@@ -112,27 +112,87 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .modal-close{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s}
 .modal-close:hover{background:rgba(39,174,96,.4)}
 
-/* ACCORDION ROUTES */
-.accordion-container{display:flex;flex-direction:column;gap:0}
-.accordion-item{background:rgba(39,174,96,.06);border:1px solid #27ae6044;border-radius:8px;overflow:hidden;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.accordion-header{padding:14px 16px;background:linear-gradient(90deg,rgba(39,174,96,.1),rgba(39,174,96,.05));border-bottom:1px solid #27ae6033;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:.2s;min-height:50px;touch-action:manipulation}
-.accordion-header:active{background:rgba(39,174,96,.15)}
-.accordion-header.active{background:rgba(39,174,96,.2);border-bottom:1px solid #27ae60}
-.accordion-header-title{display:flex;align-items:center;gap:12px;flex:1}
-.accordion-badge{background:rgba(39,174,96,.3);color:#27ae60;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:bold;letter-spacing:.05em}
-.accordion-label{color:#52c77e;font-size:13px;font-weight:bold;letter-spacing:.05em}
-.accordion-chevron{color:#27ae60;font-size:16px;transition:.3s;width:20px;text-align:center}
-.accordion-header.active .accordion-chevron{transform:rotate(-180deg)}
-.accordion-content{display:none;padding:16px;background:rgba(10,26,15,.5);max-height:0;overflow:hidden;transition:all .3s ease;border-top:1px solid #27ae6033}
-.accordion-content.active{display:block;max-height:500px}
+/* MODAL PANEL - IMPROVED MOBILE */
+.modal-panel{background:rgba(10,26,15,.98);border:1px solid #27ae60;border-radius:12px;padding:24px;max-width:520px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.6);animation:slideUp .3s ease-out;scrollbar-width:thin;scrollbar-color:#27ae60 transparent}
+.modal-panel::-webkit-scrollbar{width:6px}
+.modal-panel::-webkit-scrollbar-track{background:transparent}
+.modal-panel::-webkit-scrollbar-thumb{background:#27ae60;border-radius:3px}
+.modal-panel h2{color:#27ae60;font-size:22px;margin-bottom:16px;letter-spacing:.1em;font-weight:900}
+.modal-panel h3{color:#52c77e;font-size:13px;margin-top:16px;margin-bottom:10px;letter-spacing:.08em;font-weight:700;text-transform:uppercase}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;z-index:10}
+.modal-close:hover{background:rgba(39,174,96,.4);transform:rotate(90deg)}
+
+/* ACCORDION - ENHANCED */
+.accordion-container{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.accordion-item{background:linear-gradient(135deg,rgba(39,174,96,.08),rgba(39,174,96,.02));border:1.5px solid #27ae6055;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.accordion-header{padding:16px;background:linear-gradient(90deg,rgba(39,174,96,.12),rgba(39,174,96,.04));cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:.25s;min-height:56px;touch-action:manipulation;border-bottom:1px solid #27ae6022}
+.accordion-header:hover{background:linear-gradient(90deg,rgba(39,174,96,.18),rgba(39,174,96,.08))}
+.accordion-header:active{transform:scale(0.99)}
+.accordion-header.active{background:linear-gradient(90deg,rgba(39,174,96,.25),rgba(39,174,96,.15));border-bottom:2px solid #27ae60;box-shadow:inset 0 0 12px rgba(39,174,96,.1)}
+.accordion-header-title{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.accordion-badge{background:linear-gradient(135deg,#27ae60,#52c77e);color:#0a1a0f;padding:6px 12px;border-radius:16px;font-size:11px;font-weight:900;letter-spacing:.05em;box-shadow:0 2px 6px rgba(39,174,96,.3);flex-shrink:0}
+.accordion-label{color:#52c77e;font-size:14px;font-weight:800;letter-spacing:.05em;flex:1}
+.accordion-chevron{color:#27ae60;font-size:16px;transition:.3s ease;width:24px;text-align:center;flex-shrink:0}
+.accordion-header.active .accordion-chevron{transform:rotate(-180deg);color:#4dd8ff}
+.accordion-content{display:none;padding:16px;background:rgba(10,26,15,.6);max-height:0;overflow:hidden;transition:all .3s ease;border-top:1px solid #27ae6033}
+.accordion-content.active{display:block;max-height:800px;padding:16px}
+
+/* STOPS LIST */
 .accordion-stops{display:flex;flex-direction:column;gap:10px}
-.stop-item{background:rgba(39,174,96,.08);padding:12px;border-radius:6px;border-left:2px solid #27ae60;display:flex;justify-content:space-between;align-items:start;gap:10px}
-.stop-info{flex:1}
-.stop-name{color:#52c77e;font-size:12px;font-weight:bold;margin-bottom:4px}
+.stop-item{background:rgba(39,174,96,.1);padding:14px;border-radius:8px;border-left:3px solid #27ae60;display:flex;justify-content:space-between;align-items:start;gap:12px;transition:.2s}
+.stop-item:hover{background:rgba(39,174,96,.15);box-shadow:0 2px 8px rgba(39,174,96,.1)}
+.stop-info{flex:1;min-width:0}
+.stop-name{color:#4dd8ff;font-size:13px;font-weight:800;margin-bottom:4px}
 .stop-detail{color:#8aa88a;font-size:10px;margin-bottom:6px}
-.stop-schedule{color:#27ae60;font-size:10px;font-family:'Space Mono',monospace}
-.btn-view-map{background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;padding:6px 12px;border-radius:4px;font-size:10px;cursor:pointer;transition:.2s;white-space:nowrap;font-weight:bold;min-height:32px;display:flex;align-items:center}
-.btn-view-map:active{background:rgba(39,174,96,.4)}
+.stop-schedule{color:#27ae60;font-size:10px;font-family:'Space Mono',monospace;font-weight:bold}
+.btn-view-map{background:linear-gradient(135deg,rgba(39,174,96,.3),rgba(39,174,96,.15));border:1.5px solid #27ae60;color:#52c77e;padding:8px 14px;border-radius:6px;font-size:10px;cursor:pointer;transition:.2s;white-space:nowrap;font-weight:800;min-height:36px;display:flex;align-items:center;box-shadow:0 2px 6px rgba(39,174,96,.15);text-transform:uppercase;letter-spacing:.05em}
+.btn-view-map:hover{background:linear-gradient(135deg,rgba(39,174,96,.4),rgba(39,174,96,.25));box-shadow:0 4px 12px rgba(39,174,96,.3)}
+.btn-view-map:active{transform:scale(0.96)}
+
+/* RESULT BOX - ENHANCED */
+.result-box{background:linear-gradient(135deg,rgba(39,174,96,.15),rgba(39,174,96,.05));border:1.5px solid #27ae6055;border-radius:8px;padding:14px;margin-top:14px;font-size:11px;color:#b0d8b0;line-height:1.6;box-shadow:0 2px 8px rgba(39,174,96,.1)}
+.result-box strong{color:#4dd8ff;font-weight:800}
+
+/* JOURNEY FORM - ENHANCED */
+.journey-form{display:flex;flex-direction:column;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group label{color:#4dd8ff;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.form-group input{padding:14px 14px;background:rgba(39,174,96,.1);border:1.5px solid #27ae6066;color:#d4f1d4;border-radius:8px;font-family:'Space Mono',monospace;font-size:12px;transition:.2s;min-height:46px;touch-action:manipulation}
+.form-group input:focus{outline:none;border-color:#27ae60;box-shadow:0 0 12px rgba(39,174,96,.4);background:rgba(39,174,96,.15)}
+.form-group input::placeholder{color:#27ae6066}
+.btn-submit{padding:14px 20px;background:linear-gradient(135deg,#ff6b35,#ff8c42);border:none;color:#fff;border-radius:8px;cursor:pointer;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;font-family:'Exo 2',sans-serif;transition:.2s;margin-top:8px;box-shadow:0 4px 12px rgba(255,107,53,.3);min-height:46px;touch-action:manipulation}
+.btn-submit:hover{background:linear-gradient(135deg,#ff5722,#ff7a3d);box-shadow:0 6px 16px rgba(255,107,53,.4)}
+.btn-submit:active{transform:scale(0.98)}
+
+/* TRIP OPTIONS SELECTOR */
+.trip-selector{background:rgba(39,174,96,.08);border:1px solid #27ae6033;border-radius:8px;padding:16px;margin-top:12px}
+.trip-selector h4{color:#27ae60;font-size:11px;font-weight:900;letter-spacing:.08em;margin-bottom:12px;text-transform:uppercase}
+.trip-options{display:flex;gap:10px;flex-wrap:wrap}
+.trip-option{background:rgba(39,174,96,.15);border:2px solid #27ae6044;color:#52c77e;padding:12px 16px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:bold;min-width:60px;text-align:center;transition:.2s;flex:1;min-height:50px;display:flex;align-items:center;justify-content:center;user-select:none;touch-action:manipulation}
+.trip-option:hover{border-color:#27ae60;background:rgba(39,174,96,.25);box-shadow:0 0 8px rgba(39,174,96,.2)}
+.trip-option.selected{background:linear-gradient(135deg,#27ae60,#52c77e);border-color:#4dd8ff;color:#0a1a0f;box-shadow:0 4px 12px rgba(39,174,96,.4);font-weight:900}
+
+/* FLOATING ACTION BUTTONS - REDESIGNED */
+.map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:14px;z-index:400}
+.fab{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,174,96,.3),rgba(39,174,96,.15));border:2px solid #27ae60;color:#27ae60;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 16px rgba(39,174,96,.25);user-select:none;touch-action:manipulation}
+.fab:hover{background:linear-gradient(135deg,rgba(39,174,96,.5),rgba(39,174,96,.3));box-shadow:0 6px 20px rgba(39,174,96,.4);transform:scale(1.12)}
+.fab.active{background:linear-gradient(135deg,rgba(39,174,96,.6),rgba(39,174,96,.4));box-shadow:0 0 16px rgba(39,174,96,.6)}
+.fab:active{transform:scale(0.95)}
+
+/* PROMINENT BUTTONS */
+.btn-prominent{width:100%;padding:16px 20px;background:linear-gradient(135deg,#ff6b35,#ff8c42);border:none;color:#fff;border-radius:10px;cursor:pointer;font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;font-family:'Exo 2',sans-serif;transition:.2s;box-shadow:0 6px 20px rgba(255,107,53,.3);min-height:52px;touch-action:manipulation;margin:12px 0}
+.btn-prominent:hover{background:linear-gradient(135deg,#ff5722,#ff7a3d);box-shadow:0 8px 24px rgba(255,107,53,.4);transform:translateY(-2px)}
+.btn-prominent:active{transform:scale(0.98)}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .accordion-header{padding:14px;min-height:52px}
+  .stop-item{padding:12px;flex-direction:column}
+  .btn-view-map{width:100%;justify-content:center}
+  .modal-panel{max-width:100%;width:95%;padding:20px;margin:20px}
+  .map-fab-container{bottom:70px;right:12px}
+  .fab{width:50px;height:50px;font-size:18px}
+}
 
 /* JOURNEY FORM */
 .journey-form{display:flex;flex-direction:column;gap:12px}
@@ -203,9 +263,11 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
           <div class="route-filters" id="routeFilters"></div>
           <div class="map-info-box" id="mapInfo">Selecciona paradas para ver detalles</div>
         </div>
-        <!-- FAB BUTTONS -->
+    <!-- FAB BUTTONS -->
         <div class="map-fab-container" id="fabContainer">
-          <button class="fab" id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()">📍</button>
+          <button class="fab btn-prominent" id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()" style="background:linear-gradient(135deg,#ff6b35,#ff8c42);border-color:#ff6b35;color:#fff;width:100%;height:auto;padding:14px 16px;border-radius:10px;font-size:13px;min-height:auto;display:flex;align-items:center;justify-content:center;gap:8px">
+            📍 Ver una línea
+          </button>
           <button class="fab" id="fabJourney" title="Crear un viaje" onclick="openJourneyModal()">🗺️</button>
         </div>
       </div>
@@ -352,10 +414,20 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
         <label for="destinationInput">🎯 Destino</label>
         <input type="text" id="destinationInput" placeholder="Ej: Tecnológico, Hospital..." required>
       </div>
-      <button type="submit" class="btn-submit">Calcular Ruta</button>
+      <button type="submit" class="btn-submit">→ Calcular Ruta</button>
     </form>
+    
     <div class="result-box" id="journeyResultBox" style="display:none;">
       <strong>Resultado de búsqueda:</strong><br><span id="journeyResultText"></span>
+    </div>
+    
+    <!-- Trip Options Selector -->
+    <div class="trip-selector" id="tripSelector" style="display:none;">
+      <h4>Elige tu viaje</h4>
+      <div class="trip-options" id="tripOptions"></div>
+      <div style="color:#8aa88a;font-size:10px;margin-top:10px;line-height:1.5">
+        <div><strong style="color:#27ae60">Hora de llegada</strong> y <strong style="color:#27ae60">Tiempo de recorrido</strong></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1021,65 +1093,83 @@ function calculateJourney(e){
   
   const resultBox=document.getElementById('journeyResultBox');
   const resultText=document.getElementById('journeyResultText');
+  const tripSelector=document.getElementById('tripSelector');
+  const tripOptions=document.getElementById('tripOptions');
   
   if(!originStop || !destStop){
     resultText.innerHTML='<span style="color:#ff6b6b">⚠️ No se encontraron una o ambas paradas.</span><br><strong>Paradas disponibles:</strong><br>'+paradas.map(p=>p.name).join(', ');
     resultBox.style.display='block';
+    tripSelector.style.display='none';
     return;
   }
   
   if(originStop.id===destStop.id){
     resultText.innerHTML='<span style="color:#ffd04d">ℹ️ Ya estás en tu destino</span>';
     resultBox.style.display='block';
+    tripSelector.style.display='none';
     return;
   }
   
   // Encontrar rutas comunes
   const commonRoutes=originStop.routes.filter(r=>destStop.routes.includes(r));
   
+  // Generar opciones de viaje
+  const tripOptions_list=[];
+  const baseTime=new Date();baseTime.setHours(6,0);
+  
+  for(let i=0;i<3;i++){
+    const tripTime=new Date(baseTime);
+    tripTime.setMinutes(tripTime.getMinutes()+(i*8));
+    const arrivalTime=new Date(tripTime);
+    arrivalTime.setMinutes(arrivalTime.getMinutes()+(20+i*2));
+    
+    tripOptions_list.push({
+      id:i+1,
+      departureTime:`${String(tripTime.getHours()).padStart(2,'0')}:${String(tripTime.getMinutes()).padStart(2,'0')} AM`,
+      arrivalTime:`${String(arrivalTime.getHours()).padStart(2,'0')}:${String(arrivalTime.getMinutes()).padStart(2,'0')} AM`,
+      duration:`${20+i*2} minutos`,
+      route:commonRoutes[0]||paradas[0].routes[0]
+    });
+  }
+  
+  // Mostrar resultado
   if(commonRoutes.length>0){
-    // Hay ruta directa
     const route=commonRoutes[0];
     const routeData=allRoutesData.find(r=>r.number===route);
-    const intermediateStops=routeData.paradas.filter(p=>{
-      const originIdx=routeData.paradas.indexOf(originStop);
-      const destIdx=routeData.paradas.indexOf(destStop);
-      const checkIdx=routeData.paradas.indexOf(p);
-      return (originIdx<checkIdx && checkIdx<destIdx) || (destIdx<checkIdx && checkIdx<originIdx);
-    });
-    
-    resultText.innerHTML=`✓ <strong>Ruta Directa Disponible</strong><br>` +
-      `De: <strong>${originStop.name}</strong><br>` +
-      `A: <strong>${destStop.name}</strong><br>` +
-      `Línea: <strong>${route}</strong><br>` +
-      `Paradas intermedias: ${intermediateStops.length}<br>` +
-      `${intermediateStops.length>0 ? 'Paradas: '+intermediateStops.map(p=>p.name).join(', ') : 'Conexión directa'}`;
-    
-    // Mostrar ruta en el mapa
-    const destinationCoords=[originStop.lat,originStop.lng,destStop.lat,destStop.lng];
-    const bounds=L.latLngBounds([[originStop.lat,originStop.lng],[destStop.lat,destStop.lng]]);
-    map.fitBounds(bounds,{padding:[100,100]});
+    resultText.innerHTML=`✓ <strong>En camino a</strong><br><strong style="color:#4dd8ff">${destStop.name}</strong><br>` + 
+      `<span style="color:#8aa88a">Línea ${route} disponible</span>`;
   }else{
-    // Buscar conexiones
-    const connections=originStop.routes.flatMap(or=>
-      destStop.routes.filter(dr=>paradas.some(p=>p.routes.includes(or) && p.routes.includes(dr) && p.id!==originStop.id && p.id!==destStop.id))
-    );
-    
-    if(connections.length>0){
-      const transferStop=paradas.find(p=>p.routes.includes(originStop.routes[0]) && p.routes.includes(destStop.routes[0]) && p.id!==originStop.id && p.id!==destStop.id);
-      resultText.innerHTML=`⟳ <strong>Se requiere trasbordo</strong><br>` +
-        `De: <strong>${originStop.name}</strong><br>` +
-        `A: <strong>${destStop.name}</strong><br>` +
-        `Transbordo en: <strong>${transferStop.name}</strong><br>` +
-        `Ruta 1: ${originStop.routes[0]}<br>` +
-        `Ruta 2: ${destStop.routes[0]}`;
-    }else{
-      resultText.innerHTML='<span style="color:#ff6b6b">✕ No hay conexión disponible entre estas paradas</span>';
-    }
+    resultText.innerHTML=`📍 <strong>${originStop.name}</strong> → <strong>${destStop.name}</strong>`;
   }
   
   resultBox.style.display='block';
-  document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
+  
+  // Generar opciones de viaje interactivas
+  tripOptions.innerHTML='';
+  tripOptions_list.forEach(trip=>{
+    const option=document.createElement('div');
+    option.className='trip-option';
+    option.dataset.tripId=trip.id;
+    option.innerHTML=`
+      <div style="text-align:center;font-size:16px;font-weight:900;color:#27ae60">${trip.id}</div>
+      <div style="font-size:9px;color:#8aa88a;margin-top:2px">${trip.departureTime}</div>
+    `;
+    option.onclick=()=>selectTrip(option,trip);
+    tripOptions.appendChild(option);
+  });
+  
+  tripSelector.style.display='block';
+  
+  // Zoom en el mapa
+  const bounds=L.latLngBounds([[originStop.lat,originStop.lng],[destStop.lat,destStop.lng]]);
+  map.fitBounds(bounds,{padding:[100,100]});
+}
+
+function selectTrip(element,trip){
+  // Remover selección anterior
+  document.querySelectorAll('.trip-option').forEach(opt=>opt.classList.remove('selected'));
+  // Seleccionar nuevo
+  element.classList.add('selected');
 }
 
 // Cerrar modales al hacer clic fuera
