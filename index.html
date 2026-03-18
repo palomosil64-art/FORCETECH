@@ -82,18 +82,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .leaflet-popup-tip{background:rgba(10,26,15,.95)!important}
 .leaflet-popup-close-button{color:#27ae60!important}
 
-/* MAP SEARCH PANEL */
-.map-search-panel{position:absolute;top:12px;left:12px;background:rgba(10,26,15,.96);border:1px solid #27ae60;border-radius:6px;padding:14px;z-index:500;backdrop-filter:blur(12px);min-width:240px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
-.map-search-panel h4{color:#27ae60;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
-.search-input{width:100%;padding:8px 12px;background:rgba(39,174,96,.08);border:1px solid #27ae6066;color:#d4f1d4;border-radius:4px;font-family:'Space Mono',monospace;font-size:11px;margin-bottom:8px}
-.search-input::placeholder{color:#27ae6066}
-.search-input:focus{outline:none;border-color:#27ae60;box-shadow:0 0 8px rgba(39,174,96,.3)}
-.route-filters{display:flex;flex-direction:column;gap:6px}
-.route-filter{display:flex;align-items:center;gap:6px;cursor:pointer}
-.route-filter input{cursor:pointer;accent-color:#27ae60}
-.route-filter label{cursor:pointer;font-size:11px;color:#b0d8b0;user-select:none}
-.route-filter input:checked+label{color:#27ae60;font-weight:bold}
-.map-info-box{background:rgba(39,174,96,.1);border-left:2px solid #27ae60;padding:8px 10px;border-radius:2px;margin-top:8px;font-size:10px;color:#b0d8b0;line-height:1.4}
+/* MAP SEARCH PANEL - REMOVED (routes now managed through modal accordion) */
 
 /* FLOATING ACTION BUTTONS */
 .map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:400}
@@ -173,7 +162,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .trip-option.selected{background:linear-gradient(135deg,#27ae60,#52c77e);border-color:#4dd8ff;color:#0a1a0f;box-shadow:0 4px 12px rgba(39,174,96,.4);font-weight:900}
 
 /* FLOATING ACTION BUTTONS - REDESIGNED */
-.map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:14px;z-index:400}
+.map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:14px;z-index:400;top:auto;left:auto}
 .fab{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,174,96,.3),rgba(39,174,96,.15));border:2px solid #27ae60;color:#27ae60;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 16px rgba(39,174,96,.25);user-select:none;touch-action:manipulation}
 .fab:hover{background:linear-gradient(135deg,rgba(39,174,96,.5),rgba(39,174,96,.3));box-shadow:0 6px 20px rgba(39,174,96,.4);transform:scale(1.12)}
 .fab.active{background:linear-gradient(135deg,rgba(39,174,96,.6),rgba(39,174,96,.4));box-shadow:0 0 16px rgba(39,174,96,.6)}
@@ -256,16 +245,9 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
     <div class="panel">
       <div class="panel-header"><span>🗺️</span> Mapa de Ecoparadas — Hermosillo</div>
       <div id="map" style="position:relative">
-        <div class="map-search-panel" id="mapSearchPanel">
-          <h4>🔍 Buscar Parada</h4>
-          <input type="text" class="search-input" id="searchInput" placeholder="Nombre o calle...">
-          <h4 style="margin-top:10px">📋 Filtrar por Ruta</h4>
-          <div class="route-filters" id="routeFilters"></div>
-          <div class="map-info-box" id="mapInfo">Selecciona paradas para ver detalles</div>
-        </div>
-    <!-- FAB BUTTONS -->
+        <!-- FAB BUTTONS -->
         <div class="map-fab-container" id="fabContainer">
-          <button class="fab btn-prominent" id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()" style="background:linear-gradient(135deg,#ff6b35,#ff8c42);border-color:#ff6b35;color:#fff;width:100%;height:auto;padding:14px 16px;border-radius:10px;font-size:13px;min-height:auto;display:flex;align-items:center;justify-content:center;gap:8px">
+          <button class="fab btn-prominent" id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()" style="background:linear-gradient(135deg,#27ae60,#52c77e);border-color:#27ae60;color:#fff;width:auto;height:auto;padding:12px 18px;border-radius:8px;font-size:12px;min-height:auto;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 16px rgba(39,174,96,.4);font-weight:900;letter-spacing:.05em;top:16px;left:16px;right:auto;bottom:auto">
             📍 Ver una línea
           </button>
           <button class="fab" id="fabJourney" title="Crear un viaje" onclick="openJourneyModal()">🗺️</button>
@@ -639,60 +621,10 @@ function drawRoutes(){
 }
 drawRoutes();
 
-// Search functionality
-document.getElementById('searchInput').addEventListener('input',e=>{
-  const query=e.target.value.toLowerCase();
-  const results=paradas.filter(p=>
-    p.name.toLowerCase().includes(query)||
-    p.location.toLowerCase().includes(query)||
-    p.features.some(f=>f.toLowerCase().includes(query))||
-    p.routes.some(r=>r.toString().includes(query))
-  );
-  
-  Object.values(markers).forEach(m=>map.removeLayer(m));
-  
-  const icon=createIcon('🚌','#4dd8ff');
-  results.forEach(p=>{
-    if(activeFilters.has(p.routes[0])||p.routes.some(r=>activeFilters.has(r))){
-      L.marker([p.lat,p.lng],{icon:icon}).addTo(map).bindPopup(markers[p.id]._popup.getContent());
-    }
-  });
-  
-  if(results.length>0){
-    const bounds=L.latLngBounds(results.map(p=>[p.lat,p.lng]));
-    map.fitBounds(bounds,{padding:[50,50]});
-  }
-});
+// Search functionality (removed from UI - now use routes modal/accordion for filtering)
 
-// Route filters
-const filtersContainer=document.getElementById('routeFilters');
-allRoutes.forEach(route=>{
-  const label=document.createElement('label');
-  label.className='route-filter';
-  label.innerHTML=`<input type="checkbox" value="${route}" checked><label>Ruta ${route}</label>`;
-  
-  const input=label.querySelector('input');
-  input.addEventListener('change',e=>{
-    if(e.target.checked){
-      activeFilters.add(route);
-    }else{
-      activeFilters.delete(route);
-    }
-    
-    // Redraw based on filters
-    Object.entries(markers).forEach(([id,marker])=>{
-      const parada=paradas.find(p=>p.id==id);
-      if(parada.routes.some(r=>activeFilters.has(r))){
-        if(!map.hasLayer(marker))marker.addTo(map);
-      }else{
-        if(map.hasLayer(marker))map.removeLayer(marker);
-      }
-    });
-    drawRoutes();
-  });
-  
-  filtersContainer.appendChild(label);
-});
+// Route filters (removed from sidebar - routes now managed through accordion modal)
+// activeFilters Set continues to track all routes and is initialized with all routes visible
 
 setTimeout(()=>map.invalidateSize(),300);
 
