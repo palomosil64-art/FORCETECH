@@ -85,7 +85,6 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 /* MAP SEARCH PANEL - REMOVED (routes now managed through modal accordion) */
 
 /* FLOATING ACTION BUTTONS */
-.map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:400}
 .fab{width:50px;height:50px;border-radius:50%;background:rgba(39,174,96,.2);border:2px solid #27ae60;color:#27ae60;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 12px rgba(39,174,96,.2);user-select:none}
 .fab:hover{background:rgba(39,174,96,.4);box-shadow:0 6px 16px rgba(39,174,96,.4);transform:scale(1.1)}
 .fab.active{background:rgba(39,174,96,.5);box-shadow:0 0 12px rgba(39,174,96,.6)}
@@ -162,7 +161,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .trip-option.selected{background:linear-gradient(135deg,#27ae60,#52c77e);border-color:#4dd8ff;color:#0a1a0f;box-shadow:0 4px 12px rgba(39,174,96,.4);font-weight:900}
 
 /* FLOATING ACTION BUTTONS - REDESIGNED */
-.map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:14px;z-index:400;top:auto;left:auto}
+
 .fab{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,174,96,.3),rgba(39,174,96,.15));border:2px solid #27ae60;color:#27ae60;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 16px rgba(39,174,96,.25);user-select:none;touch-action:manipulation}
 .fab:hover{background:linear-gradient(135deg,rgba(39,174,96,.5),rgba(39,174,96,.3));box-shadow:0 6px 20px rgba(39,174,96,.4);transform:scale(1.12)}
 .fab.active{background:linear-gradient(135deg,rgba(39,174,96,.6),rgba(39,174,96,.4));box-shadow:0 0 16px rgba(39,174,96,.6)}
@@ -179,7 +178,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
   .stop-item{padding:12px;flex-direction:column}
   .btn-view-map{width:100%;justify-content:center}
   .modal-panel{max-width:100%;width:95%;padding:20px;margin:20px}
-  .map-fab-container{bottom:70px;right:12px}
+
   .fab{width:50px;height:50px;font-size:18px}
 }
 
@@ -204,7 +203,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 
 /* RESPONSIVE */
 @media(max-width:600px){
-  .map-fab-container{bottom:60px;right:12px}
+
   .fab{width:44px;height:44px;font-size:16px}
   .modal-panel{max-width:100%;width:95%;padding:20px}
 }
@@ -240,19 +239,20 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 <!-- DASHBOARD: Map + 3D side by side -->
 <section class="section" id="dashboard">
   <div class="section-title">Dashboard</div>
+  <!-- TOP ACTION BUTTONS -->
+  <div style="display:flex;gap:12px;margin-bottom:16px;padding:0 16px">
+    <button id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()" style="background:linear-gradient(135deg,#27ae60,#52c77e);border:2px solid #27ae60;color:#fff;padding:14px 24px;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.3s;box-shadow:0 4px 16px rgba(39,174,96,.3);letter-spacing:.05em">
+      📍 Ver una línea
+    </button>
+    <button id="fabJourney" title="Crear un viaje" onclick="openJourneyModal()" style="background:linear-gradient(135deg,#4dd8ff,#2ea8cc);border:2px solid #4dd8ff;color:#0a1a0f;padding:14px 24px;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.3s;box-shadow:0 4px 16px rgba(77,216,255,.3);letter-spacing:.05em">
+      🗺️ Crear Viaje
+    </button>
+  </div>
   <div class="split">
     <!-- MAP -->
     <div class="panel">
       <div class="panel-header"><span>🗺️</span> Mapa de Ecoparadas — Hermosillo</div>
       <div id="map" style="position:relative">
-        <!-- FAB BUTTONS -->
-        <div class="map-fab-container" id="fabContainer">
-          <button class="fab btn-prominent" id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()" style="background:linear-gradient(135deg,#27ae60,#52c77e);border-color:#27ae60;color:#fff;width:auto;height:auto;padding:12px 18px;border-radius:8px;font-size:12px;min-height:auto;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 16px rgba(39,174,96,.4);font-weight:900;letter-spacing:.05em;top:16px;left:16px;right:auto;bottom:auto">
-            📍 Ver una línea
-          </button>
-          <button class="fab" id="fabJourney" title="Crear un viaje" onclick="openJourneyModal()">🗺️</button>
-        </div>
-      </div>
     </div>
     <!-- 3D MODEL -->
     <div class="panel">
