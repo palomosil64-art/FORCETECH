@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart City HMO</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Space+Mono&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -172,13 +173,39 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .btn-prominent:hover{background:linear-gradient(135deg,#ff5722,#ff7a3d);box-shadow:0 8px 24px rgba(255,107,53,.4);transform:translateY(-2px)}
 .btn-prominent:active{transform:scale(0.98)}
 
+/* BUS MARKERS ANIMATED */
+.animated-bus{width:40px;height:40px;background:rgba(39,174,96,.8);border:2px solid #27ae60;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 12px rgba(39,174,96,.5);animation:busPulse 1.5s infinite}
+@keyframes busPulse{0%,100%{box-shadow:0 0 12px rgba(39,174,96,.5)};50%{box-shadow:0 0 20px rgba(77,216,255,.8)}}
+
+/* FLOATING FILTER PANEL */
+.floating-panel{position:fixed;bottom:80px;right:20px;width:340px;background:rgba(10,26,15,.98);border:2px solid #27ae60;border-radius:12px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,.6);z-index:499;max-height:500px;overflow-y:auto;animation:slideInRight .3s ease-out;scrollbar-width:thin;scrollbar-color:#27ae60 transparent}
+@keyframes slideInRight{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+.floating-panel::-webkit-scrollbar{width:6px}
+.floating-panel::-webkit-scrollbar-track{background:transparent}
+.floating-panel::-webkit-scrollbar-thumb{background:#27ae60;border-radius:3px}
+.floating-panel h3{color:#4dd8ff;font-size:14px;margin-bottom:14px;letter-spacing:.05em;border-bottom:1px solid #27ae6044;padding-bottom:10px}
+.floating-panel .filter-group{margin-bottom:14px}
+.floating-panel .filter-label{color:#27ae60;font-size:10px;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;letter-spacing:.05em}
+.floating-panel .filter-option{display:flex;gap:8px;align-items:center;margin-bottom:6px;cursor:pointer;padding:6px;border-radius:4px;transition:.2s}
+.floating-panel .filter-option:hover{background:rgba(39,174,96,.1)}
+.floating-panel .filter-option input{cursor:pointer;accent-color:#27ae60}
+.floating-panel .filter-option label{color:#b0d8b0;font-size:11px;cursor:pointer;flex:1}
+.float-btn{position:fixed;bottom:20px;right:20px;width:56px;height:56px;background:linear-gradient(135deg,#4dd8ff,#2ea8cc);border:2px solid #4dd8ff;color:#0a1a0f;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.3s;box-shadow:0 4px 16px rgba(77,216,255,.3);z-index:500;user-select:none}
+.float-btn:hover{transform:scale(1.12);box-shadow:0 6px 20px rgba(77,216,255,.4)}
+.float-btn.active{background:linear-gradient(135deg,#ff6b35,#ff8c42)}
+
+/* OCCUPANCY CHART CONTAINER */
+.occupancy-chart-container{background:rgba(39,174,96,.08);border:1px solid #27ae6033;border-radius:8px;padding:16px;margin-top:16px}
+.occupancy-chart-container h4{color:#52c77e;font-size:12px;margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:700}
+
 /* RESPONSIVE */
 @media(max-width:600px){
   .accordion-header{padding:14px;min-height:52px}
   .stop-item{padding:12px;flex-direction:column}
   .btn-view-map{width:100%;justify-content:center}
   .modal-panel{max-width:100%;width:95%;padding:20px;margin:20px}
-
+  .floating-panel{width:90%;max-width:340px;bottom:auto;top:50%;right:50%;transform:translateX(50%)}
+  .float-btn{width:50px;height:50px;font-size:16px}
   .fab{width:50px;height:50px;font-size:18px}
 }
 
@@ -248,6 +275,58 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
       🗺️ Crear Viaje
     </button>
   </div>
+  <!-- Floating Filter Button -->
+  <button class="float-btn" id="floatFilterBtn" title="Abrir filtros avanzados" onclick="toggleFloatingPanel()">⚙️</button>
+  
+  <!-- Floating Filter Panel -->
+  <div id="floatingPanel" class="floating-panel" style="display:none;">
+    <h3>🔍 Filtros Avanzados</h3>
+    
+    <div class="filter-group">
+      <label class="filter-label">Rutas</label>
+      <div id="routeFilters"></div>
+    </div>
+    
+    <div class="filter-group">
+      <label class="filter-label">Nivel de Calor</label>
+      <div class="filter-option">
+        <input type="checkbox" id="filterHeatLow" checked> <label for="filterHeatLow">🔵 Bajo (≤25°C)</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterHeatMed" checked> <label for="filterHeatMed">🟡 Medio (25-35°C)</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterHeatHigh" checked> <label for="filterHeatHigh">🔴 Alto (>35°C)</label>
+      </div>
+    </div>
+    
+    <div class="filter-group">
+      <label class="filter-label">Ocupancia</label>
+      <div class="filter-option">
+        <input type="checkbox" id="filterOccLow" checked> <label for="filterOccLow">🟢 Baja</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterOccMed" checked> <label for="filterOccMed">🟡 Media</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterOccHigh" checked> <label for="filterOccHigh">🔴 Alta</label>
+      </div>
+    </div>
+    
+    <div class="filter-group">
+      <label class="filter-label">Elementos</label>
+      <div class="filter-option">
+        <input type="checkbox" id="filterBuses" checked> <label for="filterBuses">🚌 Mostrar Buses</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterParadas" checked> <label for="filterParadas">📍 Mostrar Paradas</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterRoutes" checked> <label for="filterRoutes">🛣️ Mostrar Rutas</label>
+      </div>
+    </div>
+  </div>
+  
   <div class="split">
     <!-- MAP -->
     <div class="panel">
@@ -401,6 +480,12 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
     
     <div class="result-box" id="journeyResultBox" style="display:none;">
       <strong>Resultado de búsqueda:</strong><br><span id="journeyResultText"></span>
+    </div>
+    
+    <!-- Occupancy Chart -->
+    <div class="occupancy-chart-container" id="occupancyChartContainer" style="display:none;">
+      <h4>📊 Ocupancia de Rutas (Tiempo Real)</h4>
+      <canvas id="occupancyChart"></canvas>
     </div>
     
     <!-- Trip Options Selector -->
@@ -1175,6 +1260,179 @@ document.getElementById('routesModal').addEventListener('click',e=>{
 document.getElementById('journeyModal').addEventListener('click',e=>{
   if(e.target===e.currentTarget) closeJourneyModal();
 });
+
+// ═══════════════════════════════════════════════════════════════
+// ANIMATED BUSES ON ROUTES
+// ═══════════════════════════════════════════════════════════════
+let animatedBuses=[];
+let busAnimationRunning=true;
+
+class AnimatedBus{
+  constructor(routeNumber,routeParadas){
+    this.routeNumber=routeNumber;
+    this.routeParadas=routeParadas;
+    this.currentIndex=0;
+    this.progress=0;
+    this.marker=null;
+    this.create();
+  }
+  
+  create(){
+    if(this.routeParadas.length<2) return;
+    const icon=L.divIcon({
+      html:`<div class="animated-bus">🚌</div>`,
+      iconSize:[40,40],
+      iconAnchor:[20,20],
+      className:''
+    });
+    this.marker=L.marker([this.routeParadas[0].lat,this.routeParadas[0].lng],{icon:icon});
+    this.marker.addTo(map);
+  }
+  
+  update(){
+    if(this.routeParadas.length<2) return;
+    
+    this.progress+=0.002;
+    if(this.progress>=1){
+      this.progress=0;
+      this.currentIndex=(this.currentIndex+1)%this.routeParadas.length;
+    }
+    
+    const current=this.routeParadas[this.currentIndex];
+    const next=this.routeParadas[(this.currentIndex+1)%this.routeParadas.length];
+    
+    const lat=current.lat+(next.lat-current.lat)*this.progress;
+    const lng=current.lng+(next.lng-current.lng)*this.progress;
+    
+    this.marker.setLatLng([lat,lng]);
+  }
+  
+  remove(){
+    if(this.marker) map.removeLayer(this.marker);
+  }
+}
+
+// Crear buses animados
+function createAnimatedBuses(){
+  animatedBuses.forEach(b=>b.remove());
+  animatedBuses=[];
+  
+  allRoutesData.forEach((route,idx)=>{
+    if(route.paradas.length>=2){
+      const bus=new AnimatedBus(route.number,route.paradas);
+      animatedBuses.push(bus);
+    }
+  });
+}
+
+// Animar buses
+function updateBuses(){
+  if(!busAnimationRunning) return;
+  animatedBuses.forEach(bus=>bus.update());
+  requestAnimationFrame(updateBuses);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FLOATING FILTER PANEL
+// ═══════════════════════════════════════════════════════════════
+function toggleFloatingPanel(){
+  const panel=document.getElementById('floatingPanel');
+  const btn=document.getElementById('floatFilterBtn');
+  panel.style.display=panel.style.display==='none'?'block':'none';
+  btn.classList.toggle('active');
+}
+
+function initFloatingFilters(){
+  const routeFilters=document.getElementById('routeFilters');
+  allRoutesData.forEach(route=>{
+    const div=document.createElement('div');
+    div.className='filter-option';
+    div.innerHTML=`
+      <input type="checkbox" id="filterRoute${route.number}" checked>
+      <label for="filterRoute${route.number}">Línea ${route.number} (${route.occupancy})</label>
+    `;
+    routeFilters.appendChild(div);
+  });
+  
+  // Event listeners
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change',applyFilters);
+  });
+}
+
+function applyFilters(){
+  const showBuses=document.getElementById('filterBuses').checked;
+  const showParadas=document.getElementById('filterParadas').checked;
+  const showRoutes=document.getElementById('filterRoutes').checked;
+  
+  animatedBuses.forEach(bus=>{
+    bus.marker.setOpacity(showBuses?1:0);
+  });
+  
+  Object.values(markers).forEach(marker=>{
+    marker.setOpacity(showParadas?1:0.3);
+  });
+  
+  polylines.forEach(line=>{
+    line.setOpacity(showRoutes?0.5:0);
+  });
+  
+  // Mostrar gráfico
+  if(showRoutes) showOccupancyChart();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// OCCUPANCY CHART
+// ═══════════════════════════════════════════════════════════════
+let occupancyChart=null;
+
+function showOccupancyChart(){
+  const container=document.getElementById('occupancyChartContainer');
+  container.style.display='block';
+  
+  const routeLabels=allRoutesData.map(r=>`Línea ${r.number}`);
+  const occupancyData=allRoutesData.map(r=>{
+    const occ={'low':30,'medium':60,'high':85};
+    return occ[r.occupancy]||50;
+  });
+  const comfortData=allRoutesData.map(r=>r.comfortLevel*20);
+  const heatData=allRoutesData.map(r=>{
+    const heat={'low':20,'medium':30,'high':40};
+    return heat[r.heatLevel]||25;
+  });
+  
+  const ctx=document.getElementById('occupancyChart').getContext('2d');
+  
+  if(occupancyChart) occupancyChart.destroy();
+  
+  occupancyChart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:routeLabels,
+      datasets:[
+        {label:'Ocupancia %',data:occupancyData,backgroundColor:'rgba(39,174,96,.6)',borderColor:'#27ae60',borderWidth:2},
+        {label:'Comodidad (0-100)',data:comfortData,backgroundColor:'rgba(77,216,255,.6)',borderColor:'#4dd8ff',borderWidth:2},
+        {label:'Calor (°C aprox)',data:heatData,backgroundColor:'rgba(255,107,53,.6)',borderColor:'#ff6b35',borderWidth:2}
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:true,
+      scales:{
+        y:{min:0,max:100,ticks:{color:'#27ae60'},grid:{color:'#27ae6022'}}
+      },
+      plugins:{
+        legend:{labels:{color:'#b0d8b0',font:{size:11}}}
+      }
+    }
+  });
+}
+
+// Inicializar todo
+createAnimatedBuses();
+initFloatingFilters();
+applyFilters();
+updateBuses();
 </script>
 </body>
 </html>
