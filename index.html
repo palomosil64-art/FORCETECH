@@ -556,55 +556,55 @@ let markers={};
 let polylines=[];
 let activeFilters=new Set(allRoutes);
 
-// Create custom icons - Bus icon with orange background
-function createIcon(iconText,color='#ff6b35'){
-  // Professional bus icon SVG (white on orange background)
+// Create custom icons - Bus icon (blue background, white bus)
+function createIcon(iconText,color='#0052cc'){
+  // Professional bus icon SVG matching reference image
   const busIcon=`
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <!-- Background circle -->
+      <!-- Blue circle background -->
       <circle cx="50" cy="50" r="50" fill="${color}"/>
       
-      <!-- Bus body -->
-      <rect x="18" y="32" width="64" height="42" rx="4" fill="white"/>
-      
-      <!-- Bus windshield -->
-      <rect x="22" y="36" width="16" height="12" rx="2" fill="${color}" opacity="0.3"/>
-      
-      <!-- Bus windows -->
-      <rect x="42" y="36" width="12" height="12" rx="1" fill="${color}" opacity="0.3"/>
-      <rect x="58" y="36" width="12" height="12" rx="1" fill="${color}" opacity="0.3"/>
-      
-      <!-- Bus door line -->
-      <line x1="72" y1="36" x2="72" y2="48" stroke="${color}" stroke-width="1" opacity="0.4"/>
-      
-      <!-- Bus bumper/lower section -->
-      <rect x="18" y="74" width="64" height="4" fill="${color}" opacity="0.2"/>
-      
-      <!-- Front left wheel -->
-      <circle cx="28" cy="78" r="5" fill="white"/>
-      <circle cx="28" cy="78" r="2.5" fill="${color}"/>
-      
-      <!-- Rear left wheel -->
-      <circle cx="60" cy="78" r="5" fill="white"/>
-      <circle cx="60" cy="78" r="2.5" fill="${color}"/>
-      
-      <!-- Front right wheel -->
-      <circle cx="72" cy="78" r="5" fill="white"/>
-      <circle cx="72" cy="78" r="2.5" fill="${color}"/>
+      <!-- Bus body (white) -->
+      <g fill="white">
+        <!-- Main bus body -->
+        <rect x="20" y="38" width="60" height="38" rx="3"/>
+        
+        <!-- Bus roof -->
+        <path d="M 22 38 Q 22 28 50 28 Q 78 28 78 38" fill="white"/>
+        
+        <!-- Front windshield -->
+        <rect x="24" y="32" width="16" height="12" rx="1" fill="white" opacity="0.8"/>
+        
+        <!-- Side windows -->
+        <rect x="44" y="32" width="12" height="12" rx="1" fill="white" opacity="0.8"/>
+        <rect x="60" y="32" width="12" height="12" rx="1" fill="white" opacity="0.8"/>
+        
+        <!-- Front bumper/light circles -->
+        <circle cx="28" cy="48" r="2" fill="white"/>
+        <circle cx="72" cy="48" r="2" fill="white"/>
+        
+        <!-- Wheels -->
+        <circle cx="28" cy="72" r="6" fill="white"/>
+        <circle cx="72" cy="72" r="6" fill="white"/>
+        
+        <!-- Wheel hub -->
+        <circle cx="28" cy="72" r="3" fill="${color}"/>
+        <circle cx="72" cy="72" r="3" fill="${color}"/>
+      </g>
     </svg>
   `;
   
   return L.divIcon({
     html:busIcon,
-    iconSize:[44,44],
-    iconAnchor:[22,44],
+    iconSize:[48,48],
+    iconAnchor:[24,48],
     className:''
   });
 }
 
 // Add markers
 paradas.forEach(parada=>{
-  const icon=createIcon('🚌','#ff6b35');
+  const icon=createIcon('🚌','#0052cc');
   const marker=L.marker([parada.lat,parada.lng],{icon:icon});
   
   const routesHtml=parada.routes.map(r=>`<span class="tag" style="background:rgba(39,174,96,.2);color:#52c77e;padding:3px 8px;border-radius:3px;margin:2px 2px">Ruta ${r}</span>`).join('');
