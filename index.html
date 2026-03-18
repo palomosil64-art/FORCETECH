@@ -897,11 +897,20 @@ setTimeout(onResize,200);
 // Rutas disponibles (extraídas del dataset paradas)
 const allRoutesData=Array.from(new Set(paradas.flatMap(p=>p.routes))).sort((a,b)=>a-b).map(routeNum=>{
   const routeParadas=paradas.filter(p=>p.routes.includes(routeNum));
-  return {
+  // Route info similar to React app
+  const routeInfo={
     number:routeNum,
     paradas:routeParadas,
-    description:`${routeParadas.length} paradas`
+    description:`${routeParadas.length} paradas`,
+    duration:`${15+routeNum%20} min`,
+    arrivalTime:`${(8+routeNum%12).toString().padStart(2,'0')}:${(15+routeNum*5%60).toString().padStart(2,'0')} hrs`,
+    heatLevel:['low','medium','high'][routeNum%3],
+    comfortLevel:Math.floor((routeNum%5)+2),
+    occupancy:['low','medium','high'][routeNum%3],
+    color:['#e67e22','#8bc34a','#f4a460','#ff6b35','#4dd8ff'][routeNum%5],
+    isRecommended:routeNum%5===0
   };
+  return routeInfo;
 });
 
 // Poblar acordeón de rutas en el modal
@@ -915,13 +924,24 @@ function populateRoutesList(){
     item.className='accordion-item';
     item.dataset.routeId=route.number;
     
-    // Header del acordeón
+    // Header mejorado con información de la app React
     const header=document.createElement('div');
     header.className='accordion-header';
+    
+    const heatColors={'low':'#4caf50','medium':'#ffc107','high':'#ff5722'};
+    const occupancyEmoji={'low':'🟢','medium':'🟡','high':'🔴'};
+    const heatColor=heatColors[route.heatLevel];
+    
     header.innerHTML=`
       <div class="accordion-header-title">
-        <span class="accordion-label">Línea ${route.number}</span>
-        <span class="accordion-badge">${route.paradas.length} paradas</span>
+        <div style="flex:1">
+          <div class="accordion-label">Línea ${route.number}</div>
+          <div style="color:#8aa88a;font-size:11px;margin-top:3px">⏱️ ${route.duration} • Llega ${route.arrivalTime}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="accordion-badge" style="background:${heatColor}">${route.heatLevel==='low'?'🕐':'🔥'}</span>
+          <span class="accordion-badge">${route.paradas.length}</span>
+        </div>
       </div>
       <span class="accordion-chevron">▼</span>
     `;
@@ -930,11 +950,25 @@ function populateRoutesList(){
     const content=document.createElement('div');
     content.className='accordion-content';
     
-    // Generar lista de paradas con horarios ficticios
-    let stopsHtml='<div class="accordion-stops">';
+    // Info box con stats
+    let contentHtml=`
+      <div style="background:rgba(39,174,96,.1);padding:12px;border-radius:6px;margin-bottom:12px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="color:#4dd8ff">🌡️ Exposición: <span style="color:${heatColor};font-weight:bold">${route.heatLevel}</span></div>
+          <div style="color:#8aa88a;margin-top:3px">🍃 Comodidad: ${route.comfortLevel}/5</div>
+        </div>
+        <div style="text-align:right">
+          <div style="color:#b0d8b0">Ocupancia</div>
+          <div style="font-size:16px">${occupancyEmoji[route.occupancy]}</div>
+        </div>
+      </div>
+    `;
+    
+    // Generar lista de paradas con horarios
+    contentHtml+='<div class="accordion-stops">';
     route.paradas.forEach((parada,pIdx)=>{
       const scheduleTime=`${String(7+pIdx).padStart(2,'0')}:${String(pIdx*10).padStart(2,'0')} AM`;
-      stopsHtml+=`
+      contentHtml+=`
         <div class="stop-item">
           <div class="stop-info">
             <div class="stop-name">${parada.name}</div>
@@ -945,8 +979,8 @@ function populateRoutesList(){
         </div>
       `;
     });
-    stopsHtml+='</div>';
-    content.innerHTML=stopsHtml;
+    contentHtml+='</div>';
+    content.innerHTML=contentHtml;
     
     // Event listener para expandir/contraer
     header.addEventListener('click',()=>{
