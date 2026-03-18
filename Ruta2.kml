@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Ruta 2 - Hermosillo Transporte Público</name>
+    <description>Ruta 2 del sistema de transporte ecológico de Hermosillo</description>
+    <Style id="route2-style">
+      <LineStyle>
+        <color>ffb66b4d</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Placemark>
+      <name>Ruta 2</name>
+      <description>Ruta 2 - Hospital General a San Benito a Centro de Gobierno</description>
+      <styleUrl>#route2-style</styleUrl>
+      <LineString>
+        <coordinates>
+          -110.9520,29.0790,0
+          -110.9515,29.0810,0
+          -110.9500,29.0820,0
+          -110.9490,29.0825,0
+          -110.9480,29.0830,0
+          -110.9470,29.0835,0
+          -110.9460,29.0838,0
+          -110.9450,29.0840,0
+          -110.9440,29.0842,0
+          -110.9430,29.0843,0
+          -110.9420,29.0843,0
+          -110.9410,29.0842,0
+          -110.9400,29.0840,0
+          -110.9390,29.0837,0
+          -110.9380,29.0833,0
+          -110.9370,29.0828,0
+          -110.9360,29.0823,0
+          -110.9350,29.0817,0
+          -110.9340,29.0810,0
+          -110.9330,29.0802,0
+          -110.9320,29.0793,0
+          -110.9310,29.0783,0
+          -110.9305,29.0773,0
+          -110.9310,29.0763,0
+          -110.9320,29.0753,0
+          -110.9330,29.0743,0
+          -110.9340,29.0733,0
+          -110.9350,29.0723,0
+          -110.9360,29.0720,0
+          -110.9370,29.0720,0
+          -110.9380,29.0722,0
+          -110.9390,29.0725,0
+          -110.9400,29.0728,0
+          -110.9410,29.0730,0
+          -110.9420,29.0730,0
+          -110.9430,29.0728,0
+          -110.9440,29.0725,0
+          -110.9450,29.0720,0
+          -110.9460,29.0715,0
+          -110.9470,29.0710,0
+          -110.9480,29.0705,0
+          -110.9490,29.0703,0
+          -110.9500,29.0702,0
+          -110.9510,29.0704,0
+          -110.9520,29.0708,0
+          -110.9530,29.0715,0
+          -110.9540,29.0722,0
+          -110.9545,29.0730,0
+          -110.9548,29.0740,0
+          -110.9550,29.0750,0
+          -110.9548,29.0760,0
+          -110.9545,29.0767,0
+          -110.9540,29.0773,0
+          -110.9535,29.0778,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <!-- Parada 1: Hospital General -->
+    <Placemark>
+      <name>Hospital General</name>
+      <description>Parada Hospital General - Ruta 2</description>
+      <Point>
+        <coordinates>-110.9520,29.0790,0</coordinates>
+      </Point>
+    </Placemark>
+    <!-- Parada 2: San Benito -->
+    <Placemark>
+      <name>San Benito</name>
+      <description>Parada San Benito - Ruta 2</description>
+      <Point>
+        <coordinates>-110.9410,29.0728,0</coordinates>
+      </Point>
+    </Placemark>
+    <!-- Parada 3: Centro de Gobierno -->
+    <Placemark>
+      <name>Centro de Gobierno</name>
+      <description>Parada Centro de Gobierno - Ruta 2</description>
+      <Point>
+        <coordinates>-110.9454,29.0697,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

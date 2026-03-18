@@ -81,6 +81,84 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .leaflet-popup-content-wrapper{background:rgba(10,26,15,.95)!important;color:#d4f1d4!important;border:1px solid #27ae60!important;border-radius:4px!important;font-family:'Space Mono',monospace!important;font-size:12px!important}
 .leaflet-popup-tip{background:rgba(10,26,15,.95)!important}
 .leaflet-popup-close-button{color:#27ae60!important}
+
+/* MAP SEARCH PANEL */
+.map-search-panel{position:absolute;top:12px;left:12px;background:rgba(10,26,15,.96);border:1px solid #27ae60;border-radius:6px;padding:14px;z-index:500;backdrop-filter:blur(12px);min-width:240px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.map-search-panel h4{color:#27ae60;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.search-input{width:100%;padding:8px 12px;background:rgba(39,174,96,.08);border:1px solid #27ae6066;color:#d4f1d4;border-radius:4px;font-family:'Space Mono',monospace;font-size:11px;margin-bottom:8px}
+.search-input::placeholder{color:#27ae6066}
+.search-input:focus{outline:none;border-color:#27ae60;box-shadow:0 0 8px rgba(39,174,96,.3)}
+.route-filters{display:flex;flex-direction:column;gap:6px}
+.route-filter{display:flex;align-items:center;gap:6px;cursor:pointer}
+.route-filter input{cursor:pointer;accent-color:#27ae60}
+.route-filter label{cursor:pointer;font-size:11px;color:#b0d8b0;user-select:none}
+.route-filter input:checked+label{color:#27ae60;font-weight:bold}
+.map-info-box{background:rgba(39,174,96,.1);border-left:2px solid #27ae60;padding:8px 10px;border-radius:2px;margin-top:8px;font-size:10px;color:#b0d8b0;line-height:1.4}
+
+/* FLOATING ACTION BUTTONS */
+.map-fab-container{position:absolute;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:400}
+.fab{width:50px;height:50px;border-radius:50%;background:rgba(39,174,96,.2);border:2px solid #27ae60;color:#27ae60;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 12px rgba(39,174,96,.2);user-select:none}
+.fab:hover{background:rgba(39,174,96,.4);box-shadow:0 6px 16px rgba(39,174,96,.4);transform:scale(1.1)}
+.fab.active{background:rgba(39,174,96,.5);box-shadow:0 0 12px rgba(39,174,96,.6)}
+
+/* MODAL OVERLAY */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:600;animation:fadeIn .3s}
+.modal-overlay.active{display:flex;align-items:center;justify-content:center}
+
+/* MODAL PANEL */
+.modal-panel{background:rgba(10,26,15,.98);border:1px solid #27ae60;border-radius:8px;padding:30px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:slideUp .3s ease-out}
+.modal-panel h2{color:#27ae60;font-size:20px;margin-bottom:20px;letter-spacing:.1em}
+.modal-panel h3{color:#52c77e;font-size:14px;margin-top:16px;margin-bottom:10px;letter-spacing:.05em}
+.modal-close{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s}
+.modal-close:hover{background:rgba(39,174,96,.4)}
+
+/* ACCORDION ROUTES */
+.accordion-container{display:flex;flex-direction:column;gap:0}
+.accordion-item{background:rgba(39,174,96,.06);border:1px solid #27ae6044;border-radius:8px;overflow:hidden;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.accordion-header{padding:14px 16px;background:linear-gradient(90deg,rgba(39,174,96,.1),rgba(39,174,96,.05));border-bottom:1px solid #27ae6033;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:.2s;min-height:50px;touch-action:manipulation}
+.accordion-header:active{background:rgba(39,174,96,.15)}
+.accordion-header.active{background:rgba(39,174,96,.2);border-bottom:1px solid #27ae60}
+.accordion-header-title{display:flex;align-items:center;gap:12px;flex:1}
+.accordion-badge{background:rgba(39,174,96,.3);color:#27ae60;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:bold;letter-spacing:.05em}
+.accordion-label{color:#52c77e;font-size:13px;font-weight:bold;letter-spacing:.05em}
+.accordion-chevron{color:#27ae60;font-size:16px;transition:.3s;width:20px;text-align:center}
+.accordion-header.active .accordion-chevron{transform:rotate(-180deg)}
+.accordion-content{display:none;padding:16px;background:rgba(10,26,15,.5);max-height:0;overflow:hidden;transition:all .3s ease;border-top:1px solid #27ae6033}
+.accordion-content.active{display:block;max-height:500px}
+.accordion-stops{display:flex;flex-direction:column;gap:10px}
+.stop-item{background:rgba(39,174,96,.08);padding:12px;border-radius:6px;border-left:2px solid #27ae60;display:flex;justify-content:space-between;align-items:start;gap:10px}
+.stop-info{flex:1}
+.stop-name{color:#52c77e;font-size:12px;font-weight:bold;margin-bottom:4px}
+.stop-detail{color:#8aa88a;font-size:10px;margin-bottom:6px}
+.stop-schedule{color:#27ae60;font-size:10px;font-family:'Space Mono',monospace}
+.btn-view-map{background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;padding:6px 12px;border-radius:4px;font-size:10px;cursor:pointer;transition:.2s;white-space:nowrap;font-weight:bold;min-height:32px;display:flex;align-items:center}
+.btn-view-map:active{background:rgba(39,174,96,.4)}
+
+/* JOURNEY FORM */
+.journey-form{display:flex;flex-direction:column;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{color:#27ae60;font-size:11px;font-weight:bold;letter-spacing:.05em;text-transform:uppercase}
+.form-group input{padding:10px 12px;background:rgba(39,174,96,.08);border:1px solid #27ae6066;color:#d4f1d4;border-radius:4px;font-family:'Space Mono',monospace;font-size:12px;transition:.2s}
+.form-group input:focus{outline:none;border-color:#27ae60;box-shadow:0 0 8px rgba(39,174,96,.3)}
+.form-group input::placeholder{color:#27ae6066}
+.btn-submit{padding:12px 20px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:4px;cursor:pointer;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;font-family:'Exo 2',sans-serif;transition:.2s;margin-top:8px}
+.btn-submit:hover{background:rgba(39,174,96,.4);box-shadow:0 0 12px rgba(39,174,96,.4)}
+.btn-submit:active{transform:scale(0.98)}
+
+/* RESULT BOX */
+.result-box{background:rgba(39,174,96,.1);border:1px solid #27ae6044;border-radius:4px;padding:12px;margin-top:12px;font-size:11px;color:#b0d8b0;line-height:1.6}
+.result-box strong{color:#52c77e}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .map-fab-container{bottom:60px;right:12px}
+  .fab{width:44px;height:44px;font-size:16px}
+  .modal-panel{max-width:100%;width:95%;padding:20px}
+}
 </style>
 </head>
 <body>
@@ -93,6 +171,8 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
     <a href="#paradas">Paradas</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#specs-section">Specs</a>
+    <a href="#" onclick="openRoutesModal(event)" style="cursor:pointer">📍 Rutas</a>
+    <a href="#" onclick="openJourneyModal(event)" style="cursor:pointer">🗺️ Viaje</a>
   </div>
 </nav>
 
@@ -115,7 +195,20 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
     <!-- MAP -->
     <div class="panel">
       <div class="panel-header"><span>🗺️</span> Mapa de Ecoparadas — Hermosillo</div>
-      <div id="map"></div>
+      <div id="map" style="position:relative">
+        <div class="map-search-panel" id="mapSearchPanel">
+          <h4>🔍 Buscar Parada</h4>
+          <input type="text" class="search-input" id="searchInput" placeholder="Nombre o calle...">
+          <h4 style="margin-top:10px">📋 Filtrar por Ruta</h4>
+          <div class="route-filters" id="routeFilters"></div>
+          <div class="map-info-box" id="mapInfo">Selecciona paradas para ver detalles</div>
+        </div>
+        <!-- FAB BUTTONS -->
+        <div class="map-fab-container" id="fabContainer">
+          <button class="fab" id="fabRoutes" title="Ver rutas disponibles" onclick="openRoutesModal()">📍</button>
+          <button class="fab" id="fabJourney" title="Crear un viaje" onclick="openJourneyModal()">🗺️</button>
+        </div>
+      </div>
     </div>
     <!-- 3D MODEL -->
     <div class="panel">
@@ -156,66 +249,378 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 <!-- NOSOTROS -->
 <section class="section" id="nosotros">
   <div class="section-title">Nosotros</div>
-  <p style="text-align:center;color:#b0c8d8;margin-bottom:40px;font-size:14px;max-width:800px;margin-left:auto;margin-right:auto">Somos un equipo comprometido con la innovación sostenible. Nuestro proyecto busca transformar la experiencia del transporte urbano en Hermosillo a través de paradas ecológicas inteligentes.</p>
+  <p style="text-align:center;color:#b0c8d8;margin-bottom:40px;font-size:14px;max-width:800px;margin-left:auto;margin-right:auto">Somos un equipo multidisciplinario comprometido con la innovación sostenible. Nuestro proyecto busca transformar la experiencia del transporte urbano en Hermosillo a través de paradas ecológicas inteligentes.</p>
   <div class="team-grid">
-    <!-- Team Member 1 -->
+    <!-- Team Member 1: Directora de Proyecto -->
     <div class="team-member">
       <div class="team-photo-frame">
-        <img src="SIlvana.jpg" alt="Palomo Soto Silvana">
+        <img src="SIlvana.jpg" alt="Silvana Palomo Soto">
       </div>
-      <div class="team-name">Palomo Soto Silvana</div>
-      <div class="team-role">Diseño e Innovación</div>
-      <div class="team-bio">Especialista en diseño sostenible y arquitectura paramétrica para espacios urbanos.</div>
+      <div class="team-name">Silvana Palomo Soto</div>
+      <div class="team-role">Directora de Proyecto</div>
+      <div class="team-bio">Project Manager responsable de coordinación, planificación y gestión integral del proyecto de paradas ecológicas.</div>
     </div>
     
-    <!-- Team Member 2 -->
+    <!-- Team Member 2: Desarrollo Frontend -->
     <div class="team-member">
       <div class="team-photo-frame">
-        <div class="team-photo-placeholder">👨‍💻</div>
+        <div class="team-photo-placeholder">🎨</div>
       </div>
-      <div class="team-name">Espinoza Perez Daniel</div>
-      <div class="team-role">Desarrollo Técnico</div>
-      <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualización de datos en tiempo real.</div>
+      <div class="team-name">Gabriela Jimenez Sanchez</div>
+      <div class="team-role">Líder de Desarrollo Frontend</div>
+      <div class="team-bio">Especialista en interfaz de usuario y experiencia web. Responsable del dashboard interactivo y visualizaciones.</div>
+    </div>
+
+    <!-- Team Member 3: Backend -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">⚙️</div>
+      </div>
+      <div class="team-name">Camila Beltran Gonzales</div>
+      <div class="team-role">Ingeniera de Software Backend</div>
+      <div class="team-bio">Desarrolladora de sistemas backend, APIs y arquitectura de datos. Gestión de servidores y bases de datos.</div>
+    </div>
+
+    <!-- Team Member 4: Ciberseguridad -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">🔒</div>
+      </div>
+      <div class="team-name">Daniel Espinoza Perez</div>
+      <div class="team-role">Especialista en Ciberseguridad</div>
+      <div class="team-bio">Experto en seguridad de sistemas IoT, protección de datos y cumplimiento normativo de la plataforma.</div>
+    </div>
+
+    <!-- Team Member 5: UX/UI -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">✨</div>
+      </div>
+      <div class="team-name">Andrea Sanchez Ortiz</div>
+      <div class="team-role">Diseñadora UX/UI</div>
+      <div class="team-bio">Diseñadora de experiencia de usuario. Responsable del diseño visual, usabilidad y accesibilidad del proyecto.</div>
+    </div>
+
+    <!-- Team Member 6: QA y Datos -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">📊</div>
+      </div>
+      <div class="team-name">Francisco Flores Moreno</div>
+      <div class="team-role">Analista de Datos y QA Tester</div>
+      <div class="team-bio">Responsable de análisis de datos, testing de calidad y generación de reportes de desempeño del sistema.</div>
+    </div>
+
+    <!-- Team Member 7: Cloud Architecture -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">☁️</div>
+      </div>
+      <div class="team-name">Raul Mariano Ibarra Acosta</div>
+      <div class="team-role">Arquitecto de Soluciones Cloud</div>
+      <div class="team-bio">Especialista en infraestructura cloud, escalabilidad y arquitectura de sistemas distribuidos para IoT.</div>
     </div>
   </div>
 </section>
 
 <footer>Smart City HMO — Paradas Ecológicas Inteligentes — Hermosillo, Sonora</footer>
 
+<!-- MODAL: ROUTES -->
+<div class="modal-overlay" id="routesModal">
+  <div class="modal-panel" style="position:relative">
+    <span class="modal-close" onclick="closeRoutesModal()">✕</span>
+    <h2>📍 Rutas Disponibles</h2>
+    <p style="font-size:11px;color:#b0d8b0;margin-bottom:16px">Selecciona una línea para ver paradas y horarios</p>
+    <div class="accordion-container" id="routesAccordion"></div>
+    <div class="result-box" id="routeResultBox" style="display:none;margin-top:16px">
+      <strong>Ruta seleccionada:</strong><br><span id="routeResultText"></span>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CREATE JOURNEY -->
+<div class="modal-overlay" id="journeyModal">
+  <div class="modal-panel" style="position:relative">
+    <span class="modal-close" onclick="closeJourneyModal()">✕</span>
+    <h2>🗺️ Calcular Ruta</h2>
+    <form class="journey-form" onsubmit="calculateJourney(event)">
+      <div class="form-group">
+        <label for="originInput">📍 Origen</label>
+        <input type="text" id="originInput" placeholder="Ej: San Benito, Colosio..." required>
+      </div>
+      <div class="form-group">
+        <label for="destinationInput">🎯 Destino</label>
+        <input type="text" id="destinationInput" placeholder="Ej: Tecnológico, Hospital..." required>
+      </div>
+      <button type="submit" class="btn-submit">Calcular Ruta</button>
+    </form>
+    <div class="result-box" id="journeyResultBox" style="display:none;">
+      <strong>Resultado de búsqueda:</strong><br><span id="journeyResultText"></span>
+    </div>
+  </div>
+</div>
+
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
-// DATA
+// DATA - STRUCTURED GEOJSON FORMAT
 // ═══════════════════════════════════════════════════════════════
-const stops=[
-  {name:"San Benito",route:"Ruta 12",lat:29.0728,lng:-110.9559,desc:"Parada principal zona centro. Conecta norte-sur.",feat:["Solar","Techo Verde","USB","WiFi"]},
-  {name:"Colosio",route:"Ruta 8, 14",lat:29.0855,lng:-110.9691,desc:"Avenida principal, zona comercial y administrativa.",feat:["Solar","Reciclaje","Sombra","Asientos"]},
-  {name:"Centro de Gobierno",route:"Ruta 5, 9",lat:29.0697,lng:-110.9454,desc:"Edificios administrativos. Diseño accesible.",feat:["Techo Verde","Accesible","LED","Plazoleta"]},
-  {name:"Tecnológico",route:"Ruta 11, 15",lat:29.0942,lng:-110.9612,desc:"Zona educativa. Proyecto piloto IoT.",feat:["Solar","USB","WiFi","IoT"]},
-  {name:"Hermosillo Viejo",route:"Ruta 3, 7",lat:29.0675,lng:-110.9637,desc:"Zona histórica y cultural.",feat:["Plantas Nativas","Descanso","Info Turística"]},
-  {name:"Hospital General",route:"Ruta 2, 6",lat:29.0790,lng:-110.9520,desc:"Acceso a instalaciones sanitarias.",feat:["Accesible","Emergencia","Señalización"]}
+const paradas=[
+  {
+    id:1,
+    name:"San Benito",
+    routes:[12],
+    lat:29.0728,
+    lng:-110.9559,
+    location:"Centro de Hermosillo",
+    desc:"Parada principal zona centro. Conecta norte-sur.",
+    features:["Solar","Techo Verde","USB","WiFi"],
+    passengers:"120-150 p/día",
+    zone:"Centro"
+  },
+  {
+    id:2,
+    name:"Colosio",
+    routes:[8,14],
+    lat:29.0855,
+    lng:-110.9691,
+    location:"Avenida Colosio",
+    desc:"Avenida principal, zona comercial y administrativa.",
+    features:["Solar","Reciclaje","Sombra","Asientos"],
+    passengers:"95-120 p/día",
+    zone:"Comercial"
+  },
+  {
+    id:3,
+    name:"Centro de Gobierno",
+    routes:[5,9],
+    lat:29.0697,
+    lng:-110.9454,
+    location:"Paseo del Río",
+    desc:"Edificios administrativos. Diseño accesible.",
+    features:["Techo Verde","Accesible","LED","Plazoleta"],
+    passengers:"80-100 p/día",
+    zone:"Administrativa"
+  },
+  {
+    id:4,
+    name:"Tecnológico",
+    routes:[11,15],
+    lat:29.0942,
+    lng:-110.9612,
+    location:"Zona Universitaria",
+    desc:"Zona educativa. Proyecto piloto IoT.",
+    features:["Solar","USB","WiFi","IoT"],
+    passengers:"140-180 p/día",
+    zone:"Educativa"
+  },
+  {
+    id:5,
+    name:"Hermosillo Viejo",
+    routes:[3,7],
+    lat:29.0675,
+    lng:-110.9637,
+    location:"Centro Histórico",
+    desc:"Zona histórica y cultural.",
+    features:["Plantas Nativas","Descanso","Info Turística"],
+    passengers:"60-80 p/día",
+    zone:"Cultural"
+  },
+  {
+    id:6,
+    name:"Hospital General",
+    routes:[2,6],
+    lat:29.0790,
+    lng:-110.9520,
+    location:"Calle Progreso",
+    desc:"Acceso a instalaciones sanitarias.",
+    features:["Accesible","Emergencia","Señalización"],
+    passengers:"110-140 p/día",
+    zone:"Sanitaria"
+  }
 ];
 
+// All unique routes
+const allRoutes=Array.from(new Set(paradas.flatMap(p=>p.routes))).sort((a,b)=>a-b);
+
 // ═══════════════════════════════════════════════════════════════
-// LEAFLET MAP
+// KML LOADER UTILITY
+// ═══════════════════════════════════════════════════════════════
+function loadKMLRoute(kmlFile,routeNumber){
+  // Cargar archivo KML y parsearlo
+  fetch(kmlFile)
+    .then(res=>res.text())
+    .then(kmlText=>{
+      const parser=new DOMParser();
+      const kmlDoc=parser.parseFromString(kmlText,'application/xml');
+      
+      // Extraer coordenadas del KML
+      const placemarks=kmlDoc.querySelectorAll('Placemark');
+      if(placemarks.length===0){
+        console.warn(`No placemarks found in ${kmlFile}`);
+        return;
+      }
+      
+      placemarks.forEach(placemark=>{
+        const linestring=placemark.querySelector('LineString');
+        if(linestring){
+          const coords=linestring.querySelector('coordinates').textContent
+            .trim()
+            .split('\n')
+            .filter(c=>c.trim())
+            .map(c=>c.trim().split(',').reverse());
+          
+          const colors=['#4dd8ff','#a8f0c0','#ffd04d','#ff6b6b','#9b59b6','#e74c3c','#f39c12'];
+          const color=colors[routeNumber%colors.length];
+          
+          L.polyline(coords,{
+            color:color,
+            weight:3.5,
+            opacity:.7,
+            lineCap:'round',
+            dashArray:'5 3'
+          }).addTo(map).bindPopup(`<strong style="color:${color}">Ruta ${routeNumber}</strong>`);
+        }
+      });
+    })
+    .catch(err=>console.error('Error loading KML:',err));
+}
+
+// Intentar cargar Ruta 2 desde KML
+loadKMLRoute('Ruta2.kml',2);
+
+// ═══════════════════════════════════════════════════════════════
+// LEAFLET MAP WITH INTERACTIVE FEATURES
 // ═══════════════════════════════════════════════════════════════
 const map=L.map('map',{center:[29.0780,-110.9580],zoom:14,zoomControl:true});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(map);
 
-// Custom marker
-const busIcon=L.divIcon({html:'<div style="background:#4dd8ff;width:24px;height:24px;border-radius:50%;border:3px solid #0a0f1a;box-shadow:0 0 10px #4dd8ff;"></div>',iconSize:[24,24],iconAnchor:[12,12],className:''});
+// Store markers and layers
+let markers={};
+let polylines=[];
+let activeFilters=new Set(allRoutes);
 
-stops.forEach(s=>{
-  L.marker([s.lat,s.lng],{icon:busIcon})
-    .bindPopup(`<b style="color:#4dd8ff">${s.name}</b><br><span style="color:#a8f0c0">${s.route}</span><br>${s.desc}`)
-    .addTo(map);
+// Create custom icons
+function createIcon(iconText,color='#4dd8ff'){
+  return L.divIcon({
+    html:`<div style="background:${color};width:32px;height:32px;border-radius:50%;border:3px solid #0a0f1a;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 12px ${color}80;color:#0a0f1a">${iconText}</div>`,
+    iconSize:[32,32],
+    iconAnchor:[16,16],
+    className:''
+  });
+}
+
+// Add markers
+paradas.forEach(parada=>{
+  const icon=createIcon('🚌','#4dd8ff');
+  const marker=L.marker([parada.lat,parada.lng],{icon:icon});
+  
+  const routesHtml=parada.routes.map(r=>`<span class="tag" style="background:rgba(39,174,96,.2);color:#52c77e;padding:3px 8px;border-radius:3px;margin:2px 2px">Ruta ${r}</span>`).join('');
+  const featuresHtml=parada.features.map(f=>`<span style="background:rgba(39,174,96,.1);color:#b0d8b0;padding:2px 6px;border-radius:2px;margin:2px 2px;display:inline-block;font-size:10px">${f}</span>`).join('');
+  
+  marker.bindPopup(`
+    <div style="min-width:200px">
+      <div style="color:#4dd8ff;font-size:14px;font-weight:bold;margin-bottom:6px">${parada.name}</div>
+      <div style="color:#27ae60;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${parada.zone}</div>
+      <div style="color:#a8f0c0;font-size:11px;margin-bottom:8px">${parada.location}</div>
+      <div style="color:#b0d8b0;font-size:10px;margin-bottom:6px">${parada.desc}</div>
+      <div style="margin-bottom:6px">${routesHtml}</div>
+      <div style="margin-bottom:6px">${featuresHtml}</div>
+      <div style="border-top:1px solid #27ae6044;padding-top:6px;margin-top:6px">
+        <div style="color:#27ae60;font-size:9px">👥 ${parada.passengers}</div>
+      </div>
+    </div>
+  `);
+  
+  marker.on('click',()=>{
+    const infoBox=document.getElementById('mapInfo');
+    infoBox.innerHTML=`<strong style="color:#4dd8ff">${parada.name}</strong><br>Rutas: ${parada.routes.join(', ')}<br>${parada.location}`;
+  });
+  
+  marker.addTo(map);
+  markers[parada.id]=marker;
 });
 
-// Routes
-L.polyline([[29.0942,-110.9612],[29.0855,-110.9691],[29.0728,-110.9559],[29.0675,-110.9637]],{color:'#4dd8ff',weight:3,opacity:.6,dashArray:'8 6'}).addTo(map);
-L.polyline([[29.0790,-110.9520],[29.0728,-110.9559],[29.0697,-110.9454]],{color:'#a8f0c0',weight:3,opacity:.6,dashArray:'8 6'}).addTo(map);
+// Draw routes
+function drawRoutes(){
+  polylines.forEach(p=>map.removeLayer(p));
+  polylines=[];
+  
+  allRoutes.forEach((route,idx)=>{
+    const routeParadas=paradas.filter(p=>p.routes.includes(route));
+    if(routeParadas.length>1){
+      const coords=routeParadas.map(p=>[p.lat,p.lng]);
+      const colors=['#4dd8ff','#a8f0c0','#ffd04d','#ff6b6b','#9b59b6','#e74c3c','#f39c12'];
+      const color=colors[idx%colors.length];
+      const poly=L.polyline(coords,{
+        color:color,
+        weight:2.5,
+        opacity:.5,
+        dashArray:'6 4',
+        lineCap:'round'
+      }).addTo(map);
+      polylines.push(poly);
+    }
+  });
+}
+drawRoutes();
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('input',e=>{
+  const query=e.target.value.toLowerCase();
+  const results=paradas.filter(p=>
+    p.name.toLowerCase().includes(query)||
+    p.location.toLowerCase().includes(query)||
+    p.features.some(f=>f.toLowerCase().includes(query))||
+    p.routes.some(r=>r.toString().includes(query))
+  );
+  
+  Object.values(markers).forEach(m=>map.removeLayer(m));
+  
+  const icon=createIcon('🚌','#4dd8ff');
+  results.forEach(p=>{
+    if(activeFilters.has(p.routes[0])||p.routes.some(r=>activeFilters.has(r))){
+      L.marker([p.lat,p.lng],{icon:icon}).addTo(map).bindPopup(markers[p.id]._popup.getContent());
+    }
+  });
+  
+  if(results.length>0){
+    const bounds=L.latLngBounds(results.map(p=>[p.lat,p.lng]));
+    map.fitBounds(bounds,{padding:[50,50]});
+  }
+});
+
+// Route filters
+const filtersContainer=document.getElementById('routeFilters');
+allRoutes.forEach(route=>{
+  const label=document.createElement('label');
+  label.className='route-filter';
+  label.innerHTML=`<input type="checkbox" value="${route}" checked><label>Ruta ${route}</label>`;
+  
+  const input=label.querySelector('input');
+  input.addEventListener('change',e=>{
+    if(e.target.checked){
+      activeFilters.add(route);
+    }else{
+      activeFilters.delete(route);
+    }
+    
+    // Redraw based on filters
+    Object.entries(markers).forEach(([id,marker])=>{
+      const parada=paradas.find(p=>p.id==id);
+      if(parada.routes.some(r=>activeFilters.has(r))){
+        if(!map.hasLayer(marker))marker.addTo(map);
+      }else{
+        if(map.hasLayer(marker))map.removeLayer(marker);
+      }
+    });
+    drawRoutes();
+  });
+  
+  filtersContainer.appendChild(label);
+});
 
 setTimeout(()=>map.invalidateSize(),300);
 
@@ -223,10 +628,10 @@ setTimeout(()=>map.invalidateSize(),300);
 // CARDS
 // ═══════════════════════════════════════════════════════════════
 const cc=document.getElementById('cards-container');
-stops.forEach(s=>{
+paradas.forEach(p=>{
   const d=document.createElement('div');d.className='card';
-  d.innerHTML=`<h3>${s.name}</h3><div class="route">📍 ${s.route}</div><p>${s.desc}</p><div class="tags">${s.feat.map(f=>`<span class="tag">${f}</span>`).join('')}</div>`;
-  d.onclick=()=>{map.setView([s.lat,s.lng],16);document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})};
+  d.innerHTML=`<h3>${p.name}</h3><div class="route">📍 Ruta${p.routes.length>1?'s':''} ${p.routes.join(', ')}</div><p>${p.desc}</p><div class="tags">${p.features.map(f=>`<span class="tag">${f}</span>`).join('')}</div>`;
+  d.onclick=()=>{map.setView([p.lat,p.lng],16);document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})};
   cc.appendChild(d);
 });
 
@@ -450,6 +855,240 @@ function onResize(){
 }
 window.addEventListener('resize',onResize);
 setTimeout(onResize,200);
+
+// ═══════════════════════════════════════════════════════════════
+// MODAL CONTROLS - ROUTES & JOURNEY
+// ═══════════════════════════════════════════════════════════════
+
+// Rutas disponibles (extraídas del dataset paradas)
+const allRoutesData=Array.from(new Set(paradas.flatMap(p=>p.routes))).sort((a,b)=>a-b).map(routeNum=>{
+  const routeParadas=paradas.filter(p=>p.routes.includes(routeNum));
+  return {
+    number:routeNum,
+    paradas:routeParadas,
+    description:`${routeParadas.length} paradas`
+  };
+});
+
+// Poblar acordeón de rutas en el modal
+function populateRoutesList(){
+  const accordion=document.getElementById('routesAccordion');
+  accordion.innerHTML='';
+  
+  allRoutesData.forEach((route,idx)=>{
+    // Crear contenedor del acordeón
+    const item=document.createElement('div');
+    item.className='accordion-item';
+    item.dataset.routeId=route.number;
+    
+    // Header del acordeón
+    const header=document.createElement('div');
+    header.className='accordion-header';
+    header.innerHTML=`
+      <div class="accordion-header-title">
+        <span class="accordion-label">Línea ${route.number}</span>
+        <span class="accordion-badge">${route.paradas.length} paradas</span>
+      </div>
+      <span class="accordion-chevron">▼</span>
+    `;
+    
+    // Contenido del acordeón
+    const content=document.createElement('div');
+    content.className='accordion-content';
+    
+    // Generar lista de paradas con horarios ficticios
+    let stopsHtml='<div class="accordion-stops">';
+    route.paradas.forEach((parada,pIdx)=>{
+      const scheduleTime=`${String(7+pIdx).padStart(2,'0')}:${String(pIdx*10).padStart(2,'0')} AM`;
+      stopsHtml+=`
+        <div class="stop-item">
+          <div class="stop-info">
+            <div class="stop-name">${parada.name}</div>
+            <div class="stop-detail">${parada.zone}</div>
+            <div class="stop-schedule">⏱️ ${scheduleTime}</div>
+          </div>
+          <button class="btn-view-map" onclick="showRouteOnMap(${route.number})">Ver en mapa</button>
+        </div>
+      `;
+    });
+    stopsHtml+='</div>';
+    content.innerHTML=stopsHtml;
+    
+    // Event listener para expandir/contraer
+    header.addEventListener('click',()=>{
+      toggleAccordion(item,route);
+    });
+    
+    item.appendChild(header);
+    item.appendChild(content);
+    accordion.appendChild(item);
+  });
+}
+
+function toggleAccordion(currentItem,route){
+  // Cerrar todos los demás acordeones
+  document.querySelectorAll('.accordion-item').forEach(item=>{
+    if(item!==currentItem){
+      item.querySelector('.accordion-header').classList.remove('active');
+      item.querySelector('.accordion-content').classList.remove('active');
+    }
+  });
+  
+  // Toggle actual
+  const header=currentItem.querySelector('.accordion-header');
+  const content=currentItem.querySelector('.accordion-content');
+  
+  header.classList.toggle('active');
+  content.classList.toggle('active');
+  
+  // Si se abre, mostrar la ruta en el mapa
+  if(header.classList.contains('active')){
+    showRouteOnMap(route.number);
+  }
+}
+
+function showRouteOnMap(routeNumber){
+  const route=allRoutesData.find(r=>r.number===routeNumber);
+  if(!route) return;
+  
+  const routeParadas=route.paradas;
+  const coords=routeParadas.map(p=>[p.lat,p.lng]);
+  
+  // Remover polilinea anterior si existe
+  if(window.selectedRoutePath){
+    map.removeLayer(window.selectedRoutePath);
+  }
+  
+  // Dibujar nueva ruta
+  const colors=['#4dd8ff','#a8f0c0','#ffd04d','#ff6b6b','#9b59b6','#e74c3c','#f39c12'];
+  const color=colors[routeNumber%colors.length];
+  window.selectedRoutePath=L.polyline(coords,{
+    color:color,
+    weight:4,
+    opacity:.8,
+    lineCap:'round',
+    lineJoin:'round'
+  }).addTo(map);
+  
+  // Zoom a la ruta
+  const bounds=L.latLngBounds(coords);
+  map.fitBounds(bounds,{padding:[60,60]});
+  
+  // Mostrar resultado
+  const resultBox=document.getElementById('routeResultBox');
+  const resultText=document.getElementById('routeResultText');
+  resultText.innerHTML=`<strong>🗺️ Línea ${route.number}</strong><br>Paradas: ${routeParadas.map(p=>p.name).join(' → ')}<br>Total: ${routeParadas.length} estaciones`;
+  resultBox.style.display='block';
+  
+  // Scroll al resultado
+  setTimeout(()=>{resultBox.scrollIntoView({behavior:'smooth'})},300);
+}
+
+function openRoutesModal(e){
+  if(e) e.preventDefault();
+  populateRoutesList();
+  document.getElementById('routesModal').classList.add('active');
+  document.getElementById('fabRoutes').classList.add('active');
+}
+
+function closeRoutesModal(){
+  document.getElementById('routesModal').classList.remove('active');
+  document.getElementById('fabRoutes').classList.remove('active');
+}
+
+// Journey (Crear Viaje)
+function openJourneyModal(e){
+  if(e) e.preventDefault();
+  document.getElementById('journeyModal').classList.add('active');
+  document.getElementById('fabJourney').classList.add('active');
+  document.getElementById('journeyResultBox').style.display='none';
+}
+
+function closeJourneyModal(){
+  document.getElementById('journeyModal').classList.remove('active');
+  document.getElementById('fabJourney').classList.remove('active');
+}
+
+function calculateJourney(e){
+  e.preventDefault();
+  
+  const origin=document.getElementById('originInput').value.toLowerCase().trim();
+  const destination=document.getElementById('destinationInput').value.toLowerCase().trim();
+  
+  // Buscar paradas por nombre
+  const originStop=paradas.find(p=>p.name.toLowerCase().includes(origin)||p.location.toLowerCase().includes(origin));
+  const destStop=paradas.find(p=>p.name.toLowerCase().includes(destination)||p.location.toLowerCase().includes(destination));
+  
+  const resultBox=document.getElementById('journeyResultBox');
+  const resultText=document.getElementById('journeyResultText');
+  
+  if(!originStop || !destStop){
+    resultText.innerHTML='<span style="color:#ff6b6b">⚠️ No se encontraron una o ambas paradas.</span><br><strong>Paradas disponibles:</strong><br>'+paradas.map(p=>p.name).join(', ');
+    resultBox.style.display='block';
+    return;
+  }
+  
+  if(originStop.id===destStop.id){
+    resultText.innerHTML='<span style="color:#ffd04d">ℹ️ Ya estás en tu destino</span>';
+    resultBox.style.display='block';
+    return;
+  }
+  
+  // Encontrar rutas comunes
+  const commonRoutes=originStop.routes.filter(r=>destStop.routes.includes(r));
+  
+  if(commonRoutes.length>0){
+    // Hay ruta directa
+    const route=commonRoutes[0];
+    const routeData=allRoutesData.find(r=>r.number===route);
+    const intermediateStops=routeData.paradas.filter(p=>{
+      const originIdx=routeData.paradas.indexOf(originStop);
+      const destIdx=routeData.paradas.indexOf(destStop);
+      const checkIdx=routeData.paradas.indexOf(p);
+      return (originIdx<checkIdx && checkIdx<destIdx) || (destIdx<checkIdx && checkIdx<originIdx);
+    });
+    
+    resultText.innerHTML=`✓ <strong>Ruta Directa Disponible</strong><br>` +
+      `De: <strong>${originStop.name}</strong><br>` +
+      `A: <strong>${destStop.name}</strong><br>` +
+      `Línea: <strong>${route}</strong><br>` +
+      `Paradas intermedias: ${intermediateStops.length}<br>` +
+      `${intermediateStops.length>0 ? 'Paradas: '+intermediateStops.map(p=>p.name).join(', ') : 'Conexión directa'}`;
+    
+    // Mostrar ruta en el mapa
+    const destinationCoords=[originStop.lat,originStop.lng,destStop.lat,destStop.lng];
+    const bounds=L.latLngBounds([[originStop.lat,originStop.lng],[destStop.lat,destStop.lng]]);
+    map.fitBounds(bounds,{padding:[100,100]});
+  }else{
+    // Buscar conexiones
+    const connections=originStop.routes.flatMap(or=>
+      destStop.routes.filter(dr=>paradas.some(p=>p.routes.includes(or) && p.routes.includes(dr) && p.id!==originStop.id && p.id!==destStop.id))
+    );
+    
+    if(connections.length>0){
+      const transferStop=paradas.find(p=>p.routes.includes(originStop.routes[0]) && p.routes.includes(destStop.routes[0]) && p.id!==originStop.id && p.id!==destStop.id);
+      resultText.innerHTML=`⟳ <strong>Se requiere trasbordo</strong><br>` +
+        `De: <strong>${originStop.name}</strong><br>` +
+        `A: <strong>${destStop.name}</strong><br>` +
+        `Transbordo en: <strong>${transferStop.name}</strong><br>` +
+        `Ruta 1: ${originStop.routes[0]}<br>` +
+        `Ruta 2: ${destStop.routes[0]}`;
+    }else{
+      resultText.innerHTML='<span style="color:#ff6b6b">✕ No hay conexión disponible entre estas paradas</span>';
+    }
+  }
+  
+  resultBox.style.display='block';
+  document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
+}
+
+// Cerrar modales al hacer clic fuera
+document.getElementById('routesModal').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeRoutesModal();
+});
+document.getElementById('journeyModal').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeJourneyModal();
+});
 </script>
 </body>
 </html>
