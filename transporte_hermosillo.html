@@ -35,6 +35,7 @@
     background: var(--verde-fondo);
     color: var(--texto-oscuro);
     min-height: 100vh;
+    line-height: 1.74;
   }
 
   body, button, input, select, textarea, table, th, td {
@@ -89,7 +90,7 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    line-height: 1.45;
+    line-height: 1.8;
     letter-spacing: 0.3px;
     max-width: 680px;
   }
@@ -100,7 +101,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-style: normal;
-    line-height: 1.5;
+    line-height: 1.8;
     max-width: 680px;
   }
 
@@ -132,7 +133,7 @@
   }
 
   /* MAIN CONTENT */
-  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 56px 24px 100px; }
 
   .section { display: none; }
   .section.active { display: block; }
@@ -202,12 +203,16 @@
   }
   @media (max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } }
   .chart-panel {
-    background: white;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 28px;
-    box-shadow: 0 6px 18px var(--sombra);
-    border: 1px solid var(--borde-suave);
+    box-shadow: 0 18px 42px rgba(20, 43, 24, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  .chart-panel:hover { transform: translateY(-4px); box-shadow: 0 24px 54px rgba(20, 43, 24, 0.14); }
   .chart-panel.wide { grid-column: 1 / -1; }
   .chart-title {
     font-family: 'Montserrat', sans-serif;
@@ -268,7 +273,7 @@
     color: var(--verde-bosque);
     margin-bottom: 6px;
   }
-  .section-desc { font-size: 13px; color: var(--texto-suave); margin-bottom: 24px; }
+  .section-desc { font-size: 13px; color: var(--texto-suave); margin-bottom: 24px; line-height: 1.85; }
 
   /* YEAR SELECTOR */
   .year-selector {
@@ -297,17 +302,32 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #D35400;
+    background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: background 0.3s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
   }
-  .floating-btn:hover { background: #B84400; }
+  .floating-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(211, 84, 0, 0.34); }
   .floating-btn i { color: #FFFFFF; font-size: 20px; }
+  .floating-btn::after {
+    content: '';
+    position: absolute;
+    top: -140%;
+    left: -48%;
+    width: 34%;
+    height: 380%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 45%, rgba(255,255,255,0.42) 50%, rgba(255,255,255,0.18) 55%, rgba(255,255,255,0) 100%);
+    transform: rotate(18deg) translateX(-240%);
+    animation: sheenSweep 5s ease-in-out infinite;
+    pointer-events: none;
+  }
 
   /* ECOPARADAS */
   .eco-grid {
@@ -317,11 +337,13 @@
     margin-bottom: 20px;
   }
   .eco-card {
-    background: #FFFFFF;
-    border: 1px solid #dce9d9;
+    background: rgba(255, 255, 255, 0.66);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.62);
     border-radius: 14px;
     padding: 18px;
-    box-shadow: 0 2px 10px var(--sombra);
+    box-shadow: 0 16px 34px rgba(20, 43, 24, 0.08);
   }
   .eco-title {
     font-family: 'Montserrat', sans-serif;
@@ -346,12 +368,14 @@
     font-weight: 800;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
   }
   .eco-tag:hover {
     background: #D35400;
     color: #FFFFFF;
     border-color: #D35400;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 0 18px rgba(243, 130, 41, 0.42), 0 8px 18px rgba(211, 84, 0, 0.24);
+    filter: saturate(1.08);
   }
 
   .eco-status {
@@ -379,13 +403,43 @@
     width: 100%;
     height: 340px;
     border-radius: 14px;
-    border: 1px solid #dce9d9;
+    border: 1px solid rgba(255, 255, 255, 0.62);
     overflow: hidden;
+  }
+  .leaf-marker-wrapper {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+  }
+  .leaf-marker-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(58, 124, 66, 0.42);
+    background: radial-gradient(circle, rgba(58, 124, 66, 0.22) 0%, rgba(58, 124, 66, 0) 68%);
+    animation: ecoPulse 2.5s ease-out infinite;
   }
   .leaf-marker {
     color: #1E4620;
     font-size: 18px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes ecoPulse {
+    0% { transform: scale(0.82); opacity: 0.85; }
+    70% { transform: scale(1.58); opacity: 0; }
+    100% { transform: scale(1.58); opacity: 0; }
+  }
+
+  @keyframes sheenSweep {
+    0%, 82%, 100% { transform: rotate(18deg) translateX(-240%); opacity: 0; }
+    86% { opacity: 0.9; }
+    94% { transform: rotate(18deg) translateX(520%); opacity: 0.45; }
   }
 </style>
 </head>
@@ -904,6 +958,7 @@ const G = {
 };
 
 const YEARS = ['2019','2020','2021','2022','2023','2024'];
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 Chart.defaults.font.family = 'Montserrat';
 
@@ -919,6 +974,92 @@ const defaults = {
 
 function mergeOptions(extra) {
   return Object.assign({}, defaults, extra);
+}
+
+function getAnimatedTextNode(element) {
+  return Array.from(element.childNodes).find(
+    (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+  ) || null;
+}
+
+function parseNumericDisplay(text) {
+  const normalized = text.trim();
+  const match = normalized.match(/-?\d[\d,]*(?:\.\d+)?/);
+  if (!match) {
+    return null;
+  }
+
+  const numericText = match[0];
+  return {
+    value: Number(numericText.replace(/,/g, '')),
+    decimals: (numericText.split('.')[1] || '').length,
+    prefix: normalized.slice(0, match.index),
+    suffix: normalized.slice(match.index + numericText.length)
+  };
+}
+
+function formatAnimatedValue(value, decimals) {
+  return value.toLocaleString('es-MX', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
+
+function setAnimatedDisplay(element, displayValue) {
+  const textNode = getAnimatedTextNode(element);
+  if (textNode) {
+    textNode.textContent = `${displayValue} `;
+    return;
+  }
+
+  element.textContent = displayValue;
+}
+
+function animateNumericContent(element, targetText = null, duration = 1100) {
+  const sourceText = targetText || element.dataset.countTarget || element.textContent.trim();
+  const parsed = parseNumericDisplay(sourceText);
+  if (!parsed) {
+    if (targetText) {
+      element.textContent = targetText;
+    }
+    return;
+  }
+
+  element.dataset.countTarget = sourceText;
+
+  if (prefersReducedMotion) {
+    setAnimatedDisplay(element, `${parsed.prefix}${formatAnimatedValue(parsed.value, parsed.decimals)}${parsed.suffix}`);
+    return;
+  }
+
+  const startTime = performance.now();
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const currentValue = parsed.value * eased;
+    const displayNumber = `${parsed.prefix}${formatAnimatedValue(currentValue, parsed.decimals)}${parsed.suffix}`;
+    setAnimatedDisplay(element, displayNumber);
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      setAnimatedDisplay(element, `${parsed.prefix}${formatAnimatedValue(parsed.value, parsed.decimals)}${parsed.suffix}`);
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+function animateNumbersInSection(sectionElement) {
+  if (!sectionElement) {
+    return;
+  }
+
+  sectionElement.querySelectorAll('.kpi-value').forEach((element) => {
+    animateNumericContent(element, element.dataset.countTarget || element.textContent.trim());
+  });
 }
 
 // USUARIOS
@@ -1100,8 +1241,10 @@ new Chart(document.getElementById('chartZonas'), {
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('sec-' + id).classList.add('active');
+  const nextSection = document.getElementById('sec-' + id);
+  nextSection.classList.add('active');
   event.currentTarget.classList.add('active');
+  animateNumbersInSection(nextSection);
 }
 
 // ZONAS LOGIC
@@ -1172,7 +1315,7 @@ function initEcoMap() {
 
   const ecoActiveCount = document.getElementById('ecoActiveCount');
   if (ecoActiveCount) {
-    ecoActiveCount.textContent = `${ecoStops.length} PARADAS ACTIVAS`;
+    animateNumericContent(ecoActiveCount, `${ecoStops.length} PARADAS ACTIVAS`, 900);
   }
 }
 
@@ -1207,6 +1350,8 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     });
   }
 });
+
+animateNumbersInSection(document.querySelector('.section.active'));
 </script>
 </body>
 </html>

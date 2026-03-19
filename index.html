@@ -28,6 +28,9 @@
       --blanco: #FFFFFF;
       --sombra: rgba(30, 70, 32, 0.12);
       --borde: rgba(30, 70, 32, 0.24);
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --shadow-profunda: 0 20px 50px rgba(17, 35, 20, 0.16);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,7 +42,7 @@
       font-weight: 400;
       background: #FFFFFF;
       color: #2D2D2D;
-      line-height: 1.6;
+      line-height: 1.72;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -49,6 +52,7 @@
 
     .section-sub, .hero-sub, .chart-sub, .analisis-card p, .team-bio {
       font-weight: 600;
+      line-height: 1.85;
     }
 
     /* ── NAV ── */
@@ -198,7 +202,7 @@
       position: relative;
       z-index: 1;
       font-weight: 500;
-      line-height: 1.7;
+      line-height: 1.88;
       font-family: 'Montserrat', sans-serif;
     }
 
@@ -275,31 +279,31 @@
     }
 
     .cta-primary {
-      background: #D35400;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       letter-spacing: 0.05em;
-      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
+      isolation: isolate;
     }
 
     .cta-primary:hover {
-      background: #B84400;
       box-shadow: 0 6px 16px rgba(211, 84, 0, 0.5);
     }
 
     .cta-secondary {
-      background: #D35400;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       color: #FFFFFF;
       border: none;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       letter-spacing: 0.05em;
-      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
+      isolation: isolate;
     }
 
     .cta-secondary:hover {
-      background: #B84400;
       box-shadow: 0 6px 16px rgba(211, 84, 0, 0.5);
     }
 
@@ -330,10 +334,12 @@
       margin: -48px auto 0;
       position: relative;
       z-index: 10;
-      background: white;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-radius: 16px;
-      border: 1px solid var(--borde);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 18px 40px rgba(20, 43, 24, 0.12);
       overflow: hidden;
     }
 
@@ -367,9 +373,9 @@
 
     /* ── SECTIONS ── */
     .section {
-      padding: 80px 32px;
+      padding: 92px 32px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 100px auto 0;
       background: #eef8ee;
       position: relative;
       border-left: 4px solid var(--verde-corporativo);
@@ -419,10 +425,12 @@
 
     /* ── MAP ── */
     .map-wrapper {
-      background: #FFFFFF;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 20px;
-      border: 1px solid var(--borde);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 18px 44px rgba(22, 39, 24, 0.12);
       overflow: hidden;
     }
 
@@ -457,17 +465,40 @@
 
     .map-stop-icon {
       position: relative;
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       display: grid;
       place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #F17A20 0%, #D35400 100%);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 18px rgba(25, 39, 28, 0.22);
     }
 
     .map-stop-icon i {
-      color: #1E4620;
-      font-size: 20px;
+      color: #FFFFFF;
+      font-size: 11px;
       line-height: 1;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .map-stop-icon::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(58, 124, 66, 0.45);
+      background: radial-gradient(circle, rgba(58, 124, 66, 0.22) 0%, rgba(58, 124, 66, 0) 68%);
+      animation: mapPulse 2.4s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes mapPulse {
+      0% { transform: scale(0.82); opacity: 0.85; }
+      70% { transform: scale(1.55); opacity: 0; }
+      100% { transform: scale(1.55); opacity: 0; }
     }
 
     #mapa .section-title span.ecoparadas-highlight {
@@ -505,13 +536,15 @@
     }
 
     .parada-card {
-      background: #FFFFFF;
-      border: 1px solid var(--borde);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
       border-radius: 16px;
       padding: 20px;
       cursor: pointer;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 16px 34px rgba(20, 37, 22, 0.1);
       position: relative;
       overflow: hidden;
     }
@@ -532,8 +565,8 @@
     }
 
     .parada-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 48px rgba(45, 90, 39, 0.18), 0 8px 24px rgba(212, 112, 58, 0.12);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-profunda), 0 10px 26px rgba(211, 84, 0, 0.14);
       border-color: var(--naranja-acento);
     }
 
@@ -577,18 +610,19 @@
       text-transform: uppercase;
       padding: 6px 12px;
       border-radius: 999px;
-      background: white;
+      background: rgba(255, 255, 255, 0.72);
       color: #D35400;
       border: 2px solid #D35400;
       box-shadow: 0 2px 8px rgba(211, 84, 0, 0.15);
-      transition: all 0.2s ease;
+      transition: all 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
     }
 
     .parada-tag:hover {
       background: #D35400;
       color: #FFFFFF;
       border-color: #D35400;
-      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.35);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.22), 0 0 18px rgba(243, 130, 41, 0.45), 0 8px 18px rgba(211, 84, 0, 0.28);
+      filter: saturate(1.08);
     }
 
     /* ── MODEL SECTION ── */
@@ -640,7 +674,7 @@
 
     .btn-action {
       padding: 12px 24px;
-      background: #D35400;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       border: none;
       border-radius: 12px;
       color: #FFFFFF;
@@ -657,6 +691,7 @@
       box-shadow: 0 4px 16px rgba(30, 70, 32, 0.3);
       position: relative;
       overflow: hidden;
+      isolation: isolate;
     }
 
     .btn-action::before {
@@ -693,7 +728,7 @@
     }
 
     .btn-report {
-      background: #e74c3c;
+      background: linear-gradient(135deg, #f17864 0%, #e74c3c 62%, #c0392b 100%);
       box-shadow: 0 4px 16px rgba(231, 76, 60, 0.3);
     }
 
@@ -703,7 +738,7 @@
     }
 
     .btn-secondary {
-      background: #D35400;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       border: none;
       color: #FFFFFF;
       box-shadow: 0 4px 16px rgba(211, 84, 0, 0.35);
@@ -768,18 +803,43 @@
       gap: 8px;
       padding: 14px 28px;
       border-radius: 12px;
-      background: #D35400;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       color: #FFFFFF;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 14px;
       transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
     }
 
     .model-link:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-primary::after,
+    .cta-secondary::after,
+    .btn-action::after,
+    .model-link::after {
+      content: '';
+      position: absolute;
+      top: -140%;
+      left: -48%;
+      width: 34%;
+      height: 380%;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 45%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.18) 55%, rgba(255,255,255,0) 100%);
+      transform: rotate(18deg) translateX(-240%);
+      animation: sheenSweep 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sheenSweep {
+      0%, 82%, 100% { transform: rotate(18deg) translateX(-240%); opacity: 0; }
+      86% { opacity: 0.9; }
+      94% { transform: rotate(18deg) translateX(520%); opacity: 0.45; }
     }
 
     .model-preview {
@@ -1001,10 +1061,12 @@
 
     .transporte-chart-card {
       width: 100%;
-      background: #FFFFFF;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(30, 70, 32, 0.08);
-      border: 1px solid rgba(30, 70, 32, 0.1);
+      box-shadow: 0 18px 42px rgba(30, 70, 32, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
       padding: 18px 18px 14px;
     }
 
@@ -1220,7 +1282,7 @@
     }
 
     .section + .model-section {
-      margin-top: 60px;
+      margin-top: 100px;
       position: relative;
     }
 
@@ -1258,6 +1320,7 @@
 
       .section {
         padding: 48px 20px;
+        margin-top: 72px;
       }
 
       .hero {
@@ -1266,6 +1329,11 @@
 
       .model-section {
         padding: 48px 20px;
+        margin-top: 72px;
+      }
+
+      .diagnostico {
+        margin-top: 72px;
       }
     }
 
@@ -1309,6 +1377,7 @@
     .diagnostico {
       background: white;
       padding: 80px 32px;
+      margin-top: 100px;
     }
 
     .diagnostico-inner {
@@ -1882,7 +1951,7 @@
 
     // Icono de autobús para paradas
     const markerIcon = L.divIcon({
-      html: '<div class="map-stop-icon" style="background:#D35400;border:2px solid #FFFFFF;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.28)"><i class="fas fa-bus" style="color:#FFFFFF;font-size:11px"></i></div>',
+      html: '<div class="map-stop-icon"><i class="fas fa-bus"></i></div>',
       iconSize: [26, 26],
       iconAnchor: [13, 13],
       popupAnchor: [0, -14],
@@ -1890,6 +1959,115 @@
     });
 
     let kmlMarkerLayer = null;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function getAnimatedTextNode(element) {
+      return Array.from(element.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+      ) || null;
+    }
+
+    function parseNumericDisplay(text) {
+      const normalized = text.trim();
+      const match = normalized.match(/-?\d[\d,]*(?:\.\d+)?/);
+      if (!match) {
+        return null;
+      }
+
+      const numericText = match[0];
+      return {
+        value: Number(numericText.replace(/,/g, '')),
+        decimals: (numericText.split('.')[1] || '').length,
+        prefix: normalized.slice(0, match.index),
+        suffix: normalized.slice(match.index + numericText.length)
+      };
+    }
+
+    function formatAnimatedValue(value, decimals) {
+      return value.toLocaleString('es-MX', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function setAnimatedDisplay(element, displayValue) {
+      const textNode = getAnimatedTextNode(element);
+      if (textNode) {
+        textNode.textContent = `${displayValue} `;
+        return;
+      }
+
+      element.textContent = displayValue;
+    }
+
+    function animateNumericContent(element, targetText = null, duration = 1100) {
+      const sourceText = targetText || element.dataset.countTarget || element.textContent.trim();
+      const parsed = parseNumericDisplay(sourceText);
+      if (!parsed) {
+        if (targetText) {
+          element.textContent = targetText;
+        }
+        return;
+      }
+
+      element.dataset.countTarget = sourceText;
+
+      if (prefersReducedMotion) {
+        setAnimatedDisplay(element, `${parsed.prefix}${formatAnimatedValue(parsed.value, parsed.decimals)}${parsed.suffix}`);
+        return;
+      }
+
+      const startTime = performance.now();
+
+      function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const currentValue = parsed.value * eased;
+        const displayNumber = `${parsed.prefix}${formatAnimatedValue(currentValue, parsed.decimals)}${parsed.suffix}`;
+        setAnimatedDisplay(element, displayNumber);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          setAnimatedDisplay(element, `${parsed.prefix}${formatAnimatedValue(parsed.value, parsed.decimals)}${parsed.suffix}`);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function setupScrollCountAnimations() {
+      const numericTargets = document.querySelectorAll('.stat-number, .crisis-number, .impacto-number');
+
+      if (prefersReducedMotion) {
+        numericTargets.forEach((element) => {
+          if (element.textContent.trim() !== '--') {
+            animateNumericContent(element, element.textContent.trim(), 0);
+          }
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || entry.target.dataset.countAnimated === 'true') {
+            return;
+          }
+
+          entry.target.dataset.countAnimated = 'true';
+          animateNumericContent(entry.target, entry.target.textContent.trim());
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.35 });
+
+      numericTargets.forEach((element) => {
+        if (element.textContent.trim() !== '--') {
+          observer.observe(element);
+        }
+      });
+    }
 
     async function readKmlText(sourceUrl) {
       const lowerUrl = sourceUrl.toLowerCase();
@@ -1981,11 +2159,11 @@
         }
 
         if (activeStopsCount) {
-          activeStopsCount.textContent = `${points.length} PARADAS ACTIVAS`;
+          animateNumericContent(activeStopsCount, `${points.length} PARADAS ACTIVAS`, 900);
         }
 
         if (pilotStopsStat) {
-          pilotStopsStat.textContent = `${points.length}`;
+          animateNumericContent(pilotStopsStat, `${points.length}`, 900);
         }
       } catch (error) {
         console.error(`Error al procesar ${kmlUrl}:`, error);
@@ -2017,6 +2195,7 @@
     }
 
     loadStopsFromFirstAvailable();
+  setupScrollCountAnimations();
 
     setTimeout(() => map.invalidateSize(), 300);
 
