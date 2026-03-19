@@ -882,6 +882,16 @@
     }
 
     /* ── EQUIPO ── */
+    #equipo .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: #1E4620;
+      margin-bottom: 12px;
+      transform: rotate(-3deg);
+      display: inline-block;
+    }
+
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -891,16 +901,17 @@
 
     .team-card {
       background: #FFFFFF;
-      border: 1px solid var(--borde);
+      border: 2px solid #d4703a;
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.3s ease;
     }
 
     .team-card:hover {
       transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(212, 112, 58, 0.15);
     }
 
     .team-photo {
@@ -1255,6 +1266,46 @@
         <div class="team-name">Espinoza Perez Daniel</div>
         <div class="team-role">Desarrollo Tecnico</div>
         <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualizacion de datos en tiempo real.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder">M</div>
+        </div>
+        <div class="team-name">Moreno Flores Francisco</div>
+        <div class="team-role">CEO / Director</div>
+        <div class="team-bio">Experto en Smart Cities y gobernanza urbana sostenible con vision integral de movilidad.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder">I</div>
+        </div>
+        <div class="team-name">Ibarra Acosta Raul</div>
+        <div class="team-role">Director de Operaciones</div>
+        <div class="team-bio">Estratega operacional en movilidad urbana especializado en eficiencia de sistemas y escalabilidad.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder">S</div>
+        </div>
+        <div class="team-name">Sanchez Jimenez Gabriela</div>
+        <div class="team-role">CTO / Tecnologia</div>
+        <div class="team-bio">Especialista en IoT, cloud infrastructure y automacion inteligente para espacios urbanos.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder">O</div>
+        </div>
+        <div class="team-name">Ortiz Sanchez Andrea</div>
+        <div class="team-role">Directora de Marketing</div>
+        <div class="team-bio">Comunicadora especializada en sostenibilidad, impacto ambiental y narrativa de marca verde.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder">G</div>
+        </div>
+        <div class="team-name">Gonzales Beltran Camila</div>
+        <div class="team-role">Ingeniera de Datos</div>
+        <div class="team-bio">Ingeniera especializada en analisis de datos ambientales y reporteria de impacto ecosistemico.</div>
       </div>
     </div>
   </section>
