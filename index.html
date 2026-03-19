@@ -330,8 +330,8 @@
       width: 62px;
       height: 62px;
       border-radius: 50%;
-      background: var(--naranja-oficial);
-      color: #000000;
+      background: #D35400;
+      color: #FFFFFF;
       border: none;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
@@ -354,7 +354,7 @@
     }
 
     .fab-soporte:hover, .fab-mapa:hover {
-      background: #c0531e;
+      background: #B84400;
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
       transform: translateY(-2px) scale(1.04);
     }
@@ -509,20 +509,17 @@
 
     .leaflet-custom-icon {
       position: relative;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #1E4620;
-      border: 2px solid var(--naranja-oficial);
+      width: 20px;
+      height: 20px;
       display: grid;
       place-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
 
     .leaflet-custom-icon i {
-      color: #fff;
-      font-size: 14px;
+      color: #1E4620;
+      font-size: 18px;
       line-height: 1;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
     }
 
     .fab-mapa {
@@ -530,29 +527,25 @@
       right: 30px;
       bottom: 115px;
       z-index: 9999;
-      min-width: 140px;
-      height: 50px;
-      border-radius: 999px;
-      background: var(--naranja-oficial);
-      color: #000;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 14px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #D35400;
+      color: #FFFFFF;
+      font-size: 24px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      border: 2px solid rgba(0,0,0,0.12);
+      border: none;
       cursor: pointer;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
     }
 
     .fab-mapa:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+      background: #B84400;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
     }
 
     #mapa .section-title span.ecoparadas-highlight {
@@ -669,17 +662,23 @@
     }
 
     .parada-tag:hover {
-      background: #1E4620;
-      color: white;
-      box-shadow: 0 4px 12px rgba(30, 70, 32, 0.3);
+      background: #D35400;
+      color: #FFFFFF;
+      border-color: #D35400;
+      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.35);
     }
 
     /* ── MODEL SECTION ── */
     .model-section {
-      background: linear-gradient(135deg, var(--verde-bosque) 0%, #1f3d1b 100%);
+      background: #1E4620;
       padding: 80px 32px;
       position: relative;
       overflow: hidden;
+    }
+
+    .model-section,
+    .model-section * {
+      font-family: 'Montserrat', sans-serif;
     }
 
     .model-section::before {
@@ -718,13 +717,13 @@
 
     .btn-action {
       padding: 12px 24px;
-      background: #1E4620;
+      background: #D35400;
       border: none;
       border-radius: 12px;
       color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       cursor: pointer;
@@ -756,9 +755,9 @@
     }
 
     .btn-action:hover {
-      background: #153417;
+      background: #B84400;
       transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(30, 70, 32, 0.5);
+      box-shadow: 0 8px 28px rgba(211, 84, 0, 0.5);
     }
 
     .btn-action:active {
@@ -781,16 +780,16 @@
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1.5px solid #1E4620;
-      color: #1E4620;
-      box-shadow: 0 4px 16px rgba(30, 70, 32, 0.2);
+      background: #D35400;
+      border: none;
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(211, 84, 0, 0.35);
     }
 
     .btn-secondary:hover {
-      background: #1E4620;
+      background: #B84400;
       color: #FFFFFF;
-      box-shadow: 0 8px 28px rgba(30, 70, 32, 0.4);
+      box-shadow: 0 8px 28px rgba(211, 84, 0, 0.5);
     }
 
     .model-text .section-label {
@@ -802,7 +801,7 @@
     }
 
     .model-text p {
-      color: #8fc97e;
+      color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 15px;
       margin-bottom: 24px;
@@ -824,6 +823,7 @@
     }
 
     .model-spec-label {
+      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -845,9 +845,10 @@
       gap: 8px;
       padding: 14px 28px;
       border-radius: 12px;
-      background: var(--naranja-acento);
-      color: white;
+      background: #D35400;
+      color: #FFFFFF;
       text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 14px;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -1453,15 +1454,19 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 32px;
       font-weight: 900;
-      color: var(--naranja-oficial);
+      color: #FFFFFF;
     }
 
     .impacto-item .impacto-label {
       font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: var(--naranja-oficial);
+      color: #FFFFFF;
       margin-top: 4px;
-      font-weight: 600;
+      font-weight: 800;
+    }
+
+    .impacto-item .impacto-label.blanco {
+      color: #FFFFFF;
     }
 
     .fuente-datos {
@@ -1550,7 +1555,7 @@
     <h2 class="section-title">Mapa de <span class="ecoparadas-highlight">Ecoparadas</span></h2>
     <p class="section-sub">Red de paradas ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
     <!-- FAB Mapa (icono solo) -->
-    <a href="#mapa" class="fab-mapa" id="btnVerMapa" title="Ir al mapa" aria-label="Ir al mapa"><i class="fas fa-map-marked-alt"></i></a>
+    <a href="#mapa" class="fab-mapa" id="btnVerMapa" title="Ir al mapa" aria-label="Ir al mapa"><i class="fas fa-map-location-dot"></i></a>
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Hermosillo, Sonora</h3>
@@ -1680,7 +1685,7 @@
         </div>
         <div class="impacto-item">
           <div class="impacto-number">168,902</div>
-          <div class="impacto-label">Usuarios del transporte</div>
+          <div class="impacto-label blanco">Usuarios del transporte</div>
         </div>
       </div>
 
@@ -1875,9 +1880,9 @@
     // Icono de planta / hoja (FontAwesome) para ecoparadas
     const markerIcon = L.divIcon({
       html: '<div class="leaflet-custom-icon"><i class="fas fa-leaf"></i></div>',
-      iconSize: [28, 28],
-      iconAnchor: [14, 28],
-      popupAnchor: [0, -24],
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+      popupAnchor: [0, -12],
       className: ""
     });
 
