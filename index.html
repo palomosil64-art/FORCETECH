@@ -501,11 +501,11 @@
       border: 1px solid rgba(30, 70, 32, 0.12);
       box-shadow: 0 10px 24px rgba(17, 35, 20, 0.12);
       overflow: hidden;
+      padding: 20px;
     }
 
     .map-header {
-      padding: 22px 24px 18px;
-      border-bottom: 1px solid rgba(30, 70, 32, 0.12);
+      padding: 0 4px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -514,7 +514,7 @@
 
     .map-header h3 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
       color: #1E4620;
     }
@@ -531,6 +531,30 @@
       gap: 8px;
     }
 
+    .map-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .map-panel {
+      border: 1px solid rgba(30, 70, 32, 0.14);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 10px 20px rgba(17, 35, 20, 0.08);
+    }
+
+    .map-panel-title {
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #1E4620;
+      border-bottom: 1px solid rgba(30, 70, 32, 0.12);
+      background: #f8fbf7;
+    }
+
     .smart-actions {
       display: flex;
       gap: 12px;
@@ -540,9 +564,9 @@
 
     .smart-btn {
       background: #27AE60;
-      color: #000000;
+      color: #ffffff;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 14px 20px;
       font-family: 'Montserrat', sans-serif;
       font-size: 15px;
@@ -557,10 +581,60 @@
       min-height: 50px;
     }
 
+    .map-cta-btn {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
+      isolation: isolate;
+    }
+
     .smart-btn:hover {
-      background: #239b56;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.26);
+      box-shadow: 0 8px 20px rgba(30, 70, 32, 0.18);
+    }
+
+    .smart-btn.map-cta-btn:hover {
+      filter: brightness(90%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4);
+    }
+
+    /* Blindaje contra estilos externos tipo btn-success u otros hovers verdes. */
+    .smart-actions .smart-btn,
+    .smart-actions .smart-btn.map-cta-btn {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 12px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-weight: 800 !important;
+      text-transform: uppercase;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28) !important;
+    }
+
+    .smart-actions .smart-btn:hover,
+    .smart-actions .smart-btn.map-cta-btn:hover,
+    .smart-actions .smart-btn:focus-visible,
+    .smart-actions .smart-btn.map-cta-btn:focus-visible {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%) !important;
+      color: #FFFFFF !important;
+      filter: brightness(90%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4) !important;
+    }
+
+    .smart-actions .smart-btn:active,
+    .smart-actions .smart-btn.map-cta-btn:active {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%) !important;
+      color: #FFFFFF !important;
+    }
+
+    .smart-actions .smart-btn > * {
+      color: inherit !important;
     }
 
     .smart-btn:active {
@@ -591,6 +665,66 @@
       border-radius: 14px;
       padding: 22px;
       box-shadow: 0 16px 40px rgba(17, 35, 20, 0.25);
+    }
+
+    #routesModal .smart-modal {
+      border: 2px solid #D35400;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.74);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 14px 36px rgba(211, 84, 0, 0.2);
+    }
+
+    #routesModal .smart-modal-title {
+      color: #D35400;
+    }
+
+    .routes-menu {
+      display: grid;
+      gap: 10px;
+    }
+
+    .route-item {
+      border: 2px solid #D35400;
+      border-radius: 12px;
+      padding: 11px 12px;
+      background: rgba(255, 255, 255, 0.65);
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .route-item:hover {
+      background: rgba(211, 84, 0, 0.12);
+      box-shadow: 0 6px 14px rgba(211, 84, 0, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .route-item-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 5px;
+      color: #1E4620;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .route-label {
+      font-weight: 400;
+    }
+
+    .route-number {
+      color: #D35400;
+      font-weight: 700;
+    }
+
+    .route-stops {
+      color: #2f3e33;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.4;
     }
 
     .smart-modal-header {
@@ -680,33 +814,55 @@
       100% { box-shadow: 0 0 0 0 rgba(50, 185, 106, 0); opacity: 1; }
     }
 
-    #map {
+    .map-canvas {
       width: 100%;
-      min-height: 650px;
-      height: 650px;
+      min-height: 560px;
+      height: 560px;
     }
 
-    .map-stop-icon {
+    .current-stop-icon {
       position: relative;
-      width: 13px;
-      height: 13px;
+      width: 8px;
+      height: 8px;
       display: grid;
       place-items: center;
       border-radius: 50%;
       background: #1E4620;
-      border: 2px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 4px 10px rgba(25, 39, 28, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 6px rgba(25, 39, 28, 0.24);
     }
 
-    .map-stop-icon::after {
+    .current-stop-icon::after {
       content: '';
       position: absolute;
-      inset: -4px;
+      inset: -2px;
       border-radius: 50%;
       border: 1px solid rgba(58, 124, 66, 0.45);
       background: radial-gradient(circle, rgba(58, 124, 66, 0.22) 0%, rgba(58, 124, 66, 0) 68%);
       animation: mapPulse 2.4s ease-out infinite;
       pointer-events: none;
+    }
+
+    .pilot-stop-pin {
+      width: 20px;
+      height: 20px;
+      background: #D35400;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.35);
+      position: relative;
+    }
+
+    .pilot-stop-pin::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      top: 5px;
+      left: 5px;
     }
 
     @keyframes mapPulse {
@@ -782,16 +938,27 @@
       border-radius: 999px;
       padding: 4px 8px;
       background: transparent;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .map-popup-service:hover {
+      background: transparent;
+      color: #1E4620;
+      border-color: #D35400;
+      box-shadow: 0 0 10px rgba(211, 84, 0, 0.35);
+      transform: translateY(-1px);
     }
 
     /* Sección de cards de paradas eliminada: experiencia solo mapa KML */
 
     /* ── MODEL SECTION ── */
     .model-section {
-      background: #1E4620;
+      background: #FFFFFF;
       padding: 80px 32px;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid rgba(211, 84, 0, 0.12);
+      border-bottom: 1px solid rgba(211, 84, 0, 0.12);
     }
 
     .model-section,
@@ -807,7 +974,7 @@
       width: 600px;
       height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(106, 173, 91, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(230, 126, 34, 0.12) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -835,13 +1002,13 @@
 
     .btn-action {
       padding: 12px 24px;
-      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
-      border: none;
+      background: transparent;
+      border: 2px solid #D35400;
       border-radius: 12px;
-      color: #FFFFFF;
+      color: #D35400;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       cursor: pointer;
@@ -849,7 +1016,7 @@
       align-items: center;
       gap: 8px;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 16px rgba(30, 70, 32, 0.3);
+      box-shadow: 0 6px 16px rgba(211, 84, 0, 0.14);
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -874,9 +1041,10 @@
     }
 
     .btn-action:hover {
-      background: #B84400;
+      background: #D35400;
+      color: #FFFFFF;
       transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(211, 84, 0, 0.5);
+      box-shadow: 0 10px 26px rgba(211, 84, 0, 0.36);
     }
 
     .btn-action:active {
@@ -899,30 +1067,33 @@
     }
 
     .btn-secondary {
-      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
-      border: none;
-      color: #FFFFFF;
-      box-shadow: 0 4px 16px rgba(211, 84, 0, 0.35);
+      background: transparent;
+      border: 2px solid #D35400;
+      color: #D35400;
+      box-shadow: 0 6px 16px rgba(211, 84, 0, 0.14);
     }
 
     .btn-secondary:hover {
-      background: #B84400;
+      background: #D35400;
       color: #FFFFFF;
-      box-shadow: 0 8px 28px rgba(211, 84, 0, 0.5);
+      box-shadow: 0 10px 26px rgba(211, 84, 0, 0.36);
     }
 
     .model-text .section-label {
-      color: var(--verde-menta);
+      color: #D35400;
+      font-weight: 800;
     }
 
     .model-text .section-title {
-      color: var(--blanco);
+      color: #D35400;
+      font-weight: 800;
     }
 
     .model-text p {
-      color: #FFFFFF;
+      color: #D35400;
       font-family: 'Montserrat', sans-serif;
       font-size: 15px;
+      font-weight: 700;
       margin-bottom: 24px;
       line-height: 1.7;
     }
@@ -935,8 +1106,8 @@
     }
 
     .model-spec {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(184, 224, 168, 0.2);
+      background: #FFFFFF;
+      border: 1px solid rgba(211, 84, 0, 0.35);
       border-radius: 12px;
       padding: 14px;
     }
@@ -946,16 +1117,16 @@
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--verde-menta);
-      font-weight: 700;
+      color: #D35400;
+      font-weight: 800;
       margin-bottom: 4px;
     }
 
     .model-spec-value {
       font-family: 'Montserrat', sans-serif;
       font-size: 20px;
-      color: white;
-      font-weight: 700;
+      color: #D35400;
+      font-weight: 800;
     }
 
     .model-link {
@@ -968,17 +1139,20 @@
       color: #FFFFFF;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
       isolation: isolate;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
     }
 
     .model-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(211, 84, 0, 0.5);
     }
 
     .cta-primary::after,
@@ -1004,22 +1178,22 @@
     }
 
     .model-preview {
-      background: rgba(0, 0, 0, 0.2);
+      background: #FFFFFF;
       border-radius: 30px;
-      border: 2px solid rgba(184, 224, 168, 0.25);
+      border: 1px solid rgba(211, 84, 0, 0.35);
       overflow: hidden;
       aspect-ratio: 4/3;
       position: relative;
-      box-shadow: 0 0 0 1px rgba(184, 224, 168, 0.1),
-                  0 24px 48px rgba(0, 0, 0, 0.15),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 1px rgba(211, 84, 0, 0.08),
+                  0 18px 40px rgba(211, 84, 0, 0.14),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.55);
       transition: all 0.3s ease;
     }
 
     .model-preview:hover {
-      box-shadow: 0 0 0 1px rgba(184, 224, 168, 0.2),
-                  0 32px 64px rgba(0, 0, 0, 0.25),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 1px rgba(211, 84, 0, 0.18),
+                  0 28px 54px rgba(211, 84, 0, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
 
     .model-preview iframe {
@@ -1107,7 +1281,16 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: transform 0.2s ease, color 0.2s ease;
+      transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .transporte-link-text {
+      color: inherit;
+    }
+
+    .transporte-link-arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
     }
 
     .analisis-tabs {
@@ -1210,7 +1393,12 @@
 
     .transporte-link:hover {
       transform: translateY(-2px);
-      color: #B84400;
+      color: #D35400;
+      text-shadow: 0 0 10px rgba(211, 84, 0, 0.3);
+    }
+
+    .transporte-link:hover .transporte-link-arrow {
+      transform: translateX(5px);
     }
 
     .transporte-visual {
@@ -1225,10 +1413,17 @@
       background: #FFFFFF;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border-radius: 16px;
+      border-radius: 12px;
       box-shadow: 0 18px 42px rgba(30, 70, 32, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 2px solid rgba(211, 84, 0, 0.12);
       padding: 18px 18px 14px;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .transporte-chart-card:hover {
+      background: #FFFFFF;
+      border-color: #D35400;
+      box-shadow: 0 10px 30px rgba(211, 84, 0, 0.3);
     }
 
     .transporte-chart-title {
@@ -1237,12 +1432,14 @@
       min-height: 42px;
       padding: 10px 14px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #1E4620 0%, #2A5C2E 100%);
+      background: #D35400;
       color: #FFFFFF;
       font-size: 14px;
       font-weight: 800;
+      text-transform: uppercase;
       margin-bottom: 12px;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.06em;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .transporte-chart-wrap {
@@ -1258,11 +1455,18 @@
     }
 
     .transporte-metrica {
-      border-radius: 10px;
-      border: 1px solid rgba(30, 70, 32, 0.16);
+      border-radius: 12px;
+      border: 2px solid rgba(211, 84, 0, 0.12);
       background: #FFFFFF;
       padding: 8px;
       text-align: center;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .transporte-metrica:hover {
+      background: #FFFFFF;
+      border-color: #D35400;
+      box-shadow: 0 10px 30px rgba(211, 84, 0, 0.3);
     }
 
     .transporte-metrica .anio {
@@ -1529,6 +1733,10 @@
         align-items: flex-start;
       }
 
+      .map-split {
+        grid-template-columns: 1fr;
+      }
+
       .smart-actions {
         padding: 0 0 14px;
       }
@@ -1537,7 +1745,7 @@
         width: 100%;
       }
 
-      #map {
+      .map-canvas {
         min-height: 520px;
         height: 520px;
       }
@@ -1905,19 +2113,28 @@
   <!-- MAPA -->
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
-    <h2 class="section-title">Paradas Actuales del Transporte Urbano de Hermosillo</h2>
-    <p class="section-sub">Explora directamente en el mapa la red completa de 453 paradas activas y consulta su evidencia visual al interactuar con cada marcador.</p>
+    <h2 class="section-title">Comparativo en Tiempo Real de la Red y el Piloto</h2>
+    <p class="section-sub">Compara la red completa de paradas activas contra el proyecto piloto de 10 ecoparadas inteligentes en dos mapas sincronizados.</p>
     <div class="map-wrapper">
       <div class="map-header">
-        <h3>Paradas Actuales del Transporte Urbano de Hermosillo</h3>
+        <h3>Visualización comparativa de infraestructura</h3>
         <span id="activeStopsCount" class="live-indicator">453 PARADAS ACTIVAS</span>
       </div>
       <div class="smart-actions">
-        <button type="button" class="smart-btn" onclick="openRoutesModal()">📍 Ver una línea</button>
-        <button type="button" class="smart-btn" onclick="openJourneyModal()">🗺️ Crear viaje</button>
-        <button type="button" class="smart-btn" onclick="openReportModal()">⚠️ Reportar</button>
+        <button type="button" class="smart-btn map-cta-btn" onclick="openRoutesModal()">📍 VER UNA LÍNEA</button>
+        <button type="button" class="smart-btn map-cta-btn" onclick="openJourneyModal()">🗺️ CREAR VIAJE</button>
+        <button type="button" class="smart-btn map-cta-btn" onclick="openReportModal()">⚠️ REPORTAR</button>
       </div>
-      <div id="map"></div>
+      <div class="map-split">
+        <article class="map-panel">
+          <h4 class="map-panel-title">Red de Transporte Actual</h4>
+          <div id="mapCurrent" class="map-canvas" aria-label="Mapa de red actual"></div>
+        </article>
+        <article class="map-panel">
+          <h4 class="map-panel-title">Proyecto Piloto: 10 Ecoparadas Inteligentes</h4>
+          <div id="mapPilot" class="map-canvas" aria-label="Mapa de ecoparadas piloto"></div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -2074,7 +2291,7 @@
             <div class="model-spec-value">25+ años</div>
           </div>
         </div>
-        <a href="model.html" class="model-link">Abrir Modelo 3D Completo &rarr;</a>
+        <a href="model.html" class="model-link">ABRIR MODELO 3D COMPLETO &rarr;</a>
         <div class="action-buttons">
           <button class="btn-action btn-secondary"><span>⬆️ Descargar</span></button>
           <button class="btn-action btn-secondary"><span>🔗 Compartir</span></button>
@@ -2093,11 +2310,11 @@
         <span class="section-label">Datos y Análisis</span>
         <h2 class="section-title">Transporte Público de Hermosillo</h2>
         <p>Informe completo del sistema de transporte público 2019–2024: rutas, cobertura, estadísticas de uso e impacto de las paradas ecológicas en la movilidad urbana.</p>
-        <a href="transporte_hermosillo.html" class="transporte-link">Ver Informe Completo &rarr;</a>
+        <a href="transporte_hermosillo.html" class="transporte-link"><span class="transporte-link-text">Ver Informe Completo</span><span class="transporte-link-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="transporte-visual">
         <div class="transporte-chart-card">
-          <p class="transporte-chart-title">Tendencia de población usuaria (miles de personas)</p>
+          <p class="transporte-chart-title">TENDENCIA DE POBLACIÓN USUARIA</p>
           <div class="transporte-chart-wrap">
             <canvas id="transporteTrendChart" aria-label="Tendencia de población usuaria 2019-2024" role="img"></canvas>
           </div>
@@ -2199,7 +2416,7 @@
         <h3 class="smart-modal-title">📍 Ver una línea</h3>
         <button class="smart-close" type="button" onclick="closeRoutesModal()">Cerrar</button>
       </div>
-      <div id="routesList"></div>
+      <div id="routesList" class="routes-menu" role="list"></div>
     </div>
   </div>
 
@@ -2267,23 +2484,53 @@
     };
     const REQUIRED_POPUP_SERVICES = ["WIFI 5G", "REDUCCIÓN TÉRMICA"];
 
-    // ── Leaflet Map ──
-    const map = L.map("map", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap",
-      maxZoom: 19
-    }).addTo(map);
+    // ── Leaflet Maps (Comparativo sincronizado) ──
+    const mapCurrent = L.map("mapCurrent", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
+    const mapPilot = L.map("mapPilot", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
+    // Alias de compatibilidad para funciones existentes de viaje/rutas.
+    const map = mapCurrent;
 
-    // Icono de autobús para paradas
-    const markerIcon = L.divIcon({
-      html: '<div class="map-stop-icon"></div>',
-      iconSize: [13, 13],
-      iconAnchor: [6, 6],
-      popupAnchor: [0, -14],
+    function addBaseLayer(targetMap) {
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap",
+        maxZoom: 19
+      }).addTo(targetMap);
+    }
+
+    addBaseLayer(mapCurrent);
+    addBaseLayer(mapPilot);
+
+    const currentMarkerIcon = L.divIcon({
+      html: '<div class="current-stop-icon"></div>',
+      iconSize: [8, 8],
+      iconAnchor: [4, 4],
+      popupAnchor: [0, -8],
       className: ""
     });
 
-    let kmlMarkerLayer = null;
+    const pilotMarkerIcon = L.divIcon({
+      html: '<div class="pilot-stop-pin"></div>',
+      iconSize: [20, 20],
+      iconAnchor: [10, 20],
+      popupAnchor: [0, -18],
+      className: ""
+    });
+
+    let isSyncingMaps = false;
+    function syncMapViews(primaryMap, secondaryMap) {
+      primaryMap.on('moveend zoomend', () => {
+        if (isSyncingMaps) return;
+        isSyncingMaps = true;
+        secondaryMap.setView(primaryMap.getCenter(), primaryMap.getZoom(), { animate: false });
+        isSyncingMaps = false;
+      });
+    }
+
+    syncMapViews(mapCurrent, mapPilot);
+    syncMapViews(mapPilot, mapCurrent);
+
+    let currentKmlLayer = null;
+    let pilotKmlLayer = null;
     const nav = document.querySelector('.nav');
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2425,6 +2672,42 @@
           <div class="map-popup-services">${servicesHtml}</div>
         </div>
       `;
+    }
+
+    function pickPilotStops(points, targetCount = 10) {
+      const seeds = stops.map((stop) => normalizeStopText(stop.name));
+      const selected = [];
+      const selectedKeys = new Set();
+
+      for (const seed of seeds) {
+        const match = points.find((point) => {
+          const normalized = normalizeStopText(point.name);
+          return normalized.includes(seed) || seed.includes(normalized);
+        });
+
+        if (match) {
+          const key = `${match.lat.toFixed(6)},${match.lng.toFixed(6)}`;
+          if (!selectedKeys.has(key)) {
+            selected.push(match);
+            selectedKeys.add(key);
+          }
+        }
+
+        if (selected.length >= targetCount) break;
+      }
+
+      if (selected.length < targetCount) {
+        points.forEach((point) => {
+          if (selected.length >= targetCount) return;
+          const key = `${point.lat.toFixed(6)},${point.lng.toFixed(6)}`;
+          if (!selectedKeys.has(key)) {
+            selected.push(point);
+            selectedKeys.add(key);
+          }
+        });
+      }
+
+      return selected.slice(0, targetCount);
     }
 
     function animateNumericContent(element, targetText = null, duration = 1100) {
@@ -2621,37 +2904,63 @@
           throw new Error(`El archivo ${kmlUrl} no contiene paradas tipo Point`);
         }
 
-        if (kmlMarkerLayer) {
-          map.removeLayer(kmlMarkerLayer);
+        if (currentKmlLayer) {
+          mapCurrent.removeLayer(currentKmlLayer);
         }
 
-        const markerLayer = (typeof L.markerClusterGroup === 'function')
+        if (pilotKmlLayer) {
+          mapPilot.removeLayer(pilotKmlLayer);
+        }
+
+        const markerLayerCurrent = (typeof L.markerClusterGroup === 'function')
           ? L.markerClusterGroup({
               showCoverageOnHover: false,
               spiderfyOnMaxZoom: true,
               removeOutsideVisibleBounds: true
             })
           : L.layerGroup();
+
         points.forEach((stop) => {
           const relatedStop = findRelatedStopData(stop);
-          L.marker([stop.lat, stop.lng], { icon: markerIcon })
+          L.marker([stop.lat, stop.lng], { icon: currentMarkerIcon })
             .bindPopup(getPopupHtml(stop, relatedStop), { maxWidth: 290 })
-            .addTo(markerLayer);
+            .addTo(markerLayerCurrent);
         });
 
-        markerLayer.addTo(map);
-        kmlMarkerLayer = markerLayer;
+        const pilotStops = pickPilotStops(points, 10);
+        const markerLayerPilot = L.layerGroup();
+        pilotStops.forEach((stop) => {
+          const relatedStop = findRelatedStopData(stop);
+          L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon })
+            .bindPopup(getPopupHtml(stop, relatedStop), { maxWidth: 290 })
+            .addTo(markerLayerPilot);
+        });
 
-        if (points.length > 0) {
-          map.fitBounds(markerLayer.getBounds(), { padding: [22, 22] });
+        markerLayerCurrent.addTo(mapCurrent);
+        markerLayerPilot.addTo(mapPilot);
+        currentKmlLayer = markerLayerCurrent;
+        pilotKmlLayer = markerLayerPilot;
+
+        points.forEach((stop) => {
+          if (!Number.isFinite(stop.lat) || !Number.isFinite(stop.lng)) {
+            console.warn('Parada inválida detectada en KML:', stop);
+          }
+        });
+
+        if (points.length > 0 && markerLayerCurrent.getBounds().isValid()) {
+          mapCurrent.fitBounds(markerLayerCurrent.getBounds(), { padding: [22, 22] });
+        }
+
+        if (pilotStops.length > 0 && markerLayerPilot.getBounds().isValid()) {
+          mapPilot.fitBounds(markerLayerPilot.getBounds(), { padding: [22, 22] });
         }
 
         if (activeStopsCount) {
-          activeStopsCount.textContent = '453 PARADAS ACTIVAS';
+          activeStopsCount.textContent = `${points.length} PARADAS ACTIVAS`;
         }
 
         if (pilotStopsStat) {
-          animateNumericContent(pilotStopsStat, '453', 900);
+          animateNumericContent(pilotStopsStat, String(points.length), 900);
         }
       } catch (error) {
         console.error(`Error al procesar ${kmlUrl}:`, error);
@@ -2685,7 +2994,10 @@
     updateStickyNav();
     window.addEventListener('scroll', updateStickyNav, { passive: true });
 
-    setTimeout(() => map.invalidateSize(), 300);
+    setTimeout(() => {
+      mapCurrent.invalidateSize();
+      mapPilot.invalidateSize();
+    }, 300);
 
     renderFooterLinks();
 
@@ -2695,7 +3007,19 @@
       container.innerHTML = routes
         .map((route) => {
           const routeStops = stops.filter((stop) => stop.route.includes(route)).map((stop) => stop.name);
-          return `<div style="padding:10px 12px;border:1px solid rgba(39,174,96,0.35);border-radius:8px;margin-bottom:8px;"><strong>${route}</strong><br><span>${routeStops.join(' → ')}</span></div>`;
+          const routeParts = route.match(/^([^\d]+)\s*(.*)$/);
+          const routeLabel = routeParts ? routeParts[1].trim() : 'Ruta';
+          const routeNumber = routeParts && routeParts[2] ? routeParts[2].trim() : route;
+
+          return `
+            <div class="route-item" role="listitem">
+              <div class="route-item-head">
+                <span class="route-label">${routeLabel}</span>
+                <span class="route-number">${routeNumber}</span>
+              </div>
+              <div class="route-stops">${routeStops.join(' → ')}</div>
+            </div>
+          `;
         })
         .join('');
       document.getElementById('routesModal').classList.add('active');

@@ -17,9 +17,9 @@
     .legend h3{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#27ae60;margin-bottom:6px;font-weight:700}
     .legend-item{display:flex;align-items:center;gap:5px;margin-bottom:3px;font-size:10px;color:#8ab88a}
     .swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-    .controls{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;background:rgba(6,10,18,.9);border:1px solid rgba(211,84,0,.35);border-radius:8px;padding:10px 16px}
-    .btn{border:1px solid #D35400;border-radius:5px;background:rgba(10,26,15,.95);color:#D35400;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;cursor:pointer;padding:8px 14px;transition:background .2s,color .2s,box-shadow .2s;font-family:"Montserrat",sans-serif}
-    .btn:hover{background:#D35400;color:#FFFFFF}
+    .controls{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;background:rgba(255,255,255,.14);border:1px solid rgba(211,84,0,.48);border-radius:12px;padding:10px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+    .btn{border:2px solid #D35400;border-radius:10px;background:transparent;color:#D35400;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;cursor:pointer;padding:8px 14px;transition:background .2s,color .2s,box-shadow .2s,transform .2s;font-family:"Montserrat",sans-serif}
+    .btn:hover{background:#D35400;color:#FFFFFF;transform:translateY(-1px);box-shadow:0 8px 16px rgba(211,84,0,.35)}
     .btn.active{background:#D35400;color:#FFFFFF;box-shadow:0 0 10px rgba(211,84,0,.45)}
     @media(max-width:760px){.legend{display:none}.controls{left:12px;right:12px;transform:none;max-width:calc(100vw - 24px)}}
   </style>
