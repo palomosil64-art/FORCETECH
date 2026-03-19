@@ -2195,6 +2195,13 @@
       box-shadow: 0 6px 22px rgba(211, 84, 0, 0.18);
       transform: translateY(-2px);
     }
+    .ecodir-card--active {
+      border-color: #D35400;
+      border-width: 2.5px;
+      background: #fff8f4;
+      box-shadow: 0 0 0 4px rgba(211, 84, 0, 0.14), 0 8px 24px rgba(211, 84, 0, 0.22);
+      transform: translateY(-2px);
+    }
     .ecodir-num {
       font-family: 'Montserrat', sans-serif;
       font-size: 11px;
@@ -2736,20 +2743,38 @@
     const pilotMarkers = [];
 
     // ── Pilot stops: siempre renderiza los 10 nodos desde stops[], sin depender del KML ──
-    function getPilotPopupHtml(stop) {
-      const servicesHtml = REQUIRED_POPUP_SERVICES
-        .map((item) => {
-          const mapped = FEATURE_ICON_MAP[item] || { icon: 'fa-solid fa-circle-check', shortLabel: item };
-          return `<span class="map-popup-service"><i class="${mapped.icon}" aria-hidden="true"></i>${mapped.shortLabel}</span>`;
-        }).join('');
-      return `<div class="map-popup"><div class="map-popup-title" style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#D35400;">${stop.name}</div><div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;color:#555;margin:4px 0 6px;"><strong style="color:#D35400;">${stop.zone}</strong> &bull; ${stop.geo}</div><div class="map-popup-services">${servicesHtml}</div></div>`;
+    function getPilotPopupHtml(stop, idx) {
+      const reviews = mockReviews[stop.name] || [];
+      const avg = avgRating(reviews);
+      const starsFilled = Math.round(Number(avg));
+      const starsMarkup = Array.from({ length: 5 }, (_, i) =>
+        `<span style="color:${i < starsFilled ? '#D35400' : '#ddd'};font-size:14px;">★</span>`
+      ).join('');
+      const reviewCount = reviews.length;
+      return [
+        `<div class="map-popup" style="font-family:'Montserrat',sans-serif;">`,
+          `<div style="font-weight:800;font-size:15px;color:#D35400;margin-bottom:4px;">${stop.name}</div>`,
+          `<div style="font-size:11px;font-weight:700;color:#1E392A;margin-bottom:6px;">${stop.zone} &bull; ${stop.route}</div>`,
+          `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">`,
+            `<span>${starsMarkup}</span>`,
+            `<span style="font-size:12px;font-weight:700;color:#555;">${avg} (${reviewCount} reseña${reviewCount !== 1 ? 's' : ''})</span>`,
+          `</div>`,
+          `<button onclick="openReviewsModal(stops[${idx}],${idx},true)" style="`,
+            `display:block;width:100%;padding:9px 0;border:none;border-radius:10px;`,
+            `background:linear-gradient(135deg,#F17A20 0%,#D35400 62%,#B84400 100%);`,
+            `color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;`,
+            `font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;">`,
+            `<i class="fas fa-star" style="margin-right:6px;"></i>VER RESEÑAS`,
+          `</button>`,
+        `</div>`
+      ].join('');
     }
 
     function renderPilotLayer() {
       const layer = L.layerGroup();
-      stops.forEach((stop) => {
+      stops.forEach((stop, idx) => {
         const marker = L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon })
-          .bindPopup(getPilotPopupHtml(stop), { maxWidth: 300 })
+          .bindPopup(getPilotPopupHtml(stop, idx), { maxWidth: 300 })
           .addTo(layer);
         pilotMarkers.push(marker);
       });
@@ -3433,18 +3458,28 @@
       `).join('');
     }
 
-    function openReviewsModal(stop, idx) {
+    function highlightEcodirCard(idx) {
+      document.querySelectorAll('.ecodir-card').forEach((c) => c.classList.remove('ecodir-card--active'));
+      const target = document.querySelector(`.ecodir-card[data-stop-index="${idx}"]`);
+      if (target) {
+        target.classList.add('ecodir-card--active');
+        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function openReviewsModal(stop, idx, fromMap = false) {
       activeReviewStop = stop.name;
       selectedReviewStars = 0;
 
-      // FlyTo + open popup on pilot map
-      mapPilot.flyTo([stop.lat, stop.lng], 16, { animate: true, duration: 1.2 });
-      setTimeout(() => {
-        if (pilotMarkers[idx]) pilotMarkers[idx].openPopup();
-      }, 1300);
+      if (!fromMap) {
+        // Called from ecodir card: fly the map + open popup
+        mapPilot.flyTo([stop.lat, stop.lng], 16, { animate: true, duration: 1.2 });
+        setTimeout(() => { if (pilotMarkers[idx]) pilotMarkers[idx].openPopup(); }, 1300);
+        document.getElementById('mapa').scrollIntoView({ behavior: 'smooth' });
+      }
 
-      // Scroll to map section smoothly
-      document.getElementById('mapa').scrollIntoView({ behavior: 'smooth' });
+      // Always highlight the ecodir card
+      highlightEcodirCard(idx);
 
       // Populate modal header
       document.getElementById('reviewsModalTitle').textContent = `⭐ Reseñas — ${stop.name}`;
@@ -3470,6 +3505,7 @@
 
     function closeReviewsModal() {
       document.getElementById('reviewsModal').classList.remove('active');
+      document.querySelectorAll('.ecodir-card').forEach((c) => c.classList.remove('ecodir-card--active'));
       activeReviewStop = null;
     }
 
