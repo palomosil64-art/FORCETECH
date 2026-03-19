@@ -1561,7 +1561,7 @@
       <div class="stat-label">Queja: Espera</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">10</div>
+      <div class="stat-number" id="pilotStopsStat">10</div>
       <div class="stat-label">PARADAS PILOTO</div>
     </div>
   </div>
@@ -1855,6 +1855,7 @@
   <!-- SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
     // ── Data ──
     const stops = [
@@ -1888,45 +1889,92 @@
       className: ""
     });
 
-    // Rutas optimizadas de la app: red principal conectada
-    const networkCoords = stops.map(s => [s.lat, s.lng]);
-    L.polyline(networkCoords, {
-      color: "#1E4620",
-      weight: 3,
-      opacity: 0.45,
-      dashArray: "7 7",
-      lineCap: "round",
-      lineJoin: "round"
-    }).addTo(map);
+    async function readKmlText(sourceUrl) {
+      const lowerUrl = sourceUrl.toLowerCase();
 
-    // Segmentos de interconexión para visualizar ramales secundarios
-    L.polyline(stops.filter((_, i) => i % 2 === 0).map(s => [s.lat, s.lng]), {
-      color: "#2A5C2E",
-      weight: 2,
-      opacity: 0.35,
-      dashArray: "4 8"
-    }).addTo(map);
+      if (lowerUrl.endsWith('.kmz')) {
+        const kmzResponse = await fetch(sourceUrl);
+        if (!kmzResponse.ok) {
+          throw new Error(`No se pudo cargar KMZ: ${kmzResponse.status}`);
+        }
 
-    stops.forEach(s => {
-      // Decorative circular highlight for exact stop location
-      L.circleMarker([s.lat, s.lng], {
-        radius: 4,
-        color: "#1E4620",
-        weight: 2,
-        fillColor: "#6aad5b",
-        fillOpacity: 0.95,
-        opacity: 1
-      }).addTo(map);
+        const kmzBuffer = await kmzResponse.arrayBuffer();
+        const zip = await JSZip.loadAsync(kmzBuffer);
+        const kmlEntryName = Object.keys(zip.files).find((name) => name.toLowerCase().endsWith('.kml'));
+        if (!kmlEntryName) {
+          throw new Error('El KMZ no contiene un archivo KML interno');
+        }
 
-      L.marker([s.lat, s.lng], { icon: markerIcon })
-        .bindPopup(`<b style="color:#2d5a27;font-size:14px">${s.name}</b><br><span style="color:#d4703a;font-weight:600">${s.route}</span><br><span style="color:#3d5c39">${s.desc}</span>`)
-        .addTo(map);
-    });
+        return zip.files[kmlEntryName].async('string');
+      }
 
-    const activeStopsCount = document.getElementById('activeStopsCount');
-    if (activeStopsCount) {
-      activeStopsCount.textContent = `${stops.length} PARADAS ACTIVAS`;
+      const kmlResponse = await fetch(sourceUrl);
+      if (!kmlResponse.ok) {
+        throw new Error(`No se pudo cargar KML: ${kmlResponse.status}`);
+      }
+
+      return kmlResponse.text();
     }
+
+    // Carga de todas las paradas desde KML/KMZ (Placemark + Point)
+    async function loadStopsFromKml(kmlUrl) {
+      const activeStopsCount = document.getElementById('activeStopsCount');
+      const pilotStopsStat = document.getElementById('pilotStopsStat');
+
+      try {
+        const kmlText = await readKmlText(kmlUrl);
+        const kmlDoc = new DOMParser().parseFromString(kmlText, 'text/xml');
+        const placemarks = Array.from(kmlDoc.getElementsByTagName('Placemark'));
+        const points = [];
+
+        placemarks.forEach((placemark) => {
+          const nameNode = placemark.getElementsByTagName('name')[0];
+          const pointNode = placemark.getElementsByTagName('Point')[0];
+          if (!pointNode) return;
+
+          const coordNode = pointNode.getElementsByTagName('coordinates')[0];
+          if (!coordNode || !coordNode.textContent) return;
+
+          const rawCoords = coordNode.textContent.trim().split(',');
+          if (rawCoords.length < 2) return;
+
+          const lng = Number(rawCoords[0]);
+          const lat = Number(rawCoords[1]);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+          points.push({
+            name: nameNode?.textContent?.trim() || 'Parada',
+            lat,
+            lng
+          });
+        });
+
+        const markerLayer = L.layerGroup();
+        points.forEach((stop) => {
+          L.marker([stop.lat, stop.lng], { icon: markerIcon })
+            .bindPopup(`<b style="color:#1E4620;font-size:14px">${stop.name}</b>`)
+            .addTo(markerLayer);
+        });
+
+        markerLayer.addTo(map);
+
+        if (points.length > 0) {
+          map.fitBounds(markerLayer.getBounds(), { padding: [22, 22] });
+        }
+
+        if (activeStopsCount) {
+          activeStopsCount.textContent = `${points.length} PARADAS ACTIVAS`;
+        }
+
+        if (pilotStopsStat) {
+          pilotStopsStat.textContent = `${points.length}`;
+        }
+      } catch (error) {
+        console.error('Error al procesar KML:', error);
+      }
+    }
+
+    loadStopsFromKml('PARADAS CON CASETA.kml');
 
     setTimeout(() => map.invalidateSize(), 300);
 
