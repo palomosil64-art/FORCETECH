@@ -6,6 +6,8 @@
 <title>Transporte Público Hermosillo · Informe 2019–2024</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
   :root {
     --verde-bosque: #1E4620;
@@ -92,7 +94,19 @@
   /* NAV TABS */
   .nav-tabs {
     background: var(--verde-hoja);
-    display: flex;
+    display: flex;"Actúa como un Desarrollador Frontend. Necesito unificar el color de los datos numéricos y estadísticas en mi sitio FORCETECH.
+
+Instrucciones:
+
+Color de Datos: Localiza la sección de estadísticas (donde aparecen '168,902 usuarios', '37 líneas', '70.4%', '6 ecoparadas', etc.) y cambia el color de esos números al naranja oficial del proyecto (#D35400).
+
+Tipografía: Asegúrate de que estos números usen Montserrat Bold o Extra-Bold para que tengan mucho peso visual.
+
+Etiquetas: Mantén el texto descriptivo de abajo (ej. 'USUARIOS DEL TP') en el verde oscuro corporativo (#1E4620) o en un gris oscuro muy legible para que no compita con el número.
+
+Mapa: Aplica este mismo naranja a los títulos o datos resaltados dentro del contenedor del 'Mapa de Ecoparadas'.
+
+Entregable: Proporcióname el código CSS actualizado para que todos los indicadores numéricos del dashboard y del mapa brillen en naranja."
     gap: 0;
     overflow-x: auto;
     scrollbar-width: none;
@@ -158,8 +172,12 @@
     font-family: 'Playfair Display', serif;
     font-size: 30px;
     font-weight: 700;
-    color: var(--verde-bosque);
+    color: #D35400;
     line-height: 1;
+    transition: color 0.3s ease;
+  }
+  .kpi-value:hover {
+    color: #FFFFFF;
   }
   .kpi-value small { font-size: 14px; font-weight: 400; font-family: 'DM Sans', sans-serif; color: var(--texto-suave); }
   .kpi-change {
@@ -170,7 +188,8 @@
   .kpi-change.up { color: var(--verde-hoja); }
   .kpi-change.down { color: var(--naranja-acento); }
   .kpi-card.accent { border-left-color: var(--naranja-acento); }
-  .kpi-card.accent .kpi-value { color: var(--naranja-acento); }
+  .kpi-card.accent .kpi-value { color: var(--naranja-acento); transition: color 0.3s ease; }
+  .kpi-card.accent .kpi-value:hover { color: #FFFFFF; }
 
   /* CHART PANELS */
   .chart-grid {
@@ -260,16 +279,31 @@
     background: var(--verde-hoja); border-color: var(--verde-hoja); color: white;
   }
 
-  /* FOOTER */
-  .footer {
-    background: var(--verde-bosque);
-    color: rgba(184,224,168,0.7);
-    text-align: center;
-    padding: 24px;
-    font-size: 11px;
-    margin-top: 40px;
+  /* BOTONES FLOTANTES */
+  .floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
   }
-  .footer strong { color: var(--verde-menta); }
+  .floating-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #D35400;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background 0.3s ease;
+  }
+  .floating-btn:hover { background: #B84400; }
+  .floating-btn i { color: #FFFFFF; font-size: 20px; }
 </style>
 </head>
 <body>
@@ -286,8 +320,8 @@
   <button class="nav-tab" onclick="showSection('modal')">Reparto Modal</button>
   <button class="nav-tab" onclick="showSection('financiero')">💰 Finanzas</button>
   <button class="nav-tab" onclick="showSection('subsidio')">🏛️ Subsidio</button>
-  <button class="nav-tab" onclick="showSection('zonas')">📍 Zonas</button>
   <button class="nav-tab" onclick="showSection('tablas')">📋 Tablas</button>
+  <button class="nav-tab" onclick="showSection('ecoparadas')">🌿 Ecoparadas</button>
 </nav>
 
 <!-- SECCIÓN: USUARIOS -->

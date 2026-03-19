@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-yH6ja6v3t7z3qeRXj4dIax6pHtYXpsET3KOkj8Z1YzU3Ghr3cs+P09jHRkTc2mhZkqBj6VDpnp9Nw0b0rH6catg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
@@ -18,7 +19,8 @@
       --verde-claro: #2A5C2E;
       --verde-palido: #3A7C42;
       --verde-fondo: #FFFFFF;
-      --naranja-acento: #d4703a;
+      --naranja-oficial: #D35400;
+      --naranja-acento: var(--naranja-oficial);
       --naranja-calido: #e8954a;
       --texto-oscuro: #1E4620;
       --texto-medio: #1E4620;
@@ -34,9 +36,19 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
       background: #FFFFFF;
       color: #2D2D2D;
       line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+    }
+
+    .section-sub, .hero-sub, .chart-sub, .analisis-card p, .team-bio {
+      font-weight: 600;
     }
 
     /* ── NAV ── */
@@ -69,7 +81,7 @@
     }
 
     .nav-logo span {
-      color: #d4703a;
+      color: var(--naranja-oficial);
     }
 
     .nav-links {
@@ -85,9 +97,13 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      transition: all 0.3s ease;
+      transition: color 0.3s ease;
       font-family: 'Montserrat', sans-serif;
       position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--naranja-oficial);
     }
 
     .nav-links a::after {
@@ -97,16 +113,12 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #d4703a;
+      background: var(--naranja-oficial);
       transition: width 0.3s ease;
     }
 
     .nav-links a:hover::after {
       width: 100%;
-    }
-
-    .nav-links a:hover {
-      color: #d4703a;
     }
 
     .nav-hamburger {
@@ -311,36 +323,43 @@
     }
 
     /* ── FLOATING ACTION BUTTON (FAB) ── */
-    .fab-soporte {
+    .fab-soporte, .fab-mapa {
       position: fixed;
-      bottom: 30px;
       right: 30px;
       z-index: 9999;
-      width: 70px;
-      height: 70px;
-      border-radius: 50px;
-      background: var(--naranja-acento);
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: var(--naranja-oficial);
       color: #000000;
       border: none;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 28px;
+      font-size: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.2s ease;
       text-decoration: none;
     }
 
-    .fab-soporte:hover {
-      background: #c0531e;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
-      transform: scale(1.1);
+    .fab-mapa {
+      bottom: 110px;
     }
 
-    .fab-soporte:active {
+    .fab-soporte {
+      bottom: 30px;
+    }
+
+    .fab-soporte:hover, .fab-mapa:hover {
+      background: #c0531e;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    .fab-soporte:active, .fab-mapa:active {
       transform: scale(0.95);
     }
 
@@ -382,18 +401,19 @@
 
     .stat-number {
       font-family: 'Montserrat', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--verde-bosque);
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--naranja-oficial);
+      letter-spacing: 0.01em;
     }
 
     .stat-label {
       font-family: 'Montserrat', sans-serif;
       font-size: 11px;
-      color: #1E4620;
+      color: var(--naranja-oficial);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-weight: 700;
+      font-weight: 800;
       margin-top: 4px;
     }
 
@@ -402,8 +422,9 @@
       padding: 80px 32px;
       max-width: 1200px;
       margin: 0 auto;
-      background: #FFFFFF;
+      background: #eef8ee;
       position: relative;
+      border-left: 4px solid var(--verde-corporativo);
     }
 
     .section:nth-child(even) {
@@ -468,15 +489,15 @@
     .map-header h3 {
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;
-      font-weight: 700;
-      color: #1E4620;
+      font-weight: 800;
+      color: var(--naranja-oficial);
     }
 
     .map-header span {
       font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: #1E4620;
-      font-weight: 700;
+      color: var(--naranja-oficial);
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -484,6 +505,79 @@
     #map {
       width: 100%;
       height: 460px;
+    }
+
+    .leaflet-custom-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1E4620;
+      border: 2px solid var(--naranja-oficial);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .leaflet-custom-icon i {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .fab-mapa {
+      position: fixed;
+      right: 30px;
+      bottom: 115px;
+      z-index: 9999;
+      min-width: 140px;
+      height: 50px;
+      border-radius: 999px;
+      background: var(--naranja-oficial);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px solid rgba(0,0,0,0.12);
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .fab-mapa:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+    }
+
+    #mapa .section-title span.ecoparadas-highlight {
+      color: var(--verde-corporativo);
+      transition: text-shadow 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+      display: inline-block;
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    #mapa .section-title span.ecoparadas-highlight:hover {
+      text-shadow: 0 4px 12px rgba(30, 70, 32, 0.3);
+      transform: translateY(-1px);
+      background: rgba(30, 70, 32, 0.08);
+    }
+
+    /* Mapa — indicadores destacados */
+    #mapa .section-title {
+      color: var(--naranja-oficial);
+      font-weight: 900;
+    }
+
+    #mapa .section-sub {
+      color: #2D2D2D;
+      font-weight: 600;
     }
 
     /* ── PARADAS GRID ── */
@@ -996,7 +1090,7 @@
 
     .team-card {
       background: #FFFFFF;
-      border: 2px solid #d4703a;
+      border: 2px solid var(--naranja-oficial);
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
@@ -1019,6 +1113,12 @@
       overflow: hidden;
       border: 3px solid #1E4620;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      background: #1E4620;
+    }
+
+    .team-photo-placeholder {
+      background: #1E4620;
+      color: #FFFFFF;
     }
 
     .team-photo img {
@@ -1238,15 +1338,18 @@
     }
 
     .crisis-number {
-      font-family: "Playfair Display", serif;
-      font-size: 36px;
-      font-weight: 900;
-      color: var(--verde-bosque);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--naranja-oficial);
       line-height: 1;
     }
 
-    .crisis-card.alerta .crisis-number { color: var(--naranja-acento); }
-    .crisis-card.critico .crisis-number { color: #c0392b; }
+    .crisis-card.alerta .crisis-number,
+    .crisis-card.critico .crisis-number,
+    .crisis-card.info .crisis-number {
+      color: var(--naranja-oficial);
+    }
 
     .crisis-label {
       font-size: 13px;
@@ -1347,17 +1450,18 @@
     }
 
     .impacto-item .impacto-number {
-      font-family: "Playfair Display", serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 32px;
       font-weight: 900;
-      color: var(--verde-menta);
+      color: var(--naranja-oficial);
     }
 
     .impacto-item .impacto-label {
+      font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: var(--verde-claro);
+      color: var(--naranja-oficial);
       margin-top: 4px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .fuente-datos {
@@ -1443,8 +1547,10 @@
   <!-- MAPA -->
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
-    <h2 class="section-title">Mapa de Ecoparadas</h2>
+    <h2 class="section-title">Mapa de <span class="ecoparadas-highlight">Ecoparadas</span></h2>
     <p class="section-sub">Red de paradas ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
+    <!-- FAB Mapa (icono solo) -->
+    <a href="#mapa" class="fab-mapa" id="btnVerMapa" title="Ir al mapa" aria-label="Ir al mapa"><i class="fas fa-map-marked-alt"></i></a>
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Hermosillo, Sonora</h3>
@@ -1737,7 +1843,26 @@
       { name: "Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0697, lng: -110.9454, desc: "Edificios administrativos. Diseño accesible.", feat: ["Techo Verde", "Accesible", "LED"] },
       { name: "Tecnologico", route: "Ruta 11, 15", lat: 29.0942, lng: -110.9612, desc: "Zona educativa. Proyecto piloto IoT.", feat: ["Solar", "USB", "WiFi", "IoT"] },
       { name: "Hermosillo Viejo", route: "Ruta 3, 7", lat: 29.0675, lng: -110.9637, desc: "Zona historica y cultural.", feat: ["Plantas Nativas", "Descanso"] },
-      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", feat: ["Accesible", "Emergencia", "Señalización"] }
+      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", feat: ["Accesible", "Emergencia", "Señalización"] },
+      { name: "Plaza Niños Héroes", route: "Ruta 10, 12", lat: 29.0745, lng: -110.9540, desc: "Nodo peatonal y transferencia de líneas.", feat: ["Sombra", "WiFi"] },
+      { name: "Parque Madero", route: "Ruta 9, 13", lat: 29.0785, lng: -110.9408, desc: "Sector recreativo con ciclo-vía.", feat: ["Techo Verde", "Luz LED"] },
+      { name: "La Cantera", route: "Ruta 5, 8", lat: 29.0822, lng: -110.9609, desc: "Entrada sur de la ciudad.", feat: ["Solar", "Reciclaje"] },
+      { name: "San Benito Norte", route: "Ruta 7", lat: 29.0827, lng: -110.9521, desc: "Conexión a rutas locales y ejecutivas.", feat: ["Sombra", "USB"] },
+      { name: "Villa de Seris", route: "Ruta 3, 14", lat: 29.0650, lng: -110.9612, desc: "Acceso residencial con bici-estacionamiento.", feat: ["Parking Bicicletas", "Señalización"] },
+      { name: "Pitic", route: "Ruta 2, 6", lat: 29.0771, lng: -110.9423, desc: "Corazón del distrito financiero.", feat: ["WiFi", "LED"] },
+      { name: "Los Clasificados", route: "Ruta 4, 5", lat: 29.0668, lng: -110.9476, desc: "Área comercial de alto tráfico.", feat: ["Techo Verde", "Accesible"] },
+      { name: "Campestre", route: "Ruta 15", lat: 29.0779, lng: -110.9685, desc: "Intercambio con transporte suburbano.", feat: ["Solar", "Sombra"] },
+      { name: "Pueblitos", route: "Ruta 1, 7", lat: 29.0883, lng: -110.9528, desc: "Conecta barrios emergentes.", feat: ["Reciclaje", "Luz LED"] },
+      { name: "Palo Verde", route: "Ruta 13", lat: 29.0852, lng: -110.9431, desc: "Sector educativo y cultural.", feat: ["Solar", "WiFi"] },
+      { name: "Monterrey", route: "Ruta 8, 11", lat: 29.0632, lng: -110.9572, desc: "Entrada a zona industrial.", feat: ["Sombra", "Señalización"] },
+      { name: "Avenida Principal", route: "Ruta 6, 9", lat: 29.0911, lng: -110.9498, desc: "Eje de transporte urbano.", feat: ["Techo Verde", "USB"] },
+      { name: "Unidad Diseño", route: "Ruta 5", lat: 29.0712, lng: -110.9680, desc: "Campus de innovación.", feat: ["IoT", "Accesible"] },
+      { name: "Zona Industrial", route: "Ruta 2, 4", lat: 29.0775, lng: -110.9712, desc: "Focu de producción y logística.", feat: ["Solar", "Seguridad"] },
+      { name: "La Cholla", route: "Ruta 1, 3", lat: 29.0704, lng: -110.9332, desc: "Paso clave dirección noreste.", feat: ["Sombra", "WiFi"] },
+      { name: "Pueblo Nuevo", route: "Ruta 7, 11", lat: 29.0828, lng: -110.9371, desc: "Nueva zona residencial.", feat: ["Accesible", "LED"] },
+      { name: "Periodistas", route: "Ruta 10, 14", lat: 29.0881, lng: -110.9639, desc: "Cercano a medios y oficinas.", feat: ["Techo Verde", "USB"] },
+      { name: "Plaza 2000", route: "Ruta 16", lat: 29.0644, lng: -110.9560, desc: "Centro cultural y empresarial.", feat: ["Solar", "Reciclaje"] },
+      { name: "Avenida Kino", route: "Ruta 2, 6", lat: 29.0610, lng: -110.9489, desc: "Avenida con alta demanda de pasajeros.", feat: ["Sombra", "WiFi"] }
     ];
 
     // ── Leaflet Map ──
@@ -1747,10 +1872,12 @@
       maxZoom: 19
     }).addTo(map);
 
+    // Icono de planta / hoja (FontAwesome) para ecoparadas
     const markerIcon = L.divIcon({
-      html: '<div style="width:22px;height:22px;background:#2d5a27;border-radius:50%;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>',
-      iconSize: [22, 22],
-      iconAnchor: [11, 11],
+      html: '<div class="leaflet-custom-icon"><i class="fas fa-leaf"></i></div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 28],
+      popupAnchor: [0, -24],
       className: ""
     });
 
@@ -1809,6 +1936,15 @@
         links.style.gap = "16px";
       }
     });
+
+    // ── Botón flotante Ver Mapa ──
+    const btnVerMapa = document.getElementById('btnVerMapa');
+    if (btnVerMapa) {
+      btnVerMapa.addEventListener('click', (event) => {
+        event.preventDefault();
+        document.getElementById('mapa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
 
     // ── Datos y Analisis Tabs + Charts ──
     const analisisTabs = document.querySelectorAll(".analisis-tab");
@@ -1938,7 +2074,7 @@
 
   <!-- FLOATING ACTION BUTTON - SOPORTE -->
   <a href="#soporte" class="fab-soporte" title="Centro de Soporte FORCETECH" aria-label="Abrir Centro de Soporte">
-    <span>🎧</span>
+    <i class="fas fa-headset"></i>
   </a>
 </body>
 </html>
