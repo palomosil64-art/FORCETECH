@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transporte Público Hermosillo · Informe 2019–2024</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
@@ -17,22 +17,28 @@
     --verde-claro: #2A5C2E;
     --verde-palido: #3A7C42;
     --verde-fondo: #FFFFFF;
-    --naranja-acento: #d4703a;
+    --naranja-acento: #D35400;
     --naranja-calido: #e8954a;
     --texto-oscuro: #1E4620;
     --texto-medio: #1E4620;
     --texto-suave: #2A5C2E;
     --blanco: #FFFFFF;
     --sombra: rgba(30, 70, 32, 0.12);
+    --gris-fila: #f6f7f6;
+    --borde-suave: rgba(30, 70, 32, 0.14);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: var(--verde-fondo);
     color: var(--texto-oscuro);
     min-height: 100vh;
+  }
+
+  body, button, input, select, textarea, table, th, td {
+    font-family: 'Montserrat', sans-serif;
   }
 
   /* HEADER */
@@ -69,7 +75,7 @@
     margin-bottom: 18px;
   }
   .header h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(28px, 5vw, 52px);
     font-weight: 900;
     color: var(--blanco);
@@ -79,16 +85,23 @@
   .header h1 span { color: var(--verde-menta); }
   .header-sub {
     margin-top: 12px;
-    color: var(--verde-claro);
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 700;
+    line-height: 1.45;
     letter-spacing: 0.3px;
+    max-width: 680px;
   }
   .header-source {
     margin-top: 20px;
     font-size: 11px;
-    color: rgba(184,224,168,0.7);
-    font-style: italic;
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+    max-width: 680px;
   }
 
   /* NAV TABS */
@@ -150,7 +163,7 @@
   }
   .kpi-label {
     font-size: 10px;
-    font-family: 'Montserrat', 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -158,17 +171,17 @@
     margin-bottom: 8px;
   }
   .kpi-value {
-    font-family: 'Montserrat', 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 30px;
     font-weight: 900;
     color: #FFFFFF;
     line-height: 1;
   }
-  .kpi-value small { font-size: 14px; font-weight: 800; font-family: 'Montserrat', 'DM Sans', sans-serif; color: #FFFFFF; }
+  .kpi-value small { font-size: 14px; font-weight: 800; font-family: 'Montserrat', sans-serif; color: #FFFFFF; }
   .kpi-change {
     margin-top: 6px;
     font-size: 11px;
-    font-family: 'Montserrat', 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     color: #FFFFFF;
   }
@@ -192,13 +205,14 @@
     background: white;
     border-radius: 16px;
     padding: 28px;
-    box-shadow: 0 2px 12px var(--sombra);
+    box-shadow: 0 6px 18px var(--sombra);
+    border: 1px solid var(--borde-suave);
   }
   .chart-panel.wide { grid-column: 1 / -1; }
   .chart-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--verde-bosque);
     margin-bottom: 4px;
   }
@@ -229,9 +243,10 @@
     letter-spacing: 0.8px;
     text-transform: uppercase;
   }
-  tbody tr { border-bottom: 1px solid var(--verde-palido); transition: background 0.15s; }
-  tbody tr:hover { background: var(--verde-fondo); }
-  tbody tr:last-child { border-bottom: none; font-weight: 700; background: var(--verde-palido); }
+  tbody tr { border-bottom: 1px solid var(--borde-suave); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--gris-fila); }
+  tbody tr:hover { background: #eef4ee; }
+  tbody tr:last-child { border-bottom: none; font-weight: 700; }
   td { padding: 11px 16px; color: var(--texto-medio); }
   td:first-child { font-weight: 600; color: var(--verde-bosque); }
   .tag-up { color: var(--verde-hoja); font-weight: 600; font-size: 11px; }
@@ -241,15 +256,15 @@
   .zone-grid { display: grid; gap: 12px; margin-top: 8px; }
   .zone-row { display: flex; flex-direction: column; gap: 4px; }
   .zone-label { font-size: 12px; font-weight: 600; color: var(--texto-medio); display: flex; justify-content: space-between; }
-  .zone-label span { color: var(--verde-bosque); font-family: 'Playfair Display', serif; font-size: 14px; }
+  .zone-label span { color: var(--verde-bosque); font-family: 'Montserrat', sans-serif; font-size: 14px; }
   .zone-track { background: var(--verde-palido); border-radius: 6px; height: 10px; overflow: hidden; }
   .zone-fill { height: 100%; border-radius: 6px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
 
   /* SECTION TITLE */
   .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--verde-bosque);
     margin-bottom: 6px;
   }
@@ -309,7 +324,7 @@
     box-shadow: 0 2px 10px var(--sombra);
   }
   .eco-title {
-    font-family: 'Montserrat', 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 15px;
     color: var(--verde-bosque);
@@ -321,21 +336,44 @@
     gap: 8px;
   }
   .eco-tag {
-    background: #f0f5ef;
-    color: var(--verde-bosque);
-    border: 1px solid #c7d8c4;
+    background: transparent;
+    color: #D35400;
+    border: 1px solid #D35400;
     border-radius: 999px;
     padding: 5px 10px;
-    font-family: 'Montserrat', 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
   .eco-tag:hover {
     background: #D35400;
     color: #FFFFFF;
+    border-color: #D35400;
+  }
+
+  .eco-status {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #D35400;
+    color: #D35400;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: transparent;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 28px 20px 36px;
+    color: #1E4620;
+    font-size: 12px;
+    background: #FFFFFF;
   }
   #ecoMap {
     width: 100%;
@@ -361,12 +399,12 @@
 </div>
 
 <nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('usuarios')">👥 Usuarios</button>
+  <button class="nav-tab active" onclick="showSection('usuarios')">Usuarios</button>
   <button class="nav-tab" onclick="showSection('modal')">Reparto Modal</button>
-  <button class="nav-tab" onclick="showSection('financiero')">💰 Finanzas</button>
-  <button class="nav-tab" onclick="showSection('subsidio')">🏛️ Subsidio</button>
-  <button class="nav-tab" onclick="showSection('tablas')">📋 Tablas</button>
-  <button class="nav-tab" onclick="showSection('ecoparadas')">🌿 Ecoparadas</button>
+  <button class="nav-tab" onclick="showSection('financiero')">Finanzas</button>
+  <button class="nav-tab" onclick="showSection('subsidio')">Subsidio</button>
+  <button class="nav-tab" onclick="showSection('tablas')">Tablas</button>
+  <button class="nav-tab" onclick="showSection('ecoparadas')">Ecoparadas</button>
 </nav>
 
 <!-- SECCIÓN: USUARIOS -->
@@ -735,42 +773,97 @@
 <div id="sec-ecoparadas" class="section">
   <p class="section-title">Ecoparadas inteligentes</p>
   <p class="section-desc">Servicios instalados en las ecoparadas y localización de puntos en operación.</p>
+  <p class="eco-status" id="ecoActiveCount">10 PARADAS ACTIVAS</p>
 
   <div class="eco-grid">
     <div class="eco-card">
       <p class="eco-title">San Benito</p>
       <div class="eco-tags">
-        <span class="eco-tag">Solar</span>
-        <span class="eco-tag">WiFi</span>
-        <span class="eco-tag">USB</span>
-        <span class="eco-tag">CCTV</span>
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
       </div>
     </div>
     <div class="eco-card">
       <p class="eco-title">Colosio</p>
       <div class="eco-tags">
-        <span class="eco-tag">Solar</span>
-        <span class="eco-tag">WiFi</span>
-        <span class="eco-tag">USB</span>
-        <span class="eco-tag">Pantalla</span>
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
       </div>
     </div>
     <div class="eco-card">
-      <p class="eco-title">Centro Cívico</p>
+      <p class="eco-title">Centro de Gobierno</p>
       <div class="eco-tags">
-        <span class="eco-tag">Solar</span>
-        <span class="eco-tag">WiFi</span>
-        <span class="eco-tag">USB</span>
-        <span class="eco-tag">Accesible</span>
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
       </div>
     </div>
     <div class="eco-card">
-      <p class="eco-title">Solidaridad</p>
+      <p class="eco-title">Tecnológico</p>
       <div class="eco-tags">
-        <span class="eco-tag">Solar</span>
-        <span class="eco-tag">WiFi</span>
-        <span class="eco-tag">USB</span>
-        <span class="eco-tag">Iluminación</span>
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
+      </div>
+    </div>
+    <div class="eco-card">
+      <p class="eco-title">Hermosillo Viejo</p>
+      <div class="eco-tags">
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
+      </div>
+    </div>
+    <div class="eco-card">
+      <p class="eco-title">Hospital General</p>
+      <div class="eco-tags">
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
+      </div>
+    </div>
+    <div class="eco-card">
+      <p class="eco-title">Plaza Niños Héroes</p>
+      <div class="eco-tags">
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
+      </div>
+    </div>
+    <div class="eco-card">
+      <p class="eco-title">Parque Madero</p>
+      <div class="eco-tags">
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
+      </div>
+    </div>
+    <div class="eco-card">
+      <p class="eco-title">La Cantera</p>
+      <div class="eco-tags">
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
+      </div>
+    </div>
+    <div class="eco-card">
+      <p class="eco-title">San Benito Norte</p>
+      <div class="eco-tags">
+        <span class="eco-tag">Reducción térmica</span>
+        <span class="eco-tag">App check-in</span>
+        <span class="eco-tag">Tiempos en vivo</span>
+        <span class="eco-tag">WiFi 5G</span>
       </div>
     </div>
   </div>
@@ -800,25 +893,27 @@
 <script>
 // Color palette
 const G = {
-  bosque: '#2d5a27',
-  hoja: '#4a8c3f',
-  musgo: '#6aad5b',
-  menta: '#8fc97e',
-  claro: '#b8e0a8',
-  palido: '#ddf0d6',
-  naranja: '#d4703a',
+  bosque: '#1E4620',
+  hoja: '#2A5C2E',
+  musgo: '#3A7C42',
+  menta: '#6EA35B',
+  claro: '#B8E0A8',
+  palido: '#EEF5EC',
+  naranja: '#D35400',
   naranjaCal: '#e8954a',
 };
 
 const YEARS = ['2019','2020','2021','2022','2023','2024'];
 
+Chart.defaults.font.family = 'Montserrat';
+
 const defaults = {
   responsive: true,
   maintainAspectRatio: false,
-  plugins: { legend: { labels: { font: { family: 'DM Sans', size: 11 }, boxWidth: 12 } } },
+  plugins: { legend: { labels: { font: { family: 'Montserrat', size: 11 }, boxWidth: 12 } } },
   scales: {
-    x: { ticks: { font: { family: 'DM Sans', size: 11 } }, grid: { color: '#e8f5e2' } },
-    y: { ticks: { font: { family: 'DM Sans', size: 11 } }, grid: { color: '#e8f5e2' } }
+    x: { ticks: { font: { family: 'Montserrat', size: 11 } }, grid: { color: '#e8f5e2' } },
+    y: { ticks: { font: { family: 'Montserrat', size: 11 } }, grid: { color: '#e8f5e2' } }
   }
 };
 
@@ -840,7 +935,7 @@ new Chart(document.getElementById('chartUsuarios'), {
   },
   options: mergeOptions({
     plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.parsed.y.toLocaleString('es-MX') + ' personas' } } },
-    scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => (v/1000).toFixed(0)+'k' } } }
+    scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => (v/1000).toFixed(0)+'k' } } }
   })
 });
 
@@ -855,7 +950,7 @@ new Chart(document.getElementById('chartPorcentaje'), {
       fill: true, tension: 0.4, pointBackgroundColor: G.bosque, pointRadius: 5,
     }]
   },
-  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' }, max: 45, min: 0 } } })
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => v+'%' }, max: 45, min: 0 } } })
 });
 
 new Chart(document.getElementById('chartSatisfaccion'), {
@@ -869,7 +964,7 @@ new Chart(document.getElementById('chartSatisfaccion'), {
       fill: true, tension: 0.3, pointBackgroundColor: G.naranja, pointRadius: 5,
     }]
   },
-  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } }, min: 5, max: 10 } } })
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } }, min: 5, max: 10 } } })
 });
 
 new Chart(document.getElementById('chartInsatisfaccion'), {
@@ -886,7 +981,7 @@ new Chart(document.getElementById('chartInsatisfaccion'), {
   options: mergeOptions({
     indexAxis: 'y',
     plugins: { legend: { display: false } },
-    scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' } }, y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 10 } } } }
+    scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => v+'%' } }, y: { grid: { display: false }, ticks: { font: { family: 'Montserrat', size: 10 } } } }
   })
 });
 
@@ -903,10 +998,10 @@ new Chart(document.getElementById('chartModal'), {
       { label: 'Bicicleta', data: [8.4,6.6,2.5,4.8,5.2,4.2], borderColor: G.claro, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
     ]
   },
-  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' } } } })
+  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => v+'%' } } } })
 });
 
-const pieDefaults = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 10 }, boxWidth: 10, padding: 8 } } } };
+const pieDefaults = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { family: 'Montserrat', size: 10 }, boxWidth: 10, padding: 8 } } } };
 
 new Chart(document.getElementById('chartModal2019'), {
   type: 'doughnut',
@@ -930,7 +1025,7 @@ new Chart(document.getElementById('chartFinanzas'), {
       { label: 'Egresos (costos op.)', data: [299.84,460.92,688.12,781.75,912.96,969.5], backgroundColor: G.naranja, borderRadius: 6, borderSkipped: false },
     ]
   },
-  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$'+v } } } })
 });
 
 new Chart(document.getElementById('chartRecaudo'), {
@@ -939,7 +1034,7 @@ new Chart(document.getElementById('chartRecaudo'), {
     labels: YEARS,
     datasets: [{ label: 'Recaudo (mdp)', data: [159.41,153.71,236.9,289.54,281.46,218.32], backgroundColor: [G.hoja,G.naranjaCal,G.musgo,G.menta,G.musgo,G.naranjaCal], borderRadius: 6, borderSkipped: false }]
   },
-  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$'+v } } } })
 });
 
 new Chart(document.getElementById('chartViajes'), {
@@ -948,7 +1043,7 @@ new Chart(document.getElementById('chartViajes'), {
     labels: YEARS,
     datasets: [{ label: 'Viajes (millones)', data: [17.71,17.08,26.32,32.17,31.27,24.26], borderColor: G.bosque, backgroundColor: G.palido, fill: true, tension: 0.4, pointBackgroundColor: G.bosque, pointRadius: 5 }]
   },
-  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } }, min: 0 } } })
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } }, min: 0 } } })
 });
 
 // SUBSIDIO
@@ -958,7 +1053,7 @@ new Chart(document.getElementById('chartSubsidio'), {
     labels: YEARS,
     datasets: [{ label: 'Subsidio (mdp)', data: [92.87,252.49,427.51,482.43,613.54,723.36], backgroundColor: [G.claro,G.menta,G.musgo,G.hoja,G.hoja,G.bosque], borderRadius: 8, borderSkipped: false }]
   },
-  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$'+v } } } })
 });
 
 new Chart(document.getElementById('chartFuentes'), {
@@ -972,8 +1067,8 @@ new Chart(document.getElementById('chartFuentes'), {
   },
   options: mergeOptions({
     scales: {
-      x: { stacked: true, grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } },
-      y: { stacked: true, grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' }, max: 100 }
+      x: { stacked: true, grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } },
+      y: { stacked: true, grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => v+'%' }, max: 100 }
     }
   })
 });
@@ -984,7 +1079,7 @@ new Chart(document.getElementById('chartPercapita'), {
     labels: YEARS,
     datasets: [{ label: 'Subsidio per cápita ($)', data: [99.54,266.89,446.05,497.32,625.44,729.84], borderColor: G.naranja, backgroundColor: 'rgba(212,112,58,0.08)', fill: true, tension: 0.4, pointBackgroundColor: G.naranja, pointRadius: 5 }]
   },
-  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$'+v } } } })
 });
 
 // ZONAS
@@ -998,7 +1093,7 @@ new Chart(document.getElementById('chartZonas'), {
       { label: 'Zona Sur', data: [40.6,23.5,30.6,26.7,15.9,33.3], borderColor: G.naranja, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, pointBackgroundColor: G.naranja },
     ]
   },
-  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' }, max: 55, min: 0 } } })
+  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => v+'%' }, max: 55, min: 0 } } })
 });
 
 // NAV LOGIC
@@ -1051,10 +1146,16 @@ function initEcoMap() {
   });
 
   const ecoStops = [
-    { name: 'San Benito', coords: [29.0919, -110.9558], services: 'SOLAR · WIFI · USB · CCTV' },
-    { name: 'Colosio', coords: [29.1040, -110.9712], services: 'SOLAR · WIFI · USB · PANTALLA' },
-    { name: 'Centro Cívico', coords: [29.0729, -110.9552], services: 'SOLAR · WIFI · USB · ACCESIBLE' },
-    { name: 'Solidaridad', coords: [29.1204, -110.9459], services: 'SOLAR · WIFI · USB · ILUMINACION' }
+    { name: 'San Benito', coords: [29.0728, -110.9559], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Colosio', coords: [29.0855, -110.9691], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Centro de Gobierno', coords: [29.0697, -110.9454], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Tecnológico', coords: [29.0942, -110.9612], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Hermosillo Viejo', coords: [29.0675, -110.9637], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Hospital General', coords: [29.0790, -110.9520], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Plaza Niños Héroes', coords: [29.0745, -110.9540], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'Parque Madero', coords: [29.0785, -110.9408], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'La Cantera', coords: [29.0822, -110.9609], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
+    { name: 'San Benito Norte', coords: [29.0827, -110.9521], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' }
   ];
 
   const bounds = [];
@@ -1067,6 +1168,11 @@ function initEcoMap() {
 
   if (bounds.length > 0) {
     ecoMap.fitBounds(bounds, { padding: [40, 40] });
+  }
+
+  const ecoActiveCount = document.getElementById('ecoActiveCount');
+  if (ecoActiveCount) {
+    ecoActiveCount.textContent = `${ecoStops.length} PARADAS ACTIVAS`;
   }
 }
 
@@ -1104,3 +1210,5 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 </script>
 </body>
 </html>
+
+
