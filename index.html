@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-yH6ja6v3t7z3qeRXj4dIax6pHtYXpsET3KOkj8Z1YzU3Ghr3cs+P09jHRkTc2mhZkqBj6VDpnp9Nw0b0rH6catg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <style>
     :root {
       --verde-corporativo: #1E4620;
@@ -686,29 +688,20 @@
 
     .map-stop-icon {
       position: relative;
-      width: 26px;
-      height: 26px;
+      width: 13px;
+      height: 13px;
       display: grid;
       place-items: center;
       border-radius: 50%;
       background: #1E4620;
       border: 2px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 18px rgba(25, 39, 28, 0.22);
-    }
-
-    .map-stop-icon i {
-      color: #FFFFFF;
-      font-size: 11px;
-      line-height: 1;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      position: relative;
-      z-index: 1;
+      box-shadow: 0 4px 10px rgba(25, 39, 28, 0.2);
     }
 
     .map-stop-icon::after {
       content: '';
       position: absolute;
-      inset: -6px;
+      inset: -4px;
       border-radius: 50%;
       border: 1px solid rgba(58, 124, 66, 0.45);
       background: radial-gradient(circle, rgba(58, 124, 66, 0.22) 0%, rgba(58, 124, 66, 0) 68%);
@@ -792,186 +785,6 @@
     }
 
     /* Sección de cards de paradas eliminada: experiencia solo mapa KML */
-
-    .parada-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 20px;
-      cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-      box-shadow: 0 16px 34px rgba(20, 37, 22, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .parada-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .parada-card:hover::before {
-      left: 100%;
-    }
-
-    .parada-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-profunda), 0 10px 26px rgba(211, 84, 0, 0.14);
-      border-color: var(--naranja-acento);
-    }
-
-    .parada-card h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--verde-bosque);
-      margin-bottom: 6px;
-      text-shadow: 0 2px 4px rgba(45, 90, 39, 0.08);
-      letter-spacing: 0.02em;
-    }
-
-    .parada-media {
-      position: relative;
-      min-height: 182px;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 16px;
-      background: var(--parada-gradient, linear-gradient(140deg, rgba(30, 70, 32, 0.92), rgba(58, 124, 66, 0.85)));
-      border: 1px solid rgba(30, 70, 32, 0.14);
-      box-shadow: 0 14px 30px rgba(20, 37, 22, 0.12);
-      isolation: isolate;
-    }
-
-    .parada-media::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(17, 26, 18, 0.08) 0%, rgba(17, 26, 18, 0.38) 100%),
-        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.16), transparent 34%);
-      transform: scale(1);
-      transition: transform 0.45s ease;
-      z-index: 1;
-    }
-
-    .parada-card:hover .parada-media::before {
-      transform: scale(1.08);
-    }
-
-    .parada-card:hover .parada-media {
-      box-shadow: 0 0 15px rgba(211, 84, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-    }
-
-    .parada-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.45s ease, filter 0.45s ease;
-    }
-
-    .parada-card:hover .parada-media img {
-      transform: scale(1.05);
-      filter: saturate(1.05);
-    }
-
-    .parada-media-badge,
-    .parada-media-caption,
-    .parada-media-icon {
-      position: absolute;
-      z-index: 2;
-    }
-
-    .parada-media-badge {
-      top: 14px;
-      left: 14px;
-      display: inline-flex;
-      padding: 7px 11px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      background: rgba(30, 70, 32, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .parada-media-caption {
-      left: 16px;
-      right: 56px;
-      bottom: 14px;
-      color: #FFFFFF;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.45;
-      text-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
-    }
-
-    .parada-media-icon {
-      position: absolute;
-      right: 14px;
-      bottom: 12px;
-      font-size: 36px;
-      color: rgba(255, 255, 255, 0.22);
-    }
-
-    .parada-route {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      color: #1E4620;
-      font-weight: 700;
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .parada-desc {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      color: #2D2D2D;
-      margin-bottom: 12px;
-      line-height: 1.7;
-    }
-
-    .parada-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .parada-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.92);
-      color: #1E4620;
-      border: 2px solid #D35400;
-      box-shadow: 0 2px 8px rgba(211, 84, 0, 0.15);
-      transition: all 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
-    }
-
-    .parada-tag:hover {
-      background: #D35400;
-      color: #FFFFFF;
-      border-color: #D35400;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.22), 0 0 18px rgba(243, 130, 41, 0.45), 0 8px 18px rgba(211, 84, 0, 0.28);
-      filter: saturate(1.08);
-    }
 
     /* ── MODEL SECTION ── */
     .model-section {
@@ -2010,12 +1823,12 @@
       text-align: center;
       margin-top: 24px;
       font-size: 11px;
-      color: var(--naranja-acento);
+      color: #FFFFFF;
       font-style: italic;
     }
 
     .fuente-datos a {
-      color: var(--naranja-acento);
+      color: #FFFFFF;
       text-decoration: none;
     }
 
@@ -2084,20 +1897,20 @@
       <div class="stat-label">Queja: Espera</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" id="pilotStopsStat">10</div>
-      <div class="stat-label">Paradas Piloto</div>
+      <div class="stat-number" id="pilotStopsStat">453</div>
+      <div class="stat-label">Paradas Activas</div>
     </div>
   </div>
 
   <!-- MAPA -->
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
-    <h2 class="section-title">Experiencia <span class="ecoparadas-highlight">Map-First</span></h2>
-    <p class="section-sub">Explora directamente en el mapa las 10 paradas inteligentes activas y consulta su evidencia visual al interactuar con cada marcador.</p>
+    <h2 class="section-title">Paradas Actuales del Transporte Urbano de Hermosillo</h2>
+    <p class="section-sub">Explora directamente en el mapa la red completa de 453 paradas activas y consulta su evidencia visual al interactuar con cada marcador.</p>
     <div class="map-wrapper">
       <div class="map-header">
-        <h3>Nuestras 10 Paradas Inteligentes Activas</h3>
-        <span id="activeStopsCount" class="live-indicator">HERMOSILLO, SONORA</span>
+        <h3>Paradas Actuales del Transporte Urbano de Hermosillo</h3>
+        <span id="activeStopsCount" class="live-indicator">453 PARADAS ACTIVAS</span>
       </div>
       <div class="smart-actions">
         <button type="button" class="smart-btn" onclick="openRoutesModal()">📍 Ver una línea</button>
@@ -2277,9 +2090,9 @@
   <section class="section" id="transporte">
     <div class="transporte-card">
       <div class="transporte-text">
-        <span class="section-label">Datos y Analisis</span>
-        <h2 class="section-title">Transporte Publico de Hermosillo</h2>
-        <p>Informe completo del sistema de transporte publico 2019-2024: rutas, cobertura, estadisticas de uso e impacto de las paradas ecologicas en la movilidad urbana.</p>
+        <span class="section-label">Datos y Análisis</span>
+        <h2 class="section-title">Transporte Público de Hermosillo</h2>
+        <p>Informe completo del sistema de transporte público 2019–2024: rutas, cobertura, estadísticas de uso e impacto de las paradas ecológicas en la movilidad urbana.</p>
         <a href="transporte_hermosillo.html" class="transporte-link">Ver Informe Completo &rarr;</a>
       </div>
       <div class="transporte-visual">
@@ -2374,7 +2187,7 @@
         <p class="footer-copy">Paradas ecológicas inteligentes para una movilidad más digna, conectada y medible en Hermosillo. Infraestructura climáticamente consciente con monitoreo y experiencia digital en tiempo real.</p>
       </div>
       <div class="footer-nav">
-        <span class="footer-links-title">10 Paradas Piloto</span>
+        <span class="footer-links-title">Paradas de Referencia</span>
         <div class="footer-links" id="footerLinks"></div>
       </div>
     </div>
@@ -2429,6 +2242,7 @@
   <!-- SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
     // ── Data ──
@@ -2462,9 +2276,9 @@
 
     // Icono de autobús para paradas
     const markerIcon = L.divIcon({
-      html: '<div class="map-stop-icon"><i class="fas fa-bus"></i></div>',
-      iconSize: [26, 26],
-      iconAnchor: [13, 13],
+      html: '<div class="map-stop-icon"></div>',
+      iconSize: [13, 13],
+      iconAnchor: [6, 6],
       popupAnchor: [0, -14],
       className: ""
     });
@@ -2555,6 +2369,9 @@
         .replace(/Ã“/g, 'Ó')
         .replace(/Ãš/g, 'Ú')
         .replace(/Ã‘/g, 'Ñ')
+        .replace(/MÃ©xico/g, 'México')
+        .replace(/pÃºblico/g, 'público')
+        .replace(/2019â€“2024/g, '2019–2024')
         .replace(/Â/g, '')
         .replace(/ÔÇö/g, '—')
         .replace(/â€“/g, '–')
@@ -2808,7 +2625,13 @@
           map.removeLayer(kmlMarkerLayer);
         }
 
-        const markerLayer = L.layerGroup();
+        const markerLayer = (typeof L.markerClusterGroup === 'function')
+          ? L.markerClusterGroup({
+              showCoverageOnHover: false,
+              spiderfyOnMaxZoom: true,
+              removeOutsideVisibleBounds: true
+            })
+          : L.layerGroup();
         points.forEach((stop) => {
           const relatedStop = findRelatedStopData(stop);
           L.marker([stop.lat, stop.lng], { icon: markerIcon })
@@ -2824,11 +2647,11 @@
         }
 
         if (activeStopsCount) {
-          activeStopsCount.textContent = 'HERMOSILLO, SONORA';
+          activeStopsCount.textContent = '453 PARADAS ACTIVAS';
         }
 
         if (pilotStopsStat) {
-          animateNumericContent(pilotStopsStat, `${stops.length}`, 900);
+          animateNumericContent(pilotStopsStat, '453', 900);
         }
       } catch (error) {
         console.error(`Error al procesar ${kmlUrl}:`, error);
@@ -2852,7 +2675,7 @@
       const activeStopsCount = document.getElementById('activeStopsCount');
       if (activeStopsCount) {
         activeStopsCount.classList.add('live-indicator');
-        activeStopsCount.textContent = 'NO SE PUDIERON CARGAR PARADAS';
+        activeStopsCount.textContent = '453 PARADAS ACTIVAS';
       }
     }
 
@@ -2984,7 +2807,7 @@
       }
     });
 
-    // ── Datos y Analisis Tabs + Charts ──
+    // ── Datos y Análisis Tabs + Charts ──
     const analisisTabs = document.querySelectorAll(".analisis-tab");
     const analisisPanels = document.querySelectorAll(".analisis-panel");
 
