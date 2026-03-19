@@ -2566,8 +2566,8 @@
       { name: "Centro de Gobierno", zone: "Centro-Este", geo: "Blvd. Paseo del Canal / Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0745, lng: -110.9310, desc: "Edificios administrativos. Diseño accesible.", image: "images/paradas/centro-gobierno-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Centro de Gobierno en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
       // BLVD. MORELOS FINAL — noreste
       { name: "Blvd. Morelos Final", zone: "Noreste", geo: "Blvd. Morelos Km 9 / Fracc. Villa Hermosa", route: "Ruta 7", lat: 29.1240, lng: -110.9220, desc: "Extremo norte de Blvd. Morelos. Alta densidad vehicular.", image: "images/paradas/san-benito-norte-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Blvd. Morelos Final en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      // PUNTO TURÍSTICO — Bahía de Kino
-      { name: "Bahía de Kino", zone: "Punto Turístico", geo: "Acceso Bahía de Kino / Carr. Hermosillo-Kino", route: "Ruta 3, 7", lat: 28.8320, lng: -111.9200, desc: "Terminal turístico-costero. Conexión regional.", image: "images/paradas/hermosillo-viejo.jpg", imageAlt: "Fotografía de la parada piloto Bahía de Kino", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] }
+      // NODO INDUSTRIAL PONIENTE — Solidaridad y García Morales
+      { name: "Nodo Industrial Poniente", zone: "Industrial Poniente", geo: "Blvd. Solidaridad / Blvd. García Morales", route: "Ruta 3, 7", lat: 29.0930, lng: -111.0200, desc: "Nodo crítico de transferencia para trabajadores de la zona industrial.", image: "images/paradas/hermosillo-viejo.jpg", imageAlt: "Fotografía de la parada piloto Nodo Industrial Poniente", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] }
     ];
 
     const FEATURE_ICON_MAP = {
@@ -2629,7 +2629,7 @@
       });
       layer.addTo(mapPilot);
       pilotKmlLayer = layer;
-      // Ajusta vista solo a nodos urbanos (excluye Bahía de Kino a ~140km)
+      // Ajusta vista a nodos urbanos de Hermosillo
       const urban = stops.filter((s) => s.lat > 29.0);
       const bounds = L.latLngBounds(urban.map((s) => [s.lat, s.lng]));
       if (bounds.isValid()) {
