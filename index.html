@@ -1561,8 +1561,8 @@
       <div class="stat-label">Queja: Espera</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" id="pilotStopsStat">10</div>
-      <div class="stat-label">PARADAS PILOTO</div>
+      <div class="stat-number" id="pilotStopsStat">--</div>
+      <div class="stat-label">PARADAS REGISTRADAS</div>
     </div>
   </div>
 
@@ -1570,11 +1570,11 @@
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
     <h2 class="section-title">Mapa de <span class="ecoparadas-highlight">Ecoparadas</span></h2>
-    <p class="section-sub">Red de 10 paradas piloto ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
+    <p class="section-sub">Red de paradas ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Hermosillo, Sonora</h3>
-        <span id="activeStopsCount">10 PARADAS ACTIVAS</span>
+        <span id="activeStopsCount">CARGANDO PARADAS...</span>
       </div>
       <div id="map"></div>
     </div>
@@ -1880,14 +1880,16 @@
       maxZoom: 19
     }).addTo(map);
 
-    // Icono de autobús para paradas piloto
+    // Icono de autobús para paradas
     const markerIcon = L.divIcon({
-      html: '<div class="map-stop-icon"><i class="fas fa-bus"></i></div>',
-      iconSize: [24, 24],
-      iconAnchor: [12, 12],
+      html: '<div class="map-stop-icon" style="background:#D35400;border:2px solid #FFFFFF;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.28)"><i class="fas fa-bus" style="color:#FFFFFF;font-size:11px"></i></div>',
+      iconSize: [26, 26],
+      iconAnchor: [13, 13],
       popupAnchor: [0, -14],
       className: ""
     });
+
+    let kmlMarkerLayer = null;
 
     async function readKmlText(sourceUrl) {
       const lowerUrl = sourceUrl.toLowerCase();
@@ -1916,6 +1918,12 @@
       return kmlResponse.text();
     }
 
+    function findElementsByLocalName(root, localName) {
+      return Array.from(root.getElementsByTagName('*')).filter(
+        (node) => node.localName === localName
+      );
+    }
+
     // Carga de todas las paradas desde KML/KMZ (Placemark + Point)
     async function loadStopsFromKml(kmlUrl) {
       const activeStopsCount = document.getElementById('activeStopsCount');
@@ -1924,18 +1932,19 @@
       try {
         const kmlText = await readKmlText(kmlUrl);
         const kmlDoc = new DOMParser().parseFromString(kmlText, 'text/xml');
-        const placemarks = Array.from(kmlDoc.getElementsByTagName('Placemark'));
+        const placemarks = findElementsByLocalName(kmlDoc, 'Placemark');
         const points = [];
 
         placemarks.forEach((placemark) => {
-          const nameNode = placemark.getElementsByTagName('name')[0];
-          const pointNode = placemark.getElementsByTagName('Point')[0];
+          const nameNode = findElementsByLocalName(placemark, 'name')[0];
+          const pointNode = findElementsByLocalName(placemark, 'Point')[0];
           if (!pointNode) return;
 
-          const coordNode = pointNode.getElementsByTagName('coordinates')[0];
+          const coordNode = findElementsByLocalName(pointNode, 'coordinates')[0];
           if (!coordNode || !coordNode.textContent) return;
 
-          const rawCoords = coordNode.textContent.trim().split(',');
+          const coordLine = coordNode.textContent.trim().split(/\s+/)[0];
+          const rawCoords = coordLine.split(',');
           if (rawCoords.length < 2) return;
 
           const lng = Number(rawCoords[0]);
@@ -1949,6 +1958,14 @@
           });
         });
 
+        if (points.length === 0) {
+          throw new Error(`El archivo ${kmlUrl} no contiene paradas tipo Point`);
+        }
+
+        if (kmlMarkerLayer) {
+          map.removeLayer(kmlMarkerLayer);
+        }
+
         const markerLayer = L.layerGroup();
         points.forEach((stop) => {
           L.marker([stop.lat, stop.lng], { icon: markerIcon })
@@ -1957,24 +1974,49 @@
         });
 
         markerLayer.addTo(map);
+        kmlMarkerLayer = markerLayer;
 
         if (points.length > 0) {
           map.fitBounds(markerLayer.getBounds(), { padding: [22, 22] });
         }
 
         if (activeStopsCount) {
-          activeStopsCount.textContent = '10 PARADAS ACTIVAS';
+          activeStopsCount.textContent = `${points.length} PARADAS ACTIVAS`;
         }
 
         if (pilotStopsStat) {
-          pilotStopsStat.textContent = '10';
+          pilotStopsStat.textContent = `${points.length}`;
         }
       } catch (error) {
-        console.error('Error al procesar KML:', error);
+        console.error(`Error al procesar ${kmlUrl}:`, error);
+        throw error;
       }
     }
 
-    loadStopsFromKml('PARADAS CON CASETA.kml');
+    async function loadStopsFromFirstAvailable() {
+      const sources = [
+        'PARADAS CON CASETA.kmz',
+        'PARADAS CON CASETA.kml',
+        'Ruta 1.kmz',
+        'Ruta2.kml'
+      ];
+
+      for (const source of sources) {
+        try {
+          await loadStopsFromKml(source);
+          return;
+        } catch (_) {
+          // Try next file candidate.
+        }
+      }
+
+      const activeStopsCount = document.getElementById('activeStopsCount');
+      if (activeStopsCount) {
+        activeStopsCount.textContent = 'NO SE PUDIERON CARGAR PARADAS';
+      }
+    }
+
+    loadStopsFromFirstAvailable();
 
     setTimeout(() => map.invalidateSize(), 300);
 
