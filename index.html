@@ -101,7 +101,7 @@
     /* ── HERO ── */
     .hero {
       margin-top: 60px;
-      background: var(--verde-bosque);
+      background: linear-gradient(135deg, #ffffff 0%, rgba(240, 248, 236, 0.8) 100%);
       padding: 80px 40px 100px;
       position: relative;
       overflow: hidden;
@@ -111,23 +111,18 @@
     .hero::before {
       content: "";
       position: absolute;
-      top: -120px;
-      right: -80px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: rgba(106, 173, 91, 0.12);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url('data:image/svg+xml,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="%23f0f8ec" opacity="0.3"/></svg>');
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
     }
 
     .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -100px;
-      left: -60px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: rgba(74, 140, 63, 0.08);
+      display: none;
     }
 
     .hero-badge {
@@ -149,26 +144,28 @@
       font-family: "Playfair Display", serif;
       font-size: clamp(36px, 6vw, 64px);
       font-weight: 900;
-      color: var(--blanco);
+      color: var(--verde-bosque);
       line-height: 1.05;
       max-width: 720px;
       margin: 0 auto 16px;
       position: relative;
       z-index: 1;
+      text-shadow: 0 2px 8px rgba(45, 90, 39, 0.1);
     }
 
     .hero h1 em {
       font-style: normal;
-      color: var(--verde-menta);
+      color: var(--naranja-acento);
     }
 
     .hero-sub {
-      color: var(--verde-claro);
+      color: var(--texto-medio);
       font-size: 16px;
       max-width: 560px;
       margin: 0 auto 36px;
       position: relative;
       z-index: 1;
+      font-weight: 500;
     }
 
     .hero-pills {
@@ -269,6 +266,22 @@
       padding: 80px 32px;
       max-width: 1200px;
       margin: 0 auto;
+      background: white;
+      position: relative;
+    }
+
+    .section:nth-child(even) {
+      background: var(--verde-fondo);
+    }
+
+    .section::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--borde), transparent);
     }
 
     .section-label {
@@ -346,19 +359,41 @@
       border-radius: 16px;
       padding: 20px;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 4px 12px rgba(45, 90, 39, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parada-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .parada-card:hover::before {
+      left: 100%;
     }
 
     .parada-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px var(--sombra);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 48px rgba(45, 90, 39, 0.18), 0 8px 24px rgba(212, 112, 58, 0.12);
+      border-color: var(--naranja-acento);
     }
 
     .parada-card h4 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--texto-oscuro);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--verde-bosque);
       margin-bottom: 4px;
+      text-shadow: 0 2px 4px rgba(45, 90, 39, 0.08);
+      letter-spacing: 0.02em;
     }
 
     .parada-route {
@@ -381,21 +416,49 @@
     }
 
     .parada-tag {
+      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(184, 224, 168, 0.3);
-      color: var(--verde-bosque);
-      border: 1px solid rgba(106, 173, 91, 0.3);
+      background: white;
+      color: #27AE60;
+      border: 2px solid #27AE60;
+      box-shadow: 0 2px 8px rgba(39, 174, 96, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .parada-tag:hover {
+      background: #27AE60;
+      color: white;
+      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
     }
 
     /* ── MODEL SECTION ── */
     .model-section {
-      background: var(--verde-bosque);
+      background: linear-gradient(135deg, var(--verde-bosque) 0%, #1f3d1b 100%);
       padding: 80px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .model-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(106, 173, 91, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .model-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .model-inner {
@@ -405,6 +468,91 @@
       grid-template-columns: 1fr 1fr;
       gap: 48px;
       align-items: center;
+    }
+
+    /* ── ACTION BUTTONS ── */
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 12px 24px;
+      background: #27AE60;
+      border: none;
+      border-radius: 12px;
+      color: black;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 16px rgba(39, 174, 96, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-action::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-action:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-action:hover {
+      background: #1e8449;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(39, 174, 96, 0.5);
+    }
+
+    .btn-action:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .btn-action span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-report {
+      background: #e74c3c;
+      box-shadow: 0 4px 16px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn-report:hover {
+      background: #c0392b;
+      box-shadow: 0 8px 28px rgba(231, 76, 60, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid #27AE60;
+      color: #27AE60;
+      box-shadow: 0 4px 16px rgba(39, 174, 96, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: #27AE60;
+      color: black;
+      box-shadow: 0 8px 28px rgba(39, 174, 96, 0.4);
     }
 
     .model-text .section-label {
@@ -472,16 +620,64 @@
 
     .model-preview {
       background: rgba(0, 0, 0, 0.2);
-      border-radius: 20px;
-      border: 1px solid rgba(184, 224, 168, 0.15);
+      border-radius: 30px;
+      border: 2px solid rgba(184, 224, 168, 0.25);
       overflow: hidden;
       aspect-ratio: 4/3;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(184, 224, 168, 0.1),
+                  0 24px 48px rgba(0, 0, 0, 0.15),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .model-preview:hover {
+      box-shadow: 0 0 0 1px rgba(184, 224, 168, 0.2),
+                  0 32px 64px rgba(0, 0, 0, 0.25),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
     .model-preview iframe {
       width: 100%;
       height: 100%;
       border: none;
+    }
+
+    .model-preview::after {
+      content: 'EN VIVO';
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--naranja-acento);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(212, 112, 58, 0.4);
+    }
+
+    .model-preview::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: 42px;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      z-index: 11;
+      animation: livePulse 2s infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
     /* ── TRANSPORTE ── */
@@ -634,6 +830,16 @@
       animation: fadeUp 0.6s ease forwards;
     }
 
+    /* ── ENHANCED STYLING ── */
+    .paradas-grid {
+      animation: fadeUp 0.8s ease;
+    }
+
+    .section + .model-section {
+      margin-top: 60px;
+      position: relative;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -698,6 +904,21 @@
         width: 100%;
         max-width: 280px;
         text-align: center;
+      }
+
+      .btn-action, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 12px;
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-buttons .btn-action, .action-buttons .btn-secondary {
+        width: 100%;
       }
     }
 
@@ -786,6 +1007,11 @@
     <span class="section-label">Infraestructura</span>
     <h2 class="section-title">Ecoparadas</h2>
     <p class="section-sub">Cada parada esta disenada con tecnologia sustentable adaptada al clima desertico de Hermosillo.</p>
+    <div style="display: flex; gap: 12px; margin: 24px 0; flex-wrap: wrap;">
+      <button class="btn-action"><span>📍 Ver Línea</span></button>
+      <button class="btn-action"><span>✏️ Crear Viaje</span></button>
+      <button class="btn-action btn-report"><span>⚠️ Reportar</span></button>
+    </div>
     <div class="paradas-grid" id="paradasGrid"></div>
   </section>
 
@@ -815,6 +1041,10 @@
           </div>
         </div>
         <a href="model.html" class="model-link">Abrir Modelo 3D Completo &rarr;</a>
+        <div class="action-buttons">
+          <button class="btn-action btn-secondary"><span>⬆️ Descargar</span></button>
+          <button class="btn-action btn-secondary"><span>🔗 Compartir</span></button>
+        </div>
       </div>
       <div class="model-preview">
         <iframe src="model.html" title="Modelo 3D Parada San Benito"></iframe>
