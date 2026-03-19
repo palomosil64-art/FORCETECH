@@ -5,36 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart City HMO</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Space+Mono&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Exo 2',sans-serif;background:#0a1a0f;color:#d4f1d4}
+body{font-family:'Montserrat',sans-serif;background:#ffffff;color:#27AE60}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:999;background:rgba(10,26,15,.95);border-bottom:2px solid #27ae60;display:flex;align-items:center;justify-content:space-between;padding:12px 30px;backdrop-filter:blur(12px)}
-nav .logo{font-size:20px;font-weight:900;letter-spacing:.12em;background:linear-gradient(90deg,#27ae60,#52c77e);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav{position:sticky;top:0;z-index:999;background:#ffffff;border-bottom:2px solid #27AE60;display:flex;align-items:center;justify-content:space-between;padding:16px 30px;backdrop-filter:blur(12px)}
+nav .logo{font-size:24px;font-weight:900;letter-spacing:.12em;color:#27AE60;font-family:'Montserrat',sans-serif}
 nav .links{display:flex;gap:20px}
-nav .links a{color:#52c77e;text-decoration:none;font-size:11px;font-family:'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;padding:6px 0;border-bottom:2px solid transparent;transition:.2s}
-nav .links a:hover{color:#27ae60;border-bottom-color:#27ae60}
+nav .links a{color:#27AE60;text-decoration:none;font-size:13px;font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:8px 0;border-bottom:2px solid transparent;transition:.2s}
+nav .links a:hover{color:#27AE60;border-bottom-color:#27AE60;font-weight:700}
 
 /* HERO */
-.hero{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px 30px 40px;text-align:center;background:radial-gradient(ellipse at center bottom,rgba(39,174,96,.08) 0%,transparent 70%)}
-.hero h1{font-size:clamp(32px,5vw,56px);font-weight:900;background:linear-gradient(135deg,#27ae60,#52c77e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
-.hero p{max-width:700px;color:#b0d8b0;font-size:16px;line-height:1.7;margin-bottom:30px}
+.hero{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:80px 30px 60px;text-align:center;background:#ffffff}
+.hero h1{font-size:3.5rem;font-weight:900;color:#27AE60;margin-bottom:20px;text-shadow:0 0 15px rgba(39,174,96,.3);font-family:'Montserrat',sans-serif}
+.hero p{max-width:700px;color:#27AE60;font-size:1.3rem;line-height:1.8;margin-bottom:30px;font-family:'Montserrat',sans-serif;font-weight:500}
 .pills{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.pill{background:rgba(39,174,96,.1);border:1px solid #27ae6044;padding:8px 18px;border-radius:20px;font-size:12px;color:#52c77e;letter-spacing:.05em}
+.pill{background:rgba(39,174,96,.1);border:2px solid #27AE60;padding:10px 20px;border-radius:20px;font-size:13px;color:#27AE60;letter-spacing:.05em;font-family:'Montserrat',sans-serif;font-weight:600}
 
 /* SECTION */
-.section{padding:50px 30px;max-width:1300px;margin:0 auto}
-.section-title{font-size:28px;font-weight:900;letter-spacing:.08em;margin-bottom:30px;color:#27ae60;text-align:center;text-transform:uppercase}
+.section{padding:60px 30px;max-width:1300px;margin:0 auto;background:#ffffff}
+.section-title{font-size:3rem;font-weight:900;letter-spacing:.08em;margin-bottom:40px;color:#27AE60;text-align:center;text-transform:uppercase;text-shadow:0 0 12px rgba(39,174,96,.3);font-family:'Montserrat',sans-serif}
 
 /* SPLIT LAYOUT: map + model side by side */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:900px){.split{grid-template-columns:1fr}}
 
-.panel{background:rgba(13,35,20,.7);border:1px solid #27ae6033;border-radius:6px;overflow:hidden;position:relative}
-.panel-header{background:rgba(39,174,96,.12);padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#27ae60;display:flex;align-items:center;gap:8px;border-bottom:1px solid #27ae6033}
+.panel{background:#f5f5f5;border:2px solid #27AE60;border-radius:8px;overflow:hidden;position:relative}
+.panel-header{background:#27AE60;padding:14px 16px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000000;display:flex;align-items:center;gap:8px;border-bottom:none;font-family:'Montserrat',sans-serif}
 .panel-header span{font-size:16px}
 
 #map{width:100%;height:400px}
@@ -48,56 +49,232 @@ nav .links a:hover{color:#27ae60;border-bottom-color:#27ae60}
 
 /* CARDS */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:10px}
-.card{background:rgba(13,35,20,.6);border:1px solid #27ae6022;border-radius:6px;padding:20px;transition:.3s;border-left:3px solid #27ae60}
-.card:hover{border-color:#27ae60;transform:translateY(-4px);box-shadow:0 8px 24px rgba(39,174,96,.15)}
-.card h3{color:#52c77e;font-size:14px;margin-bottom:6px}
-.card .route{color:#27ae60;font-size:10px;font-family:'Space Mono',monospace;margin-bottom:8px}
-.card p{color:#8aa88a;font-size:11px;line-height:1.5}
+.card{background:#f5f5f5;border:2px solid #27AE60;border-radius:8px;padding:24px;transition:.3s;border-left:4px solid #27AE60}
+.card:hover{border-color:#27AE60;transform:translateY(-6px);box-shadow:0 8px 24px rgba(39,174,96,.15)}
+.card h3{color:#27AE60;font-size:1.3rem;margin-bottom:8px;text-shadow:0 0 6px rgba(39,174,96,.2);font-family:'Montserrat',sans-serif;font-weight:700}
+.card .route{color:#27AE60;font-size:12px;font-family:'Montserrat',sans-serif;margin-bottom:10px;font-weight:600}
+.card p{color:#27AE60;font-size:1.1rem;line-height:1.6;font-family:'Montserrat',sans-serif;font-weight:500}
 .tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
-.tag{background:rgba(39,174,96,.1);border:1px solid #27ae6033;padding:2px 6px;border-radius:2px;font-size:9px;color:#27ae60;font-family:'Space Mono',monospace}
+.tag{background:rgba(39,174,96,.1);border:1.5px solid #27AE60;padding:4px 8px;border-radius:3px;font-size:11px;color:#27AE60;font-family:'Montserrat',sans-serif;font-weight:600}
 
 /* SPECS */
 .specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.spec{background:rgba(39,174,96,.06);border-left:2px solid #52c77e;padding:16px;border-radius:0 4px 4px 0}
-.spec h4{color:#52c77e;font-size:12px;letter-spacing:.1em;margin-bottom:6px;text-transform:uppercase}
-.spec p{color:#8aa88a;font-size:12px;line-height:1.5}
+.spec{background:#f5f5f5;border-left:4px solid #27AE60;padding:20px;border-radius:0 4px 4px 0}
+.spec h4{color:#27AE60;font-size:1.1rem;letter-spacing:.1em;margin-bottom:8px;text-transform:uppercase;text-shadow:0 0 6px rgba(39,174,96,.2);font-family:'Montserrat',sans-serif;font-weight:700}
+.spec p{color:#27AE60;font-size:1.1rem;line-height:1.6;font-family:'Montserrat',sans-serif;font-weight:500}
 
 /* FOOTER */
-footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:60px;color:#27ae6044;font-size:11px;letter-spacing:.1em}
+footer{text-align:center;padding:40px;border-top:2px solid #27AE60;margin-top:80px;color:#27AE60;font-size:13px;letter-spacing:.1em;font-family:'Montserrat',sans-serif;font-weight:600;background:#ffffff}
 
 /* TEAM MEMBERS */
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:20px}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;margin-top:40px}
 .team-member{text-align:center;display:flex;flex-direction:column;align-items:center}
-.team-photo-frame{width:240px;height:240px;border-radius:10px;background:linear-gradient(135deg,rgba(39,174,96,.15),rgba(82,199,126,.1));border:2px solid #27ae60;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(39,174,96,.2),inset 0 0 20px rgba(39,174,96,.05);margin-bottom:20px}
-.team-photo-frame::before{content:'';position:absolute;width:100%;height:100%;background:linear-gradient(135deg,#27ae6022,transparent);animation:shimmer 3s infinite}
-@keyframes shimmer{0%{transform:translateX(-100%)};50%{transform:translateX(0)};100%{transform:translateX(100%)}}
-.team-photo-frame img{width:100%;height:100%;object-fit:cover;border-radius:8px}
-.team-photo-placeholder{width:100%;height:100%;depth:50px;display:flex;align-items:center;justify-content:center;font-size:80px;background:radial-gradient(circle at 30% 30%,rgba(82,199,126,.2),transparent);color:#27ae60}
-.team-name{font-size:18px;font-weight:700;color:#52c77e;margin-bottom:8px;letter-spacing:.05em}
-.team-role{font-size:12px;color:#27ae60;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-.team-bio{font-size:13px;color:#b0d8b0;line-height:1.6;max-width:240px}
+.team-photo-frame{width:240px;height:240px;border-radius:12px;background:#f0f0f0;border:3px solid #27AE60;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(39,174,96,.25);margin-bottom:24px}
+.team-photo-frame::before{content:'';position:absolute;width:100%;height:100%;background:linear-gradient(135deg,rgba(39,174,96,.1),transparent);animation:shimmerBrilliant 3s infinite}
+@keyframes shimmerBrilliant{0%{transform:translateX(-100%)};50%{transform:translateX(0)};100%{transform:translateX(100%)}}
+.team-photo-frame img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.team-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:#ffffff;color:#27AE60}
+.team-name{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:800;color:#27AE60;margin-bottom:8px;letter-spacing:.05em;text-shadow:0 0 10px rgba(39,174,96,.25)}
+.team-role{font-family:'Montserrat',sans-serif;font-size:1.1rem;color:#27AE60;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-weight:700;text-shadow:0 0 8px rgba(39,174,96,.2)}
+.team-bio{font-family:'Montserrat',sans-serif;font-size:1.1rem;color:#27AE60;line-height:1.8;max-width:280px;font-weight:500}
 
 /* Leaflet popup override */
-.leaflet-popup-content-wrapper{background:rgba(10,26,15,.95)!important;color:#d4f1d4!important;border:1px solid #27ae60!important;border-radius:4px!important;font-family:'Space Mono',monospace!important;font-size:12px!important}
+.leaflet-popup-content-wrapper{background:rgba(10,26,15,.95)!important;color:d4f1d4!important;border:1px solid #27AE60!important;border-radius:4px!important;font-family:'Montserrat',sans-serif!important;font-size:12px!important}
 .leaflet-popup-tip{background:rgba(10,26,15,.95)!important}
-.leaflet-popup-close-button{color:#27ae60!important}
+.leaflet-popup-close-button{color:#27AE60!important}
 
 /* ═══════════════════════════════════════════════════════════════ */
-/* SECCIÓN NOSOTROS - DISEÑO NEON */
+/* SECCIÓN NOSOTROS - DISEÑO GREEN NEON */
 /* ═══════════════════════════════════════════════════════════════ */
-#nosotros{background:#ffffff;padding:60px 30px}
-#nosotros .section-title{color:#39ff14;font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px;text-shadow:0 0 10px rgba(57,255,20,.5),0 0 20px rgba(57,255,20,.3)}
-#nosotros > p{font-family:'Montserrat',sans-serif;color:#39ff14;font-size:1.2rem;font-weight:500;text-align:center;line-height:1.8;letter-spacing:.02em;text-shadow:0 0 8px rgba(57,255,20,.4)}
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:30px}
-.team-member{text-align:center;display:flex;flex-direction:column;align-items:center}
-.team-photo-frame{width:240px;height:240px;border-radius:10px;background:linear-gradient(135deg,rgba(57,255,20,.1),rgba(57,255,20,.05));border:3px solid #39ff14;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(57,255,20,.4),inset 0 0 15px rgba(57,255,20,.1);margin-bottom:20px}
-.team-photo-frame::before{content:'';position:absolute;width:100%;height:100%;background:linear-gradient(135deg,rgba(57,255,20,.15),transparent);animation:shimmerNeon 3s infinite}
-@keyframes shimmerNeon{0%{transform:translateX(-100%)};50%{transform:translateX(0)};100%{transform:translateX(100%)}}
-.team-photo-frame img{width:100%;height:100%;object-fit:cover;border-radius:8px}
-.team-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:radial-gradient(circle at 30% 30%,rgba(57,255,20,.2),transparent);color:#39ff14}
-.team-name{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:800;color:#39ff14;margin-bottom:8px;letter-spacing:.05em;text-shadow:0 0 8px rgba(57,255,20,.4)}
-.team-role{font-family:'Montserrat',sans-serif;font-size:0.95rem;color:#39ff14;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-weight:600;text-shadow:0 0 6px rgba(57,255,20,.3)}
-.team-bio{font-family:'Montserrat',sans-serif;font-size:1.1rem;color:#39ff14;line-height:1.7;max-width:280px;font-weight:500;text-shadow:0 0 6px rgba(57,255,20,.3)}
+#nosotros{background:#ffffff;padding:80px 30px}
+#nosotros .section-title{color:#27AE60;font-family:'Montserrat',sans-serif;font-size:3rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:30px;text-shadow:0 0 15px rgba(39,174,96,.3)}
+#nosotros > p{font-family:'Montserrat',sans-serif;color:#27AE60;font-size:1.3rem;font-weight:500;text-align:center;line-height:1.9;letter-spacing:.02em;text-shadow:0 0 10px rgba(39,174,96,.2)}
+
+/* FLOATING ACTION BUTTONS */
+.fab{width:50px;height:50px;border-radius:50%;background:rgba(39,174,96,.2);border:2px solid #27ae60;color:#27ae60;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 12px rgba(39,174,96,.2);user-select:none}
+.fab:hover{background:rgba(39,174,96,.4);box-shadow:0 6px 16px rgba(39,174,96,.4);transform:scale(1.1)}
+.fab.active{background:rgba(39,174,96,.5);box-shadow:0 0 12px rgba(39,174,96,.6)}
+
+/* MODAL OVERLAY */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:600;animation:fadeIn .3s}
+.modal-overlay.active{display:flex;align-items:center;justify-content:center}
+
+/* MODAL PANEL */
+.modal-panel{background:rgba(10,26,15,.98);border:1px solid #27ae60;border-radius:8px;padding:30px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:slideUp .3s ease-out}
+.modal-panel h2{color:#27ae60;font-size:20px;margin-bottom:20px;letter-spacing:.1em}
+.modal-panel h3{color:#52c77e;font-size:14px;margin-top:16px;margin-bottom:10px;letter-spacing:.05em}
+.modal-close{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s}
+.modal-close:hover{background:rgba(39,174,96,.4)}
+
+/* MODAL PANEL - IMPROVED MOBILE */
+.modal-panel{background:rgba(10,26,15,.98);border:1px solid #27ae60;border-radius:12px;padding:24px;max-width:520px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.6);animation:slideUp .3s ease-out;scrollbar-width:thin;scrollbar-color:#27ae60 transparent}
+.modal-panel::-webkit-scrollbar{width:6px}
+.modal-panel::-webkit-scrollbar-track{background:transparent}
+.modal-panel::-webkit-scrollbar-thumb{background:#27ae60;border-radius:3px}
+.modal-panel h2{color:#27ae60;font-size:22px;margin-bottom:16px;letter-spacing:.1em;font-weight:900}
+.modal-panel h3{color:#52c77e;font-size:13px;margin-top:16px;margin-bottom:10px;letter-spacing:.08em;font-weight:700;text-transform:uppercase}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;z-index:10}
+.modal-close:hover{background:rgba(39,174,96,.4);transform:rotate(90deg)}
+
+/* ACCORDION - ENHANCED */
+.accordion-container{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.accordion-item{background:linear-gradient(135deg,rgba(39,174,96,.08),rgba(39,174,96,.02));border:1.5px solid #27ae6055;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.accordion-header{padding:16px;background:linear-gradient(90deg,rgba(39,174,96,.12),rgba(39,174,96,.04));cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:.25s;min-height:56px;touch-action:manipulation;border-bottom:1px solid #27ae6022}
+.accordion-header:hover{background:linear-gradient(90deg,rgba(39,174,96,.18),rgba(39,174,96,.08))}
+.accordion-header:active{transform:scale(0.99)}
+.accordion-header.active{background:linear-gradient(90deg,rgba(39,174,96,.25),rgba(39,174,96,.15));border-bottom:2px solid #27ae60;box-shadow:inset 0 0 12px rgba(39,174,96,.1)}
+.accordion-header-title{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.accordion-badge{background:linear-gradient(135deg,#27ae60,#52c77e);color:#0a1a0f;padding:6px 12px;border-radius:16px;font-size:11px;font-weight:900;letter-spacing:.05em;box-shadow:0 2px 6px rgba(39,174,96,.3);flex-shrink:0}
+.accordion-label{color:#52c77e;font-size:14px;font-weight:800;letter-spacing:.05em;flex:1}
+.accordion-chevron{color:#27ae60;font-size:16px;transition:.3s ease;width:24px;text-align:center;flex-shrink:0}
+.accordion-header.active .accordion-chevron{transform:rotate(-180deg);color:#4dd8ff}
+.accordion-content{display:none;padding:16px;background:rgba(10,26,15,.6);max-height:0;overflow:hidden;transition:all .3s ease;border-top:1px solid #27ae6033}
+.accordion-content.active{display:block;max-height:800px;padding:16px}
+
+/* STOPS LIST */
+.accordion-stops{display:flex;flex-direction:column;gap:10px}
+.stop-item{background:rgba(39,174,96,.1);padding:14px;border-radius:8px;border-left:3px solid #27ae60;display:flex;justify-content:space-between;align-items:start;gap:12px;transition:.2s}
+.stop-item:hover{background:rgba(39,174,96,.15);box-shadow:0 2px 8px rgba(39,174,96,.1)}
+.stop-info{flex:1;min-width:0}
+.stop-name{color:#4dd8ff;font-size:13px;font-weight:800;margin-bottom:4px}
+.stop-detail{color:#8aa88a;font-size:10px;margin-bottom:6px}
+.stop-schedule{color:#27ae60;font-size:10px;font-family:'Space Mono',monospace;font-weight:bold}
+.btn-view-map{background:linear-gradient(135deg,rgba(39,174,96,.3),rgba(39,174,96,.15));border:1.5px solid #27ae60;color:#52c77e;padding:8px 14px;border-radius:6px;font-size:10px;cursor:pointer;transition:.2s;white-space:nowrap;font-weight:800;min-height:36px;display:flex;align-items:center;box-shadow:0 2px 6px rgba(39,174,96,.15);text-transform:uppercase;letter-spacing:.05em}
+.btn-view-map:hover{background:linear-gradient(135deg,rgba(39,174,96,.4),rgba(39,174,96,.25));box-shadow:0 4px 12px rgba(39,174,96,.3)}
+.btn-view-map:active{transform:scale(0.96)}
+
+/* RESULT BOX - ENHANCED */
+.result-box{background:linear-gradient(135deg,rgba(39,174,96,.15),rgba(39,174,96,.05));border:1.5px solid #27ae6055;border-radius:8px;padding:14px;margin-top:14px;font-size:11px;color:#b0d8b0;line-height:1.6;box-shadow:0 2px 8px rgba(39,174,96,.1)}
+.result-box strong{color:#4dd8ff;font-weight:800}
+
+/* JOURNEY FORM - ENHANCED */
+.journey-form{display:flex;flex-direction:column;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group label{color:#4dd8ff;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.form-group input{padding:14px 14px;background:rgba(39,174,96,.1);border:1.5px solid #27ae6066;color:#d4f1d4;border-radius:8px;font-family:'Space Mono',monospace;font-size:12px;transition:.2s;min-height:46px;touch-action:manipulation}
+.form-group input:focus{outline:none;border-color:#27ae60;box-shadow:0 0 12px rgba(39,174,96,.4);background:rgba(39,174,96,.15)}
+.form-group input::placeholder{color:#27ae6066}
+.btn-submit{padding:14px 20px;background:linear-gradient(135deg,#ff6b35,#ff8c42);border:none;color:#fff;border-radius:8px;cursor:pointer;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;font-family:'Exo 2',sans-serif;transition:.2s;margin-top:8px;box-shadow:0 4px 12px rgba(255,107,53,.3);min-height:46px;touch-action:manipulation}
+.btn-submit:hover{background:linear-gradient(135deg,#ff5722,#ff7a3d);box-shadow:0 6px 16px rgba(255,107,53,.4)}
+.btn-submit:active{transform:scale(0.98)}
+
+/* TRIP OPTIONS SELECTOR */
+.trip-selector{background:rgba(39,174,96,.08);border:1px solid #27ae6033;border-radius:8px;padding:16px;margin-top:12px}
+.trip-selector h4{color:#27ae60;font-size:11px;font-weight:900;letter-spacing:.08em;margin-bottom:12px;text-transform:uppercase}
+.trip-options{display:flex;gap:10px;flex-wrap:wrap}
+.trip-option{background:rgba(39,174,96,.15);border:2px solid #27ae6044;color:#52c77e;padding:12px 16px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:bold;min-width:60px;text-align:center;transition:.2s;flex:1;min-height:50px;display:flex;align-items:center;justify-content:center;user-select:none;touch-action:manipulation}
+.trip-option:hover{border-color:#27ae60;background:rgba(39,174,96,.25);box-shadow:0 0 8px rgba(39,174,96,.2)}
+.trip-option.selected{background:linear-gradient(135deg,#27ae60,#52c77e);border-color:#4dd8ff;color:#0a1a0f;box-shadow:0 4px 12px rgba(39,174,96,.4);font-weight:900}
+
+/* FLOATING ACTION BUTTONS - REDESIGNED */
+
+.fab{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,174,96,.3),rgba(39,174,96,.15));border:2px solid #27ae60;color:#27ae60;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 16px rgba(39,174,96,.25);user-select:none;touch-action:manipulation}
+.fab:hover{background:linear-gradient(135deg,rgba(39,174,96,.5),rgba(39,174,96,.3));box-shadow:0 6px 20px rgba(39,174,96,.4);transform:scale(1.12)}
+.fab.active{background:linear-gradient(135deg,rgba(39,174,96,.6),rgba(39,174,96,.4));box-shadow:0 0 16px rgba(39,174,96,.6)}
+.fab:active{transform:scale(0.95)}
+
+/* PROMINENT BUTTONS */
+.btn-prominent{width:100%;padding:16px 20px;background:linear-gradient(135deg,#ff6b35,#ff8c42);border:none;color:#fff;border-radius:10px;cursor:pointer;font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;font-family:'Exo 2',sans-serif;transition:.2s;box-shadow:0 6px 20px rgba(255,107,53,.3);min-height:52px;touch-action:manipulation;margin:12px 0}
+.btn-prominent:hover{background:linear-gradient(135deg,#ff5722,#ff7a3d);box-shadow:0 8px 24px rgba(255,107,53,.4);transform:translateY(-2px)}
+.btn-prominent:active{transform:scale(0.98)}
+
+/* INTERACTIVE BUTTONS - GREEN STYLE */
+.btn-action{padding:14px 24px;background:#27AE60;border:2px solid #27AE60;color:#000000;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:.3s;box-shadow:0 4px 16px rgba(39,174,96,.3);letter-spacing:.05em;font-family:'Montserrat',sans-serif;text-transform:uppercase;touch-action:manipulation}
+.btn-action:hover{background:#239e55;border-color:#239e55;box-shadow:0 6px 20px rgba(39,174,96,.5);transform:translateY(-2px)}
+.btn-action:active{transform:scale(0.98)}
+
+.btn-report{padding:14px 24px;background:#e74c3c;border:2px solid #e74c3c;color:#ffffff;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:.3s;box-shadow:0 4px 16px rgba(231,76,60,.3);letter-spacing:.05em;font-family:'Montserrat',sans-serif;text-transform:uppercase;touch-action:manipulation}
+.btn-report:hover{background:#c0392b;border-color:#c0392b;box-shadow:0 6px 20px rgba(231,76,60,.5);transform:translateY(-2px)}
+.btn-report:active{transform:scale(0.98)}
+
+/* BUS MARKERS ANIMATED */
+.animated-bus{width:40px;height:40px;background:rgba(39,174,96,.8);border:2px solid #27ae60;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 12px rgba(39,174,96,.5);animation:busPulse 1.5s infinite}
+@keyframes busPulse{0%,100%{box-shadow:0 0 12px rgba(39,174,96,.5)};50%{box-shadow:0 0 20px rgba(77,216,255,.8)}}
+
+/* FLOATING FILTER PANEL */
+.floating-panel{position:fixed;bottom:80px;right:20px;width:340px;background:rgba(10,26,15,.98);border:2px solid #27ae60;border-radius:12px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,.6);z-index:499;max-height:500px;overflow-y:auto;animation:slideInRight .3s ease-out;scrollbar-width:thin;scrollbar-color:#27ae60 transparent}
+@keyframes slideInRight{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+.floating-panel::-webkit-scrollbar{width:6px}
+.floating-panel::-webkit-scrollbar-track{background:transparent}
+.floating-panel::-webkit-scrollbar-thumb{background:#27ae60;border-radius:3px}
+.floating-panel h3{color:#4dd8ff;font-size:14px;margin-bottom:14px;letter-spacing:.05em;border-bottom:1px solid #27ae6044;padding-bottom:10px}
+.floating-panel .filter-group{margin-bottom:14px}
+.floating-panel .filter-label{color:#27ae60;font-size:10px;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;letter-spacing:.05em}
+.floating-panel .filter-option{display:flex;gap:8px;align-items:center;margin-bottom:6px;cursor:pointer;padding:6px;border-radius:4px;transition:.2s}
+.floating-panel .filter-option:hover{background:rgba(39,174,96,.1)}
+.floating-panel .filter-option input{cursor:pointer;accent-color:#27ae60}
+.floating-panel .filter-option label{color:#b0d8b0;font-size:11px;cursor:pointer;flex:1}
+.float-btn{position:fixed;bottom:20px;right:20px;width:56px;height:56px;background:linear-gradient(135deg,#4dd8ff,#2ea8cc);border:2px solid #4dd8ff;color:#0a1a0f;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.3s;box-shadow:0 4px 16px rgba(77,216,255,.3);z-index:500;user-select:none}
+.float-btn:hover{transform:scale(1.12);box-shadow:0 6px 20px rgba(77,216,255,.4)}
+.float-btn.active{background:linear-gradient(135deg,#ff6b35,#ff8c42)}
+
+/* OCCUPANCY CHART CONTAINER */
+.occupancy-chart-container{background:rgba(39,174,96,.08);border:1px solid #27ae6033;border-radius:8px;padding:16px;margin-top:16px}
+.occupancy-chart-container h4{color:#52c77e;font-size:12px;margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:700}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .accordion-header{padding:14px;min-height:52px}
+  .stop-item{padding:12px;flex-direction:column}
+  .btn-view-map{width:100%;justify-content:center}
+  .modal-panel{max-width:100%;width:95%;padding:20px;margin:20px}
+  .floating-panel{width:90%;max-width:340px;bottom:auto;top:50%;right:50%;transform:translateX(50%)}
+  .float-btn{width:50px;height:50px;font-size:16px}
+  .fab{width:50px;height:50px;font-size:18px}
+}
+
+/* JOURNEY FORM */
+.journey-form{display:flex;flex-direction:column;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{color:#27ae60;font-size:11px;font-weight:bold;letter-spacing:.05em;text-transform:uppercase}
+.form-group input{padding:10px 12px;background:rgba(39,174,96,.08);border:1px solid #27ae6066;color:#d4f1d4;border-radius:4px;font-family:'Space Mono',monospace;font-size:12px;transition:.2s}
+.form-group input:focus{outline:none;border-color:#27ae60;box-shadow:0 0 8px rgba(39,174,96,.3)}
+.form-group input::placeholder{color:#27ae6066}
+.btn-submit{padding:12px 20px;background:rgba(39,174,96,.2);border:1px solid #27ae60;color:#27ae60;border-radius:4px;cursor:pointer;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;font-family:'Exo 2',sans-serif;transition:.2s;margin-top:8px}
+.btn-submit:hover{background:rgba(39,174,96,.4);box-shadow:0 0 12px rgba(39,174,96,.4)}
+.btn-submit:active{transform:scale(0.98)}
+
+/* RESULT BOX */
+.result-box{background:rgba(39,174,96,.1);border:1px solid #27ae6044;border-radius:4px;padding:12px;margin-top:12px;font-size:11px;color:#b0d8b0;line-height:1.6}
+.result-box strong{color:#52c77e}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* REPORT MODAL SPECIFIC STYLES */
+.report-category{background:rgba(39,174,96,.1);border:2px solid #27AE60;border-radius:8px;padding:16px;margin:10px 0;cursor:pointer;transition:.3s;display:flex;align-items:center;gap:12px}
+.report-category:hover{background:rgba(39,174,96,.2);transform:translateX(4px)}
+.report-category.selected{background:#27AE60;color:#fff;border-color:#1f7d47}
+.report-category-icon{font-size:24px;min-width:30px}
+.report-category-text{flex:1}
+.report-category-title{font-weight:700;font-size:14px;color:#27AE60;font-family:'Montserrat',sans-serif}
+.report-category.selected .report-category-title{color:#fff}
+.report-category-desc{font-size:11px;color:#666;margin-top:4px;font-family:'Montserrat',sans-serif}
+.report-category.selected .report-category-desc{color:#e8f5e9}
+.report-issues{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.report-issue{display:flex;gap:10px;align-items:center;padding:8px;background:#f5f5f5;border-radius:6px}
+.report-issue input[type="checkbox"]{cursor:pointer;accent-color:#27AE60}
+.report-issue label{font-size:12px;color:#333;cursor:pointer;flex:1;font-family:'Montserrat',sans-serif}
+.report-form{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.report-form label{color:#27AE60;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-family:'Montserrat',sans-serif}
+.report-form input, .report-form textarea{padding:10px 12px;background:rgba(39,174,96,.05);border:1.5px solid #27AE60;color:#333;border-radius:6px;font-family:'Montserrat',sans-serif;font-size:12px;transition:.2s}
+.report-form input:focus, .report-form textarea:focus{outline:none;border-color:#27AE60;box-shadow:0 0 12px rgba(39,174,96,.3);background:rgba(39,174,96,.1)}
+.report-form textarea{resize:vertical;min-height:100px}
+.report-submit{background:#27AE60;color:#000;border:none;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;transition:.3s;font-family:'Montserrat',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.05em}
+.report-submit:hover{background:#239e55;box-shadow:0 4px 12px rgba(39,174,96,.4)}
+.report-submit:active{transform:scale(0.98)}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  body{font-size:14px}
+  .section-title{font-size:2rem}
+  .hero h1{font-size:2rem}
+  .hero p{font-size:1rem}
+  .team-photo-frame{width:200px;height:200px}
+  .panel{margin:10px 0}
+  .btn-action, .btn-report{width:100%;justify-content:center;padding:16px 20px}
+}
 </style>
 </head>
 <body>
@@ -110,6 +287,8 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
     <a href="#paradas">Paradas</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#specs-section">Specs</a>
+    <a href="#" onclick="openRoutesModal(event)" style="cursor:pointer">📍 Rutas</a>
+    <a href="#" onclick="openJourneyModal(event)" style="cursor:pointer">🗺️ Viaje</a>
   </div>
 </nav>
 
@@ -128,11 +307,75 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 <!-- DASHBOARD: Map + 3D side by side -->
 <section class="section" id="dashboard">
   <div class="section-title">Dashboard</div>
+  <!-- TOP ACTION BUTTONS -->
+  <div style="display:flex;gap:12px;margin-bottom:16px;padding:0 16px;flex-wrap:wrap">
+    <button id="fabRoutes" class="btn-action" title="Ver rutas disponibles" onclick="openRoutesModal()">
+      📍 Ver una línea
+    </button>
+    <button id="fabJourney" class="btn-action" title="Crear un viaje" onclick="openJourneyModal()" style="background:linear-gradient(135deg,#4dd8ff,#2ea8cc);border:2px solid #4dd8ff;color:#0a1a0f;box-shadow:0 4px 16px rgba(77,216,255,.3)">
+      🗺️ Crear Viaje
+    </button>
+    <button id="fabReport" class="btn-report" title="Reportar una incidencia" onclick="openReportModal()">
+      ⚠️ Reportar Incidencia
+    </button>
+  </div>
+  <!-- Floating Filter Button -->
+  <button class="float-btn" id="floatFilterBtn" title="Abrir filtros avanzados" onclick="toggleFloatingPanel()">⚙️</button>
+  
+  <!-- Floating Filter Panel -->
+  <div id="floatingPanel" class="floating-panel" style="display:none;">
+    <h3>🔍 Filtros Avanzados</h3>
+    
+    <div class="filter-group">
+      <label class="filter-label">Rutas</label>
+      <div id="routeFilters"></div>
+    </div>
+    
+    <div class="filter-group">
+      <label class="filter-label">Nivel de Calor</label>
+      <div class="filter-option">
+        <input type="checkbox" id="filterHeatLow" checked> <label for="filterHeatLow">🔵 Bajo (≤25°C)</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterHeatMed" checked> <label for="filterHeatMed">🟡 Medio (25-35°C)</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterHeatHigh" checked> <label for="filterHeatHigh">🔴 Alto (>35°C)</label>
+      </div>
+    </div>
+    
+    <div class="filter-group">
+      <label class="filter-label">Ocupancia</label>
+      <div class="filter-option">
+        <input type="checkbox" id="filterOccLow" checked> <label for="filterOccLow">🟢 Baja</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterOccMed" checked> <label for="filterOccMed">🟡 Media</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterOccHigh" checked> <label for="filterOccHigh">🔴 Alta</label>
+      </div>
+    </div>
+    
+    <div class="filter-group">
+      <label class="filter-label">Elementos</label>
+      <div class="filter-option">
+        <input type="checkbox" id="filterBuses" checked> <label for="filterBuses">🚌 Mostrar Buses</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterParadas" checked> <label for="filterParadas">📍 Mostrar Paradas</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="filterRoutes" checked> <label for="filterRoutes">🛣️ Mostrar Rutas</label>
+      </div>
+    </div>
+  </div>
+  
   <div class="split">
     <!-- MAP -->
     <div class="panel">
       <div class="panel-header"><span>🗺️</span> Mapa de Ecoparadas — Hermosillo</div>
-      <div id="map"></div>
+      <div id="map" style="position:relative"></div>
     </div>
     <!-- 3D MODEL -->
     <div class="panel">
@@ -173,106 +416,450 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 <!-- NOSOTROS -->
 <section class="section" id="nosotros">
   <div class="section-title">Nuestro Equipo</div>
-  <p>Somos un equipo comprometido con la innovación sostenible. Nuestro proyecto busca transformar la experiencia del transporte urbano en Hermosillo a través de paradas ecológicas inteligentes.</p>
-  <div class="team-grid">
-    <!-- Team Member 1 -->
+  <p style="text-align:center;color:#27AE60;margin-bottom:40px;font-size:1.3rem;max-width:800px;margin-left:auto;margin-right:auto;font-family:'Montserrat',sans-serif;font-weight:500;text-shadow:0 0 10px rgba(39,174,96,.2)">Somos un equipo multidisciplinario comprometido con la innovación sostenible. Nuestro proyecto busca transformar la experiencia del transporte urbano en Hermosillo a través de paradas ecológicas inteligentes.</p>  <div class="team-grid">
+    <!-- Team Member 1: Directora de Proyecto -->
     <div class="team-member">
       <div class="team-photo-frame">
-        <img src="SIlvana.jpg" alt="Palomo Soto Silvana">
+        <img src="SIlvana.jpg" alt="Silvana Palomo Soto">
       </div>
-      <div class="team-name">Palomo Soto Silvana</div>
-      <div class="team-role">Diseño e Innovación</div>
-      <div class="team-bio">Especialista en diseño sostenible y arquitectura paramétrica para espacios urbanos.</div>
+      <div class="team-name">Silvana Palomo Soto</div>
+      <div class="team-role">Directora de Proyecto</div>
+      <div class="team-bio">Project Manager responsable de coordinación, planificación y gestión integral del proyecto de paradas ecológicas.</div>
     </div>
     
-    <!-- Team Member 2 -->
+    <!-- Team Member 2: Desarrollo Frontend -->
     <div class="team-member">
       <div class="team-photo-frame">
-        <div class="team-photo-placeholder">👨‍💻</div>
+        <div class="team-photo-placeholder">🎨</div>
       </div>
-      <div class="team-name">Espinoza Perez Daniel</div>
-      <div class="team-role">Desarrollo Técnico</div>
-      <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualización de datos en tiempo real.</div>
+      <div class="team-name">Gabriela Jimenez Sanchez</div>
+      <div class="team-role">Líder de Desarrollo Frontend</div>
+      <div class="team-bio">Especialista en interfaz de usuario y experiencia web. Responsable del dashboard interactivo y visualizaciones.</div>
+    </div>
+
+    <!-- Team Member 3: Backend -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">⚙️</div>
+      </div>
+      <div class="team-name">Camila Beltran Gonzales</div>
+      <div class="team-role">Ingeniera de Software Backend</div>
+      <div class="team-bio">Desarrolladora de sistemas backend, APIs y arquitectura de datos. Gestión de servidores y bases de datos.</div>
+    </div>
+
+    <!-- Team Member 4: Ciberseguridad -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">🔒</div>
+      </div>
+      <div class="team-name">Daniel Espinoza Perez</div>
+      <div class="team-role">Especialista en Ciberseguridad</div>
+      <div class="team-bio">Experto en seguridad de sistemas IoT, protección de datos y cumplimiento normativo de la plataforma.</div>
+    </div>
+
+    <!-- Team Member 5: UX/UI -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">✨</div>
+      </div>
+      <div class="team-name">Andrea Sanchez Ortiz</div>
+      <div class="team-role">Diseñadora UX/UI</div>
+      <div class="team-bio">Diseñadora de experiencia de usuario. Responsable del diseño visual, usabilidad y accesibilidad del proyecto.</div>
+    </div>
+
+    <!-- Team Member 6: QA y Datos -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">📊</div>
+      </div>
+      <div class="team-name">Francisco Flores Moreno</div>
+      <div class="team-role">Analista de Datos y QA Tester</div>
+      <div class="team-bio">Responsable de análisis de datos, testing de calidad y generación de reportes de desempeño del sistema.</div>
+    </div>
+
+    <!-- Team Member 7: Cloud Architecture -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">☁️</div>
+      </div>
+      <div class="team-name">Raul Mariano Ibarra Acosta</div>
+      <div class="team-role">Arquitecto de Soluciones Cloud</div>
+      <div class="team-bio">Especialista en infraestructura cloud, escalabilidad y arquitectura de sistemas distribuidos para IoT.</div>
     </div>
     
-    <!-- Team Member 3 -->
-    <div class="team-member">
-      <div class="team-photo-frame">
-        <div class="team-photo-placeholder">👨‍🔬</div>
-      </div>
-      <div class="team-name">Francisco</div>
-      <div class="team-role">Investigación & Desarrollo</div>
-      <div class="team-bio">Especialista en tecnologías sostenibles e innovación ambiental.</div>
-    </div>
-    
-    <!-- Team Member 4 -->
-    <div class="team-member">
-      <div class="team-photo-frame">
-        <div class="team-photo-placeholder">👨‍💼</div>
-      </div>
-      <div class="team-name">Raul Mariano</div>
-      <div class="team-role">Gestión de Proyectos</div>
-      <div class="team-bio">Coordinador de implementación y desarrollo estratégico de paradas.</div>
-    </div>
-    
-    <!-- Team Member 5 -->
-    <div class="team-member">
-      <div class="team-photo-frame">
-        <div class="team-photo-placeholder">👩‍💼</div>
-      </div>
-      <div class="team-name">Gabriela</div>
-      <div class="team-role">Sostenibilidad</div>
-      <div class="team-bio">Experta en sistemas verdes y gestión ambiental urbana.</div>
-    </div>
-    
-    <!-- Team Member 6 -->
-    <div class="team-member">
-      <div class="team-photo-frame">
-        <div class="team-photo-placeholder">👩‍💻</div>
-      </div>
-      <div class="team-name">Andrea</div>
-      <div class="team-role">Diseño UX/UI</div>
-      <div class="team-bio">Especialista en interfases inteligentes y experiencia de usuario.</div>
-    </div>
+
   </div>
 </section>
 
 <footer>Smart City HMO — Paradas Ecológicas Inteligentes — Hermosillo, Sonora</footer>
+
+<!-- MODAL: ROUTES -->
+<div class="modal-overlay" id="routesModal">
+  <div class="modal-panel" style="position:relative">
+    <span class="modal-close" onclick="closeRoutesModal()">✕</span>
+    <h2>📍 Rutas Disponibles</h2>
+    <p style="font-size:11px;color:#b0d8b0;margin-bottom:16px">Selecciona una línea para ver paradas y horarios</p>
+    <div class="accordion-container" id="routesAccordion"></div>
+    <div class="result-box" id="routeResultBox" style="display:none;margin-top:16px">
+      <strong>Ruta seleccionada:</strong><br><span id="routeResultText"></span>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CREATE JOURNEY -->
+<div class="modal-overlay" id="journeyModal">
+  <div class="modal-panel" style="position:relative">
+    <span class="modal-close" onclick="closeJourneyModal()">✕</span>
+    <h2>🗺️ Calcular Ruta</h2>
+    <form class="journey-form" onsubmit="calculateJourney(event)">
+      <div class="form-group">
+        <label for="originInput">📍 Origen</label>
+        <input type="text" id="originInput" placeholder="Ej: San Benito, Colosio..." required>
+      </div>
+      <div class="form-group">
+        <label for="destinationInput">🎯 Destino</label>
+        <input type="text" id="destinationInput" placeholder="Ej: Tecnológico, Hospital..." required>
+      </div>
+      <button type="submit" class="btn-submit">→ Calcular Ruta</button>
+    </form>
+    
+    <div class="result-box" id="journeyResultBox" style="display:none;">
+      <strong>Resultado de búsqueda:</strong><br><span id="journeyResultText"></span>
+    </div>
+    
+    <!-- Occupancy Chart -->
+    <div class="occupancy-chart-container" id="occupancyChartContainer" style="display:none;">
+      <h4>📊 Ocupancia de Rutas (Tiempo Real)</h4>
+      <canvas id="occupancyChart"></canvas>
+    </div>
+    
+    <!-- Trip Options Selector -->
+    <div class="trip-selector" id="tripSelector" style="display:none;">
+      <h4>Elige tu viaje</h4>
+      <div class="trip-options" id="tripOptions"></div>
+      <div style="color:#8aa88a;font-size:10px;margin-top:10px;line-height:1.5">
+        <div><strong style="color:#27ae60">Hora de llegada</strong> y <strong style="color:#27ae60">Tiempo de recorrido</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: REPORT INCIDENT -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-panel" style="position:relative;max-width:540px">
+    <span class="modal-close" onclick="closeReportModal()">✕</span>
+    <h2>⚠️ Reportar Incidencia</h2>
+    <p style="font-size:11px;color:#b0d8b0;margin-bottom:20px">Ayúdanos a mejorar el servicio reportando problemas en nuestras paradas y transporte</p>
+    
+    <!-- CATEGORY SELECTION -->
+    <div style="margin-bottom:20px">
+      <label style="color:#27ae60;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-family:'Montserrat',sans-serif;display:block;margin-bottom:12px">📋 Tipo de Incidencia</label>
+      
+      <div class="report-category" onclick="selectReportCategory(this, 'parada')">
+        <div class="report-category-icon">🏗️</div>
+        <div class="report-category-text">
+          <div class="report-category-title">Daño en Parada Ecológica</div>
+          <div class="report-category-desc">Cristales rotos, paneles sucios,falta de iluminación</div>
+        </div>
+      </div>
+      
+      <div class="report-category" onclick="selectReportCategory(this, 'transporte')">
+        <div class="report-category-icon">🚌</div>
+        <div class="report-category-text">
+          <div class="report-category-title">Problema con Unidad de Transporte</div>
+          <div class="report-category-desc">Retraso excesivo, unidad en mal estado, conducción imprudente</div>
+        </div>
+      </div>
+      
+      <div class="report-category" onclick="selectReportCategory(this, 'tecnologia')">
+        <div class="report-category-icon">🔌</div>
+        <div class="report-category-text">
+          <div class="report-category-title">Falla Tecnológica</div>
+          <div class="report-category-desc">Punto de carga USB no funciona, pantalla apagada</div>
+        </div>
+      </div>
+      
+      <div class="report-category" onclick="selectReportCategory(this, 'limpieza')">
+        <div class="report-category-icon">🧹</div>
+        <div class="report-category-text">
+          <div class="report-category-title">Limpieza y Mantenimiento</div>
+          <div class="report-category-desc">Basura, suciedad, maleza, falta de mantenimiento</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- FORM -->
+    <form class="report-form" onsubmit="submitReport(event)">
+      <div>
+        <label for="reportParada">📍 Parada Afectada</label>
+        <input type="text" id="reportParada" placeholder="Ej: San Benito, Colosio..." required>
+      </div>
+      
+      <div>
+        <label for="reportName">👤 Tu Nombre (Opcional)</label>
+        <input type="text" id="reportName" placeholder="Tu nombre">
+      </div>
+      
+      <div>
+        <label for="reportContact">📱 Contacto (Opcional)</label>
+        <input type="email" id="reportContact" placeholder="email@ejemplo.com o número telefónico">
+      </div>
+      
+      <div>
+        <label for="reportDescription">📝 Descripción Detallada</label>
+        <textarea id="reportDescription" placeholder="Cuéntanos con detalle qué viste, cuándo ocurrió y cualquier información que ayude a resolver el problema..." required></textarea>
+      </div>
+      
+      <button type="submit" class="report-submit">✓ Enviar Reporte</button>
+    </form>
+    
+    <div class="result-box" id="reportResultBox" style="display:none;margin-top:16px">
+      <strong>Estado del reporte:</strong><br><span id="reportResultText"></span>
+    </div>
+  </div>
+</div>
 
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
-// DATA
+// DATA - STRUCTURED GEOJSON FORMAT
 // ═══════════════════════════════════════════════════════════════
-const stops=[
-  {name:"San Benito",route:"Ruta 12",lat:29.0728,lng:-110.9559,desc:"Parada principal zona centro. Conecta norte-sur.",feat:["Solar","Techo Verde","USB","WiFi"]},
-  {name:"Colosio",route:"Ruta 8, 14",lat:29.0855,lng:-110.9691,desc:"Avenida principal, zona comercial y administrativa.",feat:["Solar","Reciclaje","Sombra","Asientos"]},
-  {name:"Centro de Gobierno",route:"Ruta 5, 9",lat:29.0697,lng:-110.9454,desc:"Edificios administrativos. Diseño accesible.",feat:["Techo Verde","Accesible","LED","Plazoleta"]},
-  {name:"Tecnológico",route:"Ruta 11, 15",lat:29.0942,lng:-110.9612,desc:"Zona educativa. Proyecto piloto IoT.",feat:["Solar","USB","WiFi","IoT"]},
-  {name:"Hermosillo Viejo",route:"Ruta 3, 7",lat:29.0675,lng:-110.9637,desc:"Zona histórica y cultural.",feat:["Plantas Nativas","Descanso","Info Turística"]},
-  {name:"Hospital General",route:"Ruta 2, 6",lat:29.0790,lng:-110.9520,desc:"Acceso a instalaciones sanitarias.",feat:["Accesible","Emergencia","Señalización"]}
+const paradas=[
+  {
+    id:1,
+    name:"San Benito",
+    routes:[12],
+    lat:29.0728,
+    lng:-110.9559,
+    location:"Centro de Hermosillo",
+    desc:"Parada principal zona centro. Conecta norte-sur.",
+    features:["Solar","Techo Verde","USB","WiFi"],
+    passengers:"120-150 p/día",
+    zone:"Centro"
+  },
+  {
+    id:2,
+    name:"Colosio",
+    routes:[8,14],
+    lat:29.0855,
+    lng:-110.9691,
+    location:"Avenida Colosio",
+    desc:"Avenida principal, zona comercial y administrativa.",
+    features:["Solar","Reciclaje","Sombra","Asientos"],
+    passengers:"95-120 p/día",
+    zone:"Comercial"
+  },
+  {
+    id:3,
+    name:"Centro de Gobierno",
+    routes:[5,9],
+    lat:29.0697,
+    lng:-110.9454,
+    location:"Paseo del Río",
+    desc:"Edificios administrativos. Diseño accesible.",
+    features:["Techo Verde","Accesible","LED","Plazoleta"],
+    passengers:"80-100 p/día",
+    zone:"Administrativa"
+  },
+  {
+    id:4,
+    name:"Tecnológico",
+    routes:[11,15],
+    lat:29.0942,
+    lng:-110.9612,
+    location:"Zona Universitaria",
+    desc:"Zona educativa. Proyecto piloto IoT.",
+    features:["Solar","USB","WiFi","IoT"],
+    passengers:"140-180 p/día",
+    zone:"Educativa"
+  },
+  {
+    id:5,
+    name:"Hermosillo Viejo",
+    routes:[3,7],
+    lat:29.0675,
+    lng:-110.9637,
+    location:"Centro Histórico",
+    desc:"Zona histórica y cultural.",
+    features:["Plantas Nativas","Descanso","Info Turística"],
+    passengers:"60-80 p/día",
+    zone:"Cultural"
+  },
+  {
+    id:6,
+    name:"Hospital General",
+    routes:[2,6],
+    lat:29.0790,
+    lng:-110.9520,
+    location:"Calle Progreso",
+    desc:"Acceso a instalaciones sanitarias.",
+    features:["Accesible","Emergencia","Señalización"],
+    passengers:"110-140 p/día",
+    zone:"Sanitaria"
+  }
 ];
 
+// All unique routes
+const allRoutes=Array.from(new Set(paradas.flatMap(p=>p.routes))).sort((a,b)=>a-b);
+
 // ═══════════════════════════════════════════════════════════════
-// LEAFLET MAP
+// KML LOADER UTILITY
+// ═══════════════════════════════════════════════════════════════
+function loadKMLRoute(kmlFile,routeNumber){
+  // Cargar archivo KML y parsearlo
+  fetch(kmlFile)
+    .then(res=>res.text())
+    .then(kmlText=>{
+      const parser=new DOMParser();
+      const kmlDoc=parser.parseFromString(kmlText,'application/xml');
+      
+      // Extraer coordenadas del KML
+      const placemarks=kmlDoc.querySelectorAll('Placemark');
+      if(placemarks.length===0){
+        console.warn(`No placemarks found in ${kmlFile}`);
+        return;
+      }
+      
+      placemarks.forEach(placemark=>{
+        const linestring=placemark.querySelector('LineString');
+        if(linestring){
+          const coords=linestring.querySelector('coordinates').textContent
+            .trim()
+            .split('\n')
+            .filter(c=>c.trim())
+            .map(c=>c.trim().split(',').reverse());
+          
+          const colors=['#4dd8ff','#a8f0c0','#ffd04d','#ff6b6b','#9b59b6','#e74c3c','#f39c12'];
+          const color=colors[routeNumber%colors.length];
+          
+          L.polyline(coords,{
+            color:color,
+            weight:3.5,
+            opacity:.7,
+            lineCap:'round',
+            dashArray:'5 3'
+          }).addTo(map).bindPopup(`<strong style="color:${color}">Ruta ${routeNumber}</strong>`);
+        }
+      });
+    })
+    .catch(err=>console.error('Error loading KML:',err));
+}
+
+// Intentar cargar Ruta 2 desde KML
+loadKMLRoute('Ruta2.kml',2);
+
+// ═══════════════════════════════════════════════════════════════
+// LEAFLET MAP WITH INTERACTIVE FEATURES
 // ═══════════════════════════════════════════════════════════════
 const map=L.map('map',{center:[29.0780,-110.9580],zoom:14,zoomControl:true});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(map);
 
-// Custom marker
-const busIcon=L.divIcon({html:'<div style="background:#4dd8ff;width:24px;height:24px;border-radius:50%;border:3px solid #0a0f1a;box-shadow:0 0 10px #4dd8ff;"></div>',iconSize:[24,24],iconAnchor:[12,12],className:''});
+// Store markers and layers
+let markers={};
+let polylines=[];
+let activeFilters=new Set(allRoutes);
 
-stops.forEach(s=>{
-  L.marker([s.lat,s.lng],{icon:busIcon})
-    .bindPopup(`<b style="color:#4dd8ff">${s.name}</b><br><span style="color:#a8f0c0">${s.route}</span><br>${s.desc}`)
-    .addTo(map);
+// Create custom icons - Exact bus icon design
+function createIcon(iconText,color='#000'){
+  const busIcon=`
+    <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- Main bus body -->
+      <path d="M 20 50 L 20 85 Q 20 95 30 95 L 70 95 Q 80 95 80 85 L 80 50 Z" fill="${color}"/>
+      
+      <!-- Bus cabin (rounded top) -->
+      <path d="M 15 50 Q 15 20 50 15 Q 85 20 85 50 Z" fill="${color}"/>
+      
+      <!-- Windshield (white window) -->
+      <path d="M 30 35 Q 30 25 50 22 Q 70 25 70 35 L 70 50 Q 70 55 65 55 L 35 55 Q 30 55 30 50 Z" fill="white" stroke="none"/>
+      
+      <!-- Side mirror left -->
+      <circle cx="15" cy="50" r="5" fill="${color}"/>
+      
+      <!-- Side mirror right -->
+      <circle cx="85" cy="50" r="5" fill="${color}"/>
+      
+      <!-- Front left wheel -->
+      <circle cx="30" cy="95" r="9" fill="white" stroke="${color}" stroke-width="2"/>
+      <circle cx="30" cy="95" r="4" fill="${color}"/>
+      
+      <!-- Front right wheel -->
+      <circle cx="70" cy="95" r="9" fill="white" stroke="${color}" stroke-width="2"/>
+      <circle cx="70" cy="95" r="4" fill="${color}"/>
+      
+      <!-- Door line -->
+      <line x1="50" y1="50" x2="50" y2="95" stroke="white" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  `;
+  
+  return L.divIcon({
+    html:busIcon,
+    iconSize:[50,56],
+    iconAnchor:[25,56],
+    className:''
+  });
+}
+
+// Add markers
+paradas.forEach(parada=>{
+  const icon=createIcon();
+  const marker=L.marker([parada.lat,parada.lng],{icon:icon});
+  
+  const routesHtml=parada.routes.map(r=>`<span class="tag" style="background:rgba(39,174,96,.2);color:#52c77e;padding:3px 8px;border-radius:3px;margin:2px 2px">Ruta ${r}</span>`).join('');
+  const featuresHtml=parada.features.map(f=>`<span style="background:rgba(39,174,96,.1);color:#b0d8b0;padding:2px 6px;border-radius:2px;margin:2px 2px;display:inline-block;font-size:10px">${f}</span>`).join('');
+  
+  marker.bindPopup(`
+    <div style="min-width:200px">
+      <div style="color:#4dd8ff;font-size:14px;font-weight:bold;margin-bottom:6px">${parada.name}</div>
+      <div style="color:#27ae60;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${parada.zone}</div>
+      <div style="color:#a8f0c0;font-size:11px;margin-bottom:8px">${parada.location}</div>
+      <div style="color:#b0d8b0;font-size:10px;margin-bottom:6px">${parada.desc}</div>
+      <div style="margin-bottom:6px">${routesHtml}</div>
+      <div style="margin-bottom:6px">${featuresHtml}</div>
+      <div style="border-top:1px solid #27ae6044;padding-top:6px;margin-top:6px">
+        <div style="color:#27ae60;font-size:9px">👥 ${parada.passengers}</div>
+      </div>
+    </div>
+  `);
+  
+  marker.on('click',()=>{
+    const infoBox=document.getElementById('mapInfo');
+    infoBox.innerHTML=`<strong style="color:#4dd8ff">${parada.name}</strong><br>Rutas: ${parada.routes.join(', ')}<br>${parada.location}`;
+  });
+  
+  marker.addTo(map);
+  markers[parada.id]=marker;
 });
 
-// Routes
-L.polyline([[29.0942,-110.9612],[29.0855,-110.9691],[29.0728,-110.9559],[29.0675,-110.9637]],{color:'#4dd8ff',weight:3,opacity:.6,dashArray:'8 6'}).addTo(map);
-L.polyline([[29.0790,-110.9520],[29.0728,-110.9559],[29.0697,-110.9454]],{color:'#a8f0c0',weight:3,opacity:.6,dashArray:'8 6'}).addTo(map);
+// Draw routes
+function drawRoutes(){
+  polylines.forEach(p=>map.removeLayer(p));
+  polylines=[];
+  
+  allRoutes.forEach((route,idx)=>{
+    const routeParadas=paradas.filter(p=>p.routes.includes(route));
+    if(routeParadas.length>1){
+      const coords=routeParadas.map(p=>[p.lat,p.lng]);
+      const colors=['#4dd8ff','#a8f0c0','#ffd04d','#ff6b6b','#9b59b6','#e74c3c','#f39c12'];
+      const color=colors[idx%colors.length];
+      const poly=L.polyline(coords,{
+        color:color,
+        weight:2.5,
+        opacity:.5,
+        dashArray:'6 4',
+        lineCap:'round'
+      }).addTo(map);
+      polylines.push(poly);
+    }
+  });
+}
+drawRoutes();
+
+// Search functionality (removed from UI - now use routes modal/accordion for filtering)
+
+// Route filters (removed from sidebar - routes now managed through accordion modal)
+// activeFilters Set continues to track all routes and is initialized with all routes visible
 
 setTimeout(()=>map.invalidateSize(),300);
 
@@ -280,10 +867,10 @@ setTimeout(()=>map.invalidateSize(),300);
 // CARDS
 // ═══════════════════════════════════════════════════════════════
 const cc=document.getElementById('cards-container');
-stops.forEach(s=>{
+paradas.forEach(p=>{
   const d=document.createElement('div');d.className='card';
-  d.innerHTML=`<h3>${s.name}</h3><div class="route">📍 ${s.route}</div><p>${s.desc}</p><div class="tags">${s.feat.map(f=>`<span class="tag">${f}</span>`).join('')}</div>`;
-  d.onclick=()=>{map.setView([s.lat,s.lng],16);document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})};
+  d.innerHTML=`<h3>${p.name}</h3><div class="route">📍 Ruta${p.routes.length>1?'s':''} ${p.routes.join(', ')}</div><p>${p.desc}</p><div class="tags">${p.features.map(f=>`<span class="tag">${f}</span>`).join('')}</div>`;
+  d.onclick=()=>{map.setView([p.lat,p.lng],16);document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})};
   cc.appendChild(d);
 });
 
@@ -507,6 +1094,577 @@ function onResize(){
 }
 window.addEventListener('resize',onResize);
 setTimeout(onResize,200);
+
+// ═══════════════════════════════════════════════════════════════
+// MODAL CONTROLS - ROUTES & JOURNEY
+// ═══════════════════════════════════════════════════════════════
+
+// Rutas disponibles (extraídas del dataset paradas)
+const allRoutesData=Array.from(new Set(paradas.flatMap(p=>p.routes))).sort((a,b)=>a-b).map(routeNum=>{
+  const routeParadas=paradas.filter(p=>p.routes.includes(routeNum));
+  // Route info similar to React app
+  const routeInfo={
+    number:routeNum,
+    paradas:routeParadas,
+    description:`${routeParadas.length} paradas`,
+    duration:`${15+routeNum%20} min`,
+    arrivalTime:`${(8+routeNum%12).toString().padStart(2,'0')}:${(15+routeNum*5%60).toString().padStart(2,'0')} hrs`,
+    heatLevel:['low','medium','high'][routeNum%3],
+    comfortLevel:Math.floor((routeNum%5)+2),
+    occupancy:['low','medium','high'][routeNum%3],
+    color:['#e67e22','#8bc34a','#f4a460','#ff6b35','#4dd8ff'][routeNum%5],
+    isRecommended:routeNum%5===0
+  };
+  return routeInfo;
+});
+
+// Poblar acordeón de rutas en el modal
+function populateRoutesList(){
+  const accordion=document.getElementById('routesAccordion');
+  accordion.innerHTML='';
+  
+  allRoutesData.forEach((route,idx)=>{
+    // Crear contenedor del acordeón
+    const item=document.createElement('div');
+    item.className='accordion-item';
+    item.dataset.routeId=route.number;
+    
+    // Header mejorado con información de la app React
+    const header=document.createElement('div');
+    header.className='accordion-header';
+    
+    const heatColors={'low':'#4caf50','medium':'#ffc107','high':'#ff5722'};
+    const occupancyEmoji={'low':'🟢','medium':'🟡','high':'🔴'};
+    const heatColor=heatColors[route.heatLevel];
+    
+    header.innerHTML=`
+      <div class="accordion-header-title">
+        <div style="flex:1">
+          <div class="accordion-label">Línea ${route.number}</div>
+          <div style="color:#8aa88a;font-size:11px;margin-top:3px">⏱️ ${route.duration} • Llega ${route.arrivalTime}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="accordion-badge" style="background:${heatColor}">${route.heatLevel==='low'?'🕐':'🔥'}</span>
+          <span class="accordion-badge">${route.paradas.length}</span>
+        </div>
+      </div>
+      <span class="accordion-chevron">▼</span>
+    `;
+    
+    // Contenido del acordeón
+    const content=document.createElement('div');
+    content.className='accordion-content';
+    
+    // Info box con stats
+    let contentHtml=`
+      <div style="background:rgba(39,174,96,.1);padding:12px;border-radius:6px;margin-bottom:12px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="color:#4dd8ff">🌡️ Exposición: <span style="color:${heatColor};font-weight:bold">${route.heatLevel}</span></div>
+          <div style="color:#8aa88a;margin-top:3px">🍃 Comodidad: ${route.comfortLevel}/5</div>
+        </div>
+        <div style="text-align:right">
+          <div style="color:#b0d8b0">Ocupancia</div>
+          <div style="font-size:16px">${occupancyEmoji[route.occupancy]}</div>
+        </div>
+      </div>
+    `;
+    
+    // Generar lista de paradas con horarios
+    contentHtml+='<div class="accordion-stops">';
+    route.paradas.forEach((parada,pIdx)=>{
+      const scheduleTime=`${String(7+pIdx).padStart(2,'0')}:${String(pIdx*10).padStart(2,'0')} AM`;
+      contentHtml+=`
+        <div class="stop-item">
+          <div class="stop-info">
+            <div class="stop-name">${parada.name}</div>
+            <div class="stop-detail">${parada.zone}</div>
+            <div class="stop-schedule">⏱️ ${scheduleTime}</div>
+          </div>
+          <button class="btn-view-map" onclick="showRouteOnMap(${route.number})">Ver en mapa</button>
+        </div>
+      `;
+    });
+    contentHtml+='</div>';
+    content.innerHTML=contentHtml;
+    
+    // Event listener para expandir/contraer
+    header.addEventListener('click',()=>{
+      toggleAccordion(item,route);
+    });
+    
+    item.appendChild(header);
+    item.appendChild(content);
+    accordion.appendChild(item);
+  });
+}
+
+function toggleAccordion(currentItem,route){
+  // Cerrar todos los demás acordeones
+  document.querySelectorAll('.accordion-item').forEach(item=>{
+    if(item!==currentItem){
+      item.querySelector('.accordion-header').classList.remove('active');
+      item.querySelector('.accordion-content').classList.remove('active');
+    }
+  });
+  
+  // Toggle actual
+  const header=currentItem.querySelector('.accordion-header');
+  const content=currentItem.querySelector('.accordion-content');
+  
+  header.classList.toggle('active');
+  content.classList.toggle('active');
+  
+  // Si se abre, mostrar la ruta en el mapa
+  if(header.classList.contains('active')){
+    showRouteOnMap(route.number);
+  }
+}
+
+function showRouteOnMap(routeNumber){
+  const route=allRoutesData.find(r=>r.number===routeNumber);
+  if(!route) return;
+  
+  const routeParadas=route.paradas;
+  const coords=routeParadas.map(p=>[p.lat,p.lng]);
+  
+  // Remover polilinea anterior si existe
+  if(window.selectedRoutePath){
+    map.removeLayer(window.selectedRoutePath);
+  }
+  
+  // Dibujar nueva ruta
+  const colors=['#4dd8ff','#a8f0c0','#ffd04d','#ff6b6b','#9b59b6','#e74c3c','#f39c12'];
+  const color=colors[routeNumber%colors.length];
+  window.selectedRoutePath=L.polyline(coords,{
+    color:color,
+    weight:4,
+    opacity:.8,
+    lineCap:'round',
+    lineJoin:'round'
+  }).addTo(map);
+  
+  // Zoom a la ruta
+  const bounds=L.latLngBounds(coords);
+  map.fitBounds(bounds,{padding:[60,60]});
+  
+  // Mostrar resultado
+  const resultBox=document.getElementById('routeResultBox');
+  const resultText=document.getElementById('routeResultText');
+  resultText.innerHTML=`<strong>🗺️ Línea ${route.number}</strong><br>Paradas: ${routeParadas.map(p=>p.name).join(' → ')}<br>Total: ${routeParadas.length} estaciones`;
+  resultBox.style.display='block';
+  
+  // Scroll al resultado
+  setTimeout(()=>{resultBox.scrollIntoView({behavior:'smooth'})},300);
+}
+
+function openRoutesModal(e){
+  if(e) e.preventDefault();
+  populateRoutesList();
+  document.getElementById('routesModal').classList.add('active');
+  document.getElementById('fabRoutes').classList.add('active');
+}
+
+function closeRoutesModal(){
+  document.getElementById('routesModal').classList.remove('active');
+  document.getElementById('fabRoutes').classList.remove('active');
+}
+
+// Journey (Crear Viaje)
+function openJourneyModal(e){
+  if(e) e.preventDefault();
+  document.getElementById('journeyModal').classList.add('active');
+  document.getElementById('fabJourney').classList.add('active');
+  document.getElementById('journeyResultBox').style.display='none';
+}
+
+function closeJourneyModal(){
+  document.getElementById('journeyModal').classList.remove('active');
+  document.getElementById('fabJourney').classList.remove('active');
+}
+
+// Report (Reportar Incidencia)
+function openReportModal(e){
+  if(e) e.preventDefault();
+  document.getElementById('reportModal').classList.add('active');
+  document.getElementById('fabReport').classList.add('active');
+  document.getElementById('reportResultBox').style.display='none';
+  // Reset form
+  document.getElementById('reportParada').value='';
+  document.getElementById('reportName').value='';
+  document.getElementById('reportContact').value='';
+  document.getElementById('reportDescription').value='';
+  // Reset category selection
+  document.querySelectorAll('.report-category').forEach(cat=>cat.classList.remove('selected'));
+  window.selectedReportCategory=null;
+}
+
+function closeReportModal(){
+  document.getElementById('reportModal').classList.remove('active');
+  document.getElementById('fabReport').classList.remove('active');
+}
+
+function selectReportCategory(element, categoryType){
+  // Remove previous selection
+  document.querySelectorAll('.report-category').forEach(cat=>cat.classList.remove('selected'));
+  // Select new one
+  element.classList.add('selected');
+  window.selectedReportCategory=categoryType;
+}
+
+function submitReport(e){
+  e.preventDefault();
+  
+  const category=window.selectedReportCategory;
+  const parada=document.getElementById('reportParada').value.trim();
+  const name=document.getElementById('reportName').value.trim();
+  const contact=document.getElementById('reportContact').value.trim();
+  const description=document.getElementById('reportDescription').value.trim();
+  
+  if(!category){
+    alert('⚠️ Por favor selecciona un tipo de incidencia');
+    return;
+  }
+  
+  if(!parada){
+    alert('⚠️ Por favor indica la parada afectada');
+    return;
+  }
+  
+  if(!description){
+    alert('⚠️ Por favor proporciona una descripción detallada');
+    return;
+  }
+  
+  // Validate contact if provided
+  if(contact && !validateContact(contact)){
+    alert('⚠️ Por favor proporciona un email o teléfono válido');
+    return;
+  }
+  
+  // Category labels
+  const categoryLabels={
+    parada:'Daño en Parada Ecológica',
+    transporte:'Problema con Unidad de Transporte',
+    tecnologia:'Falla Tecnológica',
+    limpieza:'Limpieza y Mantenimiento'
+  };
+  
+  // Simulate report submission
+  const timestamp=new Date().toLocaleString('es-MX');
+  const reportData={
+    id:Math.random().toString(36).substr(2,9).toUpperCase(),
+    category:categoryLabels[category],
+    parada:parada,
+    name:name||'Anónimo',
+    contact:contact||'No proporcionado',
+    description:description,
+    timestamp:timestamp,
+    status:'Recibido'
+  };
+  
+  // Save to localStorage for demo
+  let reports=JSON.parse(localStorage.getItem('forcetech_reports')||'[]');
+  reports.push(reportData);
+  localStorage.setItem('forcetech_reports', JSON.stringify(reports));
+  
+  // Show success message
+  const resultBox=document.getElementById('reportResultBox');
+  const resultText=document.getElementById('reportResultText');
+  resultText.innerHTML=`<strong style="color:#27ae60">✓ Reporte enviado exitosamente</strong><br>Folio: <strong>${reportData.id}</strong><br>Parada: ${parada}<br>Tipo: ${categoryLabels[category]}<br>Fecha: ${timestamp}<br><br>Nuestro equipo revisará tu reporte en breve.`;
+  resultBox.style.display='block';
+  
+  // Reset form
+  document.getElementById('reportParada').value='';
+  document.getElementById('reportName').value='';
+  document.getElementById('reportContact').value='';
+  document.getElementById('reportDescription').value='';
+  document.querySelectorAll('.report-category').forEach(cat=>cat.classList.remove('selected'));
+  window.selectedReportCategory=null;
+  
+  // Auto-close after 3 seconds
+  setTimeout(()=>{closeReportModal()},3000);
+}
+
+function validateContact(contact){
+  const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex=/^(\+?34)?[6789]\d{8}$/; // Mexican & Spanish formats
+  return emailRegex.test(contact) || phoneRegex.test(contact);
+}
+
+function calculateJourney(e){
+  e.preventDefault();
+  
+  const origin=document.getElementById('originInput').value.toLowerCase().trim();
+  const destination=document.getElementById('destinationInput').value.toLowerCase().trim();
+  
+  // Buscar paradas por nombre
+  const originStop=paradas.find(p=>p.name.toLowerCase().includes(origin)||p.location.toLowerCase().includes(origin));
+  const destStop=paradas.find(p=>p.name.toLowerCase().includes(destination)||p.location.toLowerCase().includes(destination));
+  
+  const resultBox=document.getElementById('journeyResultBox');
+  const resultText=document.getElementById('journeyResultText');
+  const tripSelector=document.getElementById('tripSelector');
+  const tripOptions=document.getElementById('tripOptions');
+  
+  if(!originStop || !destStop){
+    resultText.innerHTML='<span style="color:#ff6b6b">⚠️ No se encontraron una o ambas paradas.</span><br><strong>Paradas disponibles:</strong><br>'+paradas.map(p=>p.name).join(', ');
+    resultBox.style.display='block';
+    tripSelector.style.display='none';
+    return;
+  }
+  
+  if(originStop.id===destStop.id){
+    resultText.innerHTML='<span style="color:#ffd04d">ℹ️ Ya estás en tu destino</span>';
+    resultBox.style.display='block';
+    tripSelector.style.display='none';
+    return;
+  }
+  
+  // Encontrar rutas comunes
+  const commonRoutes=originStop.routes.filter(r=>destStop.routes.includes(r));
+  
+  // Generar opciones de viaje
+  const tripOptions_list=[];
+  const baseTime=new Date();baseTime.setHours(6,0);
+  
+  for(let i=0;i<3;i++){
+    const tripTime=new Date(baseTime);
+    tripTime.setMinutes(tripTime.getMinutes()+(i*8));
+    const arrivalTime=new Date(tripTime);
+    arrivalTime.setMinutes(arrivalTime.getMinutes()+(20+i*2));
+    
+    tripOptions_list.push({
+      id:i+1,
+      departureTime:`${String(tripTime.getHours()).padStart(2,'0')}:${String(tripTime.getMinutes()).padStart(2,'0')} AM`,
+      arrivalTime:`${String(arrivalTime.getHours()).padStart(2,'0')}:${String(arrivalTime.getMinutes()).padStart(2,'0')} AM`,
+      duration:`${20+i*2} minutos`,
+      route:commonRoutes[0]||paradas[0].routes[0]
+    });
+  }
+  
+  // Mostrar resultado
+  if(commonRoutes.length>0){
+    const route=commonRoutes[0];
+    const routeData=allRoutesData.find(r=>r.number===route);
+    resultText.innerHTML=`✓ <strong>En camino a</strong><br><strong style="color:#4dd8ff">${destStop.name}</strong><br>` + 
+      `<span style="color:#8aa88a">Línea ${route} disponible</span>`;
+  }else{
+    resultText.innerHTML=`📍 <strong>${originStop.name}</strong> → <strong>${destStop.name}</strong>`;
+  }
+  
+  resultBox.style.display='block';
+  
+  // Generar opciones de viaje interactivas
+  tripOptions.innerHTML='';
+  tripOptions_list.forEach(trip=>{
+    const option=document.createElement('div');
+    option.className='trip-option';
+    option.dataset.tripId=trip.id;
+    option.innerHTML=`
+      <div style="text-align:center;font-size:16px;font-weight:900;color:#27ae60">${trip.id}</div>
+      <div style="font-size:9px;color:#8aa88a;margin-top:2px">${trip.departureTime}</div>
+    `;
+    option.onclick=()=>selectTrip(option,trip);
+    tripOptions.appendChild(option);
+  });
+  
+  tripSelector.style.display='block';
+  
+  // Zoom en el mapa
+  const bounds=L.latLngBounds([[originStop.lat,originStop.lng],[destStop.lat,destStop.lng]]);
+  map.fitBounds(bounds,{padding:[100,100]});
+}
+
+function selectTrip(element,trip){
+  // Remover selección anterior
+  document.querySelectorAll('.trip-option').forEach(opt=>opt.classList.remove('selected'));
+  // Seleccionar nuevo
+  element.classList.add('selected');
+}
+
+// Cerrar modales al hacer clic fuera
+document.getElementById('routesModal').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeRoutesModal();
+});
+document.getElementById('journeyModal').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeJourneyModal();
+});
+document.getElementById('reportModal').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeReportModal();
+});
+
+// ═══════════════════════════════════════════════════════════════
+// ANIMATED BUSES ON ROUTES
+// ═══════════════════════════════════════════════════════════════
+let animatedBuses=[];
+let busAnimationRunning=true;
+
+class AnimatedBus{
+  constructor(routeNumber,routeParadas){
+    this.routeNumber=routeNumber;
+    this.routeParadas=routeParadas;
+    this.currentIndex=0;
+    this.progress=0;
+    this.marker=null;
+    this.create();
+  }
+  
+  create(){
+    if(this.routeParadas.length<2) return;
+    const icon=L.divIcon({
+      html:`<div class="animated-bus">🚌</div>`,
+      iconSize:[40,40],
+      iconAnchor:[20,20],
+      className:''
+    });
+    this.marker=L.marker([this.routeParadas[0].lat,this.routeParadas[0].lng],{icon:icon});
+    this.marker.addTo(map);
+  }
+  
+  update(){
+    if(this.routeParadas.length<2) return;
+    
+    this.progress+=0.002;
+    if(this.progress>=1){
+      this.progress=0;
+      this.currentIndex=(this.currentIndex+1)%this.routeParadas.length;
+    }
+    
+    const current=this.routeParadas[this.currentIndex];
+    const next=this.routeParadas[(this.currentIndex+1)%this.routeParadas.length];
+    
+    const lat=current.lat+(next.lat-current.lat)*this.progress;
+    const lng=current.lng+(next.lng-current.lng)*this.progress;
+    
+    this.marker.setLatLng([lat,lng]);
+  }
+  
+  remove(){
+    if(this.marker) map.removeLayer(this.marker);
+  }
+}
+
+// Crear buses animados
+function createAnimatedBuses(){
+  animatedBuses.forEach(b=>b.remove());
+  animatedBuses=[];
+  
+  allRoutesData.forEach((route,idx)=>{
+    if(route.paradas.length>=2){
+      const bus=new AnimatedBus(route.number,route.paradas);
+      animatedBuses.push(bus);
+    }
+  });
+}
+
+// Animar buses
+function updateBuses(){
+  if(!busAnimationRunning) return;
+  animatedBuses.forEach(bus=>bus.update());
+  requestAnimationFrame(updateBuses);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FLOATING FILTER PANEL
+// ═══════════════════════════════════════════════════════════════
+function toggleFloatingPanel(){
+  const panel=document.getElementById('floatingPanel');
+  const btn=document.getElementById('floatFilterBtn');
+  panel.style.display=panel.style.display==='none'?'block':'none';
+  btn.classList.toggle('active');
+}
+
+function initFloatingFilters(){
+  const routeFilters=document.getElementById('routeFilters');
+  allRoutesData.forEach(route=>{
+    const div=document.createElement('div');
+    div.className='filter-option';
+    div.innerHTML=`
+      <input type="checkbox" id="filterRoute${route.number}" checked>
+      <label for="filterRoute${route.number}">Línea ${route.number} (${route.occupancy})</label>
+    `;
+    routeFilters.appendChild(div);
+  });
+  
+  // Event listeners
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change',applyFilters);
+  });
+}
+
+function applyFilters(){
+  const showBuses=document.getElementById('filterBuses').checked;
+  const showParadas=document.getElementById('filterParadas').checked;
+  const showRoutes=document.getElementById('filterRoutes').checked;
+  
+  animatedBuses.forEach(bus=>{
+    bus.marker.setOpacity(showBuses?1:0);
+  });
+  
+  Object.values(markers).forEach(marker=>{
+    marker.setOpacity(showParadas?1:0.3);
+  });
+  
+  polylines.forEach(line=>{
+    line.setOpacity(showRoutes?0.5:0);
+  });
+  
+  // Mostrar gráfico
+  if(showRoutes) showOccupancyChart();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// OCCUPANCY CHART
+// ═══════════════════════════════════════════════════════════════
+let occupancyChart=null;
+
+function showOccupancyChart(){
+  const container=document.getElementById('occupancyChartContainer');
+  container.style.display='block';
+  
+  const routeLabels=allRoutesData.map(r=>`Línea ${r.number}`);
+  const occupancyData=allRoutesData.map(r=>{
+    const occ={'low':30,'medium':60,'high':85};
+    return occ[r.occupancy]||50;
+  });
+  const comfortData=allRoutesData.map(r=>r.comfortLevel*20);
+  const heatData=allRoutesData.map(r=>{
+    const heat={'low':20,'medium':30,'high':40};
+    return heat[r.heatLevel]||25;
+  });
+  
+  const ctx=document.getElementById('occupancyChart').getContext('2d');
+  
+  if(occupancyChart) occupancyChart.destroy();
+  
+  occupancyChart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:routeLabels,
+      datasets:[
+        {label:'Ocupancia %',data:occupancyData,backgroundColor:'rgba(39,174,96,.6)',borderColor:'#27ae60',borderWidth:2},
+        {label:'Comodidad (0-100)',data:comfortData,backgroundColor:'rgba(77,216,255,.6)',borderColor:'#4dd8ff',borderWidth:2},
+        {label:'Calor (°C aprox)',data:heatData,backgroundColor:'rgba(255,107,53,.6)',borderColor:'#ff6b35',borderWidth:2}
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:true,
+      scales:{
+        y:{min:0,max:100,ticks:{color:'#27ae60'},grid:{color:'#27ae6022'}}
+      },
+      plugins:{
+        legend:{labels:{color:'#b0d8b0',font:{size:11}}}
+      }
+    }
+  });
+}
+
+// Inicializar todo
+createAnimatedBuses();
+initFloatingFilters();
+applyFilters();
+updateBuses();
 </script>
 </body>
 </html>
