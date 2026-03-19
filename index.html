@@ -10,21 +10,22 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
-      --verde-bosque: #2d5a27;
-      --verde-hoja: #4a8c3f;
-      --verde-musgo: #6aad5b;
-      --verde-menta: #8fc97e;
-      --verde-claro: #b8e0a8;
-      --verde-palido: #ddf0d6;
-      --verde-fondo: #f0f8ec;
+      --verde-corporativo: #1E4620;
+      --verde-bosque: #1E4620;
+      --verde-hoja: #1E4620;
+      --verde-musgo: #1E4620;
+      --verde-menta: #1E4620;
+      --verde-claro: #2A5C2E;
+      --verde-palido: #3A7C42;
+      --verde-fondo: #FFFFFF;
       --naranja-acento: #d4703a;
       --naranja-calido: #e8954a;
-      --texto-oscuro: #1a2e18;
-      --texto-medio: #3d5c39;
-      --texto-suave: #6b8c65;
-      --blanco: #fafdf8;
-      --sombra: rgba(45, 90, 39, 0.12);
-      --borde: rgba(74, 140, 63, 0.24);
+      --texto-oscuro: #1E4620;
+      --texto-medio: #1E4620;
+      --texto-suave: #2A5C2E;
+      --blanco: #FFFFFF;
+      --sombra: rgba(30, 70, 32, 0.12);
+      --borde: rgba(30, 70, 32, 0.24);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -200,8 +201,8 @@
 
     .hero-pill {
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(39, 174, 96, 0.4);
-      color: #27AE60;
+      border: 1px solid rgba(30, 70, 32, 0.4);
+      color: #1E4620;
       border-radius: 999px;
       padding: 8px 16px;
       font-size: 12px;
@@ -389,7 +390,7 @@
     .stat-label {
       font-family: 'Montserrat', sans-serif;
       font-size: 11px;
-      color: #27AE60;
+      color: #1E4620;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-weight: 700;
@@ -468,13 +469,13 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;
       font-weight: 700;
-      color: #27AE60;
+      color: #1E4620;
     }
 
     .map-header span {
       font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: #27AE60;
+      color: #1E4620;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -539,7 +540,7 @@
     .parada-route {
       font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: #27AE60;
+      color: #1E4620;
       font-weight: 700;
       margin-bottom: 8px;
     }
@@ -567,16 +568,16 @@
       padding: 6px 12px;
       border-radius: 999px;
       background: white;
-      color: #27AE60;
-      border: 2px solid #27AE60;
-      box-shadow: 0 2px 8px rgba(39, 174, 96, 0.15);
+      color: #1E4620;
+      border: 2px solid #1E4620;
+      box-shadow: 0 2px 8px rgba(30, 70, 32, 0.15);
       transition: all 0.2s ease;
     }
 
     .parada-tag:hover {
-      background: #27AE60;
+      background: #1E4620;
       color: white;
-      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+      box-shadow: 0 4px 12px rgba(30, 70, 32, 0.3);
     }
 
     /* ── MODEL SECTION ── */
@@ -623,10 +624,10 @@
 
     .btn-action {
       padding: 12px 24px;
-      background: #27AE60;
+      background: #1E4620;
       border: none;
       border-radius: 12px;
-      color: black;
+      color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 800;
@@ -637,7 +638,7 @@
       align-items: center;
       gap: 8px;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 16px rgba(39, 174, 96, 0.3);
+      box-shadow: 0 4px 16px rgba(30, 70, 32, 0.3);
       position: relative;
       overflow: hidden;
     }
@@ -661,9 +662,9 @@
     }
 
     .btn-action:hover {
-      background: #1e8449;
+      background: #153417;
       transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(39, 174, 96, 0.5);
+      box-shadow: 0 8px 28px rgba(30, 70, 32, 0.5);
     }
 
     .btn-action:active {
@@ -687,15 +688,15 @@
 
     .btn-secondary {
       background: rgba(255, 255, 255, 0.12);
-      border: 1.5px solid #27AE60;
-      color: #27AE60;
-      box-shadow: 0 4px 16px rgba(39, 174, 96, 0.2);
+      border: 1.5px solid #1E4620;
+      color: #1E4620;
+      box-shadow: 0 4px 16px rgba(30, 70, 32, 0.2);
     }
 
     .btn-secondary:hover {
-      background: #27AE60;
-      color: black;
-      box-shadow: 0 8px 28px rgba(39, 174, 96, 0.4);
+      background: #1E4620;
+      color: #FFFFFF;
+      box-shadow: 0 8px 28px rgba(30, 70, 32, 0.4);
     }
 
     .model-text .section-label {
@@ -929,7 +930,7 @@
       border-radius: 50%;
       margin: 0 auto 20px;
       overflow: hidden;
-      border: 3px solid #27AE60;
+      border: 3px solid #1E4620;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
 
@@ -942,12 +943,12 @@
     .team-photo-placeholder {
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #e8f5e9, #dff5d8);
+      background: linear-gradient(135deg, #e8f5e9, #d4edda);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 48px;
-      color: #27AE60;
+      color: #1E4620;
     }
 
     .team-name {
@@ -1237,11 +1238,11 @@
       </div>
       <div class="transporte-visual">
         <svg viewBox="0 0 300 200" fill="none">
-          <rect x="20" y="150" width="35" height="40" rx="4" fill="#4a8c3f" opacity="0.7"/>
-          <rect x="65" y="120" width="35" height="70" rx="4" fill="#4a8c3f" opacity="0.8"/>
-          <rect x="110" y="90" width="35" height="100" rx="4" fill="#4a8c3f" opacity="0.85"/>
-          <rect x="155" y="70" width="35" height="120" rx="4" fill="#4a8c3f"/>
-          <rect x="200" y="50" width="35" height="140" rx="4" fill="#6aad5b"/>
+          <rect x="20" y="150" width="35" height="40" rx="4" fill="#1E4620" opacity="0.7"/>
+          <rect x="65" y="120" width="35" height="70" rx="4" fill="#1E4620" opacity="0.8"/>
+          <rect x="110" y="90" width="35" height="100" rx="4" fill="#1E4620" opacity="0.85"/>
+          <rect x="155" y="70" width="35" height="120" rx="4" fill="#1E4620"/>
+          <rect x="200" y="50" width="35" height="140" rx="4" fill="#1E4620"/>
           <rect x="245" y="30" width="35" height="160" rx="4" fill="#d4703a"/>
           <text x="37" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2019</text>
           <text x="82" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2020</text>
@@ -1361,7 +1362,7 @@
     // Routes
     L.polyline(
       [[29.0942, -110.9612], [29.0855, -110.9691], [29.0728, -110.9559], [29.0675, -110.9637]],
-      { color: "#4a8c3f", weight: 3, opacity: 0.6, dashArray: "8 6" }
+      { color: "#1E4620", weight: 3, opacity: 0.6, dashArray: "8 6" }
     ).addTo(map);
     L.polyline(
       [[29.0790, -110.9520], [29.0728, -110.9559], [29.0697, -110.9454]],
