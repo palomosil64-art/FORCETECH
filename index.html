@@ -563,7 +563,7 @@
     }
 
     .smart-btn {
-      background: #27AE60;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       color: #ffffff;
       border: none;
       border-radius: 12px;
@@ -595,7 +595,7 @@
 
     .smart-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(30, 70, 32, 0.18);
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4);
     }
 
     .smart-btn.map-cta-btn:hover {
@@ -844,25 +844,25 @@
     }
 
     .pilot-stop-pin {
-      width: 20px;
-      height: 20px;
-      background: #D35400;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #F17A20, #D35400);
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
-      border: 2px solid #ffffff;
-      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.35);
+      border: 3px solid #ffffff;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.55), 0 0 0 4px rgba(211, 84, 0, 0.15);
       position: relative;
     }
 
     .pilot-stop-pin::after {
       content: '';
       position: absolute;
-      width: 6px;
-      height: 6px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: #ffffff;
-      top: 5px;
-      left: 5px;
+      top: 7px;
+      left: 7px;
     }
 
     @keyframes mapPulse {
@@ -880,9 +880,9 @@
     }
 
     #mapa .section-title span.ecoparadas-highlight:hover {
-      text-shadow: 0 4px 12px rgba(30, 70, 32, 0.3);
+      text-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
       transform: translateY(-1px);
-      background: rgba(30, 70, 32, 0.08);
+      background: rgba(211, 84, 0, 0.08);
     }
 
     /* Mapa — indicadores destacados */
@@ -2517,7 +2517,7 @@
         <input id="destinationInput" type="text" placeholder="Destino (ej. Hospital General)" required>
         <button class="smart-btn" type="submit">Calcular ruta</button>
       </form>
-      <div id="journeyResult" style="margin-top:12px;color:#1E4620;font-weight:600;"></div>
+      <div id="journeyResult" style="margin-top:12px;color:#D35400;font-weight:600;font-family:'Montserrat',sans-serif;"></div>
     </div>
   </div>
 
@@ -2604,11 +2604,39 @@
 
     const pilotMarkerIcon = L.divIcon({
       html: '<div class="pilot-stop-pin"></div>',
-      iconSize: [20, 20],
-      iconAnchor: [10, 20],
-      popupAnchor: [0, -18],
+      iconSize: [28, 28],
+      iconAnchor: [14, 28],
+      popupAnchor: [0, -26],
       className: ""
     });
+
+    // ── Pilot stops: siempre renderiza los 10 nodos desde stops[], sin depender del KML ──
+    function getPilotPopupHtml(stop) {
+      const servicesHtml = REQUIRED_POPUP_SERVICES
+        .map((item) => {
+          const mapped = FEATURE_ICON_MAP[item] || { icon: 'fa-solid fa-circle-check', shortLabel: item };
+          return `<span class="map-popup-service"><i class="${mapped.icon}" aria-hidden="true"></i>${mapped.shortLabel}</span>`;
+        }).join('');
+      return `<div class="map-popup"><div class="map-popup-title" style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#D35400;">${stop.name}</div><div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;color:#555;margin:4px 0 6px;"><strong style="color:#D35400;">${stop.zone}</strong> &bull; ${stop.geo}</div><div class="map-popup-services">${servicesHtml}</div></div>`;
+    }
+
+    function renderPilotLayer() {
+      const layer = L.layerGroup();
+      stops.forEach((stop) => {
+        L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon })
+          .bindPopup(getPilotPopupHtml(stop), { maxWidth: 300 })
+          .addTo(layer);
+      });
+      layer.addTo(mapPilot);
+      pilotKmlLayer = layer;
+      // Ajusta vista solo a nodos urbanos (excluye Bahía de Kino a ~140km)
+      const urban = stops.filter((s) => s.lat > 29.0);
+      const bounds = L.latLngBounds(urban.map((s) => [s.lat, s.lng]));
+      if (bounds.isValid()) {
+        mapPilot.fitBounds(bounds, { padding: [36, 36] });
+      }
+    }
+    renderPilotLayer();
 
     let isSyncingMaps = false;
     function syncMapViews(primaryMap, secondaryMap) {
@@ -3021,19 +3049,9 @@
             .addTo(markerLayerCurrent);
         });
 
-        const pilotStops = pickPilotStops(points, 10);
-        const markerLayerPilot = L.layerGroup();
-        pilotStops.forEach((stop) => {
-          const relatedStop = findRelatedStopData(stop);
-          L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon })
-            .bindPopup(getPopupHtml(stop, relatedStop), { maxWidth: 290 })
-            .addTo(markerLayerPilot);
-        });
-
+        // El mapa piloto usa siempre renderPilotLayer() — solo actualizamos mapCurrent con el KML
         markerLayerCurrent.addTo(mapCurrent);
-        markerLayerPilot.addTo(mapPilot);
         currentKmlLayer = markerLayerCurrent;
-        pilotKmlLayer = markerLayerPilot;
 
         points.forEach((stop) => {
           if (!Number.isFinite(stop.lat) || !Number.isFinite(stop.lng)) {
@@ -3043,10 +3061,6 @@
 
         if (points.length > 0 && markerLayerCurrent.getBounds().isValid()) {
           mapCurrent.fitBounds(markerLayerCurrent.getBounds(), { padding: [22, 22] });
-        }
-
-        if (pilotStops.length > 0 && markerLayerPilot.getBounds().isValid()) {
-          mapPilot.fitBounds(markerLayerPilot.getBounds(), { padding: [22, 22] });
         }
 
         if (activeStopsCount) {
