@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORCETECH | Paradas Ecologicas Inteligentes - Hermosillo</title>
+  <title>FORCETECH | Paradas Ecológicas Inteligentes — Hermosillo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -484,58 +484,150 @@
       border: none;
     }
 
-    /* ── TRANSPORTE ── */
-    .transporte-card {
+    /* ── DATOS Y ANALISIS ── */
+    .analisis-shell {
       background: white;
       border: 1px solid var(--borde);
       border-radius: 20px;
       box-shadow: 0 8px 24px var(--sombra);
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
     }
 
-    .transporte-text {
-      padding: 48px 40px;
+    .analisis-head {
+      padding: 36px 36px 24px;
+      border-bottom: 1px solid var(--borde);
+      background: linear-gradient(180deg, rgba(221, 240, 214, 0.45), rgba(255, 255, 255, 0));
     }
 
-    .transporte-text p {
+    .analisis-head p {
       color: var(--texto-medio);
-      font-size: 15px;
-      margin-bottom: 24px;
+      font-size: 14px;
+      margin-top: 8px;
+      max-width: 760px;
     }
 
-    .transporte-link {
+    .analisis-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .analisis-tab {
+      border: 1px solid var(--borde);
+      background: white;
+      color: var(--texto-medio);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .analisis-tab:hover {
+      border-color: var(--verde-hoja);
+      color: var(--verde-bosque);
+    }
+
+    .analisis-tab.active {
+      background: var(--verde-bosque);
+      border-color: var(--verde-bosque);
+      color: white;
+    }
+
+    .analisis-panels {
+      padding: 24px;
+    }
+
+    .analisis-panel {
+      display: none;
+    }
+
+    .analisis-panel.active {
+      display: block;
+    }
+
+    .analisis-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 16px;
+    }
+
+    .analisis-card {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 10px var(--sombra);
+    }
+
+    .analisis-card h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      color: var(--verde-bosque);
+      margin-bottom: 6px;
+    }
+
+    .analisis-card p {
+      color: var(--texto-suave);
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .analisis-chart-wrap {
+      position: relative;
+      height: 260px;
+    }
+
+    .analisis-kpis {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .analisis-kpi {
+      background: var(--verde-fondo);
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .analisis-kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--texto-suave);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .analisis-kpi-value {
+      font-family: "Playfair Display", serif;
+      color: var(--verde-bosque);
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .analisis-link {
+      margin-top: 18px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
-      border-radius: 12px;
+      padding: 10px 18px;
+      border-radius: 10px;
       background: var(--verde-bosque);
       color: white;
       text-decoration: none;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       transition: transform 0.2s;
     }
 
-    .transporte-link:hover {
-      transform: translateY(-2px);
-    }
-
-    .transporte-visual {
-      background: linear-gradient(135deg, var(--verde-palido), var(--verde-claro));
-      padding: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 320px;
-    }
-
-    .transporte-visual svg {
-      width: 100%;
-      max-width: 340px;
+    .analisis-link:hover {
+      transform: translateY(-1px);
     }
 
     /* ── EQUIPO ── */
@@ -654,13 +746,16 @@
         aspect-ratio: 16/9;
       }
 
-      .transporte-card {
-        grid-template-columns: 1fr;
+      .analisis-head {
+        padding: 26px 20px 20px;
       }
 
-      .transporte-visual {
-        min-height: 200px;
-        padding: 32px;
+      .analisis-panels {
+        padding: 16px;
+      }
+
+      .analisis-grid {
+        grid-template-columns: 1fr;
       }
 
       .section {
@@ -701,6 +796,192 @@
       }
     }
 
+    /* ── DIAGNOSTICO ── */
+    .diagnostico {
+      background: white;
+      padding: 80px 32px;
+    }
+
+    .diagnostico-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .crisis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .crisis-card {
+      background: var(--verde-fondo);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .crisis-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .crisis-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .crisis-card.alerta::before { background: var(--naranja-acento); }
+    .crisis-card.info::before { background: var(--verde-hoja); }
+    .crisis-card.critico::before { background: #c0392b; }
+
+    .crisis-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .crisis-number {
+      font-family: "Playfair Display", serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--verde-bosque);
+      line-height: 1;
+    }
+
+    .crisis-card.alerta .crisis-number { color: var(--naranja-acento); }
+    .crisis-card.critico .crisis-number { color: #c0392b; }
+
+    .crisis-label {
+      font-size: 13px;
+      color: var(--texto-medio);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .crisis-detail {
+      font-size: 11px;
+      color: var(--texto-suave);
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--borde);
+      line-height: 1.5;
+    }
+
+    .soluciones-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .soluciones-grid { grid-template-columns: 1fr; }
+    }
+
+    .solucion-card {
+      background: var(--verde-fondo);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      gap: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .solucion-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px var(--sombra);
+    }
+
+    .solucion-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .solucion-icon.solar { background: linear-gradient(135deg, #f39c12, #e67e22); }
+    .solucion-icon.agua { background: linear-gradient(135deg, #3498db, #2980b9); }
+    .solucion-icon.temp { background: linear-gradient(135deg, #27ae60, #2d5a27); }
+    .solucion-icon.digital { background: linear-gradient(135deg, #8e44ad, #6c3483); }
+    .solucion-icon.seguridad { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+    .solucion-icon.acceso { background: linear-gradient(135deg, #1abc9c, #16a085); }
+
+    .solucion-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      margin-bottom: 6px;
+    }
+
+    .solucion-content p {
+      font-size: 13px;
+      color: var(--texto-medio);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .solucion-dato {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(212, 112, 58, 0.12);
+      color: var(--naranja-acento);
+      border: 1px solid rgba(212, 112, 58, 0.25);
+    }
+
+    .impacto-banner {
+      background: var(--verde-bosque);
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      text-align: center;
+    }
+
+    .impacto-item .impacto-number {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--verde-menta);
+    }
+
+    .impacto-item .impacto-label {
+      font-size: 12px;
+      color: var(--verde-claro);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .fuente-datos {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--texto-suave);
+      font-style: italic;
+    }
+
+    .fuente-datos a {
+      color: var(--naranja-acento);
+      text-decoration: none;
+    }
+
     /* Leaflet overrides */
     .leaflet-popup-content-wrapper {
       border-radius: 12px !important;
@@ -722,6 +1003,7 @@
     <ul class="nav-links">
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#mapa">Mapa</a></li>
+      <li><a href="#diagnostico">Diagnóstico</a></li>
       <li><a href="#paradas">Paradas</a></li>
       <li><a href="#modelo">Modelo 3D</a></li>
       <li><a href="#transporte">Transporte</a></li>
@@ -733,13 +1015,13 @@
   <!-- HERO -->
   <section class="hero" id="inicio">
     <span class="hero-badge">Hermosillo, Sonora</span>
-    <h1>Paradas Ecologicas <em>Inteligentes</em></h1>
-    <p class="hero-sub">Transformamos el transporte urbano con estaciones sustentables: energia solar, vegetacion nativa y diseno parametrico adaptado al desierto de Sonora.</p>
+    <h1>Paradas Ecológicas <em>Inteligentes</em></h1>
+    <p class="hero-sub">168,902 usuarios dependen del transporte público en Hermosillo. El 70.4% se queja de los tiempos de espera y el calor extremo. Nuestras ecoparadas atacan ambos problemas con tecnología sustentable.</p>
     <div class="hero-pills">
-      <span class="hero-pill">Energia Solar 1.6 kW</span>
-      <span class="hero-pill">Techo Verde Xerofito</span>
-      <span class="hero-pill">Infiltracion Pluvial</span>
-      <span class="hero-pill">Reciclaje Inteligente</span>
+      <span class="hero-pill">Energía Solar 1.6 kW</span>
+      <span class="hero-pill">Techo Verde Xerófito</span>
+      <span class="hero-pill">Infiltración Pluvial</span>
+      <span class="hero-pill">Tiempos de Arribo en Vivo</span>
     </div>
     <div class="hero-cta">
       <a href="#mapa" class="cta-primary">Explorar Mapa</a>
@@ -750,20 +1032,20 @@
   <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat-item">
+      <div class="stat-number">168,902</div>
+      <div class="stat-label">Usuarios del TP</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">37</div>
+      <div class="stat-label">Líneas Activas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">70.4%</div>
+      <div class="stat-label">Queja: Espera</div>
+    </div>
+    <div class="stat-item">
       <div class="stat-number">6</div>
-      <div class="stat-label">Ecoparadas</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">7</div>
-      <div class="stat-label">Rutas</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">1.6kW</div>
-      <div class="stat-label">Energia Solar</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">32m2</div>
-      <div class="stat-label">Techo Verde</div>
+      <div class="stat-label">Ecoparadas Piloto</div>
     </div>
   </div>
 
@@ -771,7 +1053,7 @@
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
     <h2 class="section-title">Mapa de Ecoparadas</h2>
-    <p class="section-sub">Red de paradas ecologicas distribuidas en puntos estrategicos de Hermosillo con cobertura de rutas de transporte publico.</p>
+    <p class="section-sub">Red de paradas ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Hermosillo, Sonora</h3>
@@ -781,11 +1063,139 @@
     </div>
   </section>
 
+  <!-- DIAGNÓSTICO -->
+  <section class="diagnostico" id="diagnostico">
+    <div class="diagnostico-inner">
+      <span class="section-label">Datos reales del transporte público</span>
+      <h2 class="section-title">Diagnóstico: Por qué Hermosillo necesita Ecoparadas</h2>
+      <p class="section-sub" style="max-width:680px;">Según el informe "¿Cómo Vamos con el Transporte Público?" de Hermosillo ¿Cómo Vamos? (2025), el sistema enfrenta una crisis financiera y de servicio que impacta a 168,902 usuarios.</p>
+
+      <div class="crisis-grid">
+        <div class="crisis-card alerta">
+          <div class="crisis-icon">&#9201;</div>
+          <div class="crisis-number">70.4%</div>
+          <div class="crisis-label">Principal queja: tiempos de espera excesivos</div>
+          <div class="crisis-detail">7 de cada 10 usuarios señalan que los autobuses "tardan mucho en pasar" como su principal motivo de insatisfacción con el servicio. Encuesta de Percepción Ciudadana 2024.</div>
+        </div>
+        <div class="crisis-card critico">
+          <div class="crisis-icon">&#128200;</div>
+          <div class="crisis-number">$3.31</div>
+          <div class="crisis-label">Subsidio por cada $1 de tarifa recaudado</div>
+          <div class="crisis-detail">En 2019 era $0.58. El gobierno aporta 77% de los ingresos del sistema. Subsidio total 2019–2024: $2,592 millones de pesos. Insostenible a largo plazo.</div>
+        </div>
+        <div class="crisis-card alerta">
+          <div class="crisis-icon">&#128507;</div>
+          <div class="crisis-number">-26%</div>
+          <div class="crisis-label">Caída de usuarios vs 2019</div>
+          <div class="crisis-detail">De 229,624 usuarios en 2019 a 168,902 en 2024. Solo 78,774 son regulares diarios (11.1% de la población adulta). El auto particular pasó de 28% a 41.5%.</div>
+        </div>
+        <div class="crisis-card info">
+          <div class="crisis-icon">&#127777;</div>
+          <div class="crisis-number">45°C</div>
+          <div class="crisis-label">Temperaturas extremas sin protección</div>
+          <div class="crisis-detail">El informe identifica "las altas temperaturas" como la primera razón que obstaculiza el uso del transporte público. Las paradas actuales carecen de sombra y ventilación adecuada.</div>
+        </div>
+        <div class="crisis-card critico">
+          <div class="crisis-icon">&#128680;</div>
+          <div class="crisis-number">9,751</div>
+          <div class="crisis-label">Siniestros viales con autobuses (2019–2023)</div>
+          <div class="crisis-detail">Los incidentes pasaron de 735 en 2019 a 3,129 en 2023. Hermosillo es una de las ciudades con mayor volumen de siniestros viales en el país.</div>
+        </div>
+        <div class="crisis-card alerta">
+          <div class="crisis-icon">&#128176;</div>
+          <div class="crisis-number">$9.00</div>
+          <div class="crisis-label">Tarifa congelada desde 2017</div>
+          <div class="crisis-detail">8 años sin ajuste tarifario mientras los costos operativos subieron 223% ($299M a $969M). El costo por km recorrido pasó de $24.4 a $37.77 (+55%).</div>
+        </div>
+      </div>
+
+      <span class="section-label">Nuestra propuesta</span>
+      <h2 class="section-title">Soluciones FORCETECH basadas en evidencia</h2>
+      <p class="section-sub" style="max-width:680px;">Cada componente de nuestras Ecoparadas responde directamente a un problema documentado del sistema de transporte.</p>
+
+      <div class="soluciones-grid">
+        <div class="solucion-card">
+          <div class="solucion-icon temp">&#127793;</div>
+          <div class="solucion-content">
+            <h4>Techo verde xerofítico contra el calor</h4>
+            <p>32 m² de vegetación nativa del desierto sonorense que reduce la temperatura ambiental hasta 8 °C bajo la estructura. Ataca directamente la barrera #1 al uso del transporte: el calor extremo.</p>
+            <span class="solucion-dato">Reduce temp. bajo techo: −8 °C</span>
+          </div>
+        </div>
+        <div class="solucion-card">
+          <div class="solucion-icon solar">&#9728;</div>
+          <div class="solucion-content">
+            <h4>Energía solar para autonomía financiera</h4>
+            <p>4 paneles de 400 W (1.6 kW) alimentan iluminación LED, pantallas informativas y puertos USB. Reducen dependencia del subsidio público al eliminar el costo energético de cada parada.</p>
+            <span class="solucion-dato">Ahorro: ~$18,000/año por parada</span>
+          </div>
+        </div>
+        <div class="solucion-card">
+          <div class="solucion-icon digital">&#128241;</div>
+          <div class="solucion-content">
+            <h4>Pantallas con tiempos reales de arribo</h4>
+            <p>Conectadas al sistema UNE Transporte. Atacan el 70.4% de insatisfacción: cuando el usuario sabe cuánto falta, la percepción de espera baja hasta 36% (estudios UITP). WiFi gratuito durante la espera.</p>
+            <span class="solucion-dato">70.4% queja principal: tiempos de espera</span>
+          </div>
+        </div>
+        <div class="solucion-card">
+          <div class="solucion-icon agua">&#128167;</div>
+          <div class="solucion-content">
+            <h4>Sistema de infiltración pluvial</h4>
+            <p>Captura agua de lluvia para riego del techo verde y recarga del manto freático. En Hermosillo, cada m³ de agua infiltrada reduce la presión sobre la red hídrica municipal.</p>
+            <span class="solucion-dato">Captación: ~12,000 litros/año</span>
+          </div>
+        </div>
+        <div class="solucion-card">
+          <div class="solucion-icon seguridad">&#128161;</div>
+          <div class="solucion-content">
+            <h4>Iluminación LED y videovigilancia</h4>
+            <p>El informe documenta 9,751 siniestros viales con autobuses. Las ecoparadas con iluminación nocturna, señalización reflectante y cámaras mejoran la seguridad vial y personal de los usuarios.</p>
+            <span class="solucion-dato">9,751 siniestros 2019–2023</span>
+          </div>
+        </div>
+        <div class="solucion-card">
+          <div class="solucion-icon acceso">&#9855;</div>
+          <div class="solucion-content">
+            <h4>Diseño universal y accesibilidad</h4>
+            <p>Rampas, señalización braille y espacio para sillas de ruedas. La Línea 7-DIF ya atiende población vulnerable; las ecoparadas complementan esa infraestructura inclusiva en las 37 líneas.</p>
+            <span class="solucion-dato">Ley 177 de Transporte del Edo. de Sonora</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="impacto-banner">
+        <div class="impacto-item">
+          <div class="impacto-number">347</div>
+          <div class="impacto-label">Autobuses en operación</div>
+        </div>
+        <div class="impacto-item">
+          <div class="impacto-number">37</div>
+          <div class="impacto-label">Líneas de transporte</div>
+        </div>
+        <div class="impacto-item">
+          <div class="impacto-number">1,390 km</div>
+          <div class="impacto-label">Red total de recorridos</div>
+        </div>
+        <div class="impacto-item">
+          <div class="impacto-number">24.3M</div>
+          <div class="impacto-label">Viajes estimados (2024)</div>
+        </div>
+        <div class="impacto-item">
+          <div class="impacto-number">168,902</div>
+          <div class="impacto-label">Usuarios del transporte</div>
+        </div>
+      </div>
+
+      <p class="fuente-datos">Fuente: Sosa Huerta, M. &amp; Gutiérrez Sánchez, L. M. (2025). <em>¿Cómo Vamos con el Transporte Público?</em> Hermosillo ¿Cómo Vamos? Datos del IMTES, INEGI y Encuesta de Percepción Ciudadana 2024.</p>
+    </div>
+  </section>
+
   <!-- PARADAS -->
   <section class="section" id="paradas">
     <span class="section-label">Infraestructura</span>
     <h2 class="section-title">Ecoparadas</h2>
-    <p class="section-sub">Cada parada esta disenada con tecnologia sustentable adaptada al clima desertico de Hermosillo.</p>
+    <p class="section-sub">Cada parada está diseñada con tecnología sustentable adaptada al clima desértico de Hermosillo.</p>
     <div class="paradas-grid" id="paradasGrid"></div>
   </section>
 
@@ -793,9 +1203,9 @@
   <section class="model-section" id="modelo">
     <div class="model-inner">
       <div class="model-text">
-        <span class="section-label">Visualizacion interactiva</span>
+        <span class="section-label">Visualización interactiva</span>
         <h2 class="section-title">Modelo 3D</h2>
-        <p>Explora la Parada San Benito en 3D. Rota, haz zoom y cambia de perspectiva para ver cada componente: paneles solares, techo verde, estructura de acero y sistema de infiltracion pluvial.</p>
+        <p>Explora la Parada San Benito en 3D. Rota, haz zoom y cambia de perspectiva para ver cada componente: paneles solares, techo verde, estructura de acero y sistema de infiltración pluvial.</p>
         <div class="model-specs">
           <div class="model-spec">
             <div class="model-spec-label">Dimensiones</div>
@@ -810,8 +1220,8 @@
             <div class="model-spec-value">12-15</div>
           </div>
           <div class="model-spec">
-            <div class="model-spec-label">Vida Util</div>
-            <div class="model-spec-value">25+ anos</div>
+            <div class="model-spec-label">Vida Útil</div>
+            <div class="model-spec-value">25+ años</div>
           </div>
         </div>
         <a href="model.html" class="model-link">Abrir Modelo 3D Completo &rarr;</a>
@@ -824,53 +1234,142 @@
 
   <!-- TRANSPORTE -->
   <section class="section" id="transporte">
-    <div class="transporte-card">
-      <div class="transporte-text">
-        <span class="section-label">Datos y Analisis</span>
-        <h2 class="section-title">Transporte Publico de Hermosillo</h2>
-        <p>Informe completo del sistema de transporte publico 2019-2024: rutas, cobertura, estadisticas de uso e impacto de las paradas ecologicas en la movilidad urbana.</p>
-        <a href="transporte_hermosillo.html" class="transporte-link">Ver Informe Completo &rarr;</a>
+    <div class="analisis-shell">
+      <div class="analisis-head">
+        <span class="section-label">Datos y Análisis</span>
+        <h2 class="section-title">Panel de Transporte Público</h2>
+        <p>Explora las principales métricas del informe sin salir de la página. Cambia entre pestañas para ver evolución de usuarios, reparto modal, finanzas y subsidio.</p>
+        <div class="analisis-tabs" role="tablist" aria-label="Pestañas de análisis">
+          <button class="analisis-tab active" data-tab="usuarios">Usuarios</button>
+          <button class="analisis-tab" data-tab="modal">Reparto Modal</button>
+          <button class="analisis-tab" data-tab="finanzas">Finanzas</button>
+          <button class="analisis-tab" data-tab="subsidio">Subsidio</button>
+        </div>
       </div>
-      <div class="transporte-visual">
-        <svg viewBox="0 0 300 200" fill="none">
-          <rect x="20" y="150" width="35" height="40" rx="4" fill="#4a8c3f" opacity="0.7"/>
-          <rect x="65" y="120" width="35" height="70" rx="4" fill="#4a8c3f" opacity="0.8"/>
-          <rect x="110" y="90" width="35" height="100" rx="4" fill="#4a8c3f" opacity="0.85"/>
-          <rect x="155" y="70" width="35" height="120" rx="4" fill="#4a8c3f"/>
-          <rect x="200" y="50" width="35" height="140" rx="4" fill="#6aad5b"/>
-          <rect x="245" y="30" width="35" height="160" rx="4" fill="#d4703a"/>
-          <text x="37" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2019</text>
-          <text x="82" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2020</text>
-          <text x="127" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2021</text>
-          <text x="172" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2022</text>
-          <text x="217" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2023</text>
-          <text x="262" y="198" text-anchor="middle" fill="#3d5c39" font-size="10" font-weight="600">2024</text>
-        </svg>
+
+      <div class="analisis-panels">
+        <div class="analisis-panel active" data-panel="usuarios">
+          <div class="analisis-grid">
+            <div class="analisis-card">
+              <h4>Población usuaria del transporte</h4>
+              <p>Habitantes mayores de 18 años que usan transporte público con alguna frecuencia (2019–2024).</p>
+              <div class="analisis-chart-wrap"><canvas id="landingUsuariosChart"></canvas></div>
+            </div>
+            <div class="analisis-kpis">
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Usuarios 2024</div>
+                <div class="analisis-kpi-value">168,902</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Cambio vs 2019</div>
+                <div class="analisis-kpi-value">-26%</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Queja principal</div>
+                <div class="analisis-kpi-value">70.4%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analisis-panel" data-panel="modal">
+          <div class="analisis-grid">
+            <div class="analisis-card">
+              <h4>Evolución del reparto modal</h4>
+              <p>Comparativo 2019–2024 de los medios de transporte más usados en Hermosillo.</p>
+              <div class="analisis-chart-wrap"><canvas id="landingModalChart"></canvas></div>
+            </div>
+            <div class="analisis-kpis">
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Auto particular 2024</div>
+                <div class="analisis-kpi-value">41.5%</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Transporte público 2024</div>
+                <div class="analisis-kpi-value">23.8%</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Caminar 2024</div>
+                <div class="analisis-kpi-value">12.4%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analisis-panel" data-panel="finanzas">
+          <div class="analisis-grid">
+            <div class="analisis-card">
+              <h4>Ingresos vs egresos del fideicomiso</h4>
+              <p>Valores en millones de pesos. La brecha anual representa déficit operativo acumulado.</p>
+              <div class="analisis-chart-wrap"><canvas id="landingFinanzasChart"></canvas></div>
+            </div>
+            <div class="analisis-kpis">
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Egreso 2024</div>
+                <div class="analisis-kpi-value">969 mdp</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Ingreso 2024</div>
+                <div class="analisis-kpi-value">590 mdp</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Déficit 2024</div>
+                <div class="analisis-kpi-value">379 mdp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analisis-panel" data-panel="subsidio">
+          <div class="analisis-grid">
+            <div class="analisis-card">
+              <h4>Dependencia del subsidio gubernamental</h4>
+              <p>Crecimiento del subsidio estatal y relación por cada peso recaudado en tarifa.</p>
+              <div class="analisis-chart-wrap"><canvas id="landingSubsidioChart"></canvas></div>
+            </div>
+            <div class="analisis-kpis">
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Subsidio 2019</div>
+                <div class="analisis-kpi-value">65 mdp</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Subsidio 2024</div>
+                <div class="analisis-kpi-value">506 mdp</div>
+              </div>
+              <div class="analisis-kpi">
+                <div class="analisis-kpi-label">Subsidio por $1 tarifa</div>
+                <div class="analisis-kpi-value">$3.31</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="transporte_hermosillo.html" class="analisis-link">Abrir informe completo de transporte &rarr;</a>
       </div>
     </div>
   </section>
 
   <!-- EQUIPO -->
   <section class="section" id="equipo">
-    <span class="section-label">Quienes Somos</span>
+    <span class="section-label">Quiénes Somos</span>
     <h2 class="section-title">Nuestro Equipo</h2>
-    <p class="section-sub">Equipo comprometido con la innovacion sostenible y la transformacion del transporte urbano en Hermosillo.</p>
+    <p class="section-sub">Equipo comprometido con la innovación sostenible y la transformación del transporte urbano en Hermosillo.</p>
     <div class="team-grid">
       <div class="team-card">
         <div class="team-photo">
           <img src="SIlvana.jpg" alt="Palomo Soto Silvana">
         </div>
         <div class="team-name">Palomo Soto Silvana</div>
-        <div class="team-role">Diseno e Innovacion</div>
-        <div class="team-bio">Especialista en diseno sostenible y arquitectura parametrica para espacios urbanos.</div>
+        <div class="team-role">Diseño e Innovación</div>
+        <div class="team-bio">Especialista en diseño sostenible y arquitectura paramétrica para espacios urbanos.</div>
       </div>
       <div class="team-card">
         <div class="team-photo">
           <div class="team-photo-placeholder">D</div>
         </div>
         <div class="team-name">Espinoza Perez Daniel</div>
-        <div class="team-role">Desarrollo Tecnico</div>
-        <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualizacion de datos en tiempo real.</div>
+        <div class="team-role">Desarrollo Técnico</div>
+        <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualización de datos en tiempo real.</div>
       </div>
     </div>
   </section>
@@ -878,20 +1377,21 @@
   <!-- FOOTER -->
   <footer class="footer">
     <strong>FORCETECH</strong>
-    <p>Paradas Ecologicas Inteligentes &middot; Hermosillo, Sonora &middot; 2024</p>
+    <p>Paradas Ecológicas Inteligentes &middot; Hermosillo, Sonora &middot; 2024</p>
   </footer>
 
   <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     // ── Data ──
     const stops = [
       { name: "San Benito", route: "Ruta 12", lat: 29.0728, lng: -110.9559, desc: "Parada principal zona centro. Conecta norte-sur.", feat: ["Solar", "Techo Verde", "USB", "WiFi"] },
       { name: "Colosio", route: "Ruta 8, 14", lat: 29.0855, lng: -110.9691, desc: "Avenida principal, zona comercial y administrativa.", feat: ["Solar", "Reciclaje", "Sombra"] },
-      { name: "Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0697, lng: -110.9454, desc: "Edificios administrativos. Diseno accesible.", feat: ["Techo Verde", "Accesible", "LED"] },
+      { name: "Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0697, lng: -110.9454, desc: "Edificios administrativos. Diseño accesible.", feat: ["Techo Verde", "Accesible", "LED"] },
       { name: "Tecnologico", route: "Ruta 11, 15", lat: 29.0942, lng: -110.9612, desc: "Zona educativa. Proyecto piloto IoT.", feat: ["Solar", "USB", "WiFi", "IoT"] },
       { name: "Hermosillo Viejo", route: "Ruta 3, 7", lat: 29.0675, lng: -110.9637, desc: "Zona historica y cultural.", feat: ["Plantas Nativas", "Descanso"] },
-      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", feat: ["Accesible", "Emergencia", "Senalizacion"] }
+      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", feat: ["Accesible", "Emergencia", "Señalización"] }
     ];
 
     // ── Leaflet Map ──
@@ -963,6 +1463,131 @@
         links.style.gap = "16px";
       }
     });
+
+    // ── Datos y Analisis Tabs + Charts ──
+    const analisisTabs = document.querySelectorAll(".analisis-tab");
+    const analisisPanels = document.querySelectorAll(".analisis-panel");
+
+    analisisTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.tab;
+        analisisTabs.forEach((item) => item.classList.remove("active"));
+        analisisPanels.forEach((panel) => panel.classList.remove("active"));
+        tab.classList.add("active");
+        const panel = document.querySelector(`.analisis-panel[data-panel="${target}"]`);
+        if (panel) panel.classList.add("active");
+      });
+    });
+
+    if (window.Chart) {
+      const years = ["2019", "2020", "2021", "2022", "2023", "2024"];
+      const commonGrid = {
+        color: "rgba(74, 140, 63, 0.15)",
+      };
+
+      new Chart(document.getElementById("landingUsuariosChart"), {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [{
+            label: "Usuarios (miles)",
+            data: [229.6, 179.2, 151.8, 177.5, 187.7, 168.9],
+            borderColor: "#2d5a27",
+            backgroundColor: "rgba(74, 140, 63, 0.15)",
+            tension: 0.35,
+            fill: true,
+            pointRadius: 3,
+            pointBackgroundColor: "#2d5a27"
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { grid: commonGrid, beginAtZero: false },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      new Chart(document.getElementById("landingModalChart"), {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            { label: "Vehiculo nacional", data: [28.0, 32.4, 39.1, 42.9, 37.2, 41.5], borderColor: "#2d5a27", tension: 0.35 },
+            { label: "Transporte público", data: [35.4, 18.3, 19.4, 23.0, 13.0, 23.8], borderColor: "#d4703a", tension: 0.35 },
+            { label: "Caminando", data: [10.0, 10.6, 11.0, 11.0, 10.4, 12.4], borderColor: "#6aad5b", tension: 0.35 }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom", labels: { boxWidth: 12 } } },
+          scales: {
+            y: { grid: commonGrid, beginAtZero: true },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      new Chart(document.getElementById("landingFinanzasChart"), {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            { label: "Ingresos (mdp)", data: [112, 129, 151, 199, 252, 590], backgroundColor: "#4a8c3f" },
+            { label: "Egresos (mdp)", data: [299, 402, 467, 560, 700, 969], backgroundColor: "#d4703a" }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom", labels: { boxWidth: 12 } } },
+          scales: {
+            y: { grid: commonGrid, beginAtZero: true },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      new Chart(document.getElementById("landingSubsidioChart"), {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "Subsidio (mdp)",
+              data: [65, 97, 162, 258, 404, 506],
+              borderColor: "#d4703a",
+              backgroundColor: "rgba(212, 112, 58, 0.16)",
+              fill: true,
+              tension: 0.35,
+              pointRadius: 3
+            },
+            {
+              label: "Subsidio por $1 recaudado",
+              data: [0.58, 0.75, 1.07, 1.30, 1.60, 3.31],
+              borderColor: "#2d5a27",
+              yAxisID: "y1",
+              tension: 0.35,
+              pointRadius: 3
+            }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom", labels: { boxWidth: 12 } } },
+          scales: {
+            y: { grid: commonGrid, beginAtZero: true },
+            y1: {
+              position: "right",
+              beginAtZero: true,
+              grid: { drawOnChartArea: false }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>
