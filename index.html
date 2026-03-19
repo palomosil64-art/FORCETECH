@@ -1067,16 +1067,16 @@
     }
 
     .btn-secondary {
-      background: transparent;
-      border: 2px solid #D35400;
-      color: #D35400;
-      box-shadow: 0 6px 16px rgba(211, 84, 0, 0.14);
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      border-color: transparent;
+      color: #FFFFFF;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
     }
 
     .btn-secondary:hover {
-      background: #D35400;
+      background: #B84400;
       color: #FFFFFF;
-      box-shadow: 0 10px 26px rgba(211, 84, 0, 0.36);
+      box-shadow: 0 14px 30px rgba(211, 84, 0, 0.5);
     }
 
     .model-text .section-label {
@@ -1648,12 +1648,19 @@
     }
 
     .footer-inner {
-      max-width: 1200px;
+      max-width: 760px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 1.4fr;
-      gap: 32px;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .footer-brand strong {
@@ -1663,7 +1670,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #FFFFFF;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .footer-brand strong span {
@@ -1671,55 +1678,145 @@
     }
 
     .footer-copy {
-      max-width: 420px;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 13px;
+      max-width: 580px;
+      color: rgba(255, 255, 255, 0.80);
+      font-size: 13.5px;
       line-height: 1.85;
+      text-align: center;
     }
 
-    .footer-links-title {
-      display: block;
-      margin-bottom: 14px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.76);
+    /* ── REVIEWS MODAL ── */
+    #reviewsModal .smart-modal {
+      border: 2px solid #D35400;
+      background: #ffffff;
+      box-shadow: 0 16px 44px rgba(211, 84, 0, 0.2);
+      max-height: 92vh;
     }
+    #reviewsModal .smart-modal-title { color: #D35400; }
 
-    .footer-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .reviews-stop-meta {
+      display: flex;
+      align-items: center;
       gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(211, 84, 0, 0.18);
     }
-
-    .footer-link {
-      appearance: none;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.06);
-      color: #FFFFFF;
-      border-radius: 14px;
-      padding: 12px 14px;
-      text-align: left;
-      font-size: 12px;
+    .reviews-stop-badge {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 100%);
+      color: #fff;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .reviews-stop-avg {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
       font-weight: 700;
+      color: #555;
+    }
+    .reviews-stop-avg strong {
+      color: #D35400;
+      font-size: 22px;
+    }
+
+    .reviews-list {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .review-card {
+      background: #fff;
+      border: 1px solid rgba(211,84,0,0.15);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: box-shadow 0.2s ease, transform 0.18s ease;
+    }
+    .review-card:hover {
+      box-shadow: 0 4px 18px rgba(211,84,0,0.12);
+      transform: translateY(-1px);
+    }
+    .review-card.review-new {
+      border-color: #D35400;
+      background: #fff9f5;
+      animation: reviewFadeIn 0.4s ease both;
+    }
+    @keyframes reviewFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .review-author {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: #1E392A;
+    }
+    .review-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+    }
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 6px;
+    }
+    .review-stars .star {
+      font-size: 15px;
+      color: #e0dbd5;
+    }
+    .review-stars .star.filled { color: #D35400; }
+    .review-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #3a3a3a;
+      line-height: 1.65;
+    }
+
+    /* Write-review form */
+    .reviews-form-section {
+      border-top: 1px solid rgba(211,84,0,0.2);
+      padding-top: 18px;
+    }
+    .reviews-form-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #1E392A;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .star-picker {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
       cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .footer-link:hover {
-      transform: translateY(-2px);
-      border-color: rgba(243, 130, 41, 0.48);
-      background: rgba(243, 130, 41, 0.12);
-      box-shadow: 0 0 15px rgba(211, 84, 0, 0.18);
+    .star-picker .sp-star {
+      font-size: 26px;
+      color: #ddd;
+      transition: color 0.15s ease, transform 0.15s ease;
+      line-height: 1;
+      user-select: none;
     }
-
-    .footer strong {
-      color: white;
-      font-size: 16px;
-      display: block;
-      margin-bottom: 8px;
-    }
+    .star-picker .sp-star.active,
+    .star-picker .sp-star.hover { color: #D35400; transform: scale(1.15); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -1815,11 +1912,9 @@
       }
 
       .footer-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-links {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
 
       .diagnostico {
@@ -2093,7 +2188,7 @@
       flex-direction: column;
       gap: 4px;
       transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.18s ease;
-      cursor: default;
+      cursor: pointer;
     }
     .ecodir-card:hover {
       border-color: #D35400;
@@ -2371,8 +2466,8 @@
         </div>
         <a href="model.html" class="model-link">ABRIR MODELO 3D COMPLETO &rarr;</a>
         <div class="action-buttons">
-          <button class="btn-action btn-secondary"><span>⬆️ Descargar</span></button>
-          <button class="btn-action btn-secondary"><span>🔗 Compartir</span></button>
+          <button class="btn-action btn-secondary"><span><i class="fas fa-download"></i> DESCARGAR</span></button>
+          <button class="btn-action btn-secondary"><span><i class="fas fa-share-alt"></i> COMPARTIR</span></button>
         </div>
       </div>
       <div class="model-preview">
@@ -2485,14 +2580,8 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-brand">
-        <strong>FORCE<span>TECH</span></strong>
-        <p class="footer-copy">Paradas ecológicas inteligentes para una movilidad más digna, conectada y medible en Hermosillo. Infraestructura climáticamente consciente con monitoreo y experiencia digital en tiempo real.</p>
-      </div>
-      <div class="footer-nav">
-        <span class="footer-links-title">PARADAS DE REFERENCIA</span>
-        <div class="footer-links" id="footerLinks"></div>
-      </div>
+      <strong>FORCE<span style="color:var(--naranja-oficial);">TECH</span></strong>
+      <p class="footer-copy">Paradas ecológicas inteligentes para una movilidad más digna, conectada y medible en Hermosillo. Infraestructura climáticamente consciente con monitoreo y experiencia digital en tiempo real.</p>
     </div>
   </footer>
 
@@ -2539,6 +2628,38 @@
         <button class="smart-btn" type="submit">Enviar reporte</button>
       </form>
       <div id="reportResult" style="margin-top:12px;color:#1E4620;font-weight:600;"></div>
+    </div>
+  </div>
+
+  <!-- REVIEWS MODAL -->
+  <div class="smart-modal-overlay" id="reviewsModal">
+    <div class="smart-modal">
+      <div class="smart-modal-header">
+        <h3 class="smart-modal-title" id="reviewsModalTitle">&#11088; Reseñas</h3>
+        <button class="smart-close" type="button" onclick="closeReviewsModal()">Cerrar</button>
+      </div>
+      <div class="reviews-stop-meta">
+        <span class="reviews-stop-badge" id="reviewsStopBadge">Parada</span>
+        <span class="reviews-stop-avg" id="reviewsStopAvg"></span>
+      </div>
+      <div class="reviews-list" id="reviewsList"></div>
+      <div class="reviews-form-section">
+        <p class="reviews-form-title">Publicar nueva reseña</p>
+        <label class="reviews-form-title" style="font-size:12px;text-transform:none;letter-spacing:0;font-weight:700;color:#555;margin-bottom:4px;">Tu calificación</label>
+        <div class="star-picker" id="starPicker" role="group" aria-label="Calificación">
+          <span class="sp-star" data-val="1" role="button" tabindex="0" aria-label="1 estrella">★</span>
+          <span class="sp-star" data-val="2" role="button" tabindex="0" aria-label="2 estrellas">★</span>
+          <span class="sp-star" data-val="3" role="button" tabindex="0" aria-label="3 estrellas">★</span>
+          <span class="sp-star" data-val="4" role="button" tabindex="0" aria-label="4 estrellas">★</span>
+          <span class="sp-star" data-val="5" role="button" tabindex="0" aria-label="5 estrellas">★</span>
+        </div>
+        <form class="smart-form" id="reviewForm" onsubmit="submitReview(event)">
+          <input id="reviewAuthor" type="text" placeholder="Tu nombre (ej. María G.)" maxlength="40" required>
+          <textarea id="reviewComment" placeholder="Escribe tu comentario sobre esta parada..." maxlength="300" required></textarea>
+          <button class="smart-btn" type="submit" style="background:linear-gradient(135deg,#F17A20 0%,#D35400 62%,#B84400 100%);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;">PUBLICAR RESEÑA</button>
+        </form>
+        <div id="reviewResult" style="margin-top:10px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#1E392A;"></div>
+      </div>
     </div>
   </div>
 
@@ -2612,6 +2733,7 @@
 
     let currentKmlLayer = null;
     let pilotKmlLayer = null;
+    const pilotMarkers = [];
 
     // ── Pilot stops: siempre renderiza los 10 nodos desde stops[], sin depender del KML ──
     function getPilotPopupHtml(stop) {
@@ -2626,9 +2748,10 @@
     function renderPilotLayer() {
       const layer = L.layerGroup();
       stops.forEach((stop) => {
-        L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon })
+        const marker = L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon })
           .bindPopup(getPilotPopupHtml(stop), { maxWidth: 300 })
           .addTo(layer);
+        pilotMarkers.push(marker);
       });
       layer.addTo(mapPilot);
       pilotKmlLayer = layer;
@@ -2938,22 +3061,6 @@
       document.getElementById("mapa").scrollIntoView({ behavior: "smooth" });
     }
 
-    function renderFooterLinks() {
-      const footerLinks = document.getElementById('footerLinks');
-      if (!footerLinks) {
-        return;
-      }
-
-      footerLinks.innerHTML = '';
-      stops.forEach((stop) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'footer-link';
-        button.textContent = stop.name;
-        button.addEventListener('click', () => focusStop(stop));
-        footerLinks.appendChild(button);
-      });
-    }
 
     async function readKmlText(sourceUrl) {
       const lowerUrl = sourceUrl.toLowerCase();
@@ -3103,19 +3210,28 @@
       mapPilot.invalidateSize();
     }, 300);
 
-    renderFooterLinks();
-
-    // Render directorio de ecoparadas (2 columnas x 5)
+    // Render directorio de ecoparadas (2 columnas x 5) con Click-to-Map
     function renderEcodir() {
       const grid = document.getElementById('ecodirGrid');
       if (!grid) return;
       grid.innerHTML = stops.map((stop, i) => `
-        <div class="ecodir-card" role="listitem">
+        <div class="ecodir-card" role="listitem" data-stop-index="${i}" tabindex="0" title="Ver ${stop.name} en el mapa piloto">
           <span class="ecodir-num">Parada ${String(i + 1).padStart(2, '0')} · ${stop.zone}</span>
           <div class="ecodir-name">${stop.name}</div>
           <div class="ecodir-geo">${stop.geo}</div>
         </div>
       `).join('');
+
+      grid.querySelectorAll('.ecodir-card').forEach((card) => {
+        const idx = Number(card.dataset.stopIndex);
+        const stop = stops[idx];
+        card.addEventListener('click', () => {
+          openReviewsModal(stop, idx);
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+        });
+      });
     }
     renderEcodir();
 
@@ -3220,7 +3336,7 @@
       reportOptions.forEach((item) => item.classList.remove('active'));
     }
 
-    ['routesModal', 'journeyModal', 'reportModal'].forEach((modalId) => {
+    ['routesModal', 'journeyModal', 'reportModal', 'reviewsModal'].forEach((modalId) => {
       const modal = document.getElementById(modalId);
       modal.addEventListener('click', (event) => {
         if (event.target === modal) {
@@ -3228,6 +3344,190 @@
         }
       });
     });
+
+    // ── MOCK REVIEWS DATA ──
+    const mockReviews = {
+      "San Benito": [
+        { author: "Carlos M.",     stars: 5, date: "12 mar 2026", comment: "Excelente conexión WiFi 5G en San Benito. Se carga el teléfono en minutos y los tiempos en pantalla son exactos." },
+        { author: "Lucía R.",      stars: 4, date: "08 mar 2026", comment: "Muy cómoda y fresca. La reducción térmica se siente inmediatamente al entrar. Zona muy limpia." },
+        { author: "Ernesto V.",    stars: 4, date: "01 mar 2026", comment: "App check-in funciona sin problemas. Buen acceso desde Blvd. Luis Encinas. Faltan bancas adicionales." },
+        { author: "Sofía A.",     stars: 5, date: "22 feb 2026", comment: "Siempre la uso para conectar con la Ruta 12. La mejor parada del centro." }
+      ],
+      "Tec de Hermosillo": [
+        { author: "Alejandro P.",  stars: 3, date: "15 mar 2026", comment: "Falta limpieza en la parada Tec. Los lunes por la mañana acumula basura. El WiFi es rápido." },
+        { author: "Mariana F.",   stars: 5, date: "10 mar 2026", comment: "Perfecta para estudiantes. Tiempo real funciona al 100. Nunca espero más de 8 minutos." },
+        { author: "Diego S.",     stars: 4, date: "04 mar 2026", comment: "La techumbre da muy buena sombra. Con +45°C aquí afuera, esto es un lujo necesario." }
+      ],
+      "Colosio Poniente": [
+        { author: "Valeria H.",   stars: 5, date: "14 mar 2026", comment: "Nueva zona, pero la parada ya está al 100. Se nota la inversión en infraestructura." },
+        { author: "José L.",      stars: 4, date: "07 mar 2026", comment: "Buena ubicación cerca del centro comercial. Los tiempos en vivo me ahorran mucha espera." },
+        { author: "Karen T.",     stars: 3, date: "28 feb 2026", comment: "El punto de carga USB estuvo unos días sin funcionar. Ya lo arreglaron. Buen servicio en general." }
+      ],
+      "Hospital General": [
+        { author: "Dr. Ruén L.",  stars: 5, date: "13 mar 2026", comment: "Esencial para el personal médico. Nos permite llegar a tiempo al turno. Gracias FORCETECH." },
+        { author: "Patricia M.",  stars: 5, date: "09 mar 2026", comment: "La sombra y el fresquito hacen que esperar el bus no sea un martirio. Hermosillo necesitaba esto." },
+        { author: "Antonio G.",   stars: 4, date: "02 mar 2026", comment: "Accesible para sillas de ruedas. Diseño inclusivo muy bien logrado." }
+      ],
+      "Plaza Sendero": [
+        { author: "Fernanda O.",  stars: 5, date: "16 mar 2026", comment: "Perfecta para ir al centro comercial. El WiFi 5G es increíblemente rápido. Se agradece." },
+        { author: "Rodrigo E.",   stars: 4, date: "11 mar 2026", comment: "Muy transitada en fines de semana pero aguanta bien la demanda. Pantallas siempre activas." },
+        { author: "Camila N.",    stars: 3, date: "05 mar 2026", comment: "En horas pico el espacio se llena. Podrían ampliar un poco más la cubierta." }
+      ],
+      "Nuevo Hermosillo": [
+        { author: "Miguel A.",    stars: 5, date: "15 mar 2026", comment: "El fraccionamiento creció rápido y la parada llegó con él. Muy buena planificación." },
+        { author: "Isabela C.",   stars: 4, date: "06 mar 2026", comment: "Check-in con la app es muy sencillo. Me avisa 5 minutos antes. Mágico." },
+        { author: "Rebeca Z.",    stars: 4, date: "27 feb 2026", comment: "Limpia y bien iluminada de noche. Muy importante para la seguridad del vecindario." }
+      ],
+      "Aeropuerto": [
+        { author: "Ing. Duarte",  stars: 5, date: "17 mar 2026", comment: "Llegé al aeropuerto en tiempo desde el centro. Los tiempos en vivo son precisos al minuto." },
+        { author: "Laura P.",     stars: 4, date: "12 mar 2026", comment: "Muy práctica para viajeros con maletas. Espacio amplio y fresco." },
+        { author: "Marcos B.",    stars: 5, date: "03 mar 2026", comment: "Conectividad excelente. Trabajé desde la parada esperando el camión. WiFi de 10." }
+      ],
+      "Centro de Gobierno": [
+        { author: "Lic. Bravo",   stars: 5, date: "14 mar 2026", comment: "Diseño accesible e inclusivo. Excelente para llegar a trámites sin use el auto." },
+        { author: "Norma S.",     stars: 4, date: "08 mar 2026", comment: "Siempre hay puntualidad en las rutas 5 y 9. La parada es moderna y da buena imagen." },
+        { author: "Felipe R.",    stars: 3, date: "01 mar 2026", comment: "Buena infraestructura. Me gustaría que hubiera más frecuencias en horario vespertino." }
+      ],
+      "Blvd. Morelos Final": [
+        { author: "Adrián V.",    stars: 4, date: "13 mar 2026", comment: "Alta densidad vehicular pero la parada mantiene el orden. Tiempos en vivo muy útiles." },
+        { author: "Daniela Q.",   stars: 5, date: "07 mar 2026", comment: "Me sorprendió la calidad. Es el extremo norte y está igual de bien equipada que las del centro." },
+        { author: "Ramón F.",     stars: 4, date: "26 feb 2026", comment: "Buena cobertura WiFi incluso en horas pico. El check-in en app es instantáneo." }
+      ],
+      "Nodo Industrial Poniente": [
+        { author: "Enrique M.",   stars: 5, date: "16 mar 2026", comment: "La iluminación del Nodo Industrial es muy segura. Ideal para los turnos nocturnos de fábrica." },
+        { author: "Gloria H.",    stars: 4, date: "10 mar 2026", comment: "Punto de transferencia clave. Conecta las rutas 3 y 7 sin necesidad de caminar." },
+        { author: "Tomás E.",     stars: 5, date: "02 mar 2026", comment: "Imprescindible para los trabajadores de la zona. FORCETECH entendió la necesidad real." }
+      ]
+    };
+
+    let activeReviewStop = null;  // name of currently viewed stop
+    let selectedReviewStars = 0;
+
+    function starsHtml(rating, total = 5) {
+      return Array.from({ length: total }, (_, i) =>
+        `<span class="star ${i < rating ? 'filled' : ''}">★</span>`
+      ).join('');
+    }
+
+    function avgRating(reviews) {
+      if (!reviews || !reviews.length) return 0;
+      return (reviews.reduce((s, r) => s + r.stars, 0) / reviews.length).toFixed(1);
+    }
+
+    function renderReviews(stopName) {
+      const list = document.getElementById('reviewsList');
+      const reviews = (mockReviews[stopName] || []).slice();
+      if (!reviews.length) {
+        list.innerHTML = '<p style="font-family:\'Montserrat\',sans-serif;color:#888;font-size:13px;">No hay reseñas aún. ¡Sé el primero!</p>';
+        return;
+      }
+      list.innerHTML = reviews.map((r, idx) => `
+        <div class="review-card${idx === 0 && r._new ? ' review-new' : ''}">
+          <div class="review-header">
+            <span class="review-author">${r.author}</span>
+            <span class="review-date">${r.date}</span>
+          </div>
+          <div class="review-stars">${starsHtml(r.stars)}</div>
+          <p class="review-text">${r.comment}</p>
+        </div>
+      `).join('');
+    }
+
+    function openReviewsModal(stop, idx) {
+      activeReviewStop = stop.name;
+      selectedReviewStars = 0;
+
+      // FlyTo + open popup on pilot map
+      mapPilot.flyTo([stop.lat, stop.lng], 16, { animate: true, duration: 1.2 });
+      setTimeout(() => {
+        if (pilotMarkers[idx]) pilotMarkers[idx].openPopup();
+      }, 1300);
+
+      // Scroll to map section smoothly
+      document.getElementById('mapa').scrollIntoView({ behavior: 'smooth' });
+
+      // Populate modal header
+      document.getElementById('reviewsModalTitle').textContent = `⭐ Reseñas — ${stop.name}`;
+      document.getElementById('reviewsStopBadge').textContent = stop.zone;
+
+      const reviews = mockReviews[stop.name] || [];
+      const avg = avgRating(reviews);
+      document.getElementById('reviewsStopAvg').innerHTML =
+        `<strong>${avg}</strong> / 5 &nbsp;&bull;&nbsp; ${reviews.length} reseña${reviews.length !== 1 ? 's' : ''}`;
+
+      renderReviews(stop.name);
+
+      // Reset form
+      document.getElementById('reviewForm').reset();
+      document.getElementById('reviewResult').textContent = '';
+      resetStarPicker();
+
+      // Open modal after a short delay so the scroll lands first
+      setTimeout(() => {
+        document.getElementById('reviewsModal').classList.add('active');
+      }, 400);
+    }
+
+    function closeReviewsModal() {
+      document.getElementById('reviewsModal').classList.remove('active');
+      activeReviewStop = null;
+    }
+
+    function submitReview(e) {
+      e.preventDefault();
+      if (!selectedReviewStars) {
+        document.getElementById('reviewResult').textContent = 'Selecciona una calificación con las estrellas.';
+        return;
+      }
+      const author  = document.getElementById('reviewAuthor').value.trim();
+      const comment = document.getElementById('reviewComment').value.trim();
+      const today   = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
+      const newReview = { author, stars: selectedReviewStars, date: today, comment, _new: true };
+
+      if (!mockReviews[activeReviewStop]) mockReviews[activeReviewStop] = [];
+      mockReviews[activeReviewStop].unshift(newReview);
+
+      // Update average
+      const reviews = mockReviews[activeReviewStop];
+      const avg = avgRating(reviews);
+      document.getElementById('reviewsStopAvg').innerHTML =
+        `<strong>${avg}</strong> / 5 &nbsp;&bull;&nbsp; ${reviews.length} reseña${reviews.length !== 1 ? 's' : ''}`;
+
+      renderReviews(activeReviewStop);
+      e.target.reset();
+      resetStarPicker();
+      selectedReviewStars = 0;
+      document.getElementById('reviewResult').textContent = '✔ Reseña publicada. ¡Gracias por tu opinión!';
+    }
+
+    // Star picker logic
+    function resetStarPicker() {
+      document.querySelectorAll('#starPicker .sp-star').forEach(s => s.classList.remove('active','hover'));
+      selectedReviewStars = 0;
+    }
+
+    (function initStarPicker() {
+      const picker = document.getElementById('starPicker');
+      if (!picker) return;
+      const stars = picker.querySelectorAll('.sp-star');
+
+      stars.forEach((star) => {
+        star.addEventListener('mouseover', () => {
+          const val = Number(star.dataset.val);
+          stars.forEach(s => s.classList.toggle('hover', Number(s.dataset.val) <= val));
+        });
+        star.addEventListener('mouseout', () => {
+          stars.forEach(s => s.classList.remove('hover'));
+        });
+        star.addEventListener('click', () => {
+          selectedReviewStars = Number(star.dataset.val);
+          stars.forEach(s => s.classList.toggle('active', Number(s.dataset.val) <= selectedReviewStars));
+        });
+        star.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); star.click(); }
+        });
+      });
+    })();
 
     // ── Mobile Nav Toggle ──
     document.getElementById("navToggle").addEventListener("click", () => {
