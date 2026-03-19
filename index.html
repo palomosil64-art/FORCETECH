@@ -62,16 +62,25 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: #1E4620;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      border-bottom: none;
+      background: rgba(30, 70, 32, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding: 0 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 60px;
-      box-shadow: none;
+      box-shadow: 0 10px 30px rgba(17, 35, 20, 0.12);
+      transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: rgba(30, 70, 32, 0.1);
+      box-shadow: 0 18px 40px rgba(20, 43, 24, 0.12);
     }
 
     .nav-logo {
@@ -86,6 +95,10 @@
 
     .nav-logo span {
       color: var(--naranja-oficial);
+    }
+
+    .nav.scrolled .nav-logo {
+      color: var(--verde-bosque);
     }
 
     .nav-links {
@@ -110,6 +123,10 @@
       color: var(--naranja-oficial);
     }
 
+    .nav.scrolled .nav-links a {
+      color: var(--verde-bosque);
+    }
+
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -132,6 +149,51 @@
       font-size: 22px;
       cursor: pointer;
       color: #FFFFFF;
+    }
+
+    .nav.scrolled .nav-hamburger {
+      color: var(--verde-bosque);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      box-shadow: 0 10px 20px rgba(211, 84, 0, 0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(211, 84, 0, 0.28);
+    }
+
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── HERO ── */
@@ -456,6 +518,26 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-indicator::before {
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #32B96A;
+      box-shadow: 0 0 0 0 rgba(50, 185, 106, 0.45);
+      animation: liveDotPulse 1.8s ease-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes liveDotPulse {
+      0% { box-shadow: 0 0 0 0 rgba(50, 185, 106, 0.45); opacity: 1; }
+      70% { box-shadow: 0 0 0 10px rgba(50, 185, 106, 0); opacity: 0.8; }
+      100% { box-shadow: 0 0 0 0 rgba(50, 185, 106, 0); opacity: 1; }
     }
 
     #map {
@@ -575,9 +657,97 @@
       font-size: 1.5rem;
       font-weight: 800;
       color: var(--verde-bosque);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       text-shadow: 0 2px 4px rgba(45, 90, 39, 0.08);
       letter-spacing: 0.02em;
+    }
+
+    .parada-media {
+      position: relative;
+      min-height: 182px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: var(--parada-gradient, linear-gradient(140deg, rgba(30, 70, 32, 0.92), rgba(58, 124, 66, 0.85)));
+      border: 1px solid rgba(30, 70, 32, 0.14);
+      box-shadow: 0 14px 30px rgba(20, 37, 22, 0.12);
+      isolation: isolate;
+    }
+
+    .parada-media::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(17, 26, 18, 0.08) 0%, rgba(17, 26, 18, 0.38) 100%),
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.16), transparent 34%);
+      transform: scale(1);
+      transition: transform 0.45s ease;
+      z-index: 1;
+    }
+
+    .parada-card:hover .parada-media::before {
+      transform: scale(1.08);
+    }
+
+    .parada-card:hover .parada-media {
+      box-shadow: 0 0 15px rgba(211, 84, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .parada-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .parada-card:hover .parada-media img {
+      transform: scale(1.05);
+      filter: saturate(1.05);
+    }
+
+    .parada-media-badge,
+    .parada-media-caption,
+    .parada-media-icon {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .parada-media-badge {
+      top: 14px;
+      left: 14px;
+      display: inline-flex;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      background: rgba(30, 70, 32, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .parada-media-caption {
+      left: 16px;
+      right: 56px;
+      bottom: 14px;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      text-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    }
+
+    .parada-media-icon {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      font-size: 36px;
+      color: rgba(255, 255, 255, 0.22);
     }
 
     .parada-route {
@@ -585,7 +755,9 @@
       font-size: 12px;
       color: #1E4620;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .parada-desc {
@@ -610,8 +782,8 @@
       text-transform: uppercase;
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      color: #D35400;
+      background: rgba(255, 255, 255, 0.92);
+      color: #1E4620;
       border: 2px solid #D35400;
       box-shadow: 0 2px 8px rgba(211, 84, 0, 0.15);
       transition: all 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
@@ -1071,7 +1243,13 @@
     }
 
     .transporte-chart-title {
-      color: #1E4620;
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1E4620 0%, #2A5C2E 100%);
+      color: #FFFFFF;
       font-size: 14px;
       font-weight: 800;
       margin-bottom: 12px;
@@ -1252,11 +1430,77 @@
     .footer {
       background: var(--verde-bosque);
       color: #ffffff;
-      text-align: center;
-      padding: 40px 32px;
+      padding: 54px 32px 42px;
       font-size: 13px;
       font-family: 'Montserrat', sans-serif;
       line-height: 1.7;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .footer-brand strong {
+      display: inline-block;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand strong span {
+      color: var(--naranja-oficial);
+    }
+
+    .footer-copy {
+      max-width: 420px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .footer-links-title {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .footer-link {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+      border-radius: 14px;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .footer-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(243, 130, 41, 0.48);
+      background: rgba(243, 130, 41, 0.12);
+      box-shadow: 0 0 15px rgba(211, 84, 0, 0.18);
     }
 
     .footer strong {
@@ -1290,6 +1534,8 @@
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .nav-hamburger { display: block; }
+
+      .nav-cta { display: none; }
 
       .stats-bar {
         grid-template-columns: repeat(2, 1fr);
@@ -1330,6 +1576,14 @@
       .model-section {
         padding: 48px 20px;
         margin-top: 72px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr;
       }
 
       .diagnostico {
@@ -1586,16 +1840,19 @@
   <!-- NAV -->
   <nav class="nav">
     <a href="#" class="nav-logo">FORCE<span>TECH</span></a>
-    <ul class="nav-links">
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#mapa">Mapa</a></li>
-      <li><a href="#diagnostico">Diagnóstico</a></li>
-      <li><a href="#paradas">Paradas</a></li>
-      <li><a href="#modelo">Modelo 3D</a></li>
-      <li><a href="#transporte">Transporte</a></li>
-      <li><a href="#equipo">Equipo</a></li>
-    </ul>
-    <button class="nav-hamburger" id="navToggle">&#9776;</button>
+    <div class="nav-actions">
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#mapa">Mapa</a></li>
+        <li><a href="#diagnostico">Diagnóstico</a></li>
+        <li><a href="#paradas">Paradas</a></li>
+        <li><a href="#modelo">Modelo 3D</a></li>
+        <li><a href="#transporte">Transporte</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+      </ul>
+      <a href="#mapa" class="nav-cta">Ver Mapa</a>
+      <button class="nav-hamburger" id="navToggle">&#9776;</button>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -1630,8 +1887,8 @@
       <div class="stat-label">Queja: Espera</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" id="pilotStopsStat">--</div>
-      <div class="stat-label">PARADAS REGISTRADAS</div>
+      <div class="stat-number" id="pilotStopsStat">10</div>
+      <div class="stat-label">Paradas Piloto</div>
     </div>
   </div>
 
@@ -1639,11 +1896,11 @@
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
     <h2 class="section-title">Mapa de <span class="ecoparadas-highlight">Ecoparadas</span></h2>
-    <p class="section-sub">Red de paradas ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
+    <p class="section-sub">Red piloto de 10 paradas ecológicas distribuidas en puntos estratégicos de Hermosillo con cobertura de rutas de transporte público.</p>
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Hermosillo, Sonora</h3>
-        <span id="activeStopsCount">CARGANDO PARADAS...</span>
+        <span id="activeStopsCount" class="live-indicator">10 PARADAS ACTIVAS</span>
       </div>
       <div id="map"></div>
     </div>
@@ -1917,8 +2174,16 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <strong>FORCETECH</strong>
-    <p>Paradas Ecológicas Inteligentes &middot; Hermosillo, Sonora &middot; 2024</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <strong>FORCE<span>TECH</span></strong>
+        <p class="footer-copy">Paradas ecológicas inteligentes para una movilidad más digna, conectada y medible en Hermosillo. Infraestructura climáticamente consciente con monitoreo y experiencia digital en tiempo real.</p>
+      </div>
+      <div class="footer-nav">
+        <span class="footer-links-title">10 Paradas Piloto</span>
+        <div class="footer-links" id="footerLinks"></div>
+      </div>
+    </div>
   </footer>
 
   <!-- SCRIPTS -->
@@ -1928,19 +2193,25 @@
   <script>
     // ── Data ──
     const stops = [
-      { name: "San Benito", route: "Ruta 12", lat: 29.0728, lng: -110.9559, desc: "Parada principal zona centro. Conecta norte-sur.", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Colosio", route: "Ruta 8, 14", lat: 29.0855, lng: -110.9691, desc: "Avenida principal, zona comercial y administrativa.", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0697, lng: -110.9454, desc: "Edificios administrativos. Diseño accesible.", feat: ["Techo Verde", "Accesible", "LED"] },
-      { name: "Tecnologico", route: "Ruta 11, 15", lat: 29.0942, lng: -110.9612, desc: "Zona educativa. Proyecto piloto IoT.", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Hermosillo Viejo", route: "Ruta 3, 7", lat: 29.0675, lng: -110.9637, desc: "Zona historica y cultural.", feat: ["Plantas Nativas", "Descanso"] },
-      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", feat: ["Accesible", "Emergencia", "Señalización"] },
-      { name: "Plaza Niños Héroes", route: "Ruta 10, 12", lat: 29.0745, lng: -110.9540, desc: "Nodo peatonal y transferencia de líneas.", feat: ["Sombra", "WiFi"] },
-      { name: "Parque Madero", route: "Ruta 9, 13", lat: 29.0785, lng: -110.9408, desc: "Sector recreativo con ciclo-vía.", feat: ["Techo Verde", "Luz LED"] },
-      { name: "La Cantera", route: "Ruta 5, 8", lat: 29.0822, lng: -110.9609, desc: "Entrada sur de la ciudad.", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "San Benito Norte", route: "Ruta 7", lat: 29.0827, lng: -110.9521, desc: "Conexión a rutas locales y ejecutivas.", feat: ["Sombra", "USB"] }
+      { name: "San Benito", route: "Ruta 12", lat: 29.0728, lng: -110.9559, desc: "Parada principal zona centro. Conecta norte-sur.", image: "images/paradas/san-benito-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto San Benito en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Colosio", route: "Ruta 8, 14", lat: 29.0855, lng: -110.9691, desc: "Avenida principal, zona comercial y administrativa.", image: "images/paradas/colosio-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Colosio en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0697, lng: -110.9454, desc: "Edificios administrativos. Diseño accesible.", image: "images/paradas/centro-gobierno-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Centro de Gobierno en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Tecnologico", route: "Ruta 11, 15", lat: 29.0942, lng: -110.9612, desc: "Zona educativa. Proyecto piloto IoT.", image: "images/paradas/tecnologico-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Tecnológico en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Hermosillo Viejo", route: "Ruta 3, 7", lat: 29.0675, lng: -110.9637, desc: "Zona histórica y cultural.", image: "images/paradas/hermosillo-viejo.jpg", imageAlt: "Fotografía de la parada piloto Hermosillo Viejo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", image: "images/paradas/hospital-general-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Hospital General en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Plaza Niños Héroes", route: "Ruta 10, 12", lat: 29.0745, lng: -110.9540, desc: "Nodo peatonal y transferencia de líneas.", image: "images/paradas/plaza-ninos-heroes-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Plaza Niños Héroes en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Parque Madero", route: "Ruta 9, 13", lat: 29.0785, lng: -110.9408, desc: "Sector recreativo con ciclo-vía.", image: "images/paradas/parque-madero-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Parque Madero en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "La Cantera", route: "Ruta 5, 8", lat: 29.0822, lng: -110.9609, desc: "Entrada sur de la ciudad.", image: "images/paradas/la-cantera-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto La Cantera en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "San Benito Norte", route: "Ruta 7", lat: 29.0827, lng: -110.9521, desc: "Conexión a rutas locales y ejecutivas.", image: "images/paradas/san-benito-norte-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto San Benito Norte en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] }
     ];
 
     const APP_TAGS = ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"];
+    const STOP_CARD_GRADIENTS = [
+      'linear-gradient(140deg, rgba(30, 70, 32, 0.95), rgba(58, 124, 66, 0.82))',
+      'linear-gradient(140deg, rgba(211, 84, 0, 0.95), rgba(241, 122, 32, 0.82))',
+      'linear-gradient(140deg, rgba(30, 70, 32, 0.95), rgba(211, 84, 0, 0.72))',
+      'linear-gradient(140deg, rgba(26, 74, 53, 0.95), rgba(65, 145, 116, 0.8))'
+    ];
 
     // ── Leaflet Map ──
     const map = L.map("map", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
@@ -1959,6 +2230,7 @@
     });
 
     let kmlMarkerLayer = null;
+    const nav = document.querySelector('.nav');
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1999,6 +2271,25 @@
       }
 
       element.textContent = displayValue;
+    }
+
+    function createStopPlaceholderDataUri(stopName) {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+          <defs>
+            <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#1E4620" />
+              <stop offset="100%" stop-color="#D35400" />
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="720" fill="url(#bg)" rx="32" ry="32" />
+          <circle cx="1020" cy="128" r="88" fill="rgba(255,255,255,0.12)" />
+          <text x="76" y="312" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="56" font-weight="800">${stopName}</text>
+          <text x="76" y="390" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="600">Inserta aquí la fotografía real de Hermosillo</text>
+          <text x="76" y="438" fill="#FDE7D6" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="700">Ruta piloto FORCE TECH</text>
+        </svg>`;
+
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
     }
 
     function animateNumericContent(element, targetText = null, duration = 1100) {
@@ -2066,6 +2357,61 @@
         if (element.textContent.trim() !== '--') {
           observer.observe(element);
         }
+      });
+    }
+
+    function updateStickyNav() {
+      if (!nav) {
+        return;
+      }
+
+      nav.classList.toggle('scrolled', window.scrollY > 18);
+    }
+
+    function setupRevealSections() {
+      const sections = document.querySelectorAll('.section, .model-section, .diagnostico, .footer');
+
+      if (prefersReducedMotion) {
+        sections.forEach((section) => section.classList.add('is-visible'));
+        return;
+      }
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -10% 0px' });
+
+      sections.forEach((section) => {
+        section.classList.add('reveal-section');
+        revealObserver.observe(section);
+      });
+    }
+
+    function focusStop(stop) {
+      map.setView([stop.lat, stop.lng], 16, { animate: true });
+      document.getElementById("mapa").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function renderFooterLinks() {
+      const footerLinks = document.getElementById('footerLinks');
+      if (!footerLinks) {
+        return;
+      }
+
+      footerLinks.innerHTML = '';
+      stops.forEach((stop) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'footer-link';
+        button.textContent = stop.name;
+        button.addEventListener('click', () => focusStop(stop));
+        footerLinks.appendChild(button);
       });
     }
 
@@ -2159,11 +2505,11 @@
         }
 
         if (activeStopsCount) {
-          animateNumericContent(activeStopsCount, `${points.length} PARADAS ACTIVAS`, 900);
+          animateNumericContent(activeStopsCount, `${stops.length} PARADAS ACTIVAS`, 900);
         }
 
         if (pilotStopsStat) {
-          animateNumericContent(pilotStopsStat, `${points.length}`, 900);
+          animateNumericContent(pilotStopsStat, `${stops.length}`, 900);
         }
       } catch (error) {
         console.error(`Error al procesar ${kmlUrl}:`, error);
@@ -2190,32 +2536,55 @@
 
       const activeStopsCount = document.getElementById('activeStopsCount');
       if (activeStopsCount) {
+        activeStopsCount.classList.add('live-indicator');
         activeStopsCount.textContent = 'NO SE PUDIERON CARGAR PARADAS';
       }
     }
 
     loadStopsFromFirstAvailable();
-  setupScrollCountAnimations();
+    setupScrollCountAnimations();
+    setupRevealSections();
+    updateStickyNav();
+    window.addEventListener('scroll', updateStickyNav, { passive: true });
 
     setTimeout(() => map.invalidateSize(), 300);
 
     // ── Paradas Cards ──
     const grid = document.getElementById("paradasGrid");
-    stops.forEach(s => {
+    stops.forEach((s, index) => {
       const card = document.createElement("div");
       card.className = "parada-card";
+      card.style.setProperty('--parada-gradient', STOP_CARD_GRADIENTS[index % STOP_CARD_GRADIENTS.length]);
       card.innerHTML = `
         <h4>${s.name}</h4>
         <div class="parada-route">${s.route}</div>
+        <div class="parada-media">
+          <img src="${s.image}" alt="${s.imageAlt}" class="parada-image" loading="lazy">
+          <span class="parada-media-badge">Hermosillo, Sonora</span>
+          <span class="parada-media-caption">Ubicación visual de la parada inteligente piloto</span>
+          <i class="fas fa-bus parada-media-icon" aria-hidden="true"></i>
+        </div>
         <p class="parada-desc">${s.desc}</p>
         <div class="parada-tags">${APP_TAGS.map(f => `<span class="parada-tag">${f}</span>`).join("")}</div>
       `;
+      const cardImage = card.querySelector('.parada-image');
+      if (cardImage) {
+        cardImage.addEventListener('error', () => {
+          if (cardImage.dataset.fallbackApplied === 'true') {
+            return;
+          }
+
+          cardImage.dataset.fallbackApplied = 'true';
+          cardImage.src = createStopPlaceholderDataUri(s.name);
+        });
+      }
       card.addEventListener("click", () => {
-        map.setView([s.lat, s.lng], 16);
-        document.getElementById("mapa").scrollIntoView({ behavior: "smooth" });
+        focusStop(s);
       });
       grid.appendChild(card);
     });
+
+    renderFooterLinks();
 
     // ── Mobile Nav Toggle ──
     document.getElementById("navToggle").addEventListener("click", () => {
