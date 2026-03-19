@@ -496,8 +496,8 @@
     .map-header span {
       font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: var(--naranja-oficial);
-      font-weight: 800;
+      color: #D35400;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -509,17 +509,25 @@
 
     .leaflet-custom-icon {
       position: relative;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       display: grid;
       place-items: center;
     }
 
     .leaflet-custom-icon i {
       color: #1E4620;
-      font-size: 18px;
+      font-size: 22px;
       line-height: 1;
       text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    }
+
+    .fab-soporte i,
+    .fab-mapa i {
+      color: #FFFFFF;
+      font-size: 24px;
+      line-height: 1;
+      pointer-events: none;
     }
 
     .fab-mapa {
@@ -1559,7 +1567,7 @@
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Hermosillo, Sonora</h3>
-        <span>6 paradas activas</span>
+        <span id="activeStopsCount">25 paradas activas</span>
       </div>
       <div id="map"></div>
     </div>
@@ -1866,8 +1874,7 @@
       { name: "La Cholla", route: "Ruta 1, 3", lat: 29.0704, lng: -110.9332, desc: "Paso clave dirección noreste.", feat: ["Sombra", "WiFi"] },
       { name: "Pueblo Nuevo", route: "Ruta 7, 11", lat: 29.0828, lng: -110.9371, desc: "Nueva zona residencial.", feat: ["Accesible", "LED"] },
       { name: "Periodistas", route: "Ruta 10, 14", lat: 29.0881, lng: -110.9639, desc: "Cercano a medios y oficinas.", feat: ["Techo Verde", "USB"] },
-      { name: "Plaza 2000", route: "Ruta 16", lat: 29.0644, lng: -110.9560, desc: "Centro cultural y empresarial.", feat: ["Solar", "Reciclaje"] },
-      { name: "Avenida Kino", route: "Ruta 2, 6", lat: 29.0610, lng: -110.9489, desc: "Avenida con alta demanda de pasajeros.", feat: ["Sombra", "WiFi"] }
+      { name: "Plaza 2000", route: "Ruta 16", lat: 29.0644, lng: -110.9560, desc: "Centro cultural y empresarial.", feat: ["Solar", "Reciclaje"] }
     ];
 
     // ── Leaflet Map ──
@@ -1880,27 +1887,38 @@
     // Icono de planta / hoja (FontAwesome) para ecoparadas
     const markerIcon = L.divIcon({
       html: '<div class="leaflet-custom-icon"><i class="fas fa-leaf"></i></div>',
-      iconSize: [20, 20],
-      iconAnchor: [10, 10],
-      popupAnchor: [0, -12],
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+      popupAnchor: [0, -14],
       className: ""
     });
 
+    // Red de conexión entre ecoparadas
+    const networkCoords = stops.map(s => [s.lat, s.lng]);
+    L.polyline(networkCoords, {
+      color: "#1E4620",
+      weight: 3,
+      opacity: 0.45,
+      dashArray: "7 7",
+      lineCap: "round",
+      lineJoin: "round"
+    }).addTo(map);
+
     stops.forEach(s => {
+      // Decorative circular highlight for exact stop location
+      L.circleMarker([s.lat, s.lng], {
+        radius: 4,
+        color: "#1E4620",
+        weight: 2,
+        fillColor: "#6aad5b",
+        fillOpacity: 0.95,
+        opacity: 1
+      }).addTo(map);
+
       L.marker([s.lat, s.lng], { icon: markerIcon })
         .bindPopup(`<b style="color:#2d5a27;font-size:14px">${s.name}</b><br><span style="color:#d4703a;font-weight:600">${s.route}</span><br><span style="color:#3d5c39">${s.desc}</span>`)
         .addTo(map);
     });
-
-    // Routes
-    L.polyline(
-      [[29.0942, -110.9612], [29.0855, -110.9691], [29.0728, -110.9559], [29.0675, -110.9637]],
-      { color: "#1E4620", weight: 3, opacity: 0.6, dashArray: "8 6" }
-    ).addTo(map);
-    L.polyline(
-      [[29.0790, -110.9520], [29.0728, -110.9559], [29.0697, -110.9454]],
-      { color: "#d4703a", weight: 3, opacity: 0.6, dashArray: "8 6" }
-    ).addTo(map);
 
     setTimeout(() => map.invalidateSize(), 300);
 
@@ -2079,7 +2097,7 @@
 
   <!-- FLOATING ACTION BUTTON - SOPORTE -->
   <a href="#soporte" class="fab-soporte" title="Centro de Soporte FORCETECH" aria-label="Abrir Centro de Soporte">
-    <i class="fas fa-headset"></i>
+    <i class="fas fa-envelope"></i>
   </a>
 </body>
 </html>
