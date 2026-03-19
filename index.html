@@ -6,7 +6,7 @@
 <title>Smart City HMO</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Space+Mono&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Exo 2',sans-serif;background:#0a1a0f;color:#d4f1d4}
@@ -81,6 +81,23 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 .leaflet-popup-content-wrapper{background:rgba(10,26,15,.95)!important;color:#d4f1d4!important;border:1px solid #27ae60!important;border-radius:4px!important;font-family:'Space Mono',monospace!important;font-size:12px!important}
 .leaflet-popup-tip{background:rgba(10,26,15,.95)!important}
 .leaflet-popup-close-button{color:#27ae60!important}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* SECCIÓN NOSOTROS - DISEÑO NEON */
+/* ═══════════════════════════════════════════════════════════════ */
+#nosotros{background:#ffffff;padding:60px 30px}
+#nosotros .section-title{color:#39ff14;font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px;text-shadow:0 0 10px rgba(57,255,20,.5),0 0 20px rgba(57,255,20,.3)}
+#nosotros > p{font-family:'Montserrat',sans-serif;color:#39ff14;font-size:1.2rem;font-weight:500;text-align:center;line-height:1.8;letter-spacing:.02em;text-shadow:0 0 8px rgba(57,255,20,.4)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:30px}
+.team-member{text-align:center;display:flex;flex-direction:column;align-items:center}
+.team-photo-frame{width:240px;height:240px;border-radius:10px;background:linear-gradient(135deg,rgba(57,255,20,.1),rgba(57,255,20,.05));border:3px solid #39ff14;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(57,255,20,.4),inset 0 0 15px rgba(57,255,20,.1);margin-bottom:20px}
+.team-photo-frame::before{content:'';position:absolute;width:100%;height:100%;background:linear-gradient(135deg,rgba(57,255,20,.15),transparent);animation:shimmerNeon 3s infinite}
+@keyframes shimmerNeon{0%{transform:translateX(-100%)};50%{transform:translateX(0)};100%{transform:translateX(100%)}}
+.team-photo-frame img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.team-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:radial-gradient(circle at 30% 30%,rgba(57,255,20,.2),transparent);color:#39ff14}
+.team-name{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:800;color:#39ff14;margin-bottom:8px;letter-spacing:.05em;text-shadow:0 0 8px rgba(57,255,20,.4)}
+.team-role{font-family:'Montserrat',sans-serif;font-size:0.95rem;color:#39ff14;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-weight:600;text-shadow:0 0 6px rgba(57,255,20,.3)}
+.team-bio{font-family:'Montserrat',sans-serif;font-size:1.1rem;color:#39ff14;line-height:1.7;max-width:280px;font-weight:500;text-shadow:0 0 6px rgba(57,255,20,.3)}
 </style>
 </head>
 <body>
@@ -155,8 +172,8 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
 
 <!-- NOSOTROS -->
 <section class="section" id="nosotros">
-  <div class="section-title">Nosotros</div>
-  <p style="text-align:center;color:#b0c8d8;margin-bottom:40px;font-size:14px;max-width:800px;margin-left:auto;margin-right:auto">Somos un equipo comprometido con la innovación sostenible. Nuestro proyecto busca transformar la experiencia del transporte urbano en Hermosillo a través de paradas ecológicas inteligentes.</p>
+  <div class="section-title">Nuestro Equipo</div>
+  <p>Somos un equipo comprometido con la innovación sostenible. Nuestro proyecto busca transformar la experiencia del transporte urbano en Hermosillo a través de paradas ecológicas inteligentes.</p>
   <div class="team-grid">
     <!-- Team Member 1 -->
     <div class="team-member">
@@ -176,6 +193,46 @@ footer{text-align:center;padding:30px;border-top:1px solid #27ae6033;margin-top:
       <div class="team-name">Espinoza Perez Daniel</div>
       <div class="team-role">Desarrollo Técnico</div>
       <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualización de datos en tiempo real.</div>
+    </div>
+    
+    <!-- Team Member 3 -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">👨‍🔬</div>
+      </div>
+      <div class="team-name">Francisco</div>
+      <div class="team-role">Investigación & Desarrollo</div>
+      <div class="team-bio">Especialista en tecnologías sostenibles e innovación ambiental.</div>
+    </div>
+    
+    <!-- Team Member 4 -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">👨‍💼</div>
+      </div>
+      <div class="team-name">Raul Mariano</div>
+      <div class="team-role">Gestión de Proyectos</div>
+      <div class="team-bio">Coordinador de implementación y desarrollo estratégico de paradas.</div>
+    </div>
+    
+    <!-- Team Member 5 -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">👩‍💼</div>
+      </div>
+      <div class="team-name">Gabriela</div>
+      <div class="team-role">Sostenibilidad</div>
+      <div class="team-bio">Experta en sistemas verdes y gestión ambiental urbana.</div>
+    </div>
+    
+    <!-- Team Member 6 -->
+    <div class="team-member">
+      <div class="team-photo-frame">
+        <div class="team-photo-placeholder">👩‍💻</div>
+      </div>
+      <div class="team-name">Andrea</div>
+      <div class="team-role">Diseño UX/UI</div>
+      <div class="team-bio">Especialista en interfases inteligentes y experiencia de usuario.</div>
     </div>
   </div>
 </section>
