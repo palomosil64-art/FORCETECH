@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transporte Público Hermosillo · Informe 2019–2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde-bosque: #2d5a27;
+    --verde-hoja: #4a8c3f;
+    --verde-musgo: #6aad5b;
+    --verde-menta: #8fc97e;
+    --verde-claro: #b8e0a8;
+    --verde-palido: #ddf0d6;
+    --verde-fondo: #f0f8ec;
+    --naranja-acento: #d4703a;
+    --naranja-calido: #e8954a;
+    --texto-oscuro: #1a2e18;
+    --texto-medio: #3d5c39;
+    --texto-suave: #6b8c65;
+    --blanco: #fafdf8;
+    --sombra: rgba(45,90,39,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--verde-fondo);
+    color: var(--texto-oscuro);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--verde-bosque);
+    padding: 48px 40px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(106,173,91,0.15);
+  }
+  .header::after {
+    content: '';
+    position: absolute; bottom: -80px; left: 20%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(74,140,63,0.1);
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--naranja-acento);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    color: var(--blanco);
+    line-height: 1.1;
+    max-width: 680px;
+  }
+  .header h1 span { color: var(--verde-menta); }
+  .header-sub {
+    margin-top: 12px;
+    color: var(--verde-claro);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  .header-source {
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(184,224,168,0.7);
+    font-style: italic;
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    background: var(--verde-hoja);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tab {
+    padding: 14px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none; border-top: none; border-left: none; border-right: none;
+  }
+  .nav-tab:hover { color: white; }
+  .nav-tab.active {
+    color: white;
+    border-bottom-color: var(--naranja-calido);
+  }
+
+  /* MAIN CONTENT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .kpi-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px var(--sombra);
+    border-left: 4px solid var(--verde-hoja);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--sombra); }
+  .kpi-card::after {
+    content: '';
+    position: absolute; bottom: -20px; right: -20px;
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--verde-palido);
+  }
+  .kpi-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--verde-bosque);
+    line-height: 1;
+  }
+  .kpi-value small { font-size: 14px; font-weight: 400; font-family: 'DM Sans', sans-serif; color: var(--texto-suave); }
+  .kpi-change {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .kpi-change.up { color: var(--verde-hoja); }
+  .kpi-change.down { color: var(--naranja-acento); }
+  .kpi-card.accent { border-left-color: var(--naranja-acento); }
+  .kpi-card.accent .kpi-value { color: var(--naranja-acento); }
+
+  /* CHART PANELS */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } }
+  .chart-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 12px var(--sombra);
+  }
+  .chart-panel.wide { grid-column: 1 / -1; }
+  .chart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--verde-bosque);
+    margin-bottom: 4px;
+  }
+  .chart-sub {
+    font-size: 11px;
+    color: var(--texto-suave);
+    margin-bottom: 20px;
+  }
+  .chart-wrap { position: relative; height: 240px; }
+  .chart-wrap.tall { height: 300px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-top: 8px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead tr {
+    background: var(--verde-bosque);
+    color: white;
+  }
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+  tbody tr { border-bottom: 1px solid var(--verde-palido); transition: background 0.15s; }
+  tbody tr:hover { background: var(--verde-fondo); }
+  tbody tr:last-child { border-bottom: none; font-weight: 700; background: var(--verde-palido); }
+  td { padding: 11px 16px; color: var(--texto-medio); }
+  td:first-child { font-weight: 600; color: var(--verde-bosque); }
+  .tag-up { color: var(--verde-hoja); font-weight: 600; font-size: 11px; }
+  .tag-down { color: var(--naranja-acento); font-weight: 600; font-size: 11px; }
+
+  /* ZONE BARS */
+  .zone-grid { display: grid; gap: 12px; margin-top: 8px; }
+  .zone-row { display: flex; flex-direction: column; gap: 4px; }
+  .zone-label { font-size: 12px; font-weight: 600; color: var(--texto-medio); display: flex; justify-content: space-between; }
+  .zone-label span { color: var(--verde-bosque); font-family: 'Playfair Display', serif; font-size: 14px; }
+  .zone-track { background: var(--verde-palido); border-radius: 6px; height: 10px; overflow: hidden; }
+  .zone-fill { height: 100%; border-radius: 6px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--verde-bosque);
+    margin-bottom: 6px;
+  }
+  .section-desc { font-size: 13px; color: var(--texto-suave); margin-bottom: 24px; }
+
+  /* YEAR SELECTOR */
+  .year-selector {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .year-btn {
+    padding: 6px 14px; border-radius: 20px; border: 2px solid var(--verde-claro);
+    background: white; font-size: 12px; font-weight: 600; color: var(--texto-suave);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .year-btn:hover, .year-btn.active {
+    background: var(--verde-hoja); border-color: var(--verde-hoja); color: white;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--verde-bosque);
+    color: rgba(184,224,168,0.7);
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    margin-top: 40px;
+  }
+  .footer strong { color: var(--verde-menta); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">Informe de Movilidad</div>
+  <h1>Transporte Público<br><span>Hermosillo</span> 2019–2024</h1>
+  <p class="header-sub">Análisis de la sostenibilidad financiera y uso ciudadano del sistema UNE</p>
+  <p class="header-source">Fuente: Hermosillo ¿Cómo Vamos? · IMTES · Encuesta de Percepción Ciudadana 2024</p>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('usuarios')">👥 Usuarios</button>
+  <button class="nav-tab" onclick="showSection('modal')">Reparto Modal</button>
+  <button class="nav-tab" onclick="showSection('financiero')">💰 Finanzas</button>
+  <button class="nav-tab" onclick="showSection('subsidio')">🏛️ Subsidio</button>
+  <button class="nav-tab" onclick="showSection('zonas')">📍 Zonas</button>
+  <button class="nav-tab" onclick="showSection('tablas')">📋 Tablas</button>
+</nav>
+
+<!-- SECCIÓN: USUARIOS -->
+<div class="container">
+<div id="sec-usuarios" class="section active">
+  <p class="section-title">Población usuaria del transporte público</p>
+  <p class="section-desc">Estimación de habitantes mayores de 18 años que usan el transporte con alguna frecuencia, 2019–2024.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Usuarios 2024</div>
+      <div class="kpi-value">168,902 <small>personas</small></div>
+      <div class="kpi-change up">↑ 86% vs 2023</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Usuarios regulares 2024</div>
+      <div class="kpi-value">78,774 <small>diario</small></div>
+      <div class="kpi-change">11.1% de la pob. adulta</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Pico histórico</div>
+      <div class="kpi-value">229,624 <small>2019</small></div>
+      <div class="kpi-change down">↓ 26% al 2024</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">Satisfacción servicio 2024</div>
+      <div class="kpi-value">7.0 <small>/ 10</small></div>
+      <div class="kpi-change down">↓ 0.4 vs 2023</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-panel wide">
+      <div class="chart-title">Tendencia de población usuaria (miles de personas)</div>
+      <div class="chart-sub">Con cualquier frecuencia de uso · Población municipal mayor de 18 años</div>
+      <div class="chart-wrap tall"><canvas id="chartUsuarios"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Proporción de la población</div>
+      <div class="chart-sub">% que usa transporte público por año</div>
+      <div class="chart-wrap"><canvas id="chartPorcentaje"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Satisfacción con el servicio</div>
+      <div class="chart-sub">Calificación promedio (escala 1–10)</div>
+      <div class="chart-wrap"><canvas id="chartSatisfaccion"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-title">Principales motivos de insatisfacción (2024)</div>
+    <div class="chart-sub">% de usuarios que mencionaron cada factor</div>
+    <div class="chart-wrap"><canvas id="chartInsatisfaccion"></canvas></div>
+  </div>
+</div>
+
+<!-- SECCIÓN: REPARTO MODAL -->
+<div id="sec-modal" class="section">
+  <p class="section-title">Reparto modal de Hermosillo</p>
+  <p class="section-desc">Distribución porcentual de los medios de transporte utilizados por la población municipal mayor de 18 años.</p>
+
+  <div class="chart-grid">
+    <div class="chart-panel wide">
+      <div class="chart-title">Evolución del reparto modal 2019–2024</div>
+      <div class="chart-sub">Los 6 medios de transporte más utilizados · % de población</div>
+      <div class="chart-wrap tall"><canvas id="chartModal"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Distribución 2019</div>
+      <div class="chart-sub">Año de referencia previo a pandemia</div>
+      <div class="chart-wrap"><canvas id="chartModal2019"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Distribución 2024</div>
+      <div class="chart-sub">Último año del período analizado</div>
+      <div class="chart-wrap"><canvas id="chartModal2024"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-title">Tabla de reparto modal completa</div>
+    <div class="chart-sub">Porcentaje por año y medio de transporte</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Medio de Transporte</th>
+            <th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th>
+            <th>Variación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Vehículo nacional</td><td>28.0%</td><td>32.4%</td><td>39.1%</td><td>42.9%</td><td>37.2%</td><td>41.5%</td><td class="tag-up">+13.5 pp</td></tr>
+          <tr><td>Transporte público</td><td>35.4%</td><td>18.3%</td><td>19.4%</td><td>23.0%</td><td>13.0%</td><td>23.8%</td><td class="tag-down">−11.6 pp</td></tr>
+          <tr><td>Caminando</td><td>10.0%</td><td>10.6%</td><td>11.0%</td><td>11.0%</td><td>10.4%</td><td>12.4%</td><td class="tag-up">+2.4 pp</td></tr>
+          <tr><td>📱 Taxi/plataforma</td><td>3.2%</td><td>5.8%</td><td>2.8%</td><td>4.5%</td><td>5.9%</td><td>6.5%</td><td class="tag-up">+3.3 pp</td></tr>
+          <tr><td>Vehículo afiliado</td><td>6.3%</td><td>10.1%</td><td>7.8%</td><td>3.7%</td><td>9.6%</td><td>5.1%</td><td class="tag-down">−1.2 pp</td></tr>
+          <tr><td>Bicicleta</td><td>8.4%</td><td>6.6%</td><td>2.5%</td><td>4.8%</td><td>5.2%</td><td>4.2%</td><td class="tag-down">−4.2 pp</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN: FINANZAS -->
+<div id="sec-financiero" class="section">
+  <p class="section-title">Estructura financiera del Fideicomiso</p>
+  <p class="section-desc">Ingresos, egresos y déficit del Fideicomiso de Recaudación, Administración, Distribución y Pago F/1219 · Millones de pesos (mdp).</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Ingresos totales 2019–2024</div>
+      <div class="kpi-value">$3,931 <small>mdp</small></div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">Egresos totales 2019–2024</div>
+      <div class="kpi-value">$4,113 <small>mdp</small></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Déficit acumulado</div>
+      <div class="kpi-value">$181 <small>mdp</small></div>
+      <div class="kpi-change down">Deuda acumulada del período</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Viajes estimados 2024</div>
+      <div class="kpi-value">24.3 <small>millones</small></div>
+      <div class="kpi-change down">↓ vs 32.2M en 2022</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-panel wide">
+      <div class="chart-title">Ingresos vs Egresos del Fideicomiso (mdp)</div>
+      <div class="chart-sub">La brecha muestra el déficit anual que se convierte en deuda para el siguiente ejercicio</div>
+      <div class="chart-wrap tall"><canvas id="chartFinanzas"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Recaudo tarifario (mdp)</div>
+      <div class="chart-sub">Ingresos por pago de pasaje · tarifa $9.00</div>
+      <div class="chart-wrap"><canvas id="chartRecaudo"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Viajes anuales estimados (millones)</div>
+      <div class="chart-sub">Calculado con base en tarifa ordinaria de $9.00</div>
+      <div class="chart-wrap"><canvas id="chartViajes"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-title">Tabla de operaciones financieras del Fideicomiso</div>
+    <div class="chart-sub">Valores en millones de pesos (mdp) · 2019–2024</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Año</th><th>Recaudo (mdp)</th><th>Subsidio (mdp)</th><th>Ingresos totales (mdp)</th><th>Egresos (mdp)</th><th>Déficit (mdp)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2019</td><td>$159.41</td><td>$92.87</td><td>$252.29</td><td>$299.84</td><td class="tag-down">−$47.55</td></tr>
+          <tr><td>2020</td><td>$153.71</td><td>$252.49</td><td>$406.19</td><td>$460.92</td><td class="tag-down">−$54.72</td></tr>
+          <tr><td>2021</td><td>$236.90</td><td>$427.51</td><td>$664.41</td><td>$688.12</td><td class="tag-down">−$23.71</td></tr>
+          <tr><td>2022</td><td>$289.54</td><td>$482.43</td><td>$771.98</td><td>$781.75</td><td class="tag-down">−$9.77</td></tr>
+          <tr><td>2023</td><td>$281.46</td><td>$613.54</td><td>$895.00</td><td>$912.96</td><td class="tag-down">−$17.95</td></tr>
+          <tr><td>2024</td><td>$218.32</td><td>$723.36</td><td>$941.68</td><td>$969.50</td><td class="tag-down">−$27.82</td></tr>
+          <tr><td>TOTAL</td><td>$1,339.34</td><td>$2,592.21</td><td>$3,931.55</td><td>$4,113.08</td><td class="tag-down">−$181.53</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN: SUBSIDIO -->
+<div id="sec-subsidio" class="section">
+  <p class="section-title">Dependencia del subsidio gubernamental</p>
+  <p class="section-desc">Análisis de la contribución estatal al financiamiento del transporte público de Hermosillo.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card accent">
+      <div class="kpi-label">Subsidio representa en 2024</div>
+      <div class="kpi-value">77% <small>de ingresos</small></div>
+      <div class="kpi-change down">↑ vs 37% en 2019</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Por cada $1 recaudado (2024)</div>
+      <div class="kpi-value">$3.31 <small>de subsidio</small></div>
+      <div class="kpi-change down">Era $0.58 en 2019</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Subsidio per cápita 2024</div>
+      <div class="kpi-value">$729 <small>/habitante</small></div>
+      <div class="kpi-change down">Era $99 en 2019 · +633%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Subsidio total 2019–2024</div>
+      <div class="kpi-value">$2,592 <small>mdp</small></div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-panel wide">
+      <div class="chart-title">Evolución del subsidio gubernamental (mdp)</div>
+      <div class="chart-sub">Aumento sostenido año a año · Crecimiento total del período: +679%</div>
+      <div class="chart-wrap tall"><canvas id="chartSubsidio"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Distribución de ingresos por fuente (%)</div>
+      <div class="chart-sub">Recaudo tarifario vs subsidio gubernamental</div>
+      <div class="chart-wrap"><canvas id="chartFuentes"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Subsidio per cápita ($)</div>
+      <div class="chart-sub">Gasto público por habitante del municipio</div>
+      <div class="chart-wrap"><canvas id="chartPercapita"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-title">Relación subsidio por peso recaudado</div>
+    <div class="chart-sub">Cuánto aporta el gobierno por cada $1.00 que paga un pasajero</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Año</th><th>Recaudo (mdp)</th><th>Subsidio (mdp)</th><th>Relación</th><th>Subsidio / $1 recaudado</th><th>Subsidio per cápita</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2019</td><td>$159.41</td><td>$92.87</td><td>0.58</td><td>$0.58</td><td>$99.54</td></tr>
+          <tr><td>2020</td><td>$153.71</td><td>$252.49</td><td>1.64</td><td>$1.64</td><td>$266.89</td></tr>
+          <tr><td>2021</td><td>$236.90</td><td>$427.51</td><td>1.80</td><td>$1.80</td><td>$446.05</td></tr>
+          <tr><td>2022</td><td>$289.54</td><td>$482.43</td><td>1.67</td><td>$1.67</td><td>$497.32</td></tr>
+          <tr><td>2023</td><td>$281.46</td><td>$613.54</td><td>2.18</td><td>$2.18</td><td>$625.44</td></tr>
+          <tr><td>2024</td><td>$218.32</td><td>$723.36</td><td>3.31</td><td class="tag-down">$3.31</td><td>$729.84</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN: ZONAS -->
+<div id="sec-zonas" class="section">
+  <p class="section-title">Uso por zona de la ciudad</p>
+  <p class="section-desc">Porcentaje de habitantes por zona urbana que utilizan el transporte público como principal medio de traslado.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Zona Norte — 2024</div>
+      <div class="kpi-value">28.4%</div>
+      <div class="kpi-change">Rango histórico: 18.3%–45.8%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Zona Centro — 2024</div>
+      <div class="kpi-value">23.7%</div>
+      <div class="kpi-change">Rango histórico: 10.1%–31.9%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Zona Sur — 2024</div>
+      <div class="kpi-value">33.3%</div>
+      <div class="kpi-change">Rango histórico: 15.9%–40.6%</div>
+    </div>
+  </div>
+
+  <div class="year-selector">
+    <span style="font-size:12px;font-weight:600;color:var(--texto-suave);align-self:center;">Ver año:</span>
+    <button class="year-btn" onclick="updateZonas('2019')">2019</button>
+    <button class="year-btn" onclick="updateZonas('2020')">2020</button>
+    <button class="year-btn" onclick="updateZonas('2021')">2021</button>
+    <button class="year-btn" onclick="updateZonas('2022')">2022</button>
+    <button class="year-btn" onclick="updateZonas('2023')">2023</button>
+    <button class="year-btn active" onclick="updateZonas('2024')">2024</button>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-panel">
+      <div class="chart-title">Uso por zona (año seleccionado)</div>
+      <div class="chart-sub" id="zonaSubtitle">Porcentaje de residentes que usan transporte público · 2024</div>
+      <div class="zone-grid" id="zonaBars">
+        <div class="zone-row">
+          <div class="zone-label">Zona Norte <span id="zn-val">28.4%</span></div>
+          <div class="zone-track"><div class="zone-fill" id="zn-bar" style="width:28.4%;background:var(--verde-bosque)"></div></div>
+        </div>
+        <div class="zone-row">
+          <div class="zone-label">Zona Centro <span id="zc-val">23.7%</span></div>
+          <div class="zone-track"><div class="zone-fill" id="zc-bar" style="width:23.7%;background:var(--verde-hoja)"></div></div>
+        </div>
+        <div class="zone-row">
+          <div class="zone-label">Zona Sur <span id="zs-val">33.3%</span></div>
+          <div class="zone-track"><div class="zone-fill" id="zs-bar" style="width:33.3%;background:var(--verde-musgo)"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">Comparativa histórica por zona</div>
+      <div class="chart-sub">Evolución 2019–2024 de las tres zonas urbanas</div>
+      <div class="chart-wrap"><canvas id="chartZonas"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-title">Tabla completa por zona y año</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Zona</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🗺️ Zona Norte</td><td>45.8%</td><td>21.5%</td><td>25.2%</td><td>28.0%</td><td>18.3%</td><td>28.4%</td></tr>
+          <tr><td>🗺️ Zona Centro</td><td>31.9%</td><td>17.3%</td><td>13.4%</td><td>24.0%</td><td>10.1%</td><td>23.7%</td></tr>
+          <tr><td>🗺️ Zona Sur</td><td>40.6%</td><td>23.5%</td><td>30.6%</td><td>26.7%</td><td>15.9%</td><td>33.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN: TABLAS -->
+<div id="sec-tablas" class="section">
+  <p class="section-title">Resumen de indicadores clave</p>
+  <p class="section-desc">Tabla consolidada con todos los indicadores del informe 2019–2024.</p>
+
+  <div class="chart-panel" style="margin-bottom:20px">
+    <div class="chart-title">Resumen financiero completo del Fideicomiso</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Indicador</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tarifa (pesos)</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>—</td></tr>
+          <tr><td>Recaudo (mdp)</td><td>$159.41</td><td>$153.71</td><td>$236.90</td><td>$289.54</td><td>$281.46</td><td>$218.32</td><td>$1,339.34</td></tr>
+          <tr><td>Subsidio (mdp)</td><td>$92.87</td><td>$252.49</td><td>$427.51</td><td>$482.43</td><td>$613.54</td><td>$723.36</td><td>$2,592.21</td></tr>
+          <tr><td>Ingresos totales (mdp)</td><td>$252.29</td><td>$406.19</td><td>$664.41</td><td>$771.98</td><td>$895.00</td><td>$941.68</td><td>$3,931.55</td></tr>
+          <tr><td>Egresos (mdp)</td><td>$299.84</td><td>$460.92</td><td>$688.12</td><td>$781.75</td><td>$912.96</td><td>$969.50</td><td>$4,113.08</td></tr>
+          <tr><td>Déficit (mdp)</td><td>−$47.55</td><td>−$54.72</td><td>−$23.71</td><td>−$9.77</td><td>−$17.95</td><td>−$27.82</td><td>−$181.53</td></tr>
+          <tr><td>Subsidio per cápita ($)</td><td>$99.54</td><td>$266.89</td><td>$446.05</td><td>$497.32</td><td>$625.44</td><td>$729.84</td><td>—</td></tr>
+          <tr><td>Usuarios TP (personas)</td><td>229,624</td><td>121,142</td><td>130,892</td><td>157,976</td><td>90,805</td><td>168,902</td><td>—</td></tr>
+          <tr><td>% usa TP</td><td>35.4%</td><td>18.3%</td><td>19.4%</td><td>23.0%</td><td>13.0%</td><td>23.8%</td><td>—</td></tr>
+          <tr><td>% usa vehículo particular</td><td>28.0%</td><td>32.4%</td><td>39.1%</td><td>42.9%</td><td>37.2%</td><td>41.5%</td><td>—</td></tr>
+          <tr><td>Satisfacción /10</td><td>7.6</td><td>7.4</td><td>7.3</td><td>6.5</td><td>7.4</td><td>7.0</td><td>—</td></tr>
+          <tr><td>Subsidio por $1 recaudado</td><td>$0.58</td><td>$1.64</td><td>$1.80</td><td>$1.67</td><td>$2.18</td><td>$3.31</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-title">Inventario de rutas y flota (2025)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dato operativo</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Total de líneas en operación</td><td>37 líneas</td></tr>
+          <tr><td>Total de unidades</td><td>347 autobuses</td></tr>
+          <tr><td>Unidades en reparación/taller</td><td>26 unidades</td></tr>
+          <tr><td>Extensión total de la red</td><td>1,390 km</td></tr>
+          <tr><td>Tarifa ordinaria</td><td>$9.00 (sin cambios desde 2017)</td></tr>
+          <tr><td>Tarifa preferencial</td><td>$5.00 (estudiantes, 3ª edad, discapacidad)</td></tr>
+          <tr><td>Horario general del servicio</td><td>5:30 a.m. – 10:30 p.m.</td></tr>
+          <tr><td>Empresas operadoras</td><td>Movilidad Integral de Hermosillo · Administración Corporativa de Hermosillo</td></tr>
+          <tr><td>Costo op. acumulado 2019–2024</td><td>$4,113 mdp</td></tr>
+          <tr><td>Costo por km (2024)</td><td>$37.77 (era $24.4 en 2019, +55%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div><!-- /container -->
+
+<div class="footer">
+  Datos de <strong>Hermosillo ¿Cómo Vamos?</strong> · Encuesta de Percepción Ciudadana 2024 · IMTES · Elaborado con información pública del período 2019–2024
+</div>
+
+<script>
+// Color palette
+const G = {
+  bosque: '#2d5a27',
+  hoja: '#4a8c3f',
+  musgo: '#6aad5b',
+  menta: '#8fc97e',
+  claro: '#b8e0a8',
+  palido: '#ddf0d6',
+  naranja: '#d4703a',
+  naranjaCal: '#e8954a',
+};
+
+const YEARS = ['2019','2020','2021','2022','2023','2024'];
+
+const defaults = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { labels: { font: { family: 'DM Sans', size: 11 }, boxWidth: 12 } } },
+  scales: {
+    x: { ticks: { font: { family: 'DM Sans', size: 11 } }, grid: { color: '#e8f5e2' } },
+    y: { ticks: { font: { family: 'DM Sans', size: 11 } }, grid: { color: '#e8f5e2' } }
+  }
+};
+
+function mergeOptions(extra) {
+  return Object.assign({}, defaults, extra);
+}
+
+// USUARIOS
+new Chart(document.getElementById('chartUsuarios'), {
+  type: 'bar',
+  data: {
+    labels: YEARS,
+    datasets: [{
+      label: 'Usuarios del transporte público',
+      data: [229624, 121142, 130892, 157976, 90805, 168902],
+      backgroundColor: [G.bosque, G.naranja, G.hoja, G.musgo, G.naranjaCal, G.hoja],
+      borderRadius: 8, borderSkipped: false,
+    }]
+  },
+  options: mergeOptions({
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.parsed.y.toLocaleString('es-MX') + ' personas' } } },
+    scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => (v/1000).toFixed(0)+'k' } } }
+  })
+});
+
+new Chart(document.getElementById('chartPorcentaje'), {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [{
+      label: '% que usa TP',
+      data: [35.4, 18.3, 19.4, 23.0, 13.0, 23.8],
+      borderColor: G.hoja, backgroundColor: G.palido,
+      fill: true, tension: 0.4, pointBackgroundColor: G.bosque, pointRadius: 5,
+    }]
+  },
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' }, max: 45, min: 0 } } })
+});
+
+new Chart(document.getElementById('chartSatisfaccion'), {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [{
+      label: 'Satisfacción /10',
+      data: [7.6, 7.4, 7.3, 6.5, 7.4, 7.0],
+      borderColor: G.naranja, backgroundColor: 'rgba(212,112,58,0.1)',
+      fill: true, tension: 0.3, pointBackgroundColor: G.naranja, pointRadius: 5,
+    }]
+  },
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } }, min: 5, max: 10 } } })
+});
+
+new Chart(document.getElementById('chartInsatisfaccion'), {
+  type: 'bar',
+  data: {
+    labels: ['Tardan mucho\nen pasar','Por el chofer','Mal servicio','Pocas\nunidades','Mal estado','No se\nparan','Suben mucha\ngente','Conducen\nmal'],
+    datasets: [{
+      label: '% usuarios que lo mencionan',
+      data: [70.4, 9.6, 5.6, 4.8, 3.2, 2.4, 2.4, 1.6],
+      backgroundColor: [G.naranja, G.hoja, G.musgo, G.menta, G.claro, G.palido, G.palido, G.palido],
+      borderRadius: 6, borderSkipped: false,
+    }]
+  },
+  options: mergeOptions({
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' } }, y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 10 } } } }
+  })
+});
+
+// REPARTO MODAL
+new Chart(document.getElementById('chartModal'), {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [
+      { label: 'Vehículo nacional', data: [28,32.4,39.1,42.9,37.2,41.5], borderColor: G.naranja, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+      { label: 'Transporte público', data: [35.4,18.3,19.4,23,13,23.8], borderColor: G.bosque, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+      { label: 'Caminando', data: [10,10.6,11,11,10.4,12.4], borderColor: G.musgo, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+      { label: 'Taxi/plataforma', data: [3.2,5.8,2.8,4.5,5.9,6.5], borderColor: G.naranjaCal, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+      { label: 'Bicicleta', data: [8.4,6.6,2.5,4.8,5.2,4.2], borderColor: G.claro, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+    ]
+  },
+  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' } } } })
+});
+
+const pieDefaults = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 10 }, boxWidth: 10, padding: 8 } } } };
+
+new Chart(document.getElementById('chartModal2019'), {
+  type: 'doughnut',
+  data: { labels: ['Vehículo nac.','TP','Caminando','Bicicleta','V.afiliado','Taxi'], datasets: [{ data: [28,35.4,10,8.4,6.3,3.2], backgroundColor: [G.naranja,G.bosque,G.musgo,G.claro,G.menta,G.naranjaCal], borderWidth: 2, borderColor: '#fff' }] },
+  options: pieDefaults
+});
+
+new Chart(document.getElementById('chartModal2024'), {
+  type: 'doughnut',
+  data: { labels: ['Vehículo nac.','TP','Caminando','Taxi','V.afiliado','Bicicleta'], datasets: [{ data: [41.5,23.8,12.4,6.5,5.1,4.2], backgroundColor: [G.naranja,G.bosque,G.musgo,G.naranjaCal,G.menta,G.claro], borderWidth: 2, borderColor: '#fff' }] },
+  options: pieDefaults
+});
+
+// FINANZAS
+new Chart(document.getElementById('chartFinanzas'), {
+  type: 'bar',
+  data: {
+    labels: YEARS,
+    datasets: [
+      { label: 'Ingresos totales', data: [252.29,406.19,664.41,771.98,895,941.68], backgroundColor: G.hoja, borderRadius: 6, borderSkipped: false },
+      { label: 'Egresos (costos op.)', data: [299.84,460.92,688.12,781.75,912.96,969.5], backgroundColor: G.naranja, borderRadius: 6, borderSkipped: false },
+    ]
+  },
+  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+});
+
+new Chart(document.getElementById('chartRecaudo'), {
+  type: 'bar',
+  data: {
+    labels: YEARS,
+    datasets: [{ label: 'Recaudo (mdp)', data: [159.41,153.71,236.9,289.54,281.46,218.32], backgroundColor: [G.hoja,G.naranjaCal,G.musgo,G.menta,G.musgo,G.naranjaCal], borderRadius: 6, borderSkipped: false }]
+  },
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+});
+
+new Chart(document.getElementById('chartViajes'), {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [{ label: 'Viajes (millones)', data: [17.71,17.08,26.32,32.17,31.27,24.26], borderColor: G.bosque, backgroundColor: G.palido, fill: true, tension: 0.4, pointBackgroundColor: G.bosque, pointRadius: 5 }]
+  },
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } }, min: 0 } } })
+});
+
+// SUBSIDIO
+new Chart(document.getElementById('chartSubsidio'), {
+  type: 'bar',
+  data: {
+    labels: YEARS,
+    datasets: [{ label: 'Subsidio (mdp)', data: [92.87,252.49,427.51,482.43,613.54,723.36], backgroundColor: [G.claro,G.menta,G.musgo,G.hoja,G.hoja,G.bosque], borderRadius: 8, borderSkipped: false }]
+  },
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+});
+
+new Chart(document.getElementById('chartFuentes'), {
+  type: 'bar',
+  data: {
+    labels: YEARS,
+    datasets: [
+      { label: 'Recaudo tarifario %', data: [63,38,36,38,31,23], backgroundColor: G.menta, borderRadius: [0,0,4,4], borderSkipped: false },
+      { label: 'Subsidio %', data: [37,62,64,62,69,77], backgroundColor: G.bosque, borderRadius: [4,4,0,0], borderSkipped: false },
+    ]
+  },
+  options: mergeOptions({
+    scales: {
+      x: { stacked: true, grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } },
+      y: { stacked: true, grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' }, max: 100 }
+    }
+  })
+});
+
+new Chart(document.getElementById('chartPercapita'), {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [{ label: 'Subsidio per cápita ($)', data: [99.54,266.89,446.05,497.32,625.44,729.84], borderColor: G.naranja, backgroundColor: 'rgba(212,112,58,0.08)', fill: true, tension: 0.4, pointBackgroundColor: G.naranja, pointRadius: 5 }]
+  },
+  options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => '$'+v } } } })
+});
+
+// ZONAS
+new Chart(document.getElementById('chartZonas'), {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [
+      { label: 'Zona Norte', data: [45.8,21.5,25.2,28,18.3,28.4], borderColor: G.bosque, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, pointBackgroundColor: G.bosque },
+      { label: 'Zona Centro', data: [31.9,17.3,13.4,24,10.1,23.7], borderColor: G.musgo, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, pointBackgroundColor: G.musgo },
+      { label: 'Zona Sur', data: [40.6,23.5,30.6,26.7,15.9,33.3], borderColor: G.naranja, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, pointBackgroundColor: G.naranja },
+    ]
+  },
+  options: mergeOptions({ scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'DM Sans', size: 11 }, callback: v => v+'%' }, max: 55, min: 0 } } })
+});
+
+// NAV LOGIC
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ZONAS LOGIC
+const zonaData = {
+  '2019': { norte: 45.8, centro: 31.9, sur: 40.6 },
+  '2020': { norte: 21.5, centro: 17.3, sur: 23.5 },
+  '2021': { norte: 25.2, centro: 13.4, sur: 30.6 },
+  '2022': { norte: 28.0, centro: 24.0, sur: 26.7 },
+  '2023': { norte: 18.3, centro: 10.1, sur: 15.9 },
+  '2024': { norte: 28.4, centro: 23.7, sur: 33.3 },
+};
+
+function updateZonas(year) {
+  const d = zonaData[year];
+  document.getElementById('zonaSubtitle').textContent = `Porcentaje de residentes que usan transporte público · ${year}`;
+  document.getElementById('zn-val').textContent = d.norte + '%';
+  document.getElementById('zc-val').textContent = d.centro + '%';
+  document.getElementById('zs-val').textContent = d.sur + '%';
+  document.getElementById('zn-bar').style.width = d.norte + '%';
+  document.getElementById('zc-bar').style.width = d.centro + '%';
+  document.getElementById('zs-bar').style.width = d.sur + '%';
+  document.querySelectorAll('.year-btn').forEach(b => b.classList.toggle('active', b.textContent === year));
+}
+</script>
+</body>
+</html>
