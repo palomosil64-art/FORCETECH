@@ -495,9 +495,9 @@
 
     .map-wrapper {
       background: #FFFFFF;
-      border-radius: 30px;
+      border-radius: 25px;
       border: 1px solid rgba(30, 70, 32, 0.12);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 24px rgba(17, 35, 20, 0.12);
       overflow: hidden;
     }
 
@@ -527,6 +527,138 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .smart-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 0 24px 16px;
+    }
+
+    .smart-btn {
+      background: #27AE60;
+      color: #000000;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 50px;
+    }
+
+    .smart-btn:hover {
+      background: #239b56;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.26);
+    }
+
+    .smart-btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .smart-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .smart-modal-overlay.active {
+      display: flex;
+    }
+
+    .smart-modal {
+      width: min(680px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      background: #ffffff;
+      border: 2px solid #27AE60;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 16px 40px rgba(17, 35, 20, 0.25);
+    }
+
+    .smart-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .smart-modal-title {
+      color: #1E4620;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .smart-close {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      background: #27AE60;
+      color: #000000;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+    }
+
+    .smart-report-categories {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+
+    .smart-report-option {
+      border: 1px solid rgba(39, 174, 96, 0.45);
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      background: #f7fff9;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .smart-report-option.active {
+      background: #27AE60;
+      color: #000000;
+      border-color: #27AE60;
+    }
+
+    .smart-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .smart-form input,
+    .smart-form textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid rgba(30, 70, 32, 0.3);
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+    }
+
+    .smart-form textarea {
+      min-height: 96px;
+      resize: vertical;
     }
 
     .live-indicator::before {
@@ -559,7 +691,7 @@
       display: grid;
       place-items: center;
       border-radius: 50%;
-      background: linear-gradient(180deg, #F17A20 0%, #D35400 100%);
+      background: #1E4620;
       border: 2px solid rgba(255, 255, 255, 0.95);
       box-shadow: 0 8px 18px rgba(25, 39, 28, 0.22);
     }
@@ -624,7 +756,7 @@
     .map-popup-title {
       color: #D35400;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 700;
       margin-bottom: 8px;
       line-height: 1.3;
     }
@@ -653,20 +785,13 @@
       font-size: 10px;
       font-weight: 700;
       color: #1E4620;
-      border: 1px solid rgba(211, 84, 0, 0.35);
+      border: 1px solid #D35400;
       border-radius: 999px;
       padding: 4px 8px;
-      background: #FFFFFF;
+      background: transparent;
     }
 
-    /* ── PARADAS GRID ── */
-    .paradas-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(5, auto);
-      gap: 20px;
-      margin-top: 32px;
-    }
+    /* Sección de cards de paradas eliminada: experiencia solo mapa KML */
 
     .parada-card {
       background: var(--glass-bg);
@@ -1284,7 +1409,7 @@
 
     .transporte-chart-card {
       width: 100%;
-      background: rgba(255, 255, 255, 0.78);
+      background: #FFFFFF;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-radius: 16px;
@@ -1572,9 +1697,6 @@
     }
 
     /* ── ENHANCED STYLING ── */
-    .paradas-grid {
-      animation: fadeUp 0.8s ease;
-    }
 
     .section + .model-section {
       margin-top: 100px;
@@ -1592,6 +1714,14 @@
       .map-header {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .smart-actions {
+        padding: 0 0 14px;
+      }
+
+      .smart-btn {
+        width: 100%;
       }
 
       #map {
@@ -1969,6 +2099,11 @@
         <h3>Nuestras 10 Paradas Inteligentes Activas</h3>
         <span id="activeStopsCount" class="live-indicator">HERMOSILLO, SONORA</span>
       </div>
+      <div class="smart-actions">
+        <button type="button" class="smart-btn" onclick="openRoutesModal()">📍 Ver una línea</button>
+        <button type="button" class="smart-btn" onclick="openJourneyModal()">🗺️ Crear viaje</button>
+        <button type="button" class="smart-btn" onclick="openReportModal()">⚠️ Reportar</button>
+      </div>
       <div id="map"></div>
     </div>
   </section>
@@ -2245,6 +2380,52 @@
     </div>
   </footer>
 
+  <div class="smart-modal-overlay" id="routesModal">
+    <div class="smart-modal">
+      <div class="smart-modal-header">
+        <h3 class="smart-modal-title">📍 Ver una línea</h3>
+        <button class="smart-close" type="button" onclick="closeRoutesModal()">Cerrar</button>
+      </div>
+      <div id="routesList"></div>
+    </div>
+  </div>
+
+  <div class="smart-modal-overlay" id="journeyModal">
+    <div class="smart-modal">
+      <div class="smart-modal-header">
+        <h3 class="smart-modal-title">🗺️ Crear viaje</h3>
+        <button class="smart-close" type="button" onclick="closeJourneyModal()">Cerrar</button>
+      </div>
+      <form class="smart-form" onsubmit="calculateJourney(event)">
+        <input id="originInput" type="text" placeholder="Origen (ej. San Benito)" required>
+        <input id="destinationInput" type="text" placeholder="Destino (ej. Hospital General)" required>
+        <button class="smart-btn" type="submit">Calcular ruta</button>
+      </form>
+      <div id="journeyResult" style="margin-top:12px;color:#1E4620;font-weight:600;"></div>
+    </div>
+  </div>
+
+  <div class="smart-modal-overlay" id="reportModal">
+    <div class="smart-modal">
+      <div class="smart-modal-header">
+        <h3 class="smart-modal-title">⚠️ Reportar Incidencia</h3>
+        <button class="smart-close" type="button" onclick="closeReportModal()">Cerrar</button>
+      </div>
+      <div class="smart-report-categories" id="reportCategories">
+        <button type="button" class="smart-report-option" data-type="Daño en Parada Ecológica">Daño en Parada Ecológica (Cristales rotos, paneles solares sucios, falta de iluminación)</button>
+        <button type="button" class="smart-report-option" data-type="Problema con Unidad de Transporte">Problema con Unidad de Transporte (Retraso excesivo, unidad en mal estado, conducción imprudente)</button>
+        <button type="button" class="smart-report-option" data-type="Falla Tecnológica">Falla Tecnológica (Punto de carga USB no funciona, pantalla de información apagada)</button>
+        <button type="button" class="smart-report-option" data-type="Limpieza y Mantenimiento">Limpieza y Mantenimiento</button>
+      </div>
+      <form class="smart-form" onsubmit="submitIncidentReport(event)">
+        <input id="reportStop" type="text" placeholder="Parada o ubicación" required>
+        <textarea id="reportDescription" placeholder="Describe la incidencia" required></textarea>
+        <button class="smart-btn" type="submit">Enviar reporte</button>
+      </form>
+      <div id="reportResult" style="margin-top:12px;color:#1E4620;font-weight:600;"></div>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -2270,6 +2451,7 @@
       "TIEMPOS EN VIVO": { icon: "fa-regular fa-clock", shortLabel: "Tiempo real" },
       "APP CHECK-IN": { icon: "fa-solid fa-mobile-screen-button", shortLabel: "App check-in" }
     };
+    const REQUIRED_POPUP_SERVICES = ["WIFI 5G", "REDUCCIÓN TÉRMICA"];
 
     // ── Leaflet Map ──
     const map = L.map("map", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
@@ -2368,8 +2550,21 @@
         .replace(/Ã³/g, 'ó')
         .replace(/Ãº/g, 'ú')
         .replace(/Ã±/g, 'ñ')
+        .replace(/Ã¼/g, 'ü')
+        .replace(/Ã‰/g, 'É')
+        .replace(/Ã“/g, 'Ó')
+        .replace(/Ãš/g, 'Ú')
+        .replace(/Ã‘/g, 'Ñ')
+        .replace(/Â/g, '')
+        .replace(/ÔÇö/g, '—')
+        .replace(/â€“/g, '–')
+        .replace(/â€”/g, '—')
         .replace(/Ã/g, 'Á')
         .replace(/\uFFFD/g, '');
+    }
+
+    function slugifyStopName(name = '') {
+      return normalizeStopText(fixMojibake(name)).replace(/\s+/g, '-');
     }
 
     function distanceSq(aLat, aLng, bLat, bLng) {
@@ -2395,11 +2590,11 @@
     }
 
     function getPopupHtml(point, relatedStop) {
-      const features = (relatedStop?.feat || []).slice(0, 4);
-      const imageSrc = relatedStop?.image || createStopPlaceholderDataUri(point.name);
+      const slug = slugifyStopName(point.name);
+      const imageSrc = `img/paradas/${slug}.jpg`;
       const imageAlt = relatedStop?.imageAlt || `Parada inteligente ${point.name}`;
 
-      const servicesHtml = features
+      const servicesHtml = REQUIRED_POPUP_SERVICES
         .map((item) => {
           const mapped = FEATURE_ICON_MAP[item] || { icon: 'fa-solid fa-circle-check', shortLabel: item };
           return `<span class="map-popup-service"><i class="${mapped.icon}" aria-hidden="true"></i>${mapped.shortLabel}</span>`;
@@ -2642,12 +2837,8 @@
     }
 
     async function loadStopsFromFirstAvailable() {
-      const sources = [
-        'PARADAS CON CASETA.kmz',
-        'PARADAS CON CASETA.kml',
-        'Ruta 1.kmz',
-        'Ruta2.kml'
-      ];
+      // Nota: en navegador se usa ruta relativa al proyecto, no ruta absoluta del sistema.
+      const sources = ['PARADAS CON CASETA.kml'];
 
       for (const source of sources) {
         try {
@@ -2674,6 +2865,104 @@
     setTimeout(() => map.invalidateSize(), 300);
 
     renderFooterLinks();
+
+    function openRoutesModal() {
+      const routes = Array.from(new Set(stops.flatMap((stop) => stop.route.split(',').map((item) => item.trim()))));
+      const container = document.getElementById('routesList');
+      container.innerHTML = routes
+        .map((route) => {
+          const routeStops = stops.filter((stop) => stop.route.includes(route)).map((stop) => stop.name);
+          return `<div style="padding:10px 12px;border:1px solid rgba(39,174,96,0.35);border-radius:8px;margin-bottom:8px;"><strong>${route}</strong><br><span>${routeStops.join(' → ')}</span></div>`;
+        })
+        .join('');
+      document.getElementById('routesModal').classList.add('active');
+    }
+
+    function closeRoutesModal() {
+      document.getElementById('routesModal').classList.remove('active');
+    }
+
+    function openJourneyModal() {
+      document.getElementById('journeyModal').classList.add('active');
+      document.getElementById('journeyResult').textContent = '';
+    }
+
+    function closeJourneyModal() {
+      document.getElementById('journeyModal').classList.remove('active');
+    }
+
+    function calculateJourney(event) {
+      event.preventDefault();
+      const origin = document.getElementById('originInput').value.trim().toLowerCase();
+      const destination = document.getElementById('destinationInput').value.trim().toLowerCase();
+      const originStop = stops.find((stop) => stop.name.toLowerCase().includes(origin));
+      const destinationStop = stops.find((stop) => stop.name.toLowerCase().includes(destination));
+      const result = document.getElementById('journeyResult');
+
+      if (!originStop || !destinationStop) {
+        result.textContent = 'No se encontró origen o destino. Intenta con nombres de paradas existentes.';
+        return;
+      }
+
+      map.fitBounds([[originStop.lat, originStop.lng], [destinationStop.lat, destinationStop.lng]], { padding: [80, 80] });
+      result.textContent = `Ruta sugerida: ${originStop.name} → ${destinationStop.name}`;
+    }
+
+    let selectedReportType = '';
+    const reportOptions = document.querySelectorAll('.smart-report-option');
+    reportOptions.forEach((option) => {
+      option.addEventListener('click', () => {
+        reportOptions.forEach((item) => item.classList.remove('active'));
+        option.classList.add('active');
+        selectedReportType = option.dataset.type;
+      });
+    });
+
+    function openReportModal() {
+      document.getElementById('reportModal').classList.add('active');
+      document.getElementById('reportResult').textContent = '';
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.remove('active');
+    }
+
+    function submitIncidentReport(event) {
+      event.preventDefault();
+      const stop = document.getElementById('reportStop').value.trim();
+      const description = document.getElementById('reportDescription').value.trim();
+      const result = document.getElementById('reportResult');
+
+      if (!selectedReportType) {
+        result.textContent = 'Selecciona un tipo de incidencia.';
+        return;
+      }
+
+      const reports = JSON.parse(localStorage.getItem('forcetech_reports') || '[]');
+      const report = {
+        id: `RPT-${Date.now().toString().slice(-6)}`,
+        type: selectedReportType,
+        stop,
+        description,
+        createdAt: new Date().toISOString()
+      };
+      reports.push(report);
+      localStorage.setItem('forcetech_reports', JSON.stringify(reports));
+
+      result.textContent = `Reporte enviado con folio ${report.id}. Gracias por contribuir.`;
+      event.target.reset();
+      selectedReportType = '';
+      reportOptions.forEach((item) => item.classList.remove('active'));
+    }
+
+    ['routesModal', 'journeyModal', 'reportModal'].forEach((modalId) => {
+      const modal = document.getElementById(modalId);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
 
     // ── Mobile Nav Toggle ──
     document.getElementById("navToggle").addEventListener("click", () => {
