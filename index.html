@@ -1240,14 +1240,26 @@
     }
 
     /* ── TRANSPORTE ── */
+    #transporte {
+      background: #FFFFFF;
+      border-left: 4px solid rgba(211, 84, 0, 0.2);
+    }
+
     .transporte-card {
       background: white;
-      border: 1px solid var(--borde);
-      border-radius: 20px;
+      border: 2px solid rgba(211, 84, 0, 0.12);
+      border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       overflow: hidden;
       display: grid;
       grid-template-columns: 1.05fr 1fr;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .transporte-card:hover {
+      background: #FFFFFF;
+      border-color: #D35400;
+      box-shadow: 0 10px 30px rgba(211, 84, 0, 0.3);
     }
 
     .transporte-text {
@@ -1255,7 +1267,9 @@
     }
 
     .transporte-text .section-title {
-      color: #1E4620;
+      color: #D35400;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
       margin-bottom: 12px;
     }
 
@@ -1266,7 +1280,9 @@
     }
 
     .transporte-text p {
-      color: #1E4620;
+      color: #2D2D2D;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
       font-size: 15px;
       margin-bottom: 24px;
     }
@@ -1473,8 +1489,9 @@
       display: block;
       font-size: 10px;
       font-weight: 700;
-      color: #1E4620;
+      color: #D35400;
       letter-spacing: 0.06em;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .transporte-metrica .valor {
@@ -1482,7 +1499,8 @@
       margin-top: 2px;
       font-size: 13px;
       font-weight: 800;
-      color: #1E4620;
+      color: #D35400;
+      font-family: 'Montserrat', sans-serif;
     }
 
     @media (max-width: 900px) {
@@ -1510,7 +1528,7 @@
     /* ── EQUIPO ── */
     #equipo {
       background: #FFFFFF;
-      border-left: 4px solid var(--verde-corporativo);
+      border-left: 4px solid rgba(211, 84, 0, 0.2);
     }
 
     #equipo,
@@ -2051,6 +2069,66 @@
       font-size: 13px !important;
       color: var(--texto-oscuro) !important;
     }
+
+    /* ── Sección: Directorio de Ecoparadas ── */
+    #red-inteligente {
+      background: #FFFFFF;
+      border-left: 4px solid rgba(211, 84, 0, 0.2);
+    }
+    .ecodir-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    @media (max-width: 640px) {
+      .ecodir-grid { grid-template-columns: 1fr; }
+    }
+    .ecodir-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(211, 84, 0, 0.35);
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.18s ease;
+      cursor: default;
+    }
+    .ecodir-card:hover {
+      border-color: #D35400;
+      box-shadow: 0 6px 22px rgba(211, 84, 0, 0.18);
+      transform: translateY(-2px);
+    }
+    .ecodir-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(211, 84, 0, 0.55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .ecodir-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #D35400;
+      line-height: 1.2;
+    }
+    .ecodir-zone {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2D2D2D;
+      opacity: 0.7;
+    }
+    .ecodir-geo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #555;
+      margin-top: 2px;
+    }
   </style>
 </head>
 <body>
@@ -2396,6 +2474,14 @@
     </div>
   </section>
 
+  <!-- DIRECTORIO DE ECOPARADAS -->
+  <section class="section" id="red-inteligente" aria-labelledby="ecodir-heading">
+    <span class="section-label">Red Piloto 2026</span>
+    <h2 class="section-title" id="ecodir-heading">UBICACIÓN ESTRATÉGICA DE RED INTELIGENTE</h2>
+    <p class="section-sub">Las 10 ecoparadas del proyecto piloto cubren toda la ciudad: norte, sur, este, oeste y puntos turísticos de alta afluencia en Hermosillo.</p>
+    <div class="ecodir-grid" id="ecodirGrid" role="list"></div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
@@ -2404,7 +2490,7 @@
         <p class="footer-copy">Paradas ecológicas inteligentes para una movilidad más digna, conectada y medible en Hermosillo. Infraestructura climáticamente consciente con monitoreo y experiencia digital en tiempo real.</p>
       </div>
       <div class="footer-nav">
-        <span class="footer-links-title">Paradas de Referencia</span>
+        <span class="footer-links-title">PARADAS DE REFERENCIA</span>
         <div class="footer-links" id="footerLinks"></div>
       </div>
     </div>
@@ -2462,18 +2548,26 @@
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
-    // ── Data ──
+    // ── Data — 10 ecoparadas distribuidas en toda la ciudad ──
     const stops = [
-      { name: "San Benito", route: "Ruta 12", lat: 29.0728, lng: -110.9559, desc: "Parada principal zona centro. Conecta norte-sur.", image: "images/paradas/san-benito-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto San Benito en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Colosio", route: "Ruta 8, 14", lat: 29.0855, lng: -110.9691, desc: "Avenida principal, zona comercial y administrativa.", image: "images/paradas/colosio-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Colosio en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0697, lng: -110.9454, desc: "Edificios administrativos. Diseño accesible.", image: "images/paradas/centro-gobierno-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Centro de Gobierno en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Tecnologico", route: "Ruta 11, 15", lat: 29.0942, lng: -110.9612, desc: "Zona educativa. Proyecto piloto IoT.", image: "images/paradas/tecnologico-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Tecnológico en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Hermosillo Viejo", route: "Ruta 3, 7", lat: 29.0675, lng: -110.9637, desc: "Zona histórica y cultural.", image: "images/paradas/hermosillo-viejo.jpg", imageAlt: "Fotografía de la parada piloto Hermosillo Viejo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Hospital General", route: "Ruta 2, 6", lat: 29.0790, lng: -110.9520, desc: "Acceso a instalaciones sanitarias.", image: "images/paradas/hospital-general-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Hospital General en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Plaza Niños Héroes", route: "Ruta 10, 12", lat: 29.0745, lng: -110.9540, desc: "Nodo peatonal y transferencia de líneas.", image: "images/paradas/plaza-ninos-heroes-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Plaza Niños Héroes en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "Parque Madero", route: "Ruta 9, 13", lat: 29.0785, lng: -110.9408, desc: "Sector recreativo con ciclo-vía.", image: "images/paradas/parque-madero-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Parque Madero en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "La Cantera", route: "Ruta 5, 8", lat: 29.0822, lng: -110.9609, desc: "Entrada sur de la ciudad.", image: "images/paradas/la-cantera-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto La Cantera en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
-      { name: "San Benito Norte", route: "Ruta 7", lat: 29.0827, lng: -110.9521, desc: "Conexión a rutas locales y ejecutivas.", image: "images/paradas/san-benito-norte-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto San Benito Norte en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] }
+      // CENTRO
+      { name: "San Benito", zone: "Centro", geo: "Blvd. Luis Encinas / Calle Pino Suárez", route: "Ruta 12", lat: 29.0728, lng: -110.9559, desc: "Parada principal zona centro. Conecta norte-sur.", image: "images/paradas/san-benito-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto San Benito en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // NORTE — zona comercial Blvd. Morelos / TEC
+      { name: "Tec de Hermosillo", zone: "Norte", geo: "Blvd. Morelos / Periferico Norte", route: "Ruta 11, 15", lat: 29.1185, lng: -110.9620, desc: "Nodo educativo-norte. Alta afluencia estudiantil.", image: "images/paradas/tecnologico-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Tec de Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Colosio Poniente", zone: "Norte-Poniente", geo: "Blvd. Luis Donaldo Colosio / Av. Periférica", route: "Ruta 8, 14", lat: 29.1050, lng: -111.0180, desc: "Zona comercial y administrativa de crecimiento rápido.", image: "images/paradas/colosio-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Colosio Poniente en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // SUR — salida a Guaymas
+      { name: "Hospital General", zone: "Sur", geo: "Blvd. Solidaridad / Hospital General de Sonora", route: "Ruta 2, 6", lat: 29.0390, lng: -110.9670, desc: "Acceso a instalaciones sanitarias. Salida sur.", image: "images/paradas/hospital-general-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Hospital General en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // ESTE — prolongación Blvd. Kino
+      { name: "Plaza Sendero", zone: "Este", geo: "Blvd. Kino / Plaza Sendero Hermosillo", route: "Ruta 10, 12", lat: 29.0820, lng: -110.9020, desc: "Nodo comercial este. Conexión Blvd. Kino.", image: "images/paradas/plaza-ninos-heroes-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Plaza Sendero en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      { name: "Nuevo Hermosillo", zone: "Este-Norte", geo: "Fracc. Nuevo Hermosillo / Blvd. El Novillo", route: "Ruta 9, 13", lat: 29.1100, lng: -110.8980, desc: "Fraccionamiento de alto crecimiento urbano.", image: "images/paradas/parque-madero-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Nuevo Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // OESTE — zona aeropuerto / industrial
+      { name: "Aeropuerto", zone: "Oeste", geo: "Blvd. de los Seris / Aeropuerto Internacional", route: "Ruta 5, 8", lat: 29.0960, lng: -111.0480, desc: "Nodo de conectividad internacional zona poniente.", image: "images/paradas/la-cantera-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Aeropuerto en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // GOBIERNO / CENTRO ADMINISTRATIVO
+      { name: "Centro de Gobierno", zone: "Centro-Este", geo: "Blvd. Paseo del Canal / Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0745, lng: -110.9310, desc: "Edificios administrativos. Diseño accesible.", image: "images/paradas/centro-gobierno-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Centro de Gobierno en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // BLVD. MORELOS FINAL — noreste
+      { name: "Blvd. Morelos Final", zone: "Noreste", geo: "Blvd. Morelos Km 9 / Fracc. Villa Hermosa", route: "Ruta 7", lat: 29.1240, lng: -110.9220, desc: "Extremo norte de Blvd. Morelos. Alta densidad vehicular.", image: "images/paradas/san-benito-norte-hermosillo.jpg", imageAlt: "Fotografía de la parada piloto Blvd. Morelos Final en Hermosillo", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] },
+      // PUNTO TURÍSTICO — Bahía de Kino
+      { name: "Bahía de Kino", zone: "Punto Turístico", geo: "Acceso Bahía de Kino / Carr. Hermosillo-Kino", route: "Ruta 3, 7", lat: 28.8320, lng: -111.9200, desc: "Terminal turístico-costero. Conexión regional.", image: "images/paradas/hermosillo-viejo.jpg", imageAlt: "Fotografía de la parada piloto Bahía de Kino", feat: ["REDUCCIÓN TÉRMICA", "APP CHECK-IN", "TIEMPOS EN VIVO", "WIFI 5G"] }
     ];
 
     const FEATURE_ICON_MAP = {
@@ -2485,8 +2579,8 @@
     const REQUIRED_POPUP_SERVICES = ["WIFI 5G", "REDUCCIÓN TÉRMICA"];
 
     // ── Leaflet Maps (Comparativo sincronizado) ──
-    const mapCurrent = L.map("mapCurrent", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
-    const mapPilot = L.map("mapPilot", { center: [29.0780, -110.9580], zoom: 14, zoomControl: true });
+    const mapCurrent = L.map("mapCurrent", { center: [29.0780, -110.9580], zoom: 13, zoomControl: true });
+    const mapPilot = L.map("mapPilot", { center: [29.0900, -110.9700], zoom: 12, zoomControl: true });
     // Alias de compatibilidad para funciones existentes de viaje/rutas.
     const map = mapCurrent;
 
@@ -3000,6 +3094,20 @@
     }, 300);
 
     renderFooterLinks();
+
+    // Render directorio de ecoparadas (2 columnas x 5)
+    function renderEcodir() {
+      const grid = document.getElementById('ecodirGrid');
+      if (!grid) return;
+      grid.innerHTML = stops.map((stop, i) => `
+        <div class="ecodir-card" role="listitem">
+          <span class="ecodir-num">Parada ${String(i + 1).padStart(2, '0')} · ${stop.zone}</span>
+          <div class="ecodir-name">${stop.name}</div>
+          <div class="ecodir-geo">${stop.geo}</div>
+        </div>
+      `).join('');
+    }
+    renderEcodir();
 
     function openRoutesModal() {
       const routes = Array.from(new Set(stops.flatMap((stop) => stop.route.split(',').map((item) => item.trim()))));
