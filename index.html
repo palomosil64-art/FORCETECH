@@ -2610,6 +2610,9 @@
       className: ""
     });
 
+    let currentKmlLayer = null;
+    let pilotKmlLayer = null;
+
     // ── Pilot stops: siempre renderiza los 10 nodos desde stops[], sin depender del KML ──
     function getPilotPopupHtml(stop) {
       const servicesHtml = REQUIRED_POPUP_SERVICES
@@ -2650,9 +2653,6 @@
 
     syncMapViews(mapCurrent, mapPilot);
     syncMapViews(mapPilot, mapCurrent);
-
-    let currentKmlLayer = null;
-    let pilotKmlLayer = null;
     const nav = document.querySelector('.nav');
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3028,10 +3028,6 @@
 
         if (currentKmlLayer) {
           mapCurrent.removeLayer(currentKmlLayer);
-        }
-
-        if (pilotKmlLayer) {
-          mapPilot.removeLayer(pilotKmlLayer);
         }
 
         const markerLayerCurrent = (typeof L.markerClusterGroup === 'function')
