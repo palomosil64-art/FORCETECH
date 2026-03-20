@@ -734,6 +734,33 @@
       gap: 10px;
     }
 
+    .routes-summary {
+      margin-bottom: 14px;
+      display: grid;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 2px solid rgba(30, 57, 42, 0.18);
+      background: linear-gradient(135deg, rgba(30, 57, 42, 0.06), rgba(52, 199, 89, 0.08));
+    }
+
+    .routes-summary-title {
+      color: #1E392A;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .routes-summary-copy {
+      color: #2f3e33;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+      font-family: 'Montserrat', sans-serif;
+    }
+
     .route-item {
       border: 2px solid #D35400;
       border-radius: 12px;
@@ -754,6 +781,8 @@
       background: rgba(211, 84, 0, 0.15);
       box-shadow: 0 8px 18px rgba(211, 84, 0, 0.24);
       border-color: #B84400;
+      outline: 2px solid rgba(211, 84, 0, 0.16);
+      transform: translateY(-1px);
     }
 
     .route-item.route-item--recommended {
@@ -800,6 +829,7 @@
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.02em;
+      border: 1px solid rgba(30, 57, 42, 0.08);
     }
 
     .route-heat-grid {
@@ -823,6 +853,11 @@
       text-transform: uppercase;
       color: #5c6d61;
       margin-bottom: 3px;
+    }
+
+    .route-heat-label i {
+      color: #D35400;
+      margin-right: 4px;
     }
 
     .route-heat-value {
@@ -3467,6 +3502,10 @@
               <strong class="journey-info-value" id="journeyRouteVariantsValue">SIGUE DE TU VIAJE</strong>
             </div>
             <div class="journey-info-row">
+              <span class="journey-info-label">Indice de calor</span>
+              <strong class="journey-info-value" id="journeyHeatValue">Baja exposicion al calor</strong>
+            </div>
+            <div class="journey-info-row">
               <span class="journey-info-label">Hora actual</span>
               <strong class="journey-info-value" id="journeyCurrentTime">--:--</strong>
             </div>
@@ -3782,6 +3821,7 @@
         <h3 class="smart-modal-title">📍 VER UNA L&Iacute;NEA</h3>
         <button class="smart-close" type="button" onclick="closeRoutesModal()">CERRAR</button>
       </div>
+      <div class="routes-summary" id="routesSummary"></div>
       <div id="routesList" class="routes-menu" role="list"></div>
     </div>
   </div>
@@ -4321,6 +4361,7 @@
       const destinationNode = document.getElementById('journeyDestinationValue');
       const busNode = document.getElementById('journeyNextBusValue');
       const routesNode = document.getElementById('journeyRouteVariantsValue');
+      const heatNode = document.getElementById('journeyHeatValue');
       const arrivalNode = document.getElementById('journeyArrivalValue');
       const etaNode = document.getElementById('journeyEtaValue');
       const totalNode = document.getElementById('journeyTotalValue');
@@ -4331,6 +4372,7 @@
       if (destinationNode && details.destination) destinationNode.textContent = details.destination;
       if (busNode && details.nextBus) busNode.textContent = details.nextBus;
       if (routesNode && details.routeVariants) routesNode.textContent = details.routeVariants;
+      if (heatNode && details.heat) heatNode.textContent = details.heat;
       if (arrivalNode && details.arrival) arrivalNode.innerHTML = `<i class="fa-regular fa-clock" aria-hidden="true"></i>${details.arrival}`;
       if (etaNode && details.eta) etaNode.textContent = details.eta;
       if (totalNode && details.total) totalNode.textContent = details.total;
@@ -4683,6 +4725,7 @@
         destination: lastStop.name.toUpperCase(),
         nextBus: routeID.toUpperCase(),
         routeVariants: `${routeID.toUpperCase()} · ${heatData.label.toUpperCase()} · VIDA UTIL: 26 ANOS`,
+        heat: `${heatData.icon} ${heatData.label} · ${heatData.heatExposureMinutes} min al sol`,
         arrival: `${arrivalToStop} min`,
         eta: formatEtaFromNow(totalMinutes),
         total: `${totalMinutes} min`
@@ -5491,6 +5534,13 @@
       const routes = Array.from(new Set(stops.flatMap((stop) => stop.route.split(',').map((item) => item.trim()))));
       const recommendedRoute = getRecommendedHeatRoute(routes);
       const container = document.getElementById('routesList');
+      const summary = document.getElementById('routesSummary');
+      if (summary && recommendedRoute) {
+        summary.innerHTML = `
+          <div class="routes-summary-title">🍃 Ruta recomendada automaticamente</div>
+          <div class="routes-summary-copy">${recommendedRoute.routeId} tiene la menor exposicion al calor estimada: ${recommendedRoute.heatExposureMinutes} min al sol, ${recommendedRoute.waitMinutes} min de espera y ${recommendedRoute.totalMinutes} min de viaje total.</div>
+        `;
+      }
       container.innerHTML = routes
         .map((route) => {
           const routeStops = stops.filter((stop) => stop.route.includes(route)).map((stop) => stop.name);
@@ -5509,15 +5559,15 @@
               <div class="route-stops">${routeStops.join(' → ')}</div>
               <div class="route-heat-grid">
                 <div class="route-heat-metric">
-                  <span class="route-heat-label">Viaje total</span>
+                  <span class="route-heat-label"><i class="fa-regular fa-clock" aria-hidden="true"></i>Viaje total</span>
                   <span class="route-heat-value">${heatData.totalMinutes} min</span>
                 </div>
                 <div class="route-heat-metric">
-                  <span class="route-heat-label">Espera estimada</span>
+                  <span class="route-heat-label"><i class="fa-regular fa-clock" aria-hidden="true"></i>Espera estimada</span>
                   <span class="route-heat-value">${heatData.waitMinutes} min</span>
                 </div>
                 <div class="route-heat-metric">
-                  <span class="route-heat-label">Exposicion calor</span>
+                  <span class="route-heat-label"><i class="fa-solid fa-sun" aria-hidden="true"></i>Exposicion calor</span>
                   <span class="route-heat-value">${heatData.heatExposureMinutes} min</span>
                 </div>
               </div>
