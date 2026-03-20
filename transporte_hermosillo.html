@@ -5,7 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transporte Publico Hermosillo - Informe 2019-2024</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script> src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -307,7 +308,7 @@
     border: none;
     cursor: pointer;
     display: flex;
-    align-itemas: center;
+    align-items: center;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -316,7 +317,13 @@
     isolation: isolate;
   }
   .floating-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(211, 84, 0, 0.34); }
-  .floating-btn i { color: #FFFFFF; font-size: 20px; }
+  .floating-btn i {
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 1;
+    display: block;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  }
   .floating-btn::after {
     content: '';
     position: absolute;
@@ -419,16 +426,24 @@
   #ecoMap {
     width: 100%;
     height: 380px;
+    min-height: 380px;
     border-radius: 12px;
     border: 2px solid #D35400;
     overflow: hidden;
+    background: #eaf0ee;
   }
   .eco-pin-wrap {
     position: relative;
     width: 30px;
     height: 30px;
     display: grid;
-    place-itemas: center;
+    place-items: center;
+  }
+
+  .kpi-card.map-linked-active {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(211, 84, 0, 0.32);
+    border-left-color: var(--naranja-acento);
   }
   .eco-pin-glow {
     position: absolute;
@@ -462,7 +477,7 @@
   }
 
   .eco-popup-name { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: #1E392A; margin-bottom: 4px; }
-  .eco-popup-rating { display: flex; gap: 5px; align-itemas: center; margin-bottom: 8px; }
+  .eco-popup-rating { display: flex; gap: 5px; align-items: center; margin-bottom: 8px; }
   .eco-popup-stars { color: #D35400; font-size: 13px; letter-spacing: 1px; }
   .eco-popup-meta { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #666; font-weight: 700; }
   .eco-popup-btn { width: 100%; border: 2px solid #D35400; border-radius: 10px; background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%); color: #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 10px; cursor: pointer; }
@@ -481,7 +496,7 @@
     position: fixed;
     inset: 0;
     display: none;
-    align-itemas: center;
+    align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.46);
     z-index: 1200;
@@ -489,7 +504,7 @@
   }
   .eco-reviews-modal.active { display: flex; }
   .eco-reviews-panel { width: min(640px, 100%); max-height: 88vh; overflow: auto; background: #FFFFFF; border: 2px solid #D35400; border-radius: 12px; padding: 18px; box-shadow: 0 18px 40px rgba(211, 84, 0, 0.24); }
-  .eco-reviews-head { display: flex; justify-content: space-between; align-itemas: center; gap: 10px; margin-bottom: 10px; }
+  .eco-reviews-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
   .eco-reviews-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; color: #D35400; text-transform: uppercase; }
   .eco-review-item { border: 2px solid rgba(211, 84, 0, 0.24); border-radius: 12px; padding: 10px 12px; background: #FFFFFF; margin-bottom: 10px; }
   .eco-review-user { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: #1E392A; margin-bottom: 3px; }
@@ -540,7 +555,7 @@
   <p class="section-desc">Estimacion de habitantes mayores de 18 anos que usan el transporte con alguna frecuencia, 2019-2024.</p>
 
   <div class="kpi-grid">
-    <div class="kpi-card">
+    <div class="kpi-card" id="kpiUsuariosTransporte">
       <div class="kpi-label usuario-transporte">Usuarios del transporte</div>
       <div class="kpi-value">168,902 <small>personas</small></div>
       <div class="kpi-change up">? 86% vs 2023</div>
@@ -555,7 +570,7 @@
       <div class="kpi-value">229,624 <small>2019</small></div>
       <div class="kpi-change down">? 26% al 2024</div>
     </div>
-    <div class="kpi-card accent">
+    <div class="kpi-card accent" id="kpiSatisfaccionServicio">
       <div class="kpi-label">Satisfaccion servicio 2024</div>
       <div class="kpi-value">7.0 <small>/ 10</small></div>
       <div class="kpi-change down">? 0.4 vs 2023</div>
@@ -911,7 +926,7 @@
     <div class="chart-sub">10 marcadores naranja con resenas mock, navegacion click-to-map y enfoque de infraestructura bioclimatica.</div>
     <div id="ecoMap"></div>
     <div class="eco-why">
-      <div class="eco-why-title">MOTIVOS DE CREACION DEL PROYECTO PILOTO</div>
+      <div class="eco-why-title">MOTIVOS DE CREACI&Oacute;N DEL PROYECTO PILOTO</div>
       <p class="eco-why-text">Este proyecto integra estructura de acero A36, cubierta de plastimadera con sustrato organico y vegetacin estrategica para mitigar el calor extremo, elevar el confort de espera y consolidar una infraestructura con vida util de 26 anos.</p>
     </div>
   </div>
@@ -1323,6 +1338,7 @@ function updateZonas(year) {
 let ecoMap;
 let ecoMarkers = [];
 let ecoActiveIndex = null;
+let ecoKpiResetTimer = null;
 
 const ecoStops = [
   { name: 'San Benito', zone: 'Centro', address: 'Blvd. Luis Encinas / Calle Pino Suarez', route: 'Ruta 12', coords: [29.0728, -110.9559] },
@@ -1456,6 +1472,7 @@ function closeEcoReviews() {
 function focusEcoStop(idx) {
   const stop = ecoStops[idx];
   setActiveEcoCard(idx);
+  syncEcoStopWithKpis(stop);
   if (ecoMap) {
     ecoMap.flyTo(stop.coords, 15, { animate: true, duration: 1.1 });
     setTimeout(() => {
@@ -1465,14 +1482,54 @@ function focusEcoStop(idx) {
   openEcoReviews(idx);
 }
 
+function syncEcoStopWithKpis(stop) {
+  const usuariosCard = document.getElementById('kpiUsuariosTransporte');
+  const satisfaccionCard = document.getElementById('kpiSatisfaccionServicio');
+  if (!usuariosCard || !satisfaccionCard) return;
+
+  const contribucionZona = {
+    'Centro': 'Contribucion estimada: 18% del flujo piloto',
+    'Norte': 'Contribucion estimada: 14% del flujo piloto',
+    'Norte-Poniente': 'Contribucion estimada: 11% del flujo piloto',
+    'Sur': 'Contribucion estimada: 12% del flujo piloto',
+    'Este': 'Contribucion estimada: 10% del flujo piloto',
+    'Este-Norte': 'Contribucion estimada: 8% del flujo piloto',
+    'Oeste': 'Contribucion estimada: 9% del flujo piloto',
+    'Centro-Este': 'Contribucion estimada: 7% del flujo piloto',
+    'Noreste': 'Contribucion estimada: 6% del flujo piloto',
+    'Industrial Poniente': 'Contribucion estimada: 5% del flujo piloto'
+  };
+
+  const usuariosChange = usuariosCard.querySelector('.kpi-change');
+  const satisfaccionChange = satisfaccionCard.querySelector('.kpi-change');
+  if (usuariosChange) {
+    usuariosChange.textContent = `${stop.name} · ${contribucionZona[stop.zone] || 'Contribucion estimada del piloto'}`;
+  }
+  if (satisfaccionChange) {
+    satisfaccionChange.textContent = `${stop.name} · Percepcion de confort validada en sitio`;
+  }
+
+  usuariosCard.classList.add('map-linked-active');
+  satisfaccionCard.classList.add('map-linked-active');
+
+  if (ecoKpiResetTimer) {
+    clearTimeout(ecoKpiResetTimer);
+  }
+  ecoKpiResetTimer = setTimeout(() => {
+    usuariosCard.classList.remove('map-linked-active');
+    satisfaccionCard.classList.remove('map-linked-active');
+  }, 2800);
+}
+
 function initEcoMap() {
   const mapContainer = document.getElementById('ecoMap');
   if (!mapContainer || ecoMap) return;
 
-  ecoMap = L.map('ecoMap', { zoomControl: true }).setView([29.0892, -110.9613], 12);
-  L.utileLayer('https://{s}.utile.openstreetmap.org/{z}/{x}/{y}.png', {
+  ecoMap = L.map('ecoMap', { zoomControl: true, preferCanvas: true }).setView([29.0892, -110.9613], 12);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
+    subdomains: 'abcd',
+    attribution: '&copy; OpenStreetMap &copy; CARTO'
   }).addTo(ecoMap);
 
   const ecoPinIcon = L.divIcon({
