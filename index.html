@@ -570,6 +570,27 @@
       overflow: hidden;
       background: #ffffff;
       box-shadow: 0 10px 20px rgba(17, 35, 20, 0.08);
+      position: relative;
+    }
+
+    .map-mock-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 700;
+      padding: 3px 8px;
+      border: 1px solid #D35400;
+      border-radius: 999px;
+      background: #FFFFFF;
+      color: #D35400;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      pointer-events: none;
+      box-shadow: 0 6px 16px rgba(211, 84, 0, 0.16);
     }
 
     .map-panel-title {
@@ -875,6 +896,55 @@
       resize: vertical;
     }
 
+    .journey-history {
+      margin-top: 14px;
+      border-top: 1px solid rgba(211, 84, 0, 0.2);
+      padding-top: 10px;
+    }
+
+    .journey-history-title {
+      margin: 0 0 8px;
+      color: #D35400;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .journey-history-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .journey-history-item {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(211, 84, 0, 0.35);
+      border-radius: 10px;
+      background: #FFFFFF;
+      color: #1E392A;
+      padding: 8px 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .journey-history-item:hover {
+      transform: translateY(-1px);
+      border-color: #D35400;
+      box-shadow: 0 6px 16px rgba(211, 84, 0, 0.18);
+    }
+
+    .journey-history-empty {
+      color: #8a8a8a;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
     .live-indicator::before {
       content: '';
       width: 9px;
@@ -898,13 +968,285 @@
       height: 560px;
     }
 
+    .journey-overlay-header {
+      position: absolute;
+      top: 56px;
+      left: 12px;
+      right: 12px;
+      z-index: 710;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(211, 84, 0, 0.4);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 8px 22px rgba(17, 35, 20, 0.16);
+      pointer-events: none;
+    }
+
+    .journey-line-title {
+      color: #1E392A;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .journey-brand-pills {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .journey-brand-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      height: 24px;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      padding: 0 10px;
+    }
+
+    .journey-brand-pill--une {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+    }
+
+    .journey-brand-pill--forcetech {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+    }
+
+    .journey-info-panel {
+      position: absolute;
+      top: 108px;
+      right: 12px;
+      z-index: 710;
+      width: min(240px, calc(100% - 24px));
+      border: 2px solid #D35400;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 12px 28px rgba(211, 84, 0, 0.2);
+      padding: 10px;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .journey-info-title {
+      margin: 0 0 10px;
+      color: #D35400;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .journey-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      border-top: 1px solid rgba(211, 84, 0, 0.14);
+    }
+
+    .journey-info-row:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .journey-info-label {
+      color: #D35400;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .journey-info-value {
+      color: #333333;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: normal;
+      word-break: break-word;
+      text-align: right;
+    }
+
+    #journeyRouteVariantsValue {
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .journey-info-value i {
+      color: #D35400;
+      margin-right: 4px;
+    }
+
+    .journey-status-bar {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 710;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .journey-status-btn {
+      border: none;
+      border-radius: 12px;
+      min-height: 42px;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0 14px;
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.34);
+      pointer-events: none;
+      text-align: center;
+    }
+
+    .journey-quick-actions {
+      display: none;
+      gap: 6px;
+    }
+
+    .journey-quick-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(17, 35, 20, 0.22);
+      pointer-events: none;
+    }
+
+    .journey-quick-btn--une {
+      background: linear-gradient(135deg, #1F65D6 0%, #1A4FB0 100%);
+    }
+
+    .journey-quick-btn--forcetech {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+    }
+
+    .journey-quick-btn i {
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    .bus-live-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      filter: drop-shadow(0 5px 10px rgba(211, 84, 0, 0.36));
+    }
+
+    .bus-live-vehicle {
+      width: 28px;
+      height: 28px;
+      transform-origin: 50% 50%;
+      transition: transform 0.16s linear;
+      will-change: transform;
+    }
+
+    .bus-live-heading {
+      opacity: 0.92;
+      animation: busHeadingPulse 1.1s ease-in-out infinite;
+    }
+
+    @keyframes busHeadingPulse {
+      0%, 100% { opacity: 0.75; }
+      50% { opacity: 1; }
+    }
+
+    .route-variant-main {
+      filter: drop-shadow(0 0 6px rgba(31, 101, 214, 0.4));
+    }
+
+    .route-variant-alt {
+      filter: drop-shadow(0 0 4px rgba(26, 79, 176, 0.26));
+    }
+
+    .route-direction-arrow {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 100%);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 6px 14px rgba(211, 84, 0, 0.42);
+      transform-origin: 50% 50%;
+      transition: transform 0.16s linear;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .journey-point-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      display: grid;
+      place-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFFFFF;
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.72), 0 6px 16px rgba(17, 35, 20, 0.2);
+    }
+
+    .journey-point-icon--start {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 100%);
+    }
+
+    .journey-point-icon--end {
+      background: linear-gradient(135deg, #2A7DE1 0%, #1A4FB0 100%);
+    }
+
+    .map-canvas--selecting {
+      cursor: crosshair;
+      outline: 2px dashed rgba(211, 84, 0, 0.35);
+      outline-offset: -2px;
+    }
+
     .current-stop-icon {
-      width: 0;
-      height: 0;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-bottom: 9px solid #b67a45;
-      filter: drop-shadow(0 1px 2px rgba(111, 77, 46, 0.4));
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--stop-color, #D35400);
+      border: 1.5px solid #FFFFFF;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95), 0 2px 6px rgba(17, 35, 20, 0.28);
       transform: translateY(-1px);
     }
 
@@ -921,7 +1263,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: rgba(211, 84, 0, 0.28);
+      background: rgba(30, 70, 32, 0.28);
       animation: mapPulse 1.9s ease-out infinite;
       pointer-events: none;
     }
@@ -929,11 +1271,11 @@
     .pilot-stop-pin {
       width: 26px;
       height: 26px;
-      background: linear-gradient(135deg, #F17A20, #D35400);
+      background: linear-gradient(135deg, #2E7D32, #1E4620);
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
       border: 3px solid #ffffff;
-      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.55), 0 0 0 4px rgba(211, 84, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(30, 70, 32, 0.55), 0 0 0 4px rgba(30, 70, 32, 0.15);
       position: relative;
       z-index: 1;
     }
@@ -1718,6 +2060,86 @@
       font-weight: 800;
     }
 
+    .team-card.andrea-card {
+      border-radius: 12px;
+    }
+
+    .team-card.andrea-card .team-photo {
+      border: 2px solid #D35400;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.22);
+      background: #FFFFFF;
+    }
+
+    .team-card.andrea-card .team-name {
+      color: #1E392A;
+      font-weight: 800;
+    }
+
+    .team-card.andrea-card .team-role {
+      color: #666666;
+    }
+
+    .team-card.francisco-card {
+      border-radius: 12px;
+    }
+
+    .team-card.francisco-card .team-photo {
+      border: 2px solid #D35400;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.22);
+      background: #FFFFFF;
+    }
+
+    .team-card.francisco-card .team-name {
+      color: #1E392A;
+      font-weight: 800;
+    }
+
+    .team-card.francisco-card .team-role {
+      color: #666666;
+    }
+
+    .team-card.gabriela-card {
+      border-radius: 12px;
+    }
+
+    .team-card.gabriela-card .team-photo {
+      border: 2px solid #D35400;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.22);
+      background: #FFFFFF;
+    }
+
+    .team-card.gabriela-card .team-name {
+      color: #1E392A;
+      font-weight: 800;
+    }
+
+    .team-card.gabriela-card .team-role {
+      color: #666666;
+    }
+
+    .team-card.raul-card {
+      border-radius: 12px;
+    }
+
+    .team-card.raul-card .team-photo {
+      border: 2px solid #D35400;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.22);
+      background: #FFFFFF;
+    }
+
+    .team-card.raul-card .team-name {
+      color: #1E392A;
+      font-weight: 800;
+    }
+
+    .team-card.raul-card .team-role {
+      color: #666666;
+    }
+
     .team-photo-placeholder {
       width: 100%;
       height: 100%;
@@ -1981,6 +2403,25 @@
       .map-canvas {
         min-height: 520px;
         height: 520px;
+      }
+
+      .journey-overlay-header {
+        top: 52px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .journey-info-panel {
+        top: 128px;
+        width: calc(100% - 24px);
+      }
+
+      .journey-status-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .journey-quick-actions {
+        justify-content: flex-end;
       }
 
       .nav-links { display: none; }
@@ -2435,6 +2876,50 @@
         <article class="map-panel">
           <h4 class="map-panel-title">Proyecto Piloto: 10 Ecoparadas Inteligentes</h4>
           <div id="mapPilot" class="map-canvas" aria-label="Mapa de ecoparadas piloto"></div>
+          <div class="journey-overlay-header" aria-hidden="true">
+            <span class="journey-line-title" id="journeyLineTitle">Sigue de tu viaje</span>
+            <div class="journey-brand-pills">
+              <span class="journey-brand-pill journey-brand-pill--une">FORCETECH</span>
+            </div>
+          </div>
+          <aside class="journey-info-panel" aria-hidden="true">
+            <h5 class="journey-info-title">Detalles de tu viaje</h5>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Origen</span>
+              <strong class="journey-info-value" id="journeyOriginValue">Ecoparada Aeropuerto</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Destino</span>
+              <strong class="journey-info-value" id="journeyDestinationValue">Centro Histórico / Catedral</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Próximo autobús</span>
+              <strong class="journey-info-value" id="journeyNextBusValue">Sigue de tu viaje</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Rutas sugeridas</span>
+              <strong class="journey-info-value" id="journeyRouteVariantsValue">SIGUE DE TU VIAJE</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Hora actual</span>
+              <strong class="journey-info-value" id="journeyCurrentTime">--:--</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Tiempo de llegada a parada</span>
+              <strong class="journey-info-value" id="journeyArrivalValue"><i class="fa-regular fa-clock" aria-hidden="true"></i>4 min</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Hora estimada de llegada (ETA)</span>
+              <strong class="journey-info-value" id="journeyEtaValue">14:45 PM</strong>
+            </div>
+            <div class="journey-info-row">
+              <span class="journey-info-label">Tiempo total de viaje</span>
+              <strong class="journey-info-value" id="journeyTotalValue">22 min</strong>
+            </div>
+          </aside>
+          <div class="journey-status-bar" aria-hidden="true">
+            <div class="journey-status-btn" id="journeyStatusText">Sigue de tu viaje</div>
+          </div>
         </article>
       </div>
       <div class="pilot-justification">
@@ -2619,36 +3104,36 @@
         <div class="team-role">DIRECTORA DE PROYECTOS 5G</div>
         <div class="team-bio">Ingeniera especializada en analisis de datos ambientales y reporteria de impacto ecosistemico.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card francisco-card">
         <div class="team-photo">
-          <div class="team-photo-placeholder">M</div>
+          <img src="2d019175-5597-4429-b9fd-0979a5dcf18d.png" alt="Moreno Flores Francisco">
         </div>
         <div class="team-name">Moreno Flores Francisco</div>
-        <div class="team-role">CEO / Director</div>
+        <div class="team-role">ESPECIALISTA EN INFRAESTRUCTURA</div>
         <div class="team-bio">Experto en Smart Cities y gobernanza urbana sostenible con vision integral de movilidad.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card raul-card">
         <div class="team-photo">
-          <div class="team-photo-placeholder">I</div>
+          <img src="96f18d07-d151-4ecb-abe0-442abf09fab9.png" alt="Ibarra Acosta Raul">
         </div>
         <div class="team-name">Ibarra Acosta Raul</div>
-        <div class="team-role">Director de Operaciones</div>
+        <div class="team-role">INGENIERO DE SISTEMAS Y DESARROLLO</div>
         <div class="team-bio">Estratega operacional en movilidad urbana especializado en eficiencia de sistemas y escalabilidad.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card gabriela-card">
         <div class="team-photo">
-          <div class="team-photo-placeholder">S</div>
+          <img src="33f5b433-6319-40ab-8915-002feb11611d.png" alt="Sanchez Jimenez Gabriela">
         </div>
         <div class="team-name">Sanchez Jimenez Gabriela</div>
-        <div class="team-role">CTO / Tecnologia</div>
+        <div class="team-role">CTO / TECNOLOGIA</div>
         <div class="team-bio">Especialista en IoT, cloud infrastructure y automacion inteligente para espacios urbanos.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card andrea-card">
         <div class="team-photo">
-          <div class="team-photo-placeholder">O</div>
+          <img src="d6fec923-66b2-4e7b-98a0-9aa37f9dc308.png" alt="Ortiz Sanchez Andrea">
         </div>
         <div class="team-name">Ortiz Sanchez Andrea</div>
-        <div class="team-role">Directora de Marketing</div>
+        <div class="team-role">ANALISTA DE DATOS AMBIENTALES</div>
         <div class="team-bio">Comunicadora especializada en sostenibilidad, impacto ambiental y narrativa de marca verde.</div>
       </div>
       <div class="team-card camila-card">
@@ -2666,7 +3151,7 @@
   <section class="section" id="red-inteligente" aria-labelledby="ecodir-heading">
     <span class="section-label">Red Piloto 2026</span>
     <h2 class="section-title" id="ecodir-heading">UBICACIÓN ESTRATÉGICA DE RED INTELIGENTE</h2>
-    <p class="section-sub">Estas 10 ecoparadas son el núcleo tecnológico de FORCETECH dentro de la red global de 453 paradas activas de Hermosillo: norte, sur, este, oeste y nodos estratégicos de alta afluencia.</p>
+    <p class="section-sub">Estas 10 ecoparadas son el núcleo tecnológico de FORCETECH dentro de la red global de 453 PARADAS ACTIVAS de Hermosillo: norte, sur, este, oeste y nodos estratégicos de alta afluencia.</p>
     <div class="ecodir-grid" id="ecodirGrid" role="list"></div>
   </section>
 
@@ -2695,11 +3180,16 @@
         <button class="smart-close" type="button" onclick="closeJourneyModal()">CERRAR</button>
       </div>
       <form class="smart-form" onsubmit="calculateJourney(event)">
-        <input id="originInput" type="text" placeholder="ORIGEN (EJ. SAN BENITO)" required>
-        <input id="destinationInput" type="text" placeholder="DESTINO (EJ. HOSPITAL GENERAL)" required>
+        <input id="originInput" type="text" placeholder="ORIGEN (EJ. AEROPUERTO, GALERÍAS MALL, COLONIA PITIC)" required>
+        <input id="destinationInput" type="text" placeholder="DESTINO (EJ. CATEDRAL, CERRO DE LA CAMPANA, UNISON)" required>
         <button class="smart-btn" type="submit">CALCULAR RUTA</button>
+        <button class="smart-btn" type="button" onclick="startJourneySelectionMode()">SELECCIONAR EN MAPA</button>
       </form>
       <div id="journeyResult" style="margin-top:12px;color:#D35400;font-weight:600;font-family:'Montserrat',sans-serif;"></div>
+      <div class="journey-history">
+        <p class="journey-history-title">Mis últimos viajes</p>
+        <div id="journeyHistoryList" class="journey-history-list"></div>
+      </div>
     </div>
   </div>
 
@@ -2791,6 +3281,7 @@
       "APP CHECK-IN": { icon: "fa-solid fa-mobile-screen-button", shortLabel: "App check-in" }
     };
     const REQUIRED_POPUP_SERVICES = ["WIFI 5G", "REDUCCIÓN TÉRMICA"];
+    const totalParadas = 453;
 
     // ── Leaflet Maps (Comparativo sincronizado) ──
     const mapCurrent = L.map("mapCurrent", { center: [29.0780, -110.9580], zoom: 13, zoomControl: true });
@@ -2808,13 +3299,19 @@
     addBaseLayer(mapCurrent);
     addBaseLayer(mapPilot);
 
-    const currentMarkerIcon = L.divIcon({
-      html: '<div class="current-stop-icon"></div>',
-      iconSize: [10, 10],
-      iconAnchor: [5, 9],
-      popupAnchor: [0, -9],
-      className: ""
-    });
+    const currentStopsPalette = ['#D35400', '#F17A20', '#1E4620', '#2E7D32', '#1A4FB0', '#3B82F6'];
+
+    function getCurrentMarkerIcon(stop, relatedStop, idx = 0) {
+      const color = currentStopsPalette[idx % currentStopsPalette.length];
+
+      return L.divIcon({
+        html: `<div class="current-stop-icon" style="--stop-color:${color}"></div>`,
+        iconSize: [11, 11],
+        iconAnchor: [5, 8],
+        popupAnchor: [0, -8],
+        className: ''
+      });
+    }
 
     const pilotMarkerIcon = L.divIcon({
       html: '<div class="pilot-stop-wrap"><span class="pilot-stop-glow"></span><span class="pilot-stop-pin"></span></div>',
@@ -2827,6 +3324,86 @@
     let currentKmlLayer = null;
     let pilotKmlLayer = null;
     const pilotMarkers = [];
+    let liveRouteLayer = null;
+    let liveRouteLayers = [];
+    let liveDirectionMarker = null;
+    let liveStartMarker = null;
+    let liveEndMarker = null;
+    let liveRouteAnimationId = null;
+    let routePulseAnimationId = null;
+    let journeyPlannerActive = false;
+    let journeySelectionStep = 'origin';
+    const journeyHistoryKey = 'forcetech_journey_history';
+    const routeCatalog = [
+      { name: 'Línea 1 Centro', color: '#1F65D6' },
+      { name: 'Línea 2 Norte', color: '#2A7DE1' },
+      { name: 'Línea 3 Monteverde', color: '#1A4FB0' },
+      { name: 'Línea 5 Hospitales', color: '#3B82F6' },
+      { name: 'Línea 8 Aeropuerto', color: '#2563EB' }
+    ];
+
+    function getJourneyHistory() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(journeyHistoryKey) || '[]');
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveJourneyHistory(entry) {
+      const history = getJourneyHistory();
+      const deduped = history.filter((item) => !(item.origin === entry.origin && item.destination === entry.destination));
+      deduped.unshift(entry);
+      localStorage.setItem(journeyHistoryKey, JSON.stringify(deduped.slice(0, 5)));
+    }
+
+    function renderJourneyHistory() {
+      const list = document.getElementById('journeyHistoryList');
+      if (!list) return;
+
+      const history = getJourneyHistory();
+      if (!history.length) {
+        list.innerHTML = '<div class="journey-history-empty">Aún no tienes viajes guardados.</div>';
+        return;
+      }
+
+      list.innerHTML = history.map((item, idx) => (
+        `<button type="button" class="journey-history-item" onclick="reuseJourneyHistory(${idx})">${item.origin} → ${item.destination}</button>`
+      )).join('');
+    }
+
+    async function reuseJourneyHistory(index) {
+      const history = getJourneyHistory();
+      const item = history[index];
+      if (!item) return;
+
+      await runInteractiveJourney(
+        { lat: item.originLat, lng: item.originLng },
+        { lat: item.destinationLat, lng: item.destinationLng },
+        { origin: item.origin, destination: item.destination, preferredLine: item.lineName }
+      );
+
+      journeyPlannerActive = false;
+      journeySelectionStep = 'origin';
+      setJourneySelectionMode(false);
+      setJourneyPlannerStatus(`🚍 ${(item.lineName || 'LÍNEA 3 MONTEVERDE').toUpperCase()}`);
+      document.getElementById('journeyModal').classList.remove('active');
+      mapPilot.getContainer().scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function injectMockBadge() {
+      const mapCurrentElement = document.getElementById('mapCurrent');
+      if (!mapCurrentElement) return;
+
+      const mapPanel = mapCurrentElement.closest('.map-panel');
+      if (!mapPanel || mapPanel.querySelector('.map-mock-badge')) return;
+
+      const badge = document.createElement('div');
+      badge.className = 'map-mock-badge';
+      badge.textContent = '= 453 paradas activas';
+      mapPanel.appendChild(badge);
+    }
 
     // ── Pilot stops: siempre renderiza los 10 nodos desde stops[], sin depender del KML ──
     function getPilotPopupHtml(stop, idx) {
@@ -2875,6 +3452,580 @@
       }
     }
     renderPilotLayer();
+
+    function getStopByName(name) {
+      return stops.find((stop) => stop.name === name) || stops[0];
+    }
+
+    function getLiveJourneyRouteStops() {
+      const orderedStopNames = [
+        'Aeropuerto',
+        'Nodo Industrial Poniente'
+      ];
+
+      return orderedStopNames.map((name) => getStopByName(name));
+    }
+
+    function getLiveJourneyRoadPath() {
+      const routeStops = getLiveJourneyRouteStops();
+      const start = routeStops[0];
+      const transfer = routeStops[1] || routeStops[0];
+
+      const roadPolyline = [
+        [start.lat, start.lng],
+        [transfer.lat, transfer.lng],
+        [29.0866, -111.0108],
+        [29.0828, -110.9996],
+        [29.0794, -110.9881],
+        [29.0762, -110.9755],
+        [29.0746, -110.9642],
+        [29.0728, -110.9560],
+        [29.0734, -110.9482],
+        [29.0741, -110.9407],
+        [29.0737, -110.9332]
+      ];
+
+      const destination = {
+        name: 'Centro Histórico / Catedral',
+        lat: 29.0737,
+        lng: -110.9332
+      };
+
+      return { routeStops, roadPolyline, destination };
+    }
+
+    function getCityRoadSpine() {
+      return [
+        [29.0930, -111.0200],
+        [29.0866, -111.0108],
+        [29.0828, -110.9996],
+        [29.0794, -110.9881],
+        [29.0762, -110.9755],
+        [29.0746, -110.9642],
+        [29.0728, -110.9560],
+        [29.0734, -110.9482],
+        [29.0741, -110.9407],
+        [29.0737, -110.9332]
+      ];
+    }
+
+    function findClosestIndex(coords, target) {
+      let bestIndex = 0;
+      let bestDistance = Infinity;
+      coords.forEach((coord, idx) => {
+        const d = distanceSq(coord[0], coord[1], target[0], target[1]);
+        if (d < bestDistance) {
+          bestDistance = d;
+          bestIndex = idx;
+        }
+      });
+      return bestIndex;
+    }
+
+    function removeDuplicateCoords(coords) {
+      const unique = [];
+      coords.forEach((coord) => {
+        const last = unique[unique.length - 1];
+        if (!last || last[0] !== coord[0] || last[1] !== coord[1]) {
+          unique.push(coord);
+        }
+      });
+      return unique;
+    }
+
+    function getNearestEcoStop(latlng) {
+      return stops.reduce((best, stop) => {
+        const d = distanceSq(latlng.lat, latlng.lng, stop.lat, stop.lng);
+        if (!best || d < best.distance) return { stop, distance: d };
+        return best;
+      }, null).stop;
+    }
+
+    async function geocodeHermosilloLocation(query) {
+      const cleanedQuery = query.trim();
+      const normalizedQuery = normalizeStopText(cleanedQuery);
+      const directStop = stops.find((stop) => normalizeStopText(stop.name).includes(normalizedQuery));
+      if (directStop) {
+        return { lat: directStop.lat, lng: directStop.lng, label: directStop.name };
+      }
+
+      const params = new URLSearchParams({
+        format: 'jsonv2',
+        limit: '1',
+        countrycodes: 'mx',
+        bounded: '1',
+        viewbox: '-111.12,29.20,-110.75,28.95',
+        q: `${cleanedQuery}, Hermosillo, Sonora, Mexico`
+      });
+
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error('No fue posible consultar ubicaciones en este momento.');
+      }
+
+      const data = await response.json();
+      if (!Array.isArray(data) || !data.length) {
+        throw new Error(`No se encontró la ubicación "${cleanedQuery}" en Hermosillo.`);
+      }
+
+      const first = data[0];
+      return {
+        lat: Number(first.lat),
+        lng: Number(first.lon),
+        label: cleanedQuery
+      };
+    }
+
+    function distanceKm(a, b) {
+      const toRad = (val) => (val * Math.PI) / 180;
+      const R = 6371;
+      const dLat = toRad(b[0] - a[0]);
+      const dLng = toRad(b[1] - a[1]);
+      const lat1 = toRad(a[0]);
+      const lat2 = toRad(b[0]);
+      const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(h));
+    }
+
+    function estimateTotalMinutes(routeCoords) {
+      if (!routeCoords || routeCoords.length < 2) return 0;
+      let km = 0;
+      for (let i = 0; i < routeCoords.length - 1; i += 1) {
+        km += distanceKm(routeCoords[i], routeCoords[i + 1]);
+      }
+      const avgUrbanSpeedKmH = 22;
+      return Math.max(4, Math.round((km / avgUrbanSpeedKmH) * 60));
+    }
+
+    function formatEtaFromNow(minutesToAdd) {
+      const eta = new Date(Date.now() + minutesToAdd * 60000);
+      const hh = String(eta.getHours()).padStart(2, '0');
+      const mm = String(eta.getMinutes()).padStart(2, '0');
+      const suffix = eta.getHours() >= 12 ? 'PM' : 'AM';
+      return `${hh}:${mm} ${suffix}`;
+    }
+
+    function updateJourneyPanelDetails(details) {
+      const originNode = document.getElementById('journeyOriginValue');
+      const destinationNode = document.getElementById('journeyDestinationValue');
+      const busNode = document.getElementById('journeyNextBusValue');
+      const routesNode = document.getElementById('journeyRouteVariantsValue');
+      const arrivalNode = document.getElementById('journeyArrivalValue');
+      const etaNode = document.getElementById('journeyEtaValue');
+      const totalNode = document.getElementById('journeyTotalValue');
+      const lineTitleNode = document.getElementById('journeyLineTitle');
+      const statusNode = document.getElementById('journeyStatusText');
+
+      if (originNode && details.origin) originNode.textContent = details.origin;
+      if (destinationNode && details.destination) destinationNode.textContent = details.destination;
+      if (busNode && details.nextBus) busNode.textContent = details.nextBus;
+      if (routesNode && details.routeVariants) routesNode.textContent = details.routeVariants;
+      if (arrivalNode && details.arrival) arrivalNode.innerHTML = `<i class="fa-regular fa-clock" aria-hidden="true"></i>${details.arrival}`;
+      if (etaNode && details.eta) etaNode.textContent = details.eta;
+      if (totalNode && details.total) totalNode.textContent = details.total;
+      if (lineTitleNode && details.nextBus) lineTitleNode.textContent = details.nextBus;
+      if (statusNode && details.nextBus) statusNode.textContent = `🚍 ${details.nextBus}`;
+    }
+
+    function hashRouteSeed(text) {
+      return Array.from(text).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    }
+
+    function createRouteVariantCoordinates(baseCoords, variantIndex) {
+      if (variantIndex === 0) return baseCoords;
+
+      const coords = [...baseCoords];
+      const mid = Math.floor(coords.length / 2);
+      const midCoord = coords[mid] || coords[coords.length - 2] || coords[0];
+      const detour = variantIndex === 1
+        ? [midCoord[0] + 0.0024, midCoord[1] - 0.003]
+        : [midCoord[0] - 0.0022, midCoord[1] + 0.0028];
+
+      return removeDuplicateCoords([
+        ...coords.slice(0, mid),
+        detour,
+        ...coords.slice(mid)
+      ]);
+    }
+
+    function buildRouteVariants(baseCoords, seedText, preferredLine = null) {
+      const seed = hashRouteSeed(seedText);
+      const startIndex = preferredLine
+        ? Math.max(0, routeCatalog.findIndex((line) => line.name === preferredLine))
+        : seed % routeCatalog.length;
+
+      return [0, 1, 2].map((variantIndex) => {
+        const catalogLine = routeCatalog[(startIndex + variantIndex) % routeCatalog.length];
+        return {
+          name: catalogLine.name,
+          color: catalogLine.color,
+          coords: createRouteVariantCoordinates(baseCoords, variantIndex)
+        };
+      });
+    }
+
+    async function fetchRoadRouteVariants(originLatLng, destinationLatLng, viaLatLng, seedText, preferredLine = null, fallbackCoords = []) {
+      const seed = hashRouteSeed(seedText);
+      const startIndex = preferredLine
+        ? Math.max(0, routeCatalog.findIndex((line) => line.name === preferredLine))
+        : seed % routeCatalog.length;
+
+      const fallback = () => {
+        const base = fallbackCoords.length
+          ? fallbackCoords
+          : removeDuplicateCoords([
+              [originLatLng.lat, originLatLng.lng],
+              [viaLatLng.lat, viaLatLng.lng],
+              [destinationLatLng.lat, destinationLatLng.lng]
+            ]);
+        return buildRouteVariants(base, seedText, preferredLine);
+      };
+
+      try {
+        const waypoints = `${originLatLng.lng},${originLatLng.lat};${viaLatLng.lng},${viaLatLng.lat};${destinationLatLng.lng},${destinationLatLng.lat}`;
+        const params = new URLSearchParams({
+          alternatives: 'true',
+          overview: 'full',
+          geometries: 'geojson',
+          steps: 'false'
+        });
+        const response = await fetch(`https://router.project-osrm.org/route/v1/driving/${waypoints}?${params.toString()}`);
+        if (!response.ok) return fallback();
+
+        const payload = await response.json();
+        if (!payload || !Array.isArray(payload.routes) || payload.routes.length === 0) {
+          return fallback();
+        }
+
+        return payload.routes.slice(0, 3).map((route, idx) => {
+          const catalogLine = routeCatalog[(startIndex + idx) % routeCatalog.length];
+          const coords = Array.isArray(route.geometry?.coordinates)
+            ? route.geometry.coordinates.map((pair) => [Number(pair[1]), Number(pair[0])])
+            : [];
+
+          return {
+            name: catalogLine.name,
+            color: catalogLine.color,
+            coords: coords.length ? removeDuplicateCoords(coords) : fallback()[idx].coords
+          };
+        });
+      } catch (_) {
+        return fallback();
+      }
+    }
+
+    function clearRouteLayers() {
+      liveRouteLayers.forEach((layer) => mapPilot.removeLayer(layer));
+      liveRouteLayers = [];
+      if (liveRouteLayer) {
+        mapPilot.removeLayer(liveRouteLayer);
+        liveRouteLayer = null;
+      }
+      if (routePulseAnimationId) {
+        cancelAnimationFrame(routePulseAnimationId);
+        routePulseAnimationId = null;
+      }
+      if (liveDirectionMarker) {
+        mapPilot.removeLayer(liveDirectionMarker);
+        liveDirectionMarker = null;
+      }
+    }
+
+    function animateRouteLayers(layers) {
+      let offset = 0;
+      function tick() {
+        offset = (offset + 1.2) % 90;
+        layers.forEach((layer, idx) => {
+          layer.setStyle({ dashOffset: `${Math.round(offset + idx * 18)}px` });
+        });
+        routePulseAnimationId = requestAnimationFrame(tick);
+      }
+      tick();
+    }
+
+    function buildInteractiveJourneyRoute(originLatLng, destinationLatLng) {
+      const nearestStop = getNearestEcoStop(originLatLng);
+      const spine = getCityRoadSpine();
+      const startSpineIdx = findClosestIndex(spine, [nearestStop.lat, nearestStop.lng]);
+      const endSpineIdx = findClosestIndex(spine, [destinationLatLng.lat, destinationLatLng.lng]);
+      const spineSegment = startSpineIdx <= endSpineIdx
+        ? spine.slice(startSpineIdx, endSpineIdx + 1)
+        : spine.slice(endSpineIdx, startSpineIdx + 1).reverse();
+
+      const routeCoords = removeDuplicateCoords([
+        [originLatLng.lat, originLatLng.lng],
+        [nearestStop.lat, nearestStop.lng],
+        ...spineSegment,
+        [destinationLatLng.lat, destinationLatLng.lng]
+      ]);
+
+      return { routeCoords, nearestStop };
+    }
+
+    function setJourneyPlannerStatus(text) {
+      const status = document.querySelector('.journey-status-btn');
+      if (status) status.textContent = text;
+    }
+
+    function setJourneySelectionMode(enabled) {
+      const mapEl = mapPilot.getContainer();
+      mapEl.classList.toggle('map-canvas--selecting', enabled);
+    }
+
+    function updateJourneyClock() {
+      const target = document.getElementById('journeyCurrentTime');
+      if (!target) return;
+
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const suffix = now.getHours() >= 12 ? 'PM' : 'AM';
+      target.textContent = `${hh}:${mm} ${suffix}`;
+    }
+
+    function interpolateRoutePosition(routeCoords, progress) {
+      if (!routeCoords.length) return null;
+      if (routeCoords.length === 1) return routeCoords[0];
+
+      const segmentLengths = [];
+      let totalLength = 0;
+
+      for (let i = 0; i < routeCoords.length - 1; i += 1) {
+        const a = routeCoords[i];
+        const b = routeCoords[i + 1];
+        const segmentLength = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        segmentLengths.push(segmentLength);
+        totalLength += segmentLength;
+      }
+
+      if (totalLength === 0) return routeCoords[0];
+      let distanceTarget = totalLength * progress;
+
+      for (let i = 0; i < segmentLengths.length; i += 1) {
+        const segmentLength = segmentLengths[i];
+        if (distanceTarget <= segmentLength) {
+          const start = routeCoords[i];
+          const end = routeCoords[i + 1];
+          const ratio = segmentLength === 0 ? 0 : distanceTarget / segmentLength;
+          return [
+            start[0] + (end[0] - start[0]) * ratio,
+            start[1] + (end[1] - start[1]) * ratio
+          ];
+        }
+        distanceTarget -= segmentLength;
+      }
+
+      return routeCoords[routeCoords.length - 1];
+    }
+
+    function computeHeadingDeg(fromCoord, toCoord) {
+      const dy = toCoord[0] - fromCoord[0];
+      const dx = toCoord[1] - fromCoord[1];
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+      return Number.isFinite(angle) ? angle : 0;
+    }
+
+    function getDirectionArrowIcon() {
+      return L.divIcon({
+        className: '',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        html: '<div class="route-direction-arrow">➤</div>'
+      });
+    }
+
+    function setDirectionArrow(marker, fromCoord, toCoord) {
+      const markerEl = marker && marker.getElement ? marker.getElement() : null;
+      if (!markerEl || !fromCoord || !toCoord) return;
+      const arrow = markerEl.querySelector('.route-direction-arrow');
+      if (!arrow) return;
+      const heading = computeHeadingDeg(fromCoord, toCoord);
+      arrow.style.transform = `rotate(${heading}deg)`;
+    }
+
+    function getJourneyPointIcon(type) {
+      const className = type === 'start'
+        ? 'journey-point-icon journey-point-icon--start'
+        : 'journey-point-icon journey-point-icon--end';
+
+      return L.divIcon({
+        className: '',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        html: `<div class="${className}">${type === 'start' ? 'A' : 'B'}</div>`
+      });
+    }
+
+    async function startLiveJourneyMock() {
+      const { routeStops, roadPolyline, destination } = getLiveJourneyRoadPath();
+      const startStop = routeStops[0];
+      const transferStop = routeStops[1] || routeStops[0];
+      const routeVariants = await fetchRoadRouteVariants(
+        { lat: startStop.lat, lng: startStop.lng },
+        { lat: destination.lat, lng: destination.lng },
+        { lat: transferStop.lat, lng: transferStop.lng },
+        'Ecoparada Aeropuerto|Centro Histórico / Catedral',
+        'Línea 3 Monteverde',
+        roadPolyline
+      );
+      const primaryRoute = routeVariants[0];
+      const routeCoords = primaryRoute.coords;
+      if (!routeCoords.length) return;
+
+      clearRouteLayers();
+      if (liveDirectionMarker) mapPilot.removeLayer(liveDirectionMarker);
+      if (liveStartMarker) mapPilot.removeLayer(liveStartMarker);
+      if (liveEndMarker) mapPilot.removeLayer(liveEndMarker);
+      if (liveRouteAnimationId) {
+        cancelAnimationFrame(liveRouteAnimationId);
+      }
+
+      liveRouteLayers = routeVariants.map((route, idx) => L.polyline(route.coords, {
+        color: route.color,
+        weight: idx === 0 ? 5 : 4,
+        opacity: idx === 0 ? 0.95 : 0.65,
+        lineJoin: 'round',
+        dashArray: idx === 0 ? '0' : '12 10',
+        dashOffset: '0px',
+        className: idx === 0 ? 'route-variant-main' : 'route-variant-alt'
+      }).addTo(mapPilot));
+      liveRouteLayer = liveRouteLayers[0];
+      animateRouteLayers(liveRouteLayers.slice(1));
+
+      const endStop = destination;
+      liveStartMarker = L.marker([startStop.lat, startStop.lng], { icon: getJourneyPointIcon('start') }).addTo(mapPilot);
+      liveEndMarker = L.marker([endStop.lat, endStop.lng], { icon: getJourneyPointIcon('end') }).addTo(mapPilot);
+
+      liveDirectionMarker = L.marker(routeCoords[0], { icon: getDirectionArrowIcon(), interactive: false }).addTo(mapPilot);
+
+      let progress = 0;
+      const speed = 0.00055;
+      const totalMinutes = estimateTotalMinutes(routeCoords);
+
+      updateJourneyPanelDetails({
+        origin: 'Ecoparada Aeropuerto',
+        destination: 'Centro Histórico / Catedral',
+        nextBus: primaryRoute.name,
+        routeVariants: routeVariants.map((r) => r.name).join(' · '),
+        arrival: '4 min',
+        eta: formatEtaFromNow(totalMinutes),
+        total: `${totalMinutes} min`
+      });
+
+      function animateBus() {
+        progress += speed;
+        if (progress > 1) progress = 0;
+        const nextPos = interpolateRoutePosition(routeCoords, progress);
+        if (nextPos && liveDirectionMarker) {
+          const lookAhead = interpolateRoutePosition(routeCoords, Math.min(progress + 0.01, 1));
+          liveDirectionMarker.setLatLng(lookAhead || nextPos);
+          setDirectionArrow(liveDirectionMarker, nextPos, lookAhead || nextPos);
+        }
+        liveRouteAnimationId = requestAnimationFrame(animateBus);
+      }
+
+      animateBus();
+    }
+
+    updateJourneyClock();
+    setInterval(updateJourneyClock, 30000);
+    startLiveJourneyMock();
+
+    async function runInteractiveJourney(originLatLng, destinationLatLng, labels = {}) {
+      const { routeCoords, nearestStop } = buildInteractiveJourneyRoute(originLatLng, destinationLatLng);
+      if (!routeCoords.length) return;
+
+      const seedText = `${labels.origin || originLatLng.lat}|${labels.destination || destinationLatLng.lat}`;
+      const routeVariants = await fetchRoadRouteVariants(
+        originLatLng,
+        destinationLatLng,
+        { lat: nearestStop.lat, lng: nearestStop.lng },
+        seedText,
+        labels.preferredLine || null,
+        routeCoords
+      );
+      const primaryRoute = routeVariants[0];
+      const primaryCoords = primaryRoute.coords;
+
+      clearRouteLayers();
+      if (liveDirectionMarker) mapPilot.removeLayer(liveDirectionMarker);
+      if (liveRouteAnimationId) cancelAnimationFrame(liveRouteAnimationId);
+
+      liveRouteLayers = routeVariants.map((route, idx) => L.polyline(route.coords, {
+        color: route.color,
+        weight: idx === 0 ? 5 : 4,
+        opacity: idx === 0 ? 0.95 : 0.68,
+        lineJoin: 'round',
+        dashArray: idx === 0 ? '0' : '12 10',
+        dashOffset: '0px',
+        className: idx === 0 ? 'route-variant-main' : 'route-variant-alt'
+      }).addTo(mapPilot));
+      liveRouteLayer = liveRouteLayers[0];
+      animateRouteLayers(liveRouteLayers.slice(1));
+
+      const totalMinutes = estimateTotalMinutes(primaryCoords);
+      const arrivalToStop = Math.max(2, Math.round(totalMinutes * 0.25));
+
+      if (liveStartMarker) mapPilot.removeLayer(liveStartMarker);
+      if (liveEndMarker) mapPilot.removeLayer(liveEndMarker);
+      liveStartMarker = L.marker(originLatLng, { icon: getJourneyPointIcon('start') }).addTo(mapPilot);
+      liveEndMarker = L.marker(destinationLatLng, { icon: getJourneyPointIcon('end') }).addTo(mapPilot);
+
+      updateJourneyPanelDetails({
+        origin: labels.origin || `Punto A (${originLatLng.lat.toFixed(4)}, ${originLatLng.lng.toFixed(4)})`,
+        destination: labels.destination || `Punto B (${destinationLatLng.lat.toFixed(4)}, ${destinationLatLng.lng.toFixed(4)})`,
+        nextBus: `${primaryRoute.name} · vía ${nearestStop.name}`,
+        routeVariants: routeVariants.map((r) => r.name).join(' · '),
+        arrival: `${arrivalToStop} min`,
+        eta: formatEtaFromNow(totalMinutes),
+        total: `${totalMinutes} min`
+      });
+
+      const bounds = L.latLngBounds(primaryCoords);
+      if (bounds.isValid()) {
+        mapPilot.fitBounds(bounds, { padding: [50, 50] });
+      }
+
+      liveDirectionMarker = L.marker(primaryCoords[0], { icon: getDirectionArrowIcon(), interactive: false }).addTo(mapPilot);
+
+      let progress = 0;
+      const speed = 0.00075;
+
+      function animateBus() {
+        progress += speed;
+        if (progress > 1) progress = 0;
+        const nextPos = interpolateRoutePosition(primaryCoords, progress);
+        if (nextPos && liveDirectionMarker) {
+          const lookAhead = interpolateRoutePosition(primaryCoords, Math.min(progress + 0.01, 1));
+          liveDirectionMarker.setLatLng(lookAhead || nextPos);
+          setDirectionArrow(liveDirectionMarker, nextPos, lookAhead || nextPos);
+        }
+        liveRouteAnimationId = requestAnimationFrame(animateBus);
+      }
+
+      animateBus();
+    }
+
+    mapPilot.on('click', async (event) => {
+      if (!journeyPlannerActive) return;
+
+      if (journeySelectionStep === 'origin') {
+        if (liveStartMarker) mapPilot.removeLayer(liveStartMarker);
+        liveStartMarker = L.marker(event.latlng, { icon: getJourneyPointIcon('start') }).addTo(mapPilot);
+        journeySelectionStep = 'destination';
+        setJourneyPlannerStatus('SELECCIONA PUNTO B EN EL MAPA');
+        return;
+      }
+
+      if (liveEndMarker) mapPilot.removeLayer(liveEndMarker);
+      liveEndMarker = L.marker(event.latlng, { icon: getJourneyPointIcon('end') }).addTo(mapPilot);
+
+      await runInteractiveJourney(liveStartMarker.getLatLng(), liveEndMarker.getLatLng());
+      setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+      journeyPlannerActive = false;
+      journeySelectionStep = 'origin';
+      setJourneySelectionMode(false);
+    });
 
     let isSyncingMaps = false;
     function syncMapViews(primaryMap, secondaryMap) {
@@ -3245,6 +4396,8 @@
           throw new Error(`El archivo ${kmlUrl} no contiene paradas tipo Point`);
         }
 
+        const pointsToRender = points.slice(0, totalParadas);
+
         if (currentKmlLayer) {
           mapCurrent.removeLayer(currentKmlLayer);
         }
@@ -3257,9 +4410,9 @@
             })
           : L.layerGroup();
 
-        points.forEach((stop) => {
+        pointsToRender.forEach((stop, idx) => {
           const relatedStop = findRelatedStopData(stop);
-          L.marker([stop.lat, stop.lng], { icon: currentMarkerIcon })
+          L.marker([stop.lat, stop.lng], { icon: getCurrentMarkerIcon(stop, relatedStop, idx) })
             .bindPopup(getPopupHtml(stop, relatedStop), { maxWidth: 290 })
             .addTo(markerLayerCurrent);
         });
@@ -3268,7 +4421,7 @@
         markerLayerCurrent.addTo(mapCurrent);
         currentKmlLayer = markerLayerCurrent;
 
-        points.forEach((stop) => {
+        pointsToRender.forEach((stop) => {
           if (!Number.isFinite(stop.lat) || !Number.isFinite(stop.lng)) {
             console.warn('Parada inválida detectada en KML:', stop);
           }
@@ -3279,14 +4432,14 @@
         }
 
         if (activeStopsCount) {
-          activeStopsCount.textContent = `${points.length} PARADAS ACTIVAS`;
+          activeStopsCount.textContent = `${totalParadas} PARADAS ACTIVAS`;
         }
 
         if (pilotStopsStat) {
-          animateNumericContent(pilotStopsStat, String(points.length), 900);
+          animateNumericContent(pilotStopsStat, String(totalParadas), 900);
         }
 
-        return points.length;
+        return pointsToRender.length;
       } catch (error) {
         console.error(`Error al procesar ${kmlUrl}:`, error);
         throw error;
@@ -3325,10 +4478,11 @@
       const activeStopsCount = document.getElementById('activeStopsCount');
       if (activeStopsCount) {
         activeStopsCount.classList.add('live-indicator');
-        activeStopsCount.textContent = '453 PARADAS ACTIVAS';
+        activeStopsCount.textContent = `${totalParadas} PARADAS ACTIVAS`;
       }
     }
 
+    injectMockBadge();
     loadStopsFromFirstAvailable();
     setupScrollCountAnimations();
     setupRevealSections();
@@ -3396,27 +4550,75 @@
     function openJourneyModal() {
       document.getElementById('journeyModal').classList.add('active');
       document.getElementById('journeyResult').textContent = '';
+      renderJourneyHistory();
+      journeyPlannerActive = false;
+      journeySelectionStep = 'origin';
+      setJourneySelectionMode(false);
+      setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+    }
+
+    function startJourneySelectionMode() {
+      document.getElementById('journeyModal').classList.remove('active');
+      journeyPlannerActive = true;
+      journeySelectionStep = 'origin';
+      setJourneySelectionMode(true);
+      setJourneyPlannerStatus('SELECCIONA PUNTO A EN EL MAPA');
+      mapPilot.getContainer().scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function closeJourneyModal() {
       document.getElementById('journeyModal').classList.remove('active');
+      journeyPlannerActive = false;
+      journeySelectionStep = 'origin';
+      setJourneySelectionMode(false);
+      setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
     }
 
-    function calculateJourney(event) {
+    async function calculateJourney(event) {
       event.preventDefault();
-      const origin = document.getElementById('originInput').value.trim().toLowerCase();
-      const destination = document.getElementById('destinationInput').value.trim().toLowerCase();
-      const originStop = stops.find((stop) => stop.name.toLowerCase().includes(origin));
-      const destinationStop = stops.find((stop) => stop.name.toLowerCase().includes(destination));
+      const origin = document.getElementById('originInput').value.trim();
+      const destination = document.getElementById('destinationInput').value.trim();
       const result = document.getElementById('journeyResult');
 
-      if (!originStop || !destinationStop) {
-        result.textContent = 'No se encontró origen o destino. Intenta con nombres de paradas existentes.';
+      if (!origin || !destination) {
+        result.textContent = 'Captura origen y destino para calcular tu viaje.';
         return;
       }
 
-      map.fitBounds([[originStop.lat, originStop.lng], [destinationStop.lat, destinationStop.lng]], { padding: [80, 80] });
-      result.textContent = `Ruta sugerida: ${originStop.name} → ${destinationStop.name}`;
+      result.textContent = 'Buscando ubicaciones en Hermosillo...';
+
+      try {
+        const [originPoint, destinationPoint] = await Promise.all([
+          geocodeHermosilloLocation(origin),
+          geocodeHermosilloLocation(destination)
+        ]);
+
+        await runInteractiveJourney(
+          { lat: originPoint.lat, lng: originPoint.lng },
+          { lat: destinationPoint.lat, lng: destinationPoint.lng },
+          { origin: originPoint.label, destination: destinationPoint.label }
+        );
+
+        saveJourneyHistory({
+          origin: originPoint.label,
+          destination: destinationPoint.label,
+          lineName: (document.getElementById('journeyNextBusValue')?.textContent || '').split(' · ')[0] || 'Línea 3 Monteverde',
+          originLat: originPoint.lat,
+          originLng: originPoint.lng,
+          destinationLat: destinationPoint.lat,
+          destinationLng: destinationPoint.lng
+        });
+
+        journeyPlannerActive = false;
+        journeySelectionStep = 'origin';
+        setJourneySelectionMode(false);
+        setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+        document.getElementById('journeyModal').classList.remove('active');
+        mapPilot.getContainer().scrollIntoView({ behavior: 'smooth', block: 'center' });
+        result.textContent = `Ruta creada: ${originPoint.label} → ${destinationPoint.label}`;
+      } catch (error) {
+        result.textContent = error.message || 'No se pudo crear la ruta. Intenta con otra ubicación de Hermosillo.';
+      }
     }
 
     let selectedReportType = '';
