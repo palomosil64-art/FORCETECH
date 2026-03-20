@@ -332,64 +332,80 @@
   /* ECOPARADAS */
   .eco-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
+  @media (max-width: 760px) {
+    .eco-grid { grid-template-columns: 1fr; }
+  }
+
   .eco-card {
-    background: rgba(255, 255, 255, 0.66);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.62);
-    border-radius: 14px;
+    background: #FFFFFF;
+    border: 2px solid rgba(211, 84, 0, 0.35);
+    border-radius: 12px;
     padding: 18px;
-    box-shadow: 0 16px 34px rgba(20, 43, 24, 0.08);
+    box-shadow: 0 10px 26px rgba(20, 43, 24, 0.06);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
   }
+  .eco-card:hover {
+    border-color: #D35400;
+    box-shadow: 0 14px 28px rgba(211, 84, 0, 0.16);
+    transform: translateY(-2px);
+  }
+  .eco-card.active {
+    border-color: #D35400;
+    box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.14), 0 12px 28px rgba(211, 84, 0, 0.2);
+  }
+
   .eco-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 15px;
     color: var(--verde-bosque);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
-  .eco-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .eco-tag {
-    background: transparent;
-    color: #D35400;
-    border: 1px solid #D35400;
-    border-radius: 999px;
-    padding: 5px 10px;
+  .eco-address {
     font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.5;
   }
-  .eco-tag:hover {
-    background: #D35400;
-    color: #FFFFFF;
-    border-color: #D35400;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 0 18px rgba(243, 130, 41, 0.42), 0 8px 18px rgba(211, 84, 0, 0.24);
-    filter: saturate(1.08);
-  }
-
-  .eco-status {
-    display: inline-block;
-    margin-bottom: 16px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid #D35400;
-    color: #D35400;
+  .eco-route {
+    font-family: 'Montserrat', sans-serif;
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    background: transparent;
+    color: #D35400;
+  }
+
+  .eco-actions {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 14px;
+  }
+  .eco-btn {
+    border: 2px solid #D35400;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  }
+  .eco-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(90%);
+    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.36);
   }
 
   .footer {
@@ -401,34 +417,89 @@
   }
   #ecoMap {
     width: 100%;
-    height: 340px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.62);
+    height: 380px;
+    border-radius: 12px;
+    border: 2px solid #D35400;
     overflow: hidden;
   }
-  .leaf-marker-wrapper {
+  .eco-pin-wrap {
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: grid;
     place-items: center;
   }
-  .leaf-marker-wrapper::after {
-    content: '';
+  .eco-pin-glow {
     position: absolute;
-    inset: -6px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    border: 1px solid rgba(58, 124, 66, 0.42);
-    background: radial-gradient(circle, rgba(58, 124, 66, 0.22) 0%, rgba(58, 124, 66, 0) 68%);
-    animation: ecoPulse 2.5s ease-out infinite;
+    background: rgba(211, 84, 0, 0.28);
+    animation: ecoPulse 1.9s ease-out infinite;
+    pointer-events: none;
   }
-  .leaf-marker {
-    color: #1E4620;
-    font-size: 18px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  .eco-pin {
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, #F17A20, #D35400);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 6px 18px rgba(211, 84, 0, 0.55), 0 0 0 4px rgba(211, 84, 0, 0.15);
     position: relative;
     z-index: 1;
   }
+  .eco-pin::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff;
+    top: 6px;
+    left: 6px;
+  }
+
+  .eco-popup-name { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: #1E392A; margin-bottom: 4px; }
+  .eco-popup-rating { display: flex; gap: 5px; align-items: center; margin-bottom: 8px; }
+  .eco-popup-stars { color: #D35400; font-size: 13px; letter-spacing: 1px; }
+  .eco-popup-meta { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #666; font-weight: 700; }
+  .eco-popup-btn { width: 100%; border: 2px solid #D35400; border-radius: 10px; background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%); color: #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 10px; cursor: pointer; }
+
+  .eco-why {
+    margin-top: 14px;
+    padding: 18px;
+    border-radius: 12px;
+    border: 2px solid rgba(211, 84, 0, 0.25);
+    background: #FFFFFF;
+  }
+  .eco-why-title { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; text-transform: uppercase; color: #D35400; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .eco-why-text { font-family: 'Montserrat', sans-serif; color: #555; font-size: 13px; font-weight: 600; line-height: 1.75; }
+
+  .eco-reviews-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.46);
+    z-index: 1200;
+    padding: 16px;
+  }
+  .eco-reviews-modal.active { display: flex; }
+  .eco-reviews-panel { width: min(640px, 100%); max-height: 88vh; overflow: auto; background: #FFFFFF; border: 2px solid #D35400; border-radius: 12px; padding: 18px; box-shadow: 0 18px 40px rgba(211, 84, 0, 0.24); }
+  .eco-reviews-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .eco-reviews-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; color: #D35400; text-transform: uppercase; }
+  .eco-review-item { border: 2px solid rgba(211, 84, 0, 0.24); border-radius: 12px; padding: 10px 12px; background: #FFFFFF; margin-bottom: 10px; }
+  .eco-review-user { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: #1E392A; margin-bottom: 3px; }
+  .eco-review-stars { color: #D35400; font-size: 13px; margin-bottom: 4px; }
+  .eco-review-text { font-family: 'Montserrat', sans-serif; color: #444; font-size: 12px; font-weight: 600; line-height: 1.6; }
+  .eco-report-form { margin-top: 8px; display: grid; gap: 8px; }
+  .eco-report-form input,
+  .eco-report-form textarea { width: 100%; border: 2px solid #D35400; border-radius: 12px; padding: 10px 12px; background: #FFFFFF; color: #1E392A; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+  .eco-report-form input:focus,
+  .eco-report-form textarea:focus { outline: none; box-shadow: 0 0 8px rgba(211, 84, 0, 0.5); }
+  .eco-report-form textarea { min-height: 86px; resize: vertical; }
 
   @keyframes ecoPulse {
     0% { transform: scale(0.82); opacity: 0.85; }
@@ -825,110 +896,41 @@
 
 <!-- SECCIÓN: ECOPARADAS -->
 <div id="sec-ecoparadas" class="section">
-  <p class="section-title">Ecoparadas inteligentes</p>
-  <p class="section-desc">Servicios instalados en las ecoparadas y localización de puntos en operación.</p>
-  <p class="eco-status" id="ecoActiveCount">10 PARADAS ACTIVAS</p>
+  <p class="section-title">UBICACIÓN ESTRATÉGICA DE RED INTELIGENTE</p>
+  <p class="section-desc">Directorio operativo del Proyecto Piloto con 10 ecoparadas inteligentes conectadas al sistema de reseñas.</p>
 
-  <div class="eco-grid">
-    <div class="eco-card">
-      <p class="eco-title">San Benito</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Colosio</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Centro de Gobierno</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Tecnológico</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Hermosillo Viejo</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Hospital General</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Plaza Niños Héroes</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">Parque Madero</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">La Cantera</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
-    <div class="eco-card">
-      <p class="eco-title">San Benito Norte</p>
-      <div class="eco-tags">
-        <span class="eco-tag">Reducción térmica</span>
-        <span class="eco-tag">App check-in</span>
-        <span class="eco-tag">Tiempos en vivo</span>
-        <span class="eco-tag">WiFi 5G</span>
-      </div>
-    </div>
+  <div class="eco-actions">
+    <button class="eco-btn" type="button" id="ecoDownloadBtn">DESCARGAR</button>
   </div>
 
+  <div class="eco-grid" id="ecoGrid"></div>
+
   <div class="chart-panel">
-    <div class="chart-title">Mapa de ecoparadas</div>
-    <div class="chart-sub">Marcadores ecológicos con icono de hoja</div>
+    <div class="chart-title">Mapa interactivo de ecoparadas inteligentes</div>
+    <div class="chart-sub">10 marcadores naranja con reseñas mock y navegación click-to-map</div>
     <div id="ecoMap"></div>
+    <div class="eco-why">
+      <div class="eco-why-title">MOTIVOS DE CREACIÓN DEL PROYECTO PILOTO</div>
+      <p class="eco-why-text">Este proyecto busca mitigar el impacto térmico, ofrecer conectividad 5G y monitorear la ciudad en tiempo real para una movilidad digna en Hermosillo.</p>
+    </div>
   </div>
 </div>
 </div><!-- /container -->
+
+<div class="eco-reviews-modal" id="ecoReviewsModal">
+  <div class="eco-reviews-panel">
+    <div class="eco-reviews-head">
+      <div class="eco-reviews-title" id="ecoReviewsTitle">RESEÑAS</div>
+      <button class="eco-btn" type="button" id="ecoCloseBtn">CERRAR</button>
+    </div>
+    <div id="ecoReviewsList"></div>
+    <form class="eco-report-form" id="ecoReportForm">
+      <input type="text" id="ecoReportUser" placeholder="NOMBRE" required>
+      <textarea id="ecoReportText" placeholder="COMENTARIO" required></textarea>
+      <button class="eco-btn" type="submit">ENVIAR REPORTE</button>
+    </form>
+  </div>
+</div>
 
 <div class="floating-buttons" aria-label="Acciones rápidas">
   <button class="floating-btn" id="btn-map" type="button" aria-label="Ver mapa de ecoparadas" title="Ver mapa">
@@ -1271,6 +1273,150 @@ function updateZonas(year) {
 
 // ECOPARADAS MAPA
 let ecoMap;
+let ecoMarkers = [];
+let ecoActiveIndex = null;
+
+const ecoStops = [
+  { name: 'San Benito', zone: 'Centro', address: 'Blvd. Luis Encinas / Calle Pino Suárez', route: 'Ruta 12', coords: [29.0728, -110.9559] },
+  { name: 'Tec de Hermosillo', zone: 'Norte', address: 'Blvd. Morelos / Periférico Norte', route: 'Ruta 11, 15', coords: [29.1185, -110.9620] },
+  { name: 'Colosio Poniente', zone: 'Norte-Poniente', address: 'Blvd. Luis Donaldo Colosio / Av. Periférica', route: 'Ruta 8, 14', coords: [29.1050, -111.0180] },
+  { name: 'Hospital General', zone: 'Sur', address: 'Blvd. Solidaridad / Hospital General de Sonora', route: 'Ruta 2, 6', coords: [29.0390, -110.9670] },
+  { name: 'Plaza Sendero', zone: 'Este', address: 'Blvd. Kino / Plaza Sendero Hermosillo', route: 'Ruta 10, 12', coords: [29.0820, -110.9020] },
+  { name: 'Nuevo Hermosillo', zone: 'Este-Norte', address: 'Fracc. Nuevo Hermosillo / Blvd. El Novillo', route: 'Ruta 9, 13', coords: [29.1100, -110.8980] },
+  { name: 'Aeropuerto', zone: 'Oeste', address: 'Blvd. de los Seris / Aeropuerto Internacional', route: 'Ruta 5, 8', coords: [29.0960, -111.0480] },
+  { name: 'Centro de Gobierno', zone: 'Centro-Este', address: 'Blvd. Paseo del Canal / Centro de Gobierno', route: 'Ruta 5, 9', coords: [29.0745, -110.9310] },
+  { name: 'Blvd. Morelos Final', zone: 'Noreste', address: 'Blvd. Morelos Km 9 / Fracc. Villa Hermosa', route: 'Ruta 7', coords: [29.1240, -110.9220] },
+  { name: 'Nodo Industrial Poniente', zone: 'Industrial Poniente', address: 'Blvd. Solidaridad / Blvd. García Morales', route: 'Ruta 3, 7', coords: [29.0930, -111.0200] }
+];
+
+const ecoReviewsMock = {
+  'San Benito': [
+    { user: 'CARLOS M.', stars: 5, comment: 'EXCELENTE CONEXIÓN WIFI EN SAN BENITO.' },
+    { user: 'LUCÍA R.', stars: 4, comment: 'MUY CÓMODA Y FRESCA EN HORAS PICO.' },
+    { user: 'ERNESTO V.', stars: 4, comment: 'APP CHECK-IN MUY ESTABLE TODO EL DÍA.' }
+  ],
+  'Tec de Hermosillo': [
+    { user: 'ALEJANDRO P.', stars: 3, comment: 'FALTA LIMPIEZA EN ALGUNOS TURNOS.' },
+    { user: 'MARIANA F.', stars: 5, comment: 'IDEAL PARA ESTUDIANTES, TIEMPOS PRECISOS.' },
+    { user: 'DIEGO S.', stars: 4, comment: 'BUENA SOMBRA Y BUENA ILUMINACIÓN.' }
+  ],
+  'Colosio Poniente': [
+    { user: 'VALERIA H.', stars: 5, comment: 'INFRAESTRUCTURA MODERNA Y SEGURA.' },
+    { user: 'JOSÉ L.', stars: 4, comment: 'ME AHORRA TIEMPO EN TRANSBORDOS.' },
+    { user: 'KAREN T.', stars: 3, comment: 'FUNCIONA BIEN, A VECES HAY SATURACIÓN.' }
+  ],
+  'Hospital General': [
+    { user: 'PATRICIA M.', stars: 5, comment: 'LA REDUCCIÓN TÉRMICA ES MUY NOTORIA.' },
+    { user: 'ANTONIO G.', stars: 4, comment: 'ACCESIBLE Y BIEN UBICADA.' },
+    { user: 'DR. RUIZ', stars: 5, comment: 'CLAVE PARA PERSONAL MÉDICO.' }
+  ],
+  'Plaza Sendero': [
+    { user: 'FERNANDA O.', stars: 5, comment: 'WIFI 5G MUY RÁPIDO.' },
+    { user: 'RODRIGO E.', stars: 4, comment: 'BUENA EN FINES DE SEMANA.' },
+    { user: 'CAMILA N.', stars: 3, comment: 'EN HORAS PICO SE LLENA RÁPIDO.' }
+  ],
+  'Nuevo Hermosillo': [
+    { user: 'MIGUEL A.', stars: 5, comment: 'EXCELENTE INTEGRACIÓN EN LA ZONA.' },
+    { user: 'ISABELA C.', stars: 4, comment: 'CHECK-IN SENCILLO Y CONFIABLE.' },
+    { user: 'REBECA Z.', stars: 4, comment: 'SEGURA Y BIEN ILUMINADA.' }
+  ],
+  'Aeropuerto': [
+    { user: 'ING. DUARTE', stars: 5, comment: 'TIEMPOS EN VIVO MUY PRECISOS.' },
+    { user: 'LAURA P.', stars: 4, comment: 'BUEN ESPACIO PARA VIAJEROS.' },
+    { user: 'MARCOS B.', stars: 5, comment: 'CONECTIVIDAD EXCELENTE.' }
+  ],
+  'Centro de Gobierno': [
+    { user: 'LIC. BRAVO', stars: 5, comment: 'DISEÑO INCLUSIVO Y FUNCIONAL.' },
+    { user: 'NORMA S.', stars: 4, comment: 'RUTAS MUY CONSTANTES.' },
+    { user: 'FELIPE R.', stars: 3, comment: 'PUEDE MEJORAR EN HORARIO VESPERTINO.' }
+  ],
+  'Blvd. Morelos Final': [
+    { user: 'ADRIÁN V.', stars: 4, comment: 'MUY ÚTIL EN ZONA DE ALTA CARGA.' },
+    { user: 'DANIELA Q.', stars: 5, comment: 'CALIDAD MUY ALTA PARA LA ZONA.' },
+    { user: 'RAMÓN F.', stars: 4, comment: 'BUENA COBERTURA WIFI.' }
+  ],
+  'Nodo Industrial Poniente': [
+    { user: 'ENRIQUE M.', stars: 5, comment: 'ILUMINACIÓN MUY SEGURA DE NOCHE.' },
+    { user: 'GLORIA H.', stars: 4, comment: 'NODO CLAVE PARA TRANSFERENCIA.' },
+    { user: 'TOMÁS E.', stars: 5, comment: 'IMPRESCINDIBLE PARA LA ZONA INDUSTRIAL.' }
+  ]
+};
+
+function ecoStars(value) {
+  return '★'.repeat(value) + '☆'.repeat(5 - value);
+}
+
+function ecoAvg(name) {
+  const items = ecoReviewsMock[name] || [];
+  if (!items.length) return '0.0';
+  return (items.reduce((s, x) => s + x.stars, 0) / items.length).toFixed(1);
+}
+
+function renderEcoGrid() {
+  const grid = document.getElementById('ecoGrid');
+  if (!grid) return;
+  grid.innerHTML = ecoStops.map((stop, idx) => `
+    <article class="eco-card" data-stop-idx="${idx}" role="button" tabindex="0" aria-label="Ver ${stop.name} en mapa y reseñas">
+      <div class="eco-title">${stop.name}</div>
+      <div class="eco-address">${stop.address}</div>
+      <div class="eco-route">${stop.zone} · ${stop.route}</div>
+    </article>
+  `).join('');
+
+  grid.querySelectorAll('.eco-card').forEach((card) => {
+    const idx = Number(card.dataset.stopIdx);
+    card.addEventListener('click', () => focusEcoStop(idx));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        focusEcoStop(idx);
+      }
+    });
+  });
+}
+
+function setActiveEcoCard(idx) {
+  document.querySelectorAll('.eco-card').forEach((card) => card.classList.remove('active'));
+  const activeCard = document.querySelector(`.eco-card[data-stop-idx="${idx}"]`);
+  if (activeCard) activeCard.classList.add('active');
+}
+
+function openEcoReviews(idx) {
+  ecoActiveIndex = idx;
+  const stop = ecoStops[idx];
+  const modal = document.getElementById('ecoReviewsModal');
+  const title = document.getElementById('ecoReviewsTitle');
+  const list = document.getElementById('ecoReviewsList');
+
+  title.textContent = `RESEÑAS · ${stop.name.toUpperCase()}`;
+  const reviews = ecoReviewsMock[stop.name] || [];
+  list.innerHTML = reviews.map((r) => `
+    <div class="eco-review-item">
+      <div class="eco-review-user">${r.user}</div>
+      <div class="eco-review-stars">${ecoStars(r.stars)}</div>
+      <div class="eco-review-text">${r.comment}</div>
+    </div>
+  `).join('');
+
+  modal.classList.add('active');
+}
+
+function closeEcoReviews() {
+  document.getElementById('ecoReviewsModal').classList.remove('active');
+}
+
+function focusEcoStop(idx) {
+  const stop = ecoStops[idx];
+  setActiveEcoCard(idx);
+  if (ecoMap) {
+    ecoMap.flyTo(stop.coords, 15, { animate: true, duration: 1.1 });
+    setTimeout(() => {
+      if (ecoMarkers[idx]) ecoMarkers[idx].openPopup();
+    }, 1100);
+  }
+  openEcoReviews(idx);
+}
+
 function initEcoMap() {
   const mapContainer = document.getElementById('ecoMap');
   if (!mapContainer || ecoMap) return;
@@ -1281,41 +1427,31 @@ function initEcoMap() {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(ecoMap);
 
-  const leafIcon = L.divIcon({
-    className: 'leaf-marker-wrapper',
-    html: '<i class="fa-solid fa-leaf leaf-marker"></i>',
-    iconSize: [20, 20],
-    iconAnchor: [10, 10]
+  const ecoPinIcon = L.divIcon({
+    className: '',
+    html: '<div class="eco-pin-wrap"><span class="eco-pin-glow"></span><span class="eco-pin"></span></div>',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -28]
   });
 
-  const ecoStops = [
-    { name: 'San Benito', coords: [29.0728, -110.9559], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Colosio', coords: [29.0855, -110.9691], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Centro de Gobierno', coords: [29.0697, -110.9454], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Tecnológico', coords: [29.0942, -110.9612], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Hermosillo Viejo', coords: [29.0675, -110.9637], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Hospital General', coords: [29.0790, -110.9520], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Plaza Niños Héroes', coords: [29.0745, -110.9540], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'Parque Madero', coords: [29.0785, -110.9408], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'La Cantera', coords: [29.0822, -110.9609], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' },
-    { name: 'San Benito Norte', coords: [29.0827, -110.9521], services: 'REDUCCIÓN TÉRMICA · APP CHECK-IN · TIEMPOS EN VIVO · WIFI 5G' }
-  ];
-
   const bounds = [];
-  ecoStops.forEach(stop => {
-    L.marker(stop.coords, { icon: leafIcon })
+  ecoStops.forEach((stop, idx) => {
+    const avg = ecoAvg(stop.name);
+    const marker = L.marker(stop.coords, { icon: ecoPinIcon })
       .addTo(ecoMap)
-      .bindPopup(`<strong>${stop.name}</strong><br>${stop.services}`);
+      .bindPopup(`
+        <div class="eco-popup-name">${stop.name}</div>
+        <div class="eco-popup-rating"><span class="eco-popup-stars">${ecoStars(Math.round(Number(avg)))}</span><span class="eco-popup-meta">${avg}/5</span></div>
+        <button class="eco-popup-btn" onclick="focusEcoStop(${idx})">VER RESEÑAS</button>
+      `, { maxWidth: 260 });
+    marker.on('click', () => focusEcoStop(idx));
+    ecoMarkers.push(marker);
     bounds.push(stop.coords);
   });
 
   if (bounds.length > 0) {
     ecoMap.fitBounds(bounds, { padding: [40, 40] });
-  }
-
-  const ecoActiveCount = document.getElementById('ecoActiveCount');
-  if (ecoActiveCount) {
-    animateNumericContent(ecoActiveCount, `${ecoStops.length} PARADAS ACTIVAS`, 900);
   }
 }
 
@@ -1340,6 +1476,42 @@ document.getElementById('btn-support').addEventListener('click', () => {
   alert('Soporte FORCETECH: contacto@forcetech.mx');
 });
 
+document.getElementById('ecoDownloadBtn').addEventListener('click', () => {
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    title: 'Proyecto Piloto Ecoparadas FORCETECH',
+    stops: ecoStops
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'forcetech-ecoparadas-piloto.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('ecoCloseBtn').addEventListener('click', closeEcoReviews);
+document.getElementById('ecoReviewsModal').addEventListener('click', (e) => {
+  if (e.target.id === 'ecoReviewsModal') closeEcoReviews();
+});
+
+document.getElementById('ecoReportForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (ecoActiveIndex === null) return;
+  const stop = ecoStops[ecoActiveIndex];
+  const user = document.getElementById('ecoReportUser').value.trim().toUpperCase();
+  const text = document.getElementById('ecoReportText').value.trim().toUpperCase();
+  if (!user || !text) return;
+
+  if (!ecoReviewsMock[stop.name]) ecoReviewsMock[stop.name] = [];
+  ecoReviewsMock[stop.name].unshift({ user, stars: 5, comment: text });
+  e.target.reset();
+  openEcoReviews(ecoActiveIndex);
+});
+
 document.querySelectorAll('.nav-tab').forEach(tab => {
   if (tab.textContent.includes('Ecoparadas')) {
     tab.addEventListener('click', () => {
@@ -1352,6 +1524,7 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 });
 
 animateNumbersInSection(document.querySelector('.section.active'));
+renderEcoGrid();
 </script>
 </body>
 </html>

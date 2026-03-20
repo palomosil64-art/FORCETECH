@@ -531,6 +531,33 @@
       gap: 8px;
     }
 
+    .pilot-justification {
+      margin-top: 16px;
+      padding: 22px;
+      border: 2px solid rgba(211, 84, 0, 0.24);
+      border-radius: 16px;
+      background: #FFFFFF;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.1);
+    }
+
+    .pilot-justification-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #1E392A;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .pilot-justification-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+      line-height: 1.8;
+    }
+
     .map-split {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -661,18 +688,18 @@
       max-height: 88vh;
       overflow: auto;
       background: #ffffff;
-      border: 2px solid #27AE60;
-      border-radius: 14px;
+      border: 2px solid #D35400;
+      border-radius: 12px;
       padding: 22px;
-      box-shadow: 0 16px 40px rgba(17, 35, 20, 0.25);
+      box-shadow: 0 16px 40px rgba(211, 84, 0, 0.2);
     }
 
     #routesModal .smart-modal {
       border: 2px solid #D35400;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.74);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: #FFFFFF;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       box-shadow: 0 14px 36px rgba(211, 84, 0, 0.2);
     }
 
@@ -736,20 +763,32 @@
     }
 
     .smart-modal-title {
-      color: #1E4620;
+      color: #D35400;
       font-size: 24px;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .smart-close {
-      border: none;
-      border-radius: 8px;
-      padding: 8px 12px;
-      background: #27AE60;
-      color: #000000;
+      border: 2px solid #D35400;
+      border-radius: 12px;
+      padding: 9px 14px;
+      background: #D35400;
+      color: #FFFFFF;
       cursor: pointer;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .smart-close:hover {
+      filter: brightness(90%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.38);
     }
 
     .smart-report-categories {
@@ -760,21 +799,25 @@
     }
 
     .smart-report-option {
-      border: 1px solid rgba(39, 174, 96, 0.45);
-      border-radius: 10px;
+      border: 2px solid #D35400;
+      border-radius: 12px;
       padding: 12px;
       cursor: pointer;
-      background: #f7fff9;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
       transition: background 0.2s ease, border-color 0.2s ease;
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       text-align: left;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #FFFFFF;
     }
 
     .smart-report-option.active {
-      background: #27AE60;
-      color: #000000;
-      border-color: #27AE60;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      color: #FFFFFF;
+      border-color: #D35400;
+      box-shadow: 0 8px 20px rgba(211, 84, 0, 0.32);
     }
 
     .smart-form {
@@ -786,10 +829,45 @@
     .smart-form textarea {
       width: 100%;
       padding: 10px 12px;
-      border: 1px solid rgba(30, 70, 32, 0.3);
-      border-radius: 8px;
+      border: 2px solid #D35400;
+      border-radius: 12px;
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #1E392A;
+      background: #FFFFFF;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .smart-form input:focus,
+    .smart-form textarea:focus {
+      outline: none;
+      border-color: #D35400;
+      box-shadow: 0 0 8px rgba(211, 84, 0, 0.5);
+    }
+
+    .smart-form input::placeholder,
+    .smart-form textarea::placeholder {
+      text-transform: uppercase;
+      color: rgba(30, 57, 42, 0.56);
+      font-weight: 700;
+    }
+
+    .smart-modal .smart-btn {
+      border-radius: 12px;
+      border: 2px solid #D35400;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .smart-modal .smart-btn:hover {
+      filter: brightness(90%);
+      box-shadow: 0 10px 22px rgba(211, 84, 0, 0.38);
     }
 
     .smart-form textarea {
@@ -1294,16 +1372,22 @@
     }
 
     .transporte-link {
-      color: #D35400;
+      color: #FFFFFF;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 14px;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.05em;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+      gap: 8px;
+      text-transform: uppercase;
+      border: 2px solid #D35400;
+      border-radius: 12px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
     }
 
     .transporte-link-text {
@@ -1415,8 +1499,9 @@
 
     .transporte-link:hover {
       transform: translateY(-2px);
-      color: #D35400;
-      text-shadow: 0 0 10px rgba(211, 84, 0, 0.3);
+      color: #FFFFFF;
+      filter: brightness(90%);
+      box-shadow: 0 14px 28px rgba(211, 84, 0, 0.42);
     }
 
     .transporte-link:hover .transporte-link-arrow {
@@ -1698,7 +1783,7 @@
       box-shadow: 0 16px 44px rgba(211, 84, 0, 0.2);
       max-height: 92vh;
     }
-    #reviewsModal .smart-modal-title { color: #1E392A; }
+    #reviewsModal .smart-modal-title { color: #D35400; }
 
     .reviews-stop-meta {
       display: flex;
@@ -2220,7 +2305,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 15px;
       font-weight: 800;
-      color: #D35400;
+      color: #1E392A;
       line-height: 1.2;
     }
     .ecodir-zone {
@@ -2304,7 +2389,6 @@
     <div class="map-wrapper">
       <div class="map-header">
         <h3>Visualización comparativa de infraestructura</h3>
-        <span id="activeStopsCount" class="live-indicator">453 PARADAS ACTIVAS</span>
       </div>
       <div class="smart-actions">
         <button type="button" class="smart-btn map-cta-btn" onclick="openRoutesModal()">📍 VER UNA LÍNEA</button>
@@ -2320,6 +2404,10 @@
           <h4 class="map-panel-title">Proyecto Piloto: 10 Ecoparadas Inteligentes</h4>
           <div id="mapPilot" class="map-canvas" aria-label="Mapa de ecoparadas piloto"></div>
         </article>
+      </div>
+      <div class="pilot-justification">
+        <h3 class="pilot-justification-title">MOTIVOS DE CREACIÓN DEL PROYECTO PILOTO</h3>
+        <p class="pilot-justification-text">El Proyecto Piloto de Ecoparadas Inteligentes en Hermosillo se creó para mitigar el impacto térmico en los usuarios, ofrecer conectividad 5G gratuita y segura, y monitorear la calidad del aire y afluencia en tiempo real, transformando paradas convencionales en nodos de dignidad y tecnología urbana.</p>
       </div>
     </div>
   </section>
@@ -2601,8 +2689,8 @@
   <div class="smart-modal-overlay" id="routesModal">
     <div class="smart-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title">📍 Ver una línea</h3>
-        <button class="smart-close" type="button" onclick="closeRoutesModal()">Cerrar</button>
+        <h3 class="smart-modal-title">📍 VER UNA LÍNEA</h3>
+        <button class="smart-close" type="button" onclick="closeRoutesModal()">CERRAR</button>
       </div>
       <div id="routesList" class="routes-menu" role="list"></div>
     </div>
@@ -2611,13 +2699,13 @@
   <div class="smart-modal-overlay" id="journeyModal">
     <div class="smart-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title">🗺️ Crear viaje</h3>
-        <button class="smart-close" type="button" onclick="closeJourneyModal()">Cerrar</button>
+        <h3 class="smart-modal-title">🗺️ CREAR VIAJE</h3>
+        <button class="smart-close" type="button" onclick="closeJourneyModal()">CERRAR</button>
       </div>
       <form class="smart-form" onsubmit="calculateJourney(event)">
-        <input id="originInput" type="text" placeholder="Origen (ej. San Benito)" required>
-        <input id="destinationInput" type="text" placeholder="Destino (ej. Hospital General)" required>
-        <button class="smart-btn" type="submit">Calcular ruta</button>
+        <input id="originInput" type="text" placeholder="ORIGEN (EJ. SAN BENITO)" required>
+        <input id="destinationInput" type="text" placeholder="DESTINO (EJ. HOSPITAL GENERAL)" required>
+        <button class="smart-btn" type="submit">CALCULAR RUTA</button>
       </form>
       <div id="journeyResult" style="margin-top:12px;color:#D35400;font-weight:600;font-family:'Montserrat',sans-serif;"></div>
     </div>
@@ -2626,19 +2714,19 @@
   <div class="smart-modal-overlay" id="reportModal">
     <div class="smart-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title">⚠️ Reportar Incidencia</h3>
-        <button class="smart-close" type="button" onclick="closeReportModal()">Cerrar</button>
+        <h3 class="smart-modal-title">⚠️ REPORTAR INCIDENCIA</h3>
+        <button class="smart-close" type="button" onclick="closeReportModal()">CERRAR</button>
       </div>
       <div class="smart-report-categories" id="reportCategories">
-        <button type="button" class="smart-report-option" data-type="Daño en Parada Ecológica">Daño en Parada Ecológica (Cristales rotos, paneles solares sucios, falta de iluminación)</button>
-        <button type="button" class="smart-report-option" data-type="Problema con Unidad de Transporte">Problema con Unidad de Transporte (Retraso excesivo, unidad en mal estado, conducción imprudente)</button>
-        <button type="button" class="smart-report-option" data-type="Falla Tecnológica">Falla Tecnológica (Punto de carga USB no funciona, pantalla de información apagada)</button>
-        <button type="button" class="smart-report-option" data-type="Limpieza y Mantenimiento">Limpieza y Mantenimiento</button>
+        <button type="button" class="smart-report-option" data-type="Daño en Parada Ecológica">DAÑO EN PARADA ECOLÓGICA (CRISTALES ROTOS, PANELES SOLARES SUCIOS, FALTA DE ILUMINACIÓN)</button>
+        <button type="button" class="smart-report-option" data-type="Problema con Unidad de Transporte">PROBLEMA CON UNIDAD DE TRANSPORTE (RETRASO EXCESIVO, UNIDAD EN MAL ESTADO, CONDUCCIÓN IMPRUDENTE)</button>
+        <button type="button" class="smart-report-option" data-type="Falla Tecnológica">FALLA TECNOLÓGICA (PUNTO DE CARGA USB NO FUNCIONA, PANTALLA DE INFORMACIÓN APAGADA)</button>
+        <button type="button" class="smart-report-option" data-type="Limpieza y Mantenimiento">LIMPIEZA Y MANTENIMIENTO</button>
       </div>
       <form class="smart-form" onsubmit="submitIncidentReport(event)">
-        <input id="reportStop" type="text" placeholder="Parada o ubicación" required>
-        <textarea id="reportDescription" placeholder="Describe la incidencia" required></textarea>
-        <button class="smart-btn" type="submit">Enviar reporte</button>
+        <input id="reportStop" type="text" placeholder="PARADA O UBICACIÓN" required>
+        <textarea id="reportDescription" placeholder="DESCRIBE LA INCIDENCIA" required></textarea>
+        <button class="smart-btn" type="submit">ENVIAR REPORTE</button>
       </form>
       <div id="reportResult" style="margin-top:12px;color:#1E4620;font-weight:600;"></div>
     </div>
@@ -2648,8 +2736,8 @@
   <div class="smart-modal-overlay" id="reviewsModal">
     <div class="smart-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title" id="reviewsModalTitle">&#11088; Reseñas</h3>
-        <button class="smart-close" type="button" onclick="closeReviewsModal()">Cerrar</button>
+        <h3 class="smart-modal-title" id="reviewsModalTitle">&#11088; RESEÑAS</h3>
+        <button class="smart-close" type="button" onclick="closeReviewsModal()">CERRAR</button>
       </div>
       <div class="reviews-stop-meta">
         <span class="reviews-stop-badge" id="reviewsStopBadge">Parada</span>
@@ -2750,7 +2838,7 @@
 
     // ── Pilot stops: siempre renderiza los 10 nodos desde stops[], sin depender del KML ──
     function getPilotPopupHtml(stop, idx) {
-      const reviews = mockReviews[stop.name] || [];
+      const reviews = (mockReviews && mockReviews[stop.name]) ? mockReviews[stop.name] : [];
       const avg = avgRating(reviews);
       const starsFilled = Math.round(Number(avg));
       const starsMarkup = Array.from({ length: 5 }, (_, i) =>
@@ -3205,6 +3293,8 @@
         if (pilotStopsStat) {
           animateNumericContent(pilotStopsStat, String(points.length), 900);
         }
+
+        return points.length;
       } catch (error) {
         console.error(`Error al procesar ${kmlUrl}:`, error);
         throw error;
@@ -3214,14 +3304,30 @@
     async function loadStopsFromFirstAvailable() {
       // Nota: en navegador se usa ruta relativa al proyecto, no ruta absoluta del sistema.
       const sources = ['Ruta2.kml', 'Ruta 1.kmz', 'PARADAS CON CASETA.kml'];
+      let bestSource = null;
+      let bestCount = 0;
 
       for (const source of sources) {
         try {
-          await loadStopsFromKml(source);
-          return;
+          const count = await loadStopsFromKml(source);
+          if (count > bestCount) {
+            bestCount = count;
+            bestSource = source;
+          }
+
+          // Evita quedarse con capas de prueba muy pequeñas (ej. 3 puntos).
+          if (count >= 100) {
+            return;
+          }
         } catch (_) {
           // Try next file candidate.
         }
+      }
+
+      // Si no hubo una capa masiva, deja al menos la mejor disponible.
+      if (bestSource && bestCount > 0) {
+        await loadStopsFromKml(bestSource);
+        return;
       }
 
       const activeStopsCount = document.getElementById('activeStopsCount');
@@ -3378,7 +3484,7 @@
     });
 
     // ── MOCK REVIEWS DATA ──
-    const mockReviews = {
+    var mockReviews = {
       "San Benito": [
         { author: "Carlos M.",     stars: 5, date: "12 mar 2026", comment: "Excelente conexión WiFi 5G en San Benito. Se carga el teléfono en minutos y los tiempos en pantalla son exactos." },
         { author: "Lucía R.",      stars: 4, date: "08 mar 2026", comment: "Muy cómoda y fresca. La reducción térmica se siente inmediatamente al entrar. Zona muy limpia." },
