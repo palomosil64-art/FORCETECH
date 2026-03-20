@@ -1691,6 +1691,33 @@
       object-fit: cover;
     }
 
+    .team-card.camila-card .team-photo {
+      border: 2px solid #D35400;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.22);
+      background: #FFFFFF;
+    }
+
+    .team-card.camila-card .team-name {
+      color: #1E392A;
+      font-weight: 800;
+    }
+
+    .team-card.camila-card .team-role {
+      color: #666666;
+    }
+
+    .team-card.daniel-card .team-photo {
+      border: 2px solid #D35400;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(211, 84, 0, 0.22);
+      background: #FFFFFF;
+    }
+
+    .team-card.daniel-card .team-name {
+      color: #1E392A;
+      font-weight: 800;
+    }
+
     .team-photo-placeholder {
       width: 100%;
       height: 100%;
@@ -2137,6 +2164,11 @@
       margin-top: 40px;
     }
 
+    .soluciones-grid.single-card {
+      grid-template-columns: minmax(320px, 760px);
+      justify-content: center;
+    }
+
     @media (max-width: 900px) {
       .soluciones-grid { grid-template-columns: 1fr; }
     }
@@ -2462,53 +2494,13 @@
       <h2 class="section-title">Soluciones FORCETECH basadas en evidencia</h2>
       <p class="section-sub" style="max-width:680px;">Cada componente de nuestra plataforma inteligente responde directamente a un problema documentado del sistema de transporte.</p>
 
-      <div class="soluciones-grid">
-        <div class="solucion-card">
-          <div class="solucion-icon temp">&#127793;</div>
-          <div class="solucion-content">
-            <h4>Techo verde xerofítico contra el calor</h4>
-            <p>32 m² de vegetación nativa del desierto sonorense que reduce la temperatura ambiental hasta 8 °C bajo la estructura. Ataca directamente la barrera #1 al uso del transporte: el calor extremo.</p>
-            <span class="solucion-dato">Reduce temp. bajo techo: −8 °C</span>
-          </div>
-        </div>
-        <div class="solucion-card">
-          <div class="solucion-icon app">&#128241;</div>
-          <div class="solucion-content">
-            <h4>App inteligente para optimizar tiempos</h4>
-            <p>La app integra geolocalización de unidades, estimaciones de llegada y check-in por parada para reducir incertidumbre. Mejora la experiencia de espera y prioriza rutas con mayor demanda en tiempo real.</p>
-            <span class="solucion-dato">Enfoque: REDUCCIÓN TÉRMICA + TIEMPOS EN VIVO</span>
-          </div>
-        </div>
-        <div class="solucion-card">
-          <div class="solucion-icon digital">&#128241;</div>
-          <div class="solucion-content">
-            <h4>Pantallas con tiempos reales de arribo</h4>
-            <p>Conectadas al sistema UNE Transporte. Atacan el 70.4% de insatisfacción: cuando el usuario sabe cuánto falta, la percepción de espera baja hasta 36% (estudios UITP). WiFi gratuito durante la espera.</p>
-            <span class="solucion-dato">70.4% queja principal: tiempos de espera</span>
-          </div>
-        </div>
+      <div class="soluciones-grid single-card">
         <div class="solucion-card">
           <div class="solucion-icon agua">&#128167;</div>
           <div class="solucion-content">
             <h4>Sistema de infiltración pluvial</h4>
             <p>Captura agua de lluvia para riego del techo verde y recarga del manto freático. En Hermosillo, cada m³ de agua infiltrada reduce la presión sobre la red hídrica municipal.</p>
-            <span class="solucion-dato">Captación: ~12,000 litros/año</span>
-          </div>
-        </div>
-        <div class="solucion-card">
-          <div class="solucion-icon seguridad">&#128161;</div>
-          <div class="solucion-content">
-            <h4>Iluminación LED y videovigilancia</h4>
-            <p>El informe documenta 9,751 siniestros viales con autobuses. Las ecoparadas con iluminación nocturna, señalización reflectante y cámaras mejoran la seguridad vial y personal de los usuarios.</p>
-            <span class="solucion-dato">9,751 siniestros 2019–2023</span>
-          </div>
-        </div>
-        <div class="solucion-card">
-          <div class="solucion-icon acceso">&#9855;</div>
-          <div class="solucion-content">
-            <h4>Diseño universal y accesibilidad</h4>
-            <p>Rampas, señalización braille y espacio para sillas de ruedas. La Línea 7-DIF ya atiende población vulnerable; las ecoparadas complementan esa infraestructura inclusiva en las 37 líneas.</p>
-            <span class="solucion-dato">Ley 177 de Transporte del Edo. de Sonora</span>
+            <span class="solucion-dato">CAPTACIÓN: ~12,000 LITROS/AÑO</span>
           </div>
         </div>
       </div>
@@ -2619,13 +2611,13 @@
         <div class="team-role">Diseño e Innovación</div>
         <div class="team-bio">Especialista en diseño sostenible y arquitectura paramétrica para espacios urbanos.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card daniel-card">
         <div class="team-photo">
-          <div class="team-photo-placeholder">D</div>
+          <img src="fd3baab5-ec4f-45b0-90ef-067627022448.png" alt="Espinoza Perez Daniel">
         </div>
-        <div class="team-name">Espinoza Perez Daniel</div>
-        <div class="team-role">Desarrollo Técnico</div>
-        <div class="team-bio">Desarrollador especializado en sistemas inteligentes IoT y visualización de datos en tiempo real.</div>
+        <div class="team-name">Espinoza Perez<br>Daniel</div>
+        <div class="team-role">DIRECTORA DE PROYECTOS 5G</div>
+        <div class="team-bio">Ingeniera especializada en analisis de datos ambientales y reporteria de impacto ecosistemico.</div>
       </div>
       <div class="team-card">
         <div class="team-photo">
@@ -2659,12 +2651,12 @@
         <div class="team-role">Directora de Marketing</div>
         <div class="team-bio">Comunicadora especializada en sostenibilidad, impacto ambiental y narrativa de marca verde.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card camila-card">
         <div class="team-photo">
-          <div class="team-photo-placeholder">G</div>
+          <img src="fda5a566-c9db-47d6-964b-16ebdd7d349e.png" alt="Gonzales Beltran Camila">
         </div>
         <div class="team-name">Gonzales Beltran Camila</div>
-        <div class="team-role">Ingeniera de Datos</div>
+        <div class="team-role">Directora de Proyectos 5G</div>
         <div class="team-bio">Ingeniera especializada en analisis de datos ambientales y reporteria de impacto ecosistemico.</div>
       </div>
     </div>
