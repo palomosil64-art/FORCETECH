@@ -9,6 +9,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
   :root {
@@ -216,6 +217,21 @@
   }
   .chart-panel:hover { transform: translateY(-4px); box-shadow: 0 24px 54px rgba(20, 43, 24, 0.14); }
   .chart-panel.wide { grid-column: 1 / -1; }
+
+  body[data-aos-easing="ease-out-quad"] [data-aos] {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal-table-20 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal-table-20.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .chart-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 17px;
@@ -555,22 +571,22 @@
   <p class="section-desc">Estimacion de habitantes mayores de 18 anos que usan el transporte con alguna frecuencia, 2019-2024.</p>
 
   <div class="kpi-grid">
-    <div class="kpi-card" id="kpiUsuariosTransporte">
+    <div class="kpi-card" id="kpiUsuariosTransporte" data-aos="fade-up" data-aos-delay="0">
       <div class="kpi-label usuario-transporte">Usuarios del transporte</div>
       <div class="kpi-value">168,902 <small>personas</small></div>
       <div class="kpi-change up">? 86% vs 2023</div>
     </div>
-    <div class="kpi-card">
+    <div class="kpi-card" data-aos="fade-up" data-aos-delay="100">
       <div class="kpi-label">Usuarios regulares 2024</div>
       <div class="kpi-value">78,774 <small>diario</small></div>
       <div class="kpi-change">11.1% de la pob. adulta</div>
     </div>
-    <div class="kpi-card">
+    <div class="kpi-card" data-aos="fade-up" data-aos-delay="200">
       <div class="kpi-label">Pico historico</div>
       <div class="kpi-value">229,624 <small>2019</small></div>
       <div class="kpi-change down">? 26% al 2024</div>
     </div>
-    <div class="kpi-card accent" id="kpiSatisfaccionServicio">
+    <div class="kpi-card accent" id="kpiSatisfaccionServicio" data-aos="fade-up" data-aos-delay="300">
       <div class="kpi-label">Satisfaccion servicio 2024</div>
       <div class="kpi-value">7.0 <small>/ 10</small></div>
       <div class="kpi-change down">? 0.4 vs 2023</div>
@@ -694,7 +710,7 @@
     </div>
   </div>
 
-  <div class="chart-panel">
+  <div class="chart-panel reveal-table-20" data-reveal-threshold="0.2">
     <div class="chart-title">Tabla de operaciones financieras del Fideicomiso</div>
     <div class="chart-sub">Valores en millones de pesos (mdp)  2019-2024</div>
     <div class="table-wrap">
@@ -761,7 +777,7 @@
     </div>
   </div>
 
-  <div class="chart-panel">
+  <div class="chart-panel reveal-table-20" data-reveal-threshold="0.2">
     <div class="chart-title">Relacion subsidio por peso recaudado</div>
     <div class="chart-sub">Cuanto aporta el gobierno por cada $1.00 que paga un pasajero</div>
     <div class="table-wrap">
@@ -1009,6 +1025,7 @@
   Datos de <strong>Hermosillo Como Vamos?</strong> | Encuesta de Percepcion Ciudadana 2024 | IMTES | Elaborado con informacion publica del periodo 2019-2024
 </div>
 
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
 // Color palette
 const G = {
@@ -1628,9 +1645,42 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   }
 });
 
+function initRevealTables() {
+  const targets = Array.from(document.querySelectorAll('.reveal-table-20'));
+  if (!targets.length) return;
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      obs.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  targets.forEach((el) => observer.observe(el));
+}
+
+if (window.AOS) {
+  AOS.init({
+    duration: 600,
+    easing: 'ease-out-quad',
+    once: true,
+    mirror: false
+  });
+}
+
+initRevealTables();
+
 animateNumbersInSection(document.querySelector('.section.active'));
 renderEcoGrid();
-</script> src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+</script>
 
 </body>
 </html>
