@@ -11,6 +11,7 @@ interface MapFiltersState {
 
 interface HermosilloMapProps {
   filters: MapFiltersState;
+  highlightedRouteId?: "linea3" | "linea4" | "linea8" | null;
   onStopClick?: (stopId: string) => void;
 }
 
@@ -46,7 +47,7 @@ const busRoutes = {
   ],
 };
 
-export function HermosilloMap({ filters, onStopClick }: HermosilloMapProps) {
+export function HermosilloMap({ filters, highlightedRouteId, onStopClick }: HermosilloMapProps) {
   const [buses, setBuses] = useState([
     { 
       id: "b1", 
@@ -114,6 +115,9 @@ export function HermosilloMap({ filters, onStopClick }: HermosilloMapProps) {
     { id: "4", name: "Rosales Centro", position: { top: "46.7%", left: "56.25%" }, street: { x: 450, y: 280 } },
     { id: "6", name: "Serdán", position: { top: "63.3%", left: "31.25%" }, street: { x: 250, y: 380 } },
   ];
+
+  const routeIsActive = (routeId: "linea3" | "linea4" | "linea8") =>
+    !highlightedRouteId || highlightedRouteId === routeId;
 
   return (
     <div className="relative w-full h-full bg-[#e5e3df] overflow-hidden">
@@ -269,9 +273,9 @@ export function HermosilloMap({ filters, onStopClick }: HermosilloMapProps) {
               <path
                 d="M 250 150 L 320 150 L 320 220 L 380 220 L 380 280 L 450 280 L 450 330 L 520 330"
                 stroke="#e67e22"
-                strokeWidth="6"
+                strokeWidth={routeIsActive("linea3") ? 8 : 4}
                 fill="none"
-                opacity="0.8"
+                opacity={routeIsActive("linea3") ? 0.95 : 0.2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -280,9 +284,9 @@ export function HermosilloMap({ filters, onStopClick }: HermosilloMapProps) {
               <path
                 d="M 250 280 L 320 280 L 380 280 L 450 280 L 520 280 L 520 380 L 520 450"
                 stroke="#8bc34a"
-                strokeWidth="6"
+                strokeWidth={routeIsActive("linea8") ? 8 : 4}
                 fill="none"
-                opacity="0.8"
+                opacity={routeIsActive("linea8") ? 0.95 : 0.2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -291,9 +295,9 @@ export function HermosilloMap({ filters, onStopClick }: HermosilloMapProps) {
               <path
                 d="M 250 380 L 320 380 L 380 380 L 380 330 L 450 330 L 520 330 L 520 420"
                 stroke="#f4a460"
-                strokeWidth="6"
+                strokeWidth={routeIsActive("linea4") ? 8 : 4}
                 fill="none"
-                opacity="0.8"
+                opacity={routeIsActive("linea4") ? 0.95 : 0.2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
