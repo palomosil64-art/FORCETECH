@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hermosillo Viva 3D | FORCETECH</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -16,27 +17,17 @@
     .legend h3{font-family:"Montserrat",sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#d35400;margin-bottom:7px;font-weight:800}
     .li{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-family:"Montserrat",sans-serif;font-size:9px;color:#8aaa80;font-weight:600}
     .sw{width:10px;height:10px;border-radius:2px;border:1px solid rgba(255,255,255,.14);flex-shrink:0}
-    .routes{position:absolute;right:12px;top:12px;background:rgba(6,14,6,.82);border:1px solid rgba(211,84,0,.28);border-radius:10px;padding:10px 13px;width:220px;backdrop-filter:blur(6px);z-index:2}
-    .routes h3{font-family:"Montserrat",sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#d35400;margin-bottom:7px;font-weight:800}
-    .ri{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-family:"Montserrat",sans-serif;font-size:9px;color:#8aaa80;font-weight:600}
     .tag{color:#fff;font-weight:800;font-size:8px;padding:2px 6px;border-radius:999px;background:#2d5db3;min-width:36px;text-align:center;flex-shrink:0}
     .controls{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;z-index:3;display:flex;flex-wrap:wrap;justify-content:center;gap:5px;padding:8px 10px;border:1px solid rgba(211,84,0,.3);border-radius:10px;background:rgba(6,14,6,.88);backdrop-filter:blur(6px)}
     .btn{border:1px solid rgba(211,84,0,.35);border-radius:7px;background:transparent;color:#cc6020;font-family:"Montserrat",sans-serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;cursor:pointer;padding:6px 9px;transition:background .18s,color .18s,transform .15s}
     .btn:hover{background:#d35400;color:#fff;transform:translateY(-1px)}
     .btn.active{background:#d35400;color:#fff}
-    @media(max-width:860px){.legend,.routes{display:none}.controls{left:10px;right:10px;transform:none;justify-content:flex-start}}
+    @media(max-width:860px){.legend{display:none}.controls{left:10px;right:10px;transform:none;justify-content:flex-start}}
   </style>
 </head>
 <body>
   <canvas id="canvas"></canvas>
   <a href="index.html" class="brand">&larr; FORCETECH</a>
-
-  <div class="routes">
-    <h3>Lineas de Ruta</h3>
-    <div class="ri"><span class="tag">R12</span><span>Centro - Hospital General</span></div>
-    <div class="ri"><span class="tag">R17</span><span>Solidaridad - Vado del Rio</span></div>
-    <div class="ri"><span class="tag">R04</span><span>UNISON - Parque Industrial</span></div>
-  </div>
 
   <div class="legend">
     <h3>Materiales</h3>
@@ -61,10 +52,8 @@
     <button class="btn" id="txBtn">Texturas PNG</button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
-  <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script> src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"<script>
   /* ==========================================================
      FORCETECH – Hermosillo Viva | Photorealistic Three.js r128
   ========================================================== */
@@ -436,9 +425,10 @@
     G.position.set(px,BEDY+0.26,pz); G.scale.setScalar(sc);
     ROOT.add(G); return G;
   }
-  // 6 plantas originales + 8 adicionales para cobertura densa
+  // Cobertura vegetal densa sobre la cubierta
   [[-2.4,-1.5,1.10],[-1.1,0.8,1.05],[0.2,-0.9,1.15],[1.5,0.9,1.00],[2.2,-0.3,0.95],[0.7,1.6,0.90],
-   [-3.0,0.2,0.92],[-2.8,-0.8,1.05],[-1.8,1.4,0.98],[-0.4,0.3,1.08],[1.0,-1.4,1.12],[2.8,1.2,0.94],[3.1,-0.5,0.88],[-0.9,-1.2,1.02]].forEach(function(p){ chloro(p[0],p[1],p[2]); });
+   [-3.0,0.2,0.92],[-2.8,-0.8,1.05],[-1.8,1.4,0.98],[-0.4,0.3,1.08],[1.0,-1.4,1.12],[2.8,1.2,0.94],[3.1,-0.5,0.88],[-0.9,-1.2,1.02],
+   [-3.2,-1.5,0.86],[-2.1,1.65,0.92],[-0.2,1.55,0.90],[0.9,0.4,1.06],[1.9,-1.05,0.97],[2.55,0.35,0.91],[3.3,0.9,0.82],[-1.35,-0.15,0.96]].forEach(function(p){ chloro(p[0],p[1],p[2]); });
 
   /* ── Hanging vines ── */
   function vine(sx,sz,drop,xv){
@@ -469,78 +459,32 @@
   });
 
   /* ── Solar lamp ── */
-  cy(0.034,0.042,2.85,10,M.steel,4.15,1.425,2.05);
+  cy(0.036,0.044,4.65,12,M.steel,4.15,2.325,2.05);
   var armM=new THREE.Mesh(new THREE.CylinderGeometry(0.018,0.018,0.72,8),M.steel);
-  armM.position.set(4.15,2.9,2.05); armM.rotation.z=Math.PI*0.28; armM.castShadow=true; ROOT.add(armM);
-  cy(0.13,0.09,0.09,14,M.lamp,4.38,3.01,2.05);
-  var spanel=bx(0.44,0.02,0.44,new THREE.MeshPhysicalMaterial({color:0x18244a,roughness:0.10,metalness:0.82,clearcoat:0.65}),4.12,2.88,2.05);
+  armM.position.set(4.15,4.62,2.05); armM.rotation.z=Math.PI*0.28; armM.castShadow=true; ROOT.add(armM);
+  cy(0.14,0.10,0.10,14,M.lamp,4.44,4.74,2.05);
+  var spanel=bx(0.50,0.02,0.50,new THREE.MeshPhysicalMaterial({color:0x18244a,roughness:0.10,metalness:0.82,clearcoat:0.65}),4.10,4.54,2.05);
   spanel.rotation.x=0.38;
   var lumino=new THREE.Mesh(new THREE.PlaneGeometry(0.20,0.20),new THREE.MeshBasicMaterial({color:0xfffbd0,transparent:true,opacity:0.45}));
-  lumino.position.set(4.38,2.96,2.05); lumino.rotation.x=Math.PI*0.5; ROOT.add(lumino);
+  lumino.position.set(4.44,4.68,2.05); lumino.rotation.x=Math.PI*0.5; ROOT.add(lumino);
 
-  /* ── Bus stop elements ── */
+  /* ── Bus stop elements (single aligned sign) ── */
 
-  // 1. Poste principal de parada con número
-  cy(0.038,0.044,3.80,10,M.steel,5.2,1.90,0.0);
-  bx(0.72,0.48,0.10,M.sign,5.2,3.90,0.0);
-  var stopNumC=document.createElement("canvas"); stopNumC.width=256; stopNumC.height=172;
+  // Poste unico con letrero principal acomodado hacia la banqueta
+  cy(0.038,0.044,3.95,10,M.steel,5.05,1.975,0.25);
+  bx(0.84,0.58,0.10,M.sign,5.05,3.86,0.25);
+  var stopNumC=document.createElement("canvas"); stopNumC.width=340; stopNumC.height=230;
   var snx=stopNumC.getContext("2d");
-  snx.fillStyle="#1a3a8a"; snx.fillRect(0,0,256,172);
-  snx.fillStyle="#ffffff"; snx.font="bold 36px sans-serif"; snx.textAlign="center";
-  snx.fillText("PARADA",128,58); snx.font="bold 72px sans-serif"; snx.fillText("047",128,138);
-  var stopNumMesh=new THREE.Mesh(new THREE.PlaneGeometry(0.68,0.44),new THREE.MeshPhysicalMaterial({map:new THREE.CanvasTexture(stopNumC),roughness:0.05,clearcoat:0.85}));
-  stopNumMesh.position.set(5.26,3.90,0.0); stopNumMesh.rotation.y=-Math.PI/2; ROOT.add(stopNumMesh);
-
-  // 2. Panel de rutas ampliado (4 lineas con colores)
-  cy(0.034,0.040,2.60,10,M.steel,-4.30,1.30,0.45);
-  bx(0.055,1.45,0.055,M.steel,-4.30,2.50,0.45);
-  bx(1.80,1.20,0.08,M.sign,-4.30,2.50,0.45);
-  bx(1.68,1.08,0.022,M.glass,-4.26,2.50,0.50);
-  var sc=document.createElement("canvas"); sc.width=620; sc.height=420;
-  var sx=sc.getContext("2d");
-  sx.fillStyle="#e8f0ff"; sx.fillRect(0,0,620,420);
-  sx.fillStyle="#1a2c68"; sx.fillRect(0,0,620,66);
-  sx.fillStyle="#ffffff"; sx.font="bold 28px sans-serif"; sx.textAlign="left"; sx.fillText("  LINEAS DE RUTA",16,44);
-  var rdata=[["R12","#e53935","Centro - Hospital General"],["R17","#2e7d32","Solidaridad - Vado del Rio"],["R04","#1565c0","UNISON - Parque Industrial"],["R22","#f57f17","Galerias - Col. Olivares"]];
-  rdata.forEach(function(row,i){
-    var ry=80+i*82;
-    sx.fillStyle=row[1]; sx.fillRect(14,ry,68,46);
-    sx.fillStyle="#fff"; sx.font="bold 24px sans-serif"; sx.textAlign="center"; sx.fillText(row[0],48,ry+30);
-    sx.fillStyle="#1a2c68"; sx.font="600 21px sans-serif"; sx.textAlign="left"; sx.fillText(row[2],98,ry+30);
-    sx.strokeStyle="rgba(26,44,104,0.14)"; sx.lineWidth=1; sx.beginPath(); sx.moveTo(14,ry+52); sx.lineTo(606,ry+52); sx.stroke();
-  });
-  var signMesh=new THREE.Mesh(new THREE.PlaneGeometry(1.62,1.02),new THREE.MeshPhysicalMaterial({map:new THREE.CanvasTexture(sc),roughness:0.06,clearcoat:0.82,clearcoatRoughness:0.06}));
-  signMesh.position.set(-3.88,2.50,0.52); signMesh.rotation.y=Math.PI/2; ROOT.add(signMesh);
-
-  // 3. Panel de proximas salidas en poste lateral
-  cy(0.034,0.040,2.80,10,M.steel,4.0,1.40,-2.8);
-  bx(1.50,0.90,0.07,M.sign,4.0,2.90,-2.8);
-  var hc=document.createElement("canvas"); hc.width=480; hc.height=290;
-  var hx=hc.getContext("2d");
-  hx.fillStyle="#0d1f4a"; hx.fillRect(0,0,480,290);
-  hx.fillStyle="#d35400"; hx.fillRect(0,0,480,52);
-  hx.fillStyle="#ffffff"; hx.font="bold 24px sans-serif"; hx.textAlign="center"; hx.fillText("PROXIMAS SALIDAS",240,35);
-  var times=[["R12","2 min"],["R04","8 min"],["R17","14 min"],["R22","21 min"]];
-  times.forEach(function(t,i){
-    hx.fillStyle=i%2===0?"rgba(255,255,255,0.06)":"transparent"; hx.fillRect(0,56+i*58,480,58);
-    hx.fillStyle="#ffcc44"; hx.font="bold 22px sans-serif"; hx.textAlign="left"; hx.fillText(t[0],22,93+i*58);
-    hx.fillStyle="#ffffff"; hx.font="600 20px sans-serif"; hx.fillText(t[1],78,93+i*58);
-    hx.fillStyle="rgba(80,220,80,0.85)"; hx.beginPath(); hx.arc(438,78+i*58,7,0,Math.PI*2); hx.fill();
-  });
-  var hMesh=new THREE.Mesh(new THREE.PlaneGeometry(1.40,0.82),new THREE.MeshPhysicalMaterial({map:new THREE.CanvasTexture(hc),roughness:0.05,clearcoat:0.85}));
-  hMesh.position.set(4.05,2.90,-2.74); hMesh.rotation.y=-Math.PI/2+0.1; ROOT.add(hMesh);
+  snx.fillStyle="#173883"; snx.fillRect(0,0,340,230);
+  snx.fillStyle="#ffffff"; snx.font="bold 44px sans-serif"; snx.textAlign="center";
+  snx.fillText("PARADA",170,76); snx.font="bold 86px sans-serif"; snx.fillText("047",170,170);
+  snx.font="600 26px sans-serif"; snx.fillText("RUTAS ACTIVAS",170,208);
+  var stopNumMesh=new THREE.Mesh(new THREE.PlaneGeometry(0.78,0.52),new THREE.MeshPhysicalMaterial({map:new THREE.CanvasTexture(stopNumC),roughness:0.05,clearcoat:0.85}));
+  stopNumMesh.position.set(5.13,3.86,0.25); stopNumMesh.rotation.y=-Math.PI/2; ROOT.add(stopNumMesh);
 
   // 4. Linea amarilla de espera en el suelo
   bx(9.0,0.018,0.12,new THREE.MeshStandardMaterial({color:0xf5c518,roughness:0.65}),0,0.058,3.6);
   bx(0.12,0.018,8.0,new THREE.MeshStandardMaterial({color:0xf5c518,roughness:0.65}),5.5,0.058,0);
-
-  // 5. Icono bus en el poste principal
-  var busC=document.createElement("canvas"); busC.width=180; busC.height=180;
-  var bxc=busC.getContext("2d");
-  bxc.fillStyle="#1a3a8a"; bxc.beginPath(); bxc.arc(90,90,88,0,Math.PI*2); bxc.fill();
-  bxc.fillStyle="#ffffff"; bxc.font="80px sans-serif"; bxc.textAlign="center"; bxc.textBaseline="middle"; bxc.fillText("\uD83D\uDE8C",90,96);
-  var busMesh=new THREE.Mesh(new THREE.CircleGeometry(0.22,32),new THREE.MeshStandardMaterial({map:new THREE.CanvasTexture(busC),roughness:0.10}));
-  busMesh.position.set(5.26,4.55,0.02); busMesh.rotation.y=-Math.PI/2; ROOT.add(busMesh);
 
   /* ── Desert context ── */
   function cactus(x,z,h){
@@ -620,5 +564,7 @@
   function animate(){requestAnimationFrame(animate);if(autoR){ORB.theta+=0.004;camUpdate()}GL.render(SC,CAM)}
   animate();
   </script>
+   src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"
+  
 </body>
 </html>

@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORCETECH | Paradas Ecológicas Inteligentes — Hermosillo</title>
+  <title>FORCETECH | Paradas Ecol&oacute;gicas Inteligentes &mdash; Hermosillo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -740,12 +741,19 @@
       background: rgba(255, 255, 255, 0.65);
       transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
       font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
     }
 
     .route-item:hover {
       background: rgba(211, 84, 0, 0.12);
       box-shadow: 0 6px 14px rgba(211, 84, 0, 0.16);
       transform: translateY(-1px);
+    }
+
+    .route-item.route-item--active {
+      background: rgba(211, 84, 0, 0.15);
+      box-shadow: 0 8px 18px rgba(211, 84, 0, 0.24);
+      border-color: #B84400;
     }
 
     .route-item-head {
@@ -1203,6 +1211,18 @@
       filter: drop-shadow(0 0 4px rgba(26, 79, 176, 0.26));
     }
 
+    .route-pro-shadow {
+      filter: drop-shadow(0 0 10px rgba(211, 84, 0, 0.42));
+    }
+
+    .route-pro-main {
+      filter: drop-shadow(0 0 7px rgba(211, 84, 0, 0.28));
+    }
+
+    .route-pro-highlight {
+      filter: drop-shadow(0 0 3px rgba(255, 193, 128, 0.8));
+    }
+
     .route-direction-arrow {
       width: 24px;
       height: 24px;
@@ -1319,7 +1339,7 @@
       background: rgba(211, 84, 0, 0.08);
     }
 
-    /* Mapa — indicadores destacados */
+    /* Mapa &mdash; indicadores destacados */
     #mapa .section-title {
       color: var(--naranja-oficial);
       font-weight: 900;
@@ -1383,7 +1403,7 @@
       transform: translateY(-1px);
     }
 
-    /* Sección de cards de paradas eliminada: experiencia solo mapa KML */
+    /* Secci&oacute;n de cards de paradas eliminada: experiencia solo mapa KML */
 
     /* ── MODEL SECTION ── */
     .model-section {
@@ -1513,6 +1533,13 @@
       box-shadow: 0 14px 30px rgba(211, 84, 0, 0.5);
     }
 
+    .action-buttons .btn-action {
+      background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%);
+      border-color: transparent;
+      color: #FFFFFF;
+      box-shadow: 0 10px 24px rgba(211, 84, 0, 0.28);
+    }
+
     .model-text .section-label {
       color: #D35400;
       font-weight: 800;
@@ -1524,7 +1551,7 @@
     }
 
     .model-text p {
-      color: #D35400;
+      color: #1E392A;
       font-family: 'Montserrat', sans-serif;
       font-size: 15px;
       font-weight: 700;
@@ -1540,10 +1567,29 @@
     }
 
     .model-spec {
-      background: #FFFFFF;
-      border: 1px solid rgba(211, 84, 0, 0.35);
+      position: relative;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(211, 84, 0, 0.42);
       border-radius: 12px;
-      padding: 14px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 20px rgba(30, 57, 42, 0.08);
+    }
+
+    .model-spec-icon {
+      position: absolute;
+      top: 9px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      color: #D35400;
+      border: 1px solid rgba(211, 84, 0, 0.28);
+      background: rgba(255, 255, 255, 0.66);
     }
 
     .model-spec-label {
@@ -1558,9 +1604,22 @@
 
     .model-spec-value {
       font-family: 'Montserrat', sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       color: #D35400;
       font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.35;
+      max-width: 92%;
+    }
+
+    .model-spec-note {
+      margin-top: 7px;
+      font-size: 9px;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      color: #1E392A;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     .model-link {
@@ -2053,7 +2112,7 @@
     }
 
     .team-card.camila-card .team-role {
-      color: #666666;
+      color: #D35400;
     }
 
     .team-card.daniel-card .team-photo {
@@ -2085,7 +2144,7 @@
     }
 
     .team-card.andrea-card .team-role {
-      color: #666666;
+      color: #D35400;
     }
 
     .team-card.francisco-card {
@@ -2105,7 +2164,7 @@
     }
 
     .team-card.francisco-card .team-role {
-      color: #666666;
+      color: #D35400;
     }
 
     .team-card.gabriela-card {
@@ -2125,7 +2184,7 @@
     }
 
     .team-card.gabriela-card .team-role {
-      color: #666666;
+      color: #D35400;
     }
 
     .team-card.raul-card {
@@ -2145,7 +2204,7 @@
     }
 
     .team-card.raul-card .team-role {
-      color: #666666;
+      color: #D35400;
     }
 
     .team-photo-placeholder {
@@ -2163,7 +2222,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;
       font-weight: 700;
-      color: var(--texto-oscuro);
+      color: #1E392A;
       margin-bottom: 4px;
     }
 
@@ -2172,7 +2231,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--naranja-acento);
+      color: #D35400;
       font-weight: 700;
       margin-bottom: 12px;
     }
@@ -2714,7 +2773,7 @@
     .infra-proof {
       margin: 20px 0 34px;
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 300px minmax(0, 1fr) 300px;
       gap: 22px;
       align-items: center;
       border: 1px solid rgba(211, 84, 0, 0.2);
@@ -2799,6 +2858,11 @@
       text-align: center;
     }
 
+    .infra-proof-content {
+      display: grid;
+      gap: 10px;
+    }
+
     .infra-proof-content h3 {
       margin: 0 0 10px;
       color: #D35400;
@@ -2811,7 +2875,8 @@
 
     .infra-proof-list {
       margin: 0;
-      padding-left: 18px;
+      padding: 0;
+      list-style: none;
       display: grid;
       gap: 8px;
     }
@@ -2822,11 +2887,24 @@
       font-size: 13px;
       line-height: 1.55;
       font-weight: 600;
+      display: grid;
+      grid-template-columns: 136px 1fr;
+      column-gap: 10px;
+      align-items: start;
     }
 
     .infra-proof-list strong {
       color: #1E392A;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .infra-proof-list .infra-proof-highlight {
+      color: #D35400;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     @media (max-width: 900px) {
@@ -2837,6 +2915,10 @@
       .infra-proof-image-btn {
         width: 230px;
         height: 230px;
+      }
+
+      .infra-proof-list li {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -3040,7 +3122,7 @@
       color: var(--texto-oscuro) !important;
     }
 
-    /* ── Sección: Directorio de Ecoparadas ── */
+    /* ── Secci&oacute;n: Directorio de Ecoparadas ── */
     #red-inteligente {
       background: #FFFFFF;
       border-left: 4px solid rgba(211, 84, 0, 0.2);
@@ -3117,7 +3199,7 @@
       <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#mapa">Mapa</a></li>
-        <li><a href="#diagnostico">Diagnóstico</a></li>
+        <li><a href="#diagnostico">Diagn&oacute;stico</a></li>
         <li><a href="#mapa">Paradas</a></li>
         <li><a href="#modelo">Modelo 3D</a></li>
         <li><a href="#transporte">Transporte</a></li>
@@ -3131,13 +3213,13 @@
   <!-- HERO -->
   <section class="hero" id="inicio">
     <span class="hero-badge">Hermosillo, Sonora</span>
-    <h1>Ingeniería que Respira: El Futuro de la Movilidad en <em>Hermosillo</em></h1>
-    <p class="hero-sub">Diseñamos Ecoparadas de alto rendimiento con estructura de acero A36 y cubiertas vegetales inteligentes, garantizando un confort térmico superior y una vida útil de 26 años.</p>
+    <h1>INGENIER&Iacute;A QUE RESPIRA</h1>
+    <p class="hero-sub">Infraestructura Viva de Alta Ingenier&iacute;a: acero A36, bioclimatizaci&oacute;n activa y desempe&ntilde;o urbano medible para 32 RUTAS ACTIVAS.</p>
     <div class="hero-pills">
       <span class="hero-pill">ACERO A36</span>
-      <span class="hero-pill">BIOCLIMATIZACIÓN ACTIVA</span>
-      <span class="hero-pill">453 PARADAS ACTIVAS</span>
-      <span class="hero-pill">VIDA ÚTIL: 26 AÑOS</span>
+      <span class="hero-pill">BIOCLIMATIZACI&Oacute;N ACTIVA</span>
+      <span class="hero-pill">32 RUTAS ACTIVAS</span>
+      <span class="hero-pill">VIDA &Uacute;TIL: 26 A&Ntilde;OS</span>
     </div>
     <div class="hero-cta">
       <a href="#mapa" class="cta-primary"><span>Explorar Mapa</span></a>
@@ -3152,16 +3234,16 @@
       <div class="stat-label">Usuarios del TP</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">37</div>
-      <div class="stat-label">Líneas Activas</div>
+      <div class="stat-number">32</div>
+      <div class="stat-label">L&iacute;neas Activas</div>
     </div>
     <div class="stat-item">
       <div class="stat-number">70.4%</div>
       <div class="stat-label">Queja: Espera</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" id="pilotStopsStat">453</div>
-      <div class="stat-label">Paradas Activas</div>
+      <div class="stat-number" id="pilotStopsStat">32</div>
+      <div class="stat-label">Rutas Activas</div>
     </div>
   </div>
 
@@ -3169,16 +3251,16 @@
   <section class="section" id="mapa">
     <span class="section-label">Ubicaciones reales</span>
     <h2 class="section-title">Comparativo en Tiempo Real de la Red y el Piloto</h2>
-    <p class="section-sub">Compara la red completa de 453 PARADAS ACTIVAS contra el proyecto piloto de 10 ecoparadas inteligentes en dos mapas sincronizados.</p>
+    <p class="section-sub">Compara la red completa de 32 RUTAS ACTIVAS contra el proyecto piloto de 10 ecoparadas inteligentes en dos mapas sincronizados.</p>
     <div class="map-wrapper">
       <div class="map-header">
-        <h3>Visualización comparativa de infraestructura</h3>
+        <h3>Visualizaci&oacute;n comparativa de infraestructura</h3>
       </div>
       <div class="smart-actions">
-        <button type="button" class="smart-btn map-cta-btn" onclick="openRoutesModal()">📍 VER UNA LÍNEA</button>
+        <button type="button" class="smart-btn map-cta-btn" onclick="openRoutesModal()">📍 VER UNA L&Iacute;NEA</button>
         <button type="button" class="smart-btn map-cta-btn" onclick="openJourneyModal()">🗺️ CREAR VIAJE</button>
         <button type="button" class="smart-btn map-cta-btn" onclick="openReportModal()">⚠️ REPORTAR</button>
-        <button type="button" class="smart-btn map-cta-btn citizen-reviews-btn" id="citizenReviewsBtn">💬 ¿QUÉ OPINAN LOS HERMOSILLENSES?</button>
+        <button type="button" class="smart-btn map-cta-btn citizen-reviews-btn" id="citizenReviewsBtn">💬 &iquest;QU&Eacute; OPINAN LOS HERMOSILLENSES?</button>
       </div>
       <div class="map-split">
         <article class="map-panel">
@@ -3202,10 +3284,10 @@
             </div>
             <div class="journey-info-row">
               <span class="journey-info-label">Destino</span>
-              <strong class="journey-info-value" id="journeyDestinationValue">Centro Histórico / Catedral</strong>
+              <strong class="journey-info-value" id="journeyDestinationValue">Centro Hist&oacute;rico / Catedral</strong>
             </div>
             <div class="journey-info-row">
-              <span class="journey-info-label">Próximo autobús</span>
+              <span class="journey-info-label">Pr&oacute;ximo autob&uacute;s</span>
               <strong class="journey-info-value" id="journeyNextBusValue">Sigue de tu viaje</strong>
             </div>
             <div class="journey-info-row">
@@ -3235,37 +3317,43 @@
         </article>
       </div>
       <div class="pilot-justification">
-        <h3 class="pilot-justification-title">MOTIVOS DE CREACIÓN DEL PROYECTO PILOTO</h3>
+        <h3 class="pilot-justification-title">MOTIVOS DE CREACI&Oacute;N DEL PROYECTO PILOTO</h3>
         <p class="pilot-justification-text">El Proyecto Piloto de Ecoparadas Inteligentes en Hermosillo se creo para mitigar el impacto termico en los usuarios, con ingenieria de materiales, bioclimatizacion pasiva y monitoreo ambiental, transformando paradas convencionales en nodos de dignidad urbana.</p>
       </div>
     </div>
   </section>
 
-  <!-- DIAGNÓSTICO -->
+  <!-- DIAGN&Oacute;STICO -->
   <section class="diagnostico" id="diagnostico">
     <div class="diagnostico-inner">
-      <span class="section-label">Especificaciones de Ingeniería</span>
-      <h2 class="section-title">Infraestructura Viva de Alta Ingeniería para el clima extremo</h2>
-      <p class="section-sub" style="max-width:680px;">FORCETECH integra diseño estructural, bioclimatización activa y drenaje permeable para transformar la espera en una experiencia térmica segura, medible y durable por 26 años.</p>
+      <span class="section-label">Especificaciones de Ingenier&iacute;a</span>
+      <h2 class="section-title">Infraestructura Viva de Alta Ingenier&iacute;a para el clima extremo</h2>
+      <p class="section-sub" style="max-width:680px;">FORCETECH integra dise&ntilde;o estructural, bioclimatizaci&oacute;n activa y drenaje permeable para transformar la espera en una experiencia t&eacute;rmica segura, medible y durable por 26 a&ntilde;os.</p>
 
-      <div class="infra-proof" aria-label="Ficha técnica viva de la ecoparada">
+      <div class="infra-proof" aria-label="Ficha t&eacute;cnica viva de la ecoparada">
         <figure class="infra-proof-media">
           <button type="button" class="infra-proof-image-btn" id="infraProofImageBtn" aria-label="Centrar mapa en el Proyecto Piloto de Ecoparadas">
-            <img src="45e5c7ef-6bc0-459f-9732-14e822f56170 (2).png" alt="Ecoparada FORCETECH construida en sitio real con vegetación y cubierta bioclimática">
+            <img src="45e5c7ef-6bc0-459f-9732-14e822f56170 (2).png" alt="Ecoparada FORCETECH construida en sitio real con vegetaci&oacute;n y cubierta bioclim&aacute;tica">
           </button>
-          <figcaption class="infra-proof-caption">Prueba física de infraestructura viva</figcaption>
+          <figcaption class="infra-proof-caption">Vista lateral construida</figcaption>
         </figure>
         <div class="infra-proof-content">
-          <h3>Ficha técnica viva</h3>
+          <h3>FICHA T&Eacute;CNICA VIVA</h3>
           <ul class="infra-proof-list">
             <li><strong>Estructura:</strong> 4 pilares de acero A36 (2.5m altura).</li>
-            <li><strong>Cubierta:</strong> Plastimadera de 3m con 15cm de sustrato orgánico (fibra de coco y humus de lombriz).</li>
-            <li><strong>Bioclimatización:</strong> 6 plantas Chlorophytum comosum y enredaderas colgantes para confort térmico.</li>
-            <li><strong>Suelo:</strong> Adopasto (340x190cm) para filtración de agua y áreas verdes.</li>
-            <li><strong>Autonomía:</strong> Lámpara solar recargable para iluminación nocturna.</li>
-            <li><strong>Vida útil:</strong> 26 años de operatividad estimada.</li>
+            <li><strong>Cubierta:</strong> Plastimadera de 3m con 15cm de sustrato org&aacute;nico (fibra de coco y humus de lombriz).</li>
+            <li><strong>Bioclimatizaci&oacute;n:</strong> 6 plantas Chlorophytum comosum y enredaderas colgantes para confort t&eacute;rmico.</li>
+            <li><strong>Suelo:</strong> Adopasto (340x190cm) para filtraci&oacute;n de agua y &aacute;reas verdes.</li>
+            <li><strong>Autonom&iacute;a:</strong> L&aacute;mpara solar recargable para iluminaci&oacute;n nocturna.</li>
+            <li><strong>Vida &uacute;til:</strong> <span class="infra-proof-highlight">26 A&Ntilde;OS</span> de operatividad estimada.</li>
           </ul>
         </div>
+        <figure class="infra-proof-media">
+          <button type="button" class="infra-proof-image-btn" aria-label="Vista frontal de la ecoparada FORCETECH">
+            <img src="b1b29782-21a8-4751-881a-6dadadfb17f5.png" alt="Vista frontal de la ecoparada con usuarios sentados y mapa de rutas">
+          </button>
+          <figcaption class="infra-proof-caption">Vista frontal en operaci&oacute;n</figcaption>
+        </figure>
       </div>
 
       <div class="crisis-grid">
@@ -3273,67 +3361,67 @@
           <div class="crisis-icon">&#128736;</div>
           <div class="crisis-number">A36</div>
           <div class="crisis-label">Estructura y resistencia de grado industrial</div>
-          <div class="crisis-detail">Cuatro pilares de acero A36 de 2.5 metros anclan la estación para operación continua bajo radiación, polvo y ciclos térmicos de Hermosillo.</div>
+          <div class="crisis-detail">Cuatro pilares de acero A36 de 2.5 metros anclan la estaci&oacute;n para operaci&oacute;n continua bajo radiaci&oacute;n, polvo y ciclos t&eacute;rmicos de Hermosillo.</div>
         </div>
         <div class="crisis-card alerta">
           <div class="crisis-icon">&#127957;</div>
           <div class="crisis-number">3.0m</div>
           <div class="crisis-label">Cubierta de plastimadera para ecosistema superior</div>
-          <div class="crisis-detail">La cubierta de 3 metros soporta un sustrato orgánico de 15 cm con fibra de coco y humus de lombriz, funcionando como aislante térmico natural de alta eficiencia.</div>
+          <div class="crisis-detail">La cubierta de 3 metros soporta un sustrato org&aacute;nico de 15 cm con fibra de coco y humus de lombriz, funcionando como aislante t&eacute;rmico natural de alta eficiencia.</div>
         </div>
         <div class="crisis-card info">
           <div class="crisis-icon">&#9728;</div>
           <div class="crisis-number">300x150</div>
-          <div class="crisis-label">Bioclimatización activa y protección UV</div>
-          <div class="crisis-detail">Malla sombra integrada de 300 x 150 cm y vegetación estratégica para atenuar radiación directa, reducir carga térmica y elevar el confort en horas pico.</div>
+          <div class="crisis-label">Bioclimatizaci&oacute;n activa y protecci&oacute;n UV</div>
+          <div class="crisis-detail">Malla sombra integrada de 300 x 150 cm y vegetaci&oacute;n estrat&eacute;gica para atenuar radiaci&oacute;n directa, reducir carga t&eacute;rmica y elevar el confort en horas pico.</div>
         </div>
         <div class="crisis-card alerta">
           <div class="crisis-icon">&#128167;</div>
           <div class="crisis-number">340x190</div>
-          <div class="crisis-label">Filtración hídrica y control de encharcamiento</div>
-          <div class="crisis-detail">Piso de adopasto de 340 x 190 cm para infiltración al subsuelo, menor escorrentía superficial y reducción de islas de calor en el entorno inmediato.</div>
+          <div class="crisis-label">Filtraci&oacute;n h&iacute;drica y control de encharcamiento</div>
+          <div class="crisis-detail">Piso de adopasto de 340 x 190 cm para infiltraci&oacute;n al subsuelo, menor escorrent&iacute;a superficial y reducci&oacute;n de islas de calor en el entorno inmediato.</div>
         </div>
       </div>
 
-      <span class="section-label">El pulmón de la estación</span>
-      <h2 class="section-title">Más que una estructura, un organismo vivo</h2>
-      <p class="section-sub" style="max-width:680px;">Cada unidad incorpora seis ejemplares de Chlorophytum comosum y enredaderas ornamentales que cuelgan estratégicamente para generar sombra viva, mejorar el microclima y elevar la calidad del aire en espera.</p>
+      <span class="section-label">El pulm&oacute;n de la estaci&oacute;n</span>
+      <h2 class="section-title">M&aacute;s que una estructura, un organismo vivo</h2>
+      <p class="section-sub" style="max-width:680px;">Cada unidad incorpora seis ejemplares de Chlorophytum comosum y enredaderas ornamentales que cuelgan estrat&eacute;gicamente para generar sombra viva, mejorar el microclima y elevar la calidad del aire en espera.</p>
 
       <span class="section-label">Experiencia del usuario</span>
-      <h2 class="section-title">Confort urbano con desempeño operativo medible</h2>
-      <p class="section-sub" style="max-width:680px;">La propuesta combina ergonomía, autonomía energética y durabilidad extrema para optimizar la inversión pública y privada.</p>
+      <h2 class="section-title">Confort urbano con desempe&ntilde;o operativo medible</h2>
+      <p class="section-sub" style="max-width:680px;">La propuesta combina ergonom&iacute;a, autonom&iacute;a energ&eacute;tica y durabilidad extrema para optimizar la inversi&oacute;n p&uacute;blica y privada.</p>
 
       <div class="soluciones-grid">
         <div class="solucion-card">
           <div class="solucion-icon app">&#128719;</div>
           <div class="solucion-content">
-            <h4>Capacidad real y ergonomía</h4>
-            <p>Configuración interior para 5 personas cómodamente sentadas en bancas de plastimadera ergonómica, con distribución espacial optimizada para flujo peatonal.</p>
-            <span class="solucion-dato">CAPACIDAD: 5 USUARIOS SENTADOS</span>
+            <h4>Capacidad real y ergonom&iacute;a</h4>
+            <p>Dise&ntilde;o abierto con bancas de plastimadera ergon&oacute;mica y distribuci&oacute;n espacial optimizada para flujo peatonal sin l&iacute;mite fijo de usuarios.</p>
+            <span class="solucion-dato">CAPACIDAD FLEXIBLE EN ESPACIO ABIERTO</span>
           </div>
         </div>
         <div class="solucion-card">
           <div class="solucion-icon digital">&#9728;</div>
           <div class="solucion-content">
             <h4>Seguridad solar nocturna</h4>
-            <p>Iluminación LED recargable con energía fotovoltaica para visibilidad constante, percepción de seguridad y operación autónoma sin dependencia de red convencional.</p>
-            <span class="solucion-dato">ILUMINACIÓN AUTÓNOMA FOTOVOLTAICA</span>
+            <p>Iluminaci&oacute;n LED recargable con energ&iacute;a fotovoltaica para visibilidad constante, percepci&oacute;n de seguridad y operaci&oacute;n aut&oacute;noma sin dependencia de red convencional.</p>
+            <span class="solucion-dato">ILUMINACI&Oacute;N AUT&Oacute;NOMA FOTOVOLTAICA</span>
           </div>
         </div>
         <div class="solucion-card">
           <div class="solucion-icon temp">&#9200;</div>
           <div class="solucion-content">
             <h4>Durabilidad extrema</h4>
-            <p>Selección de materiales de alta resistencia para bajo mantenimiento y ciclo de vida extendido, con una vida útil de 26 años en condiciones de operación urbana.</p>
-            <span class="solucion-dato">VIDA ÚTIL GARANTIZADA: 26 AÑOS</span>
+            <p>Selecci&oacute;n de materiales de alta resistencia para bajo mantenimiento y ciclo de vida extendido, con una vida &uacute;til de 26 a&ntilde;os en condiciones de operaci&oacute;n urbana.</p>
+            <span class="solucion-dato">VIDA &Uacute;TIL GARANTIZADA: 26 A&Ntilde;OS</span>
           </div>
         </div>
         <div class="solucion-card">
           <div class="solucion-icon agua">&#128167;</div>
           <div class="solucion-content">
             <h4>Regulacion higrotermica pasiva</h4>
-            <p>Gracias al sustrato de 15 cm de fibra de coco y humus, la parada retiene humedad ambiental y puede reducir la temperatura interior hasta 8°C respecto al exterior en Hermosillo.</p>
-            <span class="solucion-dato">REDUCCION PASIVA: HASTA 8°C</span>
+            <p>Gracias al sustrato de 15 cm de fibra de coco y humus, la parada retiene humedad ambiental y puede reducir la temperatura interior hasta 8&deg;C respecto al exterior en Hermosillo.</p>
+            <span class="solucion-dato">REDUCCION PASIVA: HASTA 8&deg;C</span>
           </div>
         </div>
       </div>
@@ -3341,11 +3429,11 @@
       <div class="impacto-banner">
         <div class="impacto-item">
           <div class="impacto-number">347</div>
-          <div class="impacto-label">Autobuses en operación</div>
+          <div class="impacto-label">Autobuses en operaci&oacute;n</div>
         </div>
         <div class="impacto-item">
           <div class="impacto-number">37</div>
-          <div class="impacto-label">Líneas de transporte</div>
+          <div class="impacto-label">L&iacute;neas de transporte</div>
         </div>
         <div class="impacto-item">
           <div class="impacto-number">1,390 km</div>
@@ -3361,7 +3449,7 @@
         </div>
       </div>
 
-      <p class="fuente-datos">Fuente: Sosa Huerta, M. &amp; Gutiérrez Sánchez, L. M. (2025). <em>¿Cómo Vamos con el Transporte Público?</em> Hermosillo ¿Cómo Vamos? Datos del IMTES, INEGI y Encuesta de Percepción Ciudadana 2024.</p>
+      <p class="fuente-datos">Fuente: Sosa Huerta, M. &amp; Guti&eacute;rrez S&aacute;nchez, L. M. (2025). <em>&iquest;C&oacute;mo Vamos con el Transporte P&uacute;blico?</em> Hermosillo &iquest;C&oacute;mo Vamos? Datos del IMTES, INEGI y Encuesta de Percepci&oacute;n Ciudadana 2024.</p>
     </div>
   </section>
 
@@ -3369,25 +3457,30 @@
   <section class="model-section" id="modelo">
     <div class="model-inner">
       <div class="model-text">
-        <span class="section-label">Visualización interactiva</span>
+        <span class="section-label">Visualizaci&oacute;n interactiva</span>
         <h2 class="section-title">Modelo 3D de infraestructura viva</h2>
-        <p>Explora la arquitectura técnica de FORCETECH en 3D: pilares de acero A36, cubierta de plastimadera con sustrato orgánico de 15 cm y componentes de bioclimatización activa para confort térmico urbano.</p>
+        <p>Explora la arquitectura t&eacute;cnica de FORCETECH en 3D: pilares de acero A36, cubierta de plastimadera con sustrato org&aacute;nico de 15 cm y componentes de bioclimatizaci&oacute;n activa para confort t&eacute;rmico urbano.</p>
         <div class="model-specs">
           <div class="model-spec">
+            <span class="model-spec-icon" aria-hidden="true"><i class="fas fa-ruler-combined"></i></span>
             <div class="model-spec-label">Dimensiones</div>
-            <div class="model-spec-value">3.0m cubierta</div>
+            <div class="model-spec-value">3.0M CUBIERTA</div>
           </div>
           <div class="model-spec">
+            <span class="model-spec-icon" aria-hidden="true"><i class="fas fa-drafting-compass"></i></span>
             <div class="model-spec-label">Estructura</div>
-            <div class="model-spec-value">4 pilares A36 2.5m</div>
+            <div class="model-spec-value">4 PILARES A36 2.5M</div>
           </div>
           <div class="model-spec">
+            <span class="model-spec-icon" aria-hidden="true"><i class="fas fa-users"></i></span>
             <div class="model-spec-label">Capacidad</div>
-            <div class="model-spec-value">5 usuarios</div>
+            <div class="model-spec-value">ESPACIO ABIERTO (SIN L&Iacute;MITE FIJO)</div>
           </div>
           <div class="model-spec">
-            <div class="model-spec-label">Vida Útil</div>
-            <div class="model-spec-value">26 años</div>
+            <span class="model-spec-icon" aria-hidden="true"><i class="fas fa-bolt"></i></span>
+            <div class="model-spec-label">Vida &Uacute;til</div>
+            <div class="model-spec-value">VIDA &Uacute;TIL: 26 A&Ntilde;OS</div>
+            <div class="model-spec-note">ESTIMACI&Oacute;N BASADA EN RESISTENCIA ESTRUCTURAL DEL ACERO A36 Y PLASTIMADERA DE ALTO IMPACTO.</div>
           </div>
         </div>
         <a href="model.html" class="model-link">ABRIR MODELO 3D COMPLETO &rarr;</a>
@@ -3406,16 +3499,16 @@
   <section class="section" id="transporte">
     <div class="transporte-card">
       <div class="transporte-text">
-        <span class="section-label">Datos y Análisis</span>
-        <h2 class="section-title">Transporte Público de Hermosillo</h2>
-        <p>Informe técnico del sistema de movilidad 2019–2024 con enfoque en infraestructura viva: desempeño operativo, sostenibilidad financiera y evidencia de impacto urbano de FORCETECH.</p>
+        <span class="section-label">Datos y An&aacute;lisis</span>
+        <h2 class="section-title">Transporte P&uacute;blico de Hermosillo</h2>
+        <p>Informe t&eacute;cnico del sistema de movilidad 2019&ndash;2024 con enfoque en infraestructura viva: desempe&ntilde;o operativo, sostenibilidad financiera y evidencia de impacto urbano de FORCETECH.</p>
         <a href="transporte_hermosillo.html" class="transporte-link"><span class="transporte-link-text">Ver Informe Completo</span><span class="transporte-link-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="transporte-visual">
         <div class="transporte-chart-card">
-          <p class="transporte-chart-title">TENDENCIA DE POBLACIÓN USUARIA</p>
+          <p class="transporte-chart-title">TENDENCIA DE POBLACI&Oacute;N USUARIA</p>
           <div class="transporte-chart-wrap">
-            <canvas id="transporteTrendChart" aria-label="Tendencia de población usuaria 2019-2024" role="img"></canvas>
+            <canvas id="transporteTrendChart" aria-label="Tendencia de poblaci&oacute;n usuaria 2019-2024" role="img"></canvas>
           </div>
           <div class="transporte-metricas" aria-label="Metricas de usuarios por anio">
             <div class="transporte-metrica"><span class="anio">2019</span><span class="valor">229.6</span></div>
@@ -3432,17 +3525,17 @@
 
   <!-- EQUIPO -->
   <section class="section" id="equipo">
-    <span class="section-label">Quiénes Somos</span>
+    <span class="section-label">Qui&eacute;nes Somos</span>
     <h2 class="section-title">Nuestro Equipo</h2>
-    <p class="section-sub">Equipo comprometido con la innovación sostenible y la transformación del transporte urbano en Hermosillo.</p>
+    <p class="section-sub">Equipo comprometido con la innovaci&oacute;n sostenible y la transformaci&oacute;n del transporte urbano en Hermosillo.</p>
     <div class="team-grid">
       <div class="team-card">
         <div class="team-photo">
           <img src="SIlvana.jpg" alt="Palomo Soto Silvana">
         </div>
         <div class="team-name">Palomo Soto Silvana</div>
-        <div class="team-role">Diseño e Innovación</div>
-        <div class="team-bio">Especialista en diseño sostenible y arquitectura paramétrica para espacios urbanos.</div>
+        <div class="team-role">Dise&ntilde;o e Innovaci&oacute;n</div>
+        <div class="team-bio">Especialista en dise&ntilde;o sostenible y arquitectura param&eacute;trica para espacios urbanos.</div>
       </div>
       <div class="team-card daniel-card">
         <div class="team-photo">
@@ -3498,8 +3591,8 @@
   <!-- DIRECTORIO DE ECOPARADAS -->
   <section class="section" id="red-inteligente" aria-labelledby="ecodir-heading">
     <span class="section-label">Red Piloto 2026</span>
-    <h2 class="section-title" id="ecodir-heading">UBICACIÓN ESTRATÉGICA DE RED INTELIGENTE</h2>
-    <p class="section-sub">Estas 10 ecoparadas son el núcleo tecnológico de FORCETECH dentro de la red global de 453 PARADAS ACTIVAS de Hermosillo: norte, sur, este, oeste y nodos estratégicos de alta afluencia.</p>
+    <h2 class="section-title" id="ecodir-heading">UBICACI&Oacute;N ESTRAT&Eacute;GICA DE RED INTELIGENTE</h2>
+    <p class="section-sub">Estas 10 ecoparadas son el n&uacute;cleo tecnol&oacute;gico de FORCETECH dentro de la red global de 32 RUTAS ACTIVAS de Hermosillo: norte, sur, este, oeste y nodos estrat&eacute;gicos de alta afluencia.</p>
     <div class="ecodir-grid" id="ecodirGrid" role="list"></div>
   </section>
 
@@ -3514,7 +3607,7 @@
   <div class="smart-modal-overlay" id="routesModal">
     <div class="smart-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title">📍 VER UNA LÍNEA</h3>
+        <h3 class="smart-modal-title">📍 VER UNA L&Iacute;NEA</h3>
         <button class="smart-close" type="button" onclick="closeRoutesModal()">CERRAR</button>
       </div>
       <div id="routesList" class="routes-menu" role="list"></div>
@@ -3528,14 +3621,14 @@
         <button class="smart-close" type="button" onclick="closeJourneyModal()">CERRAR</button>
       </div>
       <form class="smart-form" onsubmit="calculateJourney(event)">
-        <input id="originInput" type="text" placeholder="ORIGEN (EJ. AEROPUERTO, GALERÍAS MALL, COLONIA PITIC)" required>
+        <input id="originInput" type="text" placeholder="ORIGEN (EJ. AEROPUERTO, GALER&Iacute;AS MALL, COLONIA PITIC)" required>
         <input id="destinationInput" type="text" placeholder="DESTINO (EJ. CATEDRAL, CERRO DE LA CAMPANA, UNISON)" required>
         <button class="smart-btn" type="submit">CALCULAR RUTA</button>
         <button class="smart-btn" type="button" onclick="startJourneySelectionMode()">SELECCIONAR EN MAPA</button>
       </form>
       <div id="journeyResult" style="margin-top:12px;color:#D35400;font-weight:600;font-family:'Montserrat',sans-serif;"></div>
       <div class="journey-history">
-        <p class="journey-history-title">Mis últimos viajes</p>
+        <p class="journey-history-title">Mis &uacute;ltimos viajes</p>
         <div id="journeyHistoryList" class="journey-history-list"></div>
       </div>
     </div>
@@ -3548,13 +3641,13 @@
         <button class="smart-close" type="button" onclick="closeReportModal()">CERRAR</button>
       </div>
       <div class="smart-report-categories" id="reportCategories">
-        <button type="button" class="smart-report-option" data-type="Daño en Parada Ecológica">DAÑO EN PARADA ECOLÓGICA (CRISTALES ROTOS, PANELES SOLARES SUCIOS, FALTA DE ILUMINACIÓN)</button>
-        <button type="button" class="smart-report-option" data-type="Problema con Unidad de Transporte">PROBLEMA CON UNIDAD DE TRANSPORTE (RETRASO EXCESIVO, UNIDAD EN MAL ESTADO, CONDUCCIÓN IMPRUDENTE)</button>
-        <button type="button" class="smart-report-option" data-type="Falla Tecnológica">FALLA TECNOLÓGICA (PUNTO DE CARGA USB NO FUNCIONA, PANTALLA DE INFORMACIÓN APAGADA)</button>
+        <button type="button" class="smart-report-option" data-type="Da&ntilde;o en Parada Ecol&oacute;gica">DA&Ntilde;O EN PARADA ECOL&Oacute;GICA (CRISTALES ROTOS, PANELES SOLARES SUCIOS, FALTA DE ILUMINACI&Oacute;N)</button>
+        <button type="button" class="smart-report-option" data-type="Problema con Unidad de Transporte">PROBLEMA CON UNIDAD DE TRANSPORTE (RETRASO EXCESIVO, UNIDAD EN MAL ESTADO, CONDUCCI&Oacute;N IMPRUDENTE)</button>
+        <button type="button" class="smart-report-option" data-type="Falla Tecnol&oacute;gica">FALLA TECNOL&Oacute;GICA (PUNTO DE CARGA USB NO FUNCIONA, PANTALLA DE INFORMACI&Oacute;N APAGADA)</button>
         <button type="button" class="smart-report-option" data-type="Limpieza y Mantenimiento">LIMPIEZA Y MANTENIMIENTO</button>
       </div>
       <form class="smart-form" onsubmit="submitIncidentReport(event)">
-        <input id="reportStop" type="text" placeholder="PARADA O UBICACIÓN" required>
+        <input id="reportStop" type="text" placeholder="PARADA O UBICACI&Oacute;N" required>
         <textarea id="reportDescription" placeholder="DESCRIBE LA INCIDENCIA" required></textarea>
         <button class="smart-btn" type="submit">ENVIAR REPORTE</button>
       </form>
@@ -3565,22 +3658,22 @@
   <div class="smart-modal-overlay" id="citizenReviewsModal">
     <div class="smart-modal citizen-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title">💬 PERCEPCIÓN CIUDADANA</h3>
+        <h3 class="smart-modal-title">💬 PERCEPCI&Oacute;N CIUDADANA</h3>
         <button class="smart-close" type="button" id="closeCitizenReviewsBtn">CERRAR</button>
       </div>
 
-      <div class="citizen-tabs" role="tablist" aria-label="Panel de reseñas ciudadanas">
+      <div class="citizen-tabs" role="tablist" aria-label="Panel de rese&ntilde;as ciudadanas">
         <button type="button" class="citizen-tab active" data-citizen-tab="rutas" role="tab" aria-selected="true">RUTAS</button>
         <button type="button" class="citizen-tab" data-citizen-tab="espera" role="tab" aria-selected="false">EXPERIENCIA DE ESPERA</button>
       </div>
 
       <div class="citizen-tab-panel active" id="citizenTabRutas" role="tabpanel">
-        <p class="citizen-panel-desc">Selecciona una línea para resaltar su trayecto en azul y actualizar el panel DETALLES DE TU VIAJE.</p>
+        <p class="citizen-panel-desc">Selecciona una l&iacute;nea para resaltar su trayecto en azul y actualizar el panel DETALLES DE TU VIAJE.</p>
         <div class="citizen-routes-list" id="citizenRoutesList"></div>
       </div>
 
       <div class="citizen-tab-panel" id="citizenTabEspera" role="tabpanel">
-        <p class="citizen-panel-desc">Comparativa de percepción térmica entre paradas tradicionales y Ecoparadas FORCETECH.</p>
+        <p class="citizen-panel-desc">Comparativa de percepci&oacute;n t&eacute;rmica entre paradas tradicionales y Ecoparadas FORCETECH.</p>
         <div class="citizen-compare-grid">
           <section>
             <h4 class="citizen-col-title">PARADAS TRADICIONALES</h4>
@@ -3599,7 +3692,7 @@
   <div class="smart-modal-overlay" id="reviewsModal">
     <div class="smart-modal">
       <div class="smart-modal-header">
-        <h3 class="smart-modal-title" id="reviewsModalTitle">&#11088; RESEÑAS</h3>
+        <h3 class="smart-modal-title" id="reviewsModalTitle">&#11088; RESE&Ntilde;AS</h3>
         <button class="smart-close" type="button" onclick="closeReviewsModal()">CERRAR</button>
       </div>
       <div class="reviews-stop-meta">
@@ -3608,9 +3701,9 @@
       </div>
       <div class="reviews-list" id="reviewsList"></div>
       <div class="reviews-form-section">
-        <p class="reviews-form-title">Publicar nueva reseña</p>
-        <label class="reviews-form-title" style="font-size:12px;text-transform:none;letter-spacing:0;font-weight:700;color:#555;margin-bottom:4px;">Tu calificación</label>
-        <div class="star-picker" id="starPicker" role="group" aria-label="Calificación">
+        <p class="reviews-form-title">Publicar nueva rese&ntilde;a</p>
+        <label class="reviews-form-title" style="font-size:12px;text-transform:none;letter-spacing:0;font-weight:700;color:#555;margin-bottom:4px;">Tu calificaci&oacute;n</label>
+        <div class="star-picker" id="starPicker" role="group" aria-label="Calificaci&oacute;n">
           <span class="sp-star" data-val="1" role="button" tabindex="0" aria-label="1 estrella">★</span>
           <span class="sp-star" data-val="2" role="button" tabindex="0" aria-label="2 estrellas">★</span>
           <span class="sp-star" data-val="3" role="button" tabindex="0" aria-label="3 estrellas">★</span>
@@ -3618,9 +3711,9 @@
           <span class="sp-star" data-val="5" role="button" tabindex="0" aria-label="5 estrellas">★</span>
         </div>
         <form class="smart-form" id="reviewForm" onsubmit="submitReview(event)">
-          <input id="reviewAuthor" type="text" placeholder="Tu nombre (ej. María G.)" maxlength="40" required>
+          <input id="reviewAuthor" type="text" placeholder="Tu nombre (ej. Mar&iacute;a G.)" maxlength="40" required>
           <textarea id="reviewComment" placeholder="Escribe tu comentario sobre esta parada..." maxlength="300" required></textarea>
-          <button class="smart-btn" type="submit" style="background:linear-gradient(135deg,#F17A20 0%,#D35400 62%,#B84400 100%);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;">PUBLICAR RESEÑA</button>
+          <button class="smart-btn" type="submit" style="background:linear-gradient(135deg,#F17A20 0%,#D35400 62%,#B84400 100%);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;">PUBLICAR RESE&Ntilde;A</button>
         </form>
         <div id="reviewResult" style="margin-top:10px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#1E392A;"></div>
       </div>
@@ -3628,30 +3721,28 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script> src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script> src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
-    // ── Data — 10 ecoparadas distribuidas en toda la ciudad ──
+    // ── Data - 10 ecoparadas distribuidas en toda la ciudad ──
     const stops = [
       // CENTRO
       { name: "San Benito", zone: "Centro", geo: "Blvd. Luis Encinas / Calle Pino Suarez", route: "Ruta 12", lat: 29.0728, lng: -110.9559, desc: "Parada principal zona centro. Conecta norte-sur.", image: "images/paradas/san-benito-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto San Benito en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
-      // NORTE — zona comercial Blvd. Morelos / TEC
+      // NORTE - zona comercial Blvd. Morelos / TEC
       { name: "Tec de Hermosillo", zone: "Norte", geo: "Blvd. Morelos / Periferico Norte", route: "Ruta 11, 15", lat: 29.1185, lng: -110.9620, desc: "Nodo educativo-norte. Alta afluencia estudiantil.", image: "images/paradas/tecnologico-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Tec de Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
       { name: "Colosio Poniente", zone: "Norte-Poniente", geo: "Blvd. Luis Donaldo Colosio / Av. Periferica", route: "Ruta 8, 14", lat: 29.1050, lng: -111.0180, desc: "Zona comercial y administrativa de crecimiento rapido.", image: "images/paradas/colosio-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Colosio Poniente en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
-      // SUR — salida a Guaymas
+      // SUR - salida a Guaymas
       { name: "Hospital General", zone: "Sur", geo: "Blvd. Solidaridad / Hospital General de Sonora", route: "Ruta 2, 6", lat: 29.0390, lng: -110.9670, desc: "Acceso a instalaciones sanitarias. Salida sur.", image: "images/paradas/hospital-general-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Hospital General en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
-      // ESTE — prolongación Blvd. Kino
+      // ESTE - prolongacion Blvd. Kino
       { name: "Plaza Sendero", zone: "Este", geo: "Blvd. Kino / Plaza Sendero Hermosillo", route: "Ruta 10, 12", lat: 29.0820, lng: -110.9020, desc: "Nodo comercial este. Conexion Blvd. Kino.", image: "images/paradas/plaza-ninos-heroes-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Plaza Sendero en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
       { name: "Nuevo Hermosillo", zone: "Este-Norte", geo: "Fracc. Nuevo Hermosillo / Blvd. El Novillo", route: "Ruta 9, 13", lat: 29.1100, lng: -110.8980, desc: "Fraccionamiento de alto crecimiento urbano.", image: "images/paradas/parque-madero-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Nuevo Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
-      // OESTE — zona aeropuerto / industrial
+      // OESTE - zona aeropuerto / industrial
       { name: "Aeropuerto", zone: "Oeste", geo: "Blvd. de los Seris / Aeropuerto Internacional", route: "Ruta 5, 8", lat: 29.0960, lng: -111.0480, desc: "Nodo de transferencia de alta demanda en zona poniente.", image: "images/paradas/la-cantera-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Aeropuerto en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
       // GOBIERNO / CENTRO ADMINISTRATIVO
       { name: "Centro de Gobierno", zone: "Centro-Este", geo: "Blvd. Paseo del Canal / Centro de Gobierno", route: "Ruta 5, 9", lat: 29.0745, lng: -110.9310, desc: "Edificios administrativos. Diseno accesible.", image: "images/paradas/centro-gobierno-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Centro de Gobierno en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
-      // BLVD. MORELOS FINAL — noreste
+      // BLVD. MORELOS FINAL - noreste
       { name: "Blvd. Morelos Final", zone: "Noreste", geo: "Blvd. Morelos Km 9 / Fracc. Villa Hermosa", route: "Ruta 7", lat: 29.1240, lng: -110.9220, desc: "Extremo norte de Blvd. Morelos. Alta densidad vehicular.", image: "images/paradas/san-benito-norte-hermosillo.jpg", imageAlt: "Fotografia de la parada piloto Blvd. Morelos Final en Hermosillo", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] },
-      // NODO INDUSTRIAL PONIENTE — Solidaridad y García Morales
+      // NODO INDUSTRIAL PONIENTE - Solidaridad y Garcia Morales
       { name: "Nodo Industrial Poniente", zone: "Industrial Poniente", geo: "Blvd. Solidaridad / Blvd. Garcia Morales", route: "Ruta 3, 7", lat: 29.0930, lng: -111.0200, desc: "Nodo critico de transferencia para trabajadores de la zona industrial.", image: "images/paradas/hermosillo-viejo.jpg", imageAlt: "Fotografia de la parada piloto Nodo Industrial Poniente", feat: ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA", "SOMBRA VEGETAL", "ILUMINACION SOLAR"] }
     ];
 
@@ -3662,7 +3753,8 @@
       "ILUMINACION SOLAR": { icon: "fa-solid fa-sun", shortLabel: "Iluminacion solar" }
     };
     const REQUIRED_POPUP_SERVICES = ["REGULACION HIGROTERMICA PASIVA", "BIOCLIMATIZACION ACTIVA"];
-    const totalParadas = 453;
+    const totalParadas = 32;   // rutas activas (display/badge)
+    const totalStops = 453;      // paradas fisicas en el KML
     const HERMOSILLO_CENTER = [29.0754, -110.9592];
     const HERMOSILLO_ZOOM = 12;
 
@@ -3714,16 +3806,57 @@
     let liveEndMarker = null;
     let liveRouteAnimationId = null;
     let routePulseAnimationId = null;
+    let activeRouteId = '';
+    let activeRouteStopHighlights = [];
     let journeyPlannerActive = false;
     let journeySelectionStep = 'origin';
     const journeyHistoryKey = 'forcetech_journey_history';
     const routeCatalog = [
-      { name: 'Línea 1 Centro', color: '#1F65D6' },
-      { name: 'Línea 2 Norte', color: '#2A7DE1' },
-      { name: 'Línea 3 Monteverde', color: '#1A4FB0' },
-      { name: 'Línea 5 Hospitales', color: '#3B82F6' },
-      { name: 'Línea 8 Aeropuerto', color: '#2563EB' }
+      { name: 'Linea 1 Centro', color: '#1F65D6' },
+      { name: 'Linea 2 Norte', color: '#2A7DE1' },
+      { name: 'Linea 3 Monteverde', color: '#1A4FB0' },
+      { name: 'Linea 5 Hospitales', color: '#3B82F6' },
+      { name: 'Linea 8 Aeropuerto', color: '#2563EB' }
     ];
+
+    const routePathCatalog = {
+      'Ruta 12': [
+        [29.1185, -110.9620],
+        [29.1056, -110.9575],
+        [29.0940, -110.9530],
+        [29.0820, -110.9020]
+      ],
+      'Ruta 11': [
+        [29.1230, -110.9688],
+        [29.1185, -110.9620],
+        [29.1090, -110.9552],
+        [29.0985, -110.9480],
+        [29.0880, -110.9435],
+        [29.0745, -110.9310]
+      ],
+      'Ruta 15': [
+        [29.1265, -110.9732],
+        [29.1185, -110.9620],
+        [29.1120, -110.9520],
+        [29.1015, -110.9462],
+        [29.0890, -110.9410],
+        [29.0737, -110.9332]
+      ],
+      'Ruta 2': [
+        [29.0390, -110.9670],
+        [29.0498, -110.9664],
+        [29.0618, -110.9645],
+        [29.0720, -110.9582],
+        [29.0737, -110.9332]
+      ],
+      'Ruta 6': [
+        [29.0390, -110.9670],
+        [29.0505, -110.9628],
+        [29.0610, -110.9570],
+        [29.0725, -110.9492],
+        [29.0745, -110.9310]
+      ]
+    };
 
     function getJourneyHistory() {
       try {
@@ -3747,7 +3880,7 @@
 
       const history = getJourneyHistory();
       if (!history.length) {
-        list.innerHTML = '<div class="journey-history-empty">Aún no tienes viajes guardados.</div>';
+        list.innerHTML = '<div class="journey-history-empty">Aun no tienes viajes guardados.</div>';
         return;
       }
 
@@ -3776,15 +3909,15 @@
     }
 
     function injectMockBadge() {
-      const mapCurrentElement = document.getElementById('mapCurrent');
-      if (!mapCurrentElement) return;
+      const mapPilotElement = document.getElementById('mapPilot');
+      if (!mapPilotElement) return;
 
-      const mapPanel = mapCurrentElement.closest('.map-panel');
+      const mapPanel = mapPilotElement.closest('.map-panel');
       if (!mapPanel || mapPanel.querySelector('.map-mock-badge')) return;
 
       const badge = document.createElement('div');
       badge.className = 'map-mock-badge';
-      badge.textContent = '= 453 PARADAS ACTIVAS';
+      badge.textContent = `+ ${totalParadas} RUTAS ACTIVAS`;
       mapPanel.appendChild(badge);
     }
 
@@ -3803,14 +3936,14 @@
           `<div style="font-size:11px;font-weight:700;color:#1E392A;margin-bottom:6px;">${stop.zone} &bull; ${stop.route}</div>`,
           `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">`,
             `<span>${starsMarkup}</span>`,
-            `<span style="font-size:12px;font-weight:700;color:#555;">${avg} (${reviewCount} reseña${reviewCount !== 1 ? 's' : ''})</span>`,
+            `<span style="font-size:12px;font-weight:700;color:#555;">${avg} (${reviewCount} resena${reviewCount !== 1 ? 's' : ''})</span>`,
           `</div>`,
           `<button onclick="openReviewsModal(stops[${idx}],${idx},true)" style="`,
             `display:block;width:100%;padding:9px 0;border:none;border-radius:10px;`,
             `background:linear-gradient(135deg,#F17A20 0%,#D35400 62%,#B84400 100%);`,
             `color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;`,
             `font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;">`,
-            `<i class="fas fa-star" style="margin-right:6px;"></i>VER RESEÑAS`,
+            `<i class="fas fa-star" style="margin-right:6px;"></i>VER RESEnAS`,
           `</button>`,
         `</div>`
       ].join('');
@@ -3877,7 +4010,7 @@
       ];
 
       const destination = {
-        name: 'Centro Histórico / Catedral',
+        name: 'Centro Historico / Catedral',
         lat: 29.0737,
         lng: -110.9332
       };
@@ -3956,7 +4089,7 @@
 
       const data = await response.json();
       if (!Array.isArray(data) || !data.length) {
-        throw new Error(`No se encontró la ubicación "${cleanedQuery}" en Hermosillo.`);
+        throw new Error(`No se encontro la ubicacion "${cleanedQuery}" en Hermosillo.`);
       }
 
       const first = data[0];
@@ -4122,6 +4255,136 @@
       }
     }
 
+    function clearRouteStopHighlights() {
+      activeRouteStopHighlights.forEach((layer) => mapPilot.removeLayer(layer));
+      activeRouteStopHighlights = [];
+    }
+
+    function clearActiveRouteSelection() {
+      activeRouteId = '';
+      document.querySelectorAll('.route-item').forEach((item) => item.classList.remove('route-item--active'));
+    }
+
+    function extractRouteStops(routeId) {
+      return stops.filter((stop) => stop.route.split(',').map((value) => value.trim()).includes(routeId));
+    }
+
+    function resolveRoutePath(routeId, routeStops) {
+      if (routePathCatalog[routeId]) {
+        return routePathCatalog[routeId];
+      }
+
+      if (routeStops.length >= 2) {
+        const sorted = [...routeStops].sort((a, b) => b.lat - a.lat);
+        return sorted.map((stop) => [stop.lat, stop.lng]);
+      }
+
+      if (routeStops.length === 1) {
+        const only = routeStops[0];
+        return [
+          [only.lat + 0.014, only.lng - 0.010],
+          [only.lat, only.lng],
+          [only.lat - 0.016, only.lng + 0.019]
+        ];
+      }
+
+      return [];
+    }
+
+    function drawRoute(routeID) {
+      const routeStops = extractRouteStops(routeID);
+      const coords = resolveRoutePath(routeID, routeStops);
+      if (!coords.length) return;
+
+      clearRouteLayers();
+      clearRouteStopHighlights();
+      if (liveRouteAnimationId) {
+        cancelAnimationFrame(liveRouteAnimationId);
+        liveRouteAnimationId = null;
+      }
+      if (liveStartMarker) {
+        mapPilot.removeLayer(liveStartMarker);
+        liveStartMarker = null;
+      }
+      if (liveEndMarker) {
+        mapPilot.removeLayer(liveEndMarker);
+        liveEndMarker = null;
+      }
+
+      const shadowRoute = L.polyline(coords, {
+        color: '#7a2e00',
+        weight: 9,
+        opacity: 0.26,
+        lineCap: 'round',
+        lineJoin: 'round',
+        className: 'route-pro-shadow'
+      }).addTo(mapPilot);
+
+      const mainRoute = L.polyline(coords, {
+        color: '#D35400',
+        weight: 5,
+        opacity: 0.85,
+        lineCap: 'round',
+        lineJoin: 'round',
+        className: 'route-pro-main'
+      }).addTo(mapPilot);
+
+      const highlightRoute = L.polyline(coords, {
+        color: '#f9c08b',
+        weight: 2,
+        opacity: 0.72,
+        lineCap: 'round',
+        lineJoin: 'round',
+        dashArray: '14 12',
+        dashOffset: '0px',
+        className: 'route-pro-highlight'
+      }).addTo(mapPilot);
+
+      liveRouteLayers = [shadowRoute, mainRoute, highlightRoute];
+      liveRouteLayer = mainRoute;
+      animateRouteLayers([highlightRoute]);
+
+      const relatedStops = routeStops.length
+        ? routeStops
+        : [
+            { name: 'Ecoparada Norte', lat: coords[0][0], lng: coords[0][1] },
+            { name: 'Ecoparada Centro', lat: coords[coords.length - 1][0], lng: coords[coords.length - 1][1] }
+          ];
+
+      relatedStops.forEach((stop) => {
+        const marker = L.marker([stop.lat, stop.lng], { icon: pilotMarkerIcon }).addTo(mapPilot);
+        const halo = L.circleMarker([stop.lat, stop.lng], {
+          radius: 17,
+          color: '#D35400',
+          weight: 2,
+          fillColor: '#F17A20',
+          fillOpacity: 0.14,
+          opacity: 0.7
+        }).addTo(mapPilot);
+        activeRouteStopHighlights.push(marker, halo);
+      });
+
+      const firstStop = relatedStops[0];
+      const lastStop = relatedStops[relatedStops.length - 1];
+      const totalMinutes = estimateTotalMinutes(coords);
+      const arrivalToStop = Math.max(2, Math.round(totalMinutes * 0.28));
+      updateJourneyPanelDetails({
+        origin: `ECOPARADA GPS: ${firstStop.name.toUpperCase()}`,
+        destination: lastStop.name.toUpperCase(),
+        nextBus: routeID.toUpperCase(),
+        routeVariants: `${routeID.toUpperCase()} · VIDA uTIL: 26 AnOS`,
+        arrival: `${arrivalToStop} min`,
+        eta: formatEtaFromNow(totalMinutes),
+        total: `${totalMinutes} min`
+      });
+      setJourneyPlannerStatus(`🚍 ${routeID.toUpperCase()} ACTIVA`);
+
+      const bounds = L.latLngBounds(coords);
+      if (bounds.isValid()) {
+        mapPilot.fitBounds(bounds, { padding: [52, 52], animate: true });
+      }
+    }
+
     function animateRouteLayers(layers) {
       let offset = 0;
       function tick() {
@@ -4255,8 +4518,8 @@
         { lat: startStop.lat, lng: startStop.lng },
         { lat: destination.lat, lng: destination.lng },
         { lat: transferStop.lat, lng: transferStop.lng },
-        'Ecoparada Aeropuerto|Centro Histórico / Catedral',
-        'Línea 3 Monteverde',
+        'Ecoparada Aeropuerto|Centro Historico / Catedral',
+        'Linea 3 Monteverde',
         roadPolyline
       );
       const primaryRoute = routeVariants[0];
@@ -4295,7 +4558,7 @@
 
       updateJourneyPanelDetails({
         origin: 'Ecoparada Aeropuerto',
-        destination: 'Centro Histórico / Catedral',
+        destination: 'Centro Historico / Catedral',
         nextBus: primaryRoute.name,
         routeVariants: routeVariants.map((r) => r.name).join(' · '),
         arrival: '4 min',
@@ -4365,7 +4628,7 @@
       updateJourneyPanelDetails({
         origin: labels.origin || `Punto A (${originLatLng.lat.toFixed(4)}, ${originLatLng.lng.toFixed(4)})`,
         destination: labels.destination || `Punto B (${destinationLatLng.lat.toFixed(4)}, ${destinationLatLng.lng.toFixed(4)})`,
-        nextBus: `${primaryRoute.name} · vía ${nearestStop.name}`,
+        nextBus: `${primaryRoute.name} · via ${nearestStop.name}`,
         routeVariants: routeVariants.map((r) => r.name).join(' · '),
         arrival: `${arrivalToStop} min`,
         eta: formatEtaFromNow(totalMinutes),
@@ -4412,7 +4675,7 @@
       liveEndMarker = L.marker(event.latlng, { icon: getJourneyPointIcon('end') }).addTo(mapPilot);
 
       await runInteractiveJourney(liveStartMarker.getLatLng(), liveEndMarker.getLatLng());
-      setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+      setJourneyPlannerStatus('🚍 RUTA DINaMICA ACTIVA');
       journeyPlannerActive = false;
       journeySelectionStep = 'origin';
       setJourneySelectionMode(false);
@@ -4485,7 +4748,7 @@
           <rect width="1200" height="720" fill="url(#bg)" rx="32" ry="32" />
           <circle cx="1020" cy="128" r="88" fill="rgba(255,255,255,0.12)" />
           <text x="76" y="312" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="56" font-weight="800">${stopName}</text>
-          <text x="76" y="390" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="600">Inserta aquí la fotografía real de Hermosillo</text>
+          <text x="76" y="390" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="600">Inserta aqui la fotografia real de Hermosillo</text>
           <text x="76" y="438" fill="#FDE7D6" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="700">Ruta piloto FORCE TECH</text>
         </svg>`;
 
@@ -4504,25 +4767,25 @@
 
     function fixMojibake(text = '') {
       return text
-        .replace(/Ã¡/g, 'á')
-        .replace(/Ã©/g, 'é')
-        .replace(/Ã­/g, 'í')
-        .replace(/Ã³/g, 'ó')
-        .replace(/Ãº/g, 'ú')
-        .replace(/Ã±/g, 'ñ')
-        .replace(/Ã¼/g, 'ü')
-        .replace(/Ã‰/g, 'É')
-        .replace(/Ã“/g, 'Ó')
-        .replace(/Ãš/g, 'Ú')
-        .replace(/Ã‘/g, 'Ñ')
-        .replace(/MÃ©xico/g, 'México')
-        .replace(/pÃºblico/g, 'público')
-        .replace(/2019â€“2024/g, '2019–2024')
+        .replace(/Ã!/g, 'a')
+        .replace(/Ã©/g, 'e')
+        .replace(/Ã­/g, 'i')
+        .replace(/Ã³/g, 'o')
+        .replace(/Ãº/g, 'u')
+        .replace(/Ã±/g, 'n')
+        .replace(/Ã¼/g, 'u')
+        .replace(/Ã‰/g, 'e')
+        .replace(/Ã“/g, 'o')
+        .replace(/Ãš/g, 'u')
+        .replace(/Ã‘/g, 'n')
+        .replace(/MÃ©xico/g, 'Mexico')
+        .replace(/pÃºblico/g, 'publico')
+        .replace(/2019â€“2024/g, '2019-2024')
         .replace(/Â/g, '')
-        .replace(/ÔÇö/g, '—')
-        .replace(/â€“/g, '–')
-        .replace(/â€”/g, '—')
-        .replace(/Ã/g, 'Á')
+        .replace(/ÔÇö/g, '-')
+        .replace(/â€“/g, '-')
+        .replace(/â€”/g, '-')
+        .replace(/Ã/g, 'a')
         .replace(/\uFFFD/g, '');
     }
 
@@ -4787,7 +5050,7 @@
           throw new Error(`El archivo ${kmlUrl} no contiene paradas tipo Point`);
         }
 
-        const pointsToRender = points.slice(0, totalParadas);
+        const pointsToRender = points.slice(0, totalStops);
 
         if (currentKmlLayer) {
           mapCurrent.removeLayer(currentKmlLayer);
@@ -4808,20 +5071,20 @@
             .addTo(markerLayerCurrent);
         });
 
-        // El mapa piloto usa siempre renderPilotLayer() — solo actualizamos mapCurrent con el KML
+        // El mapa piloto usa siempre renderPilotLayer() - solo actualizamos mapCurrent con el KML
         markerLayerCurrent.addTo(mapCurrent);
         currentKmlLayer = markerLayerCurrent;
 
         pointsToRender.forEach((stop) => {
           if (!Number.isFinite(stop.lat) || !Number.isFinite(stop.lng)) {
-            console.warn('Parada inválida detectada en KML:', stop);
+            console.warn('Parada invalida detectada en KML:', stop);
           }
         });
 
         mapCurrent.setView(HERMOSILLO_CENTER, HERMOSILLO_ZOOM);
 
         if (activeStopsCount) {
-          activeStopsCount.textContent = `${totalParadas} PARADAS ACTIVAS`;
+          activeStopsCount.textContent = `${pointsToRender.length} PARADAS ACTIVAS`;
         }
 
         if (pilotStopsStat) {
@@ -4849,7 +5112,7 @@
             bestSource = source;
           }
 
-          // Evita quedarse con capas de prueba muy pequeñas (ej. 3 puntos).
+          // Evita quedarse con capas de prueba muy pequenas (ej. 3 puntos).
           if (count >= 100) {
             return;
           }
@@ -4867,7 +5130,7 @@
       const activeStopsCount = document.getElementById('activeStopsCount');
       if (activeStopsCount) {
         activeStopsCount.classList.add('live-indicator');
-        activeStopsCount.textContent = `${totalParadas} PARADAS ACTIVAS`;
+        activeStopsCount.textContent = `${totalStops} PARADAS ACTIVAS`;
       }
     }
 
@@ -4919,7 +5182,7 @@
           const routeNumber = routeParts && routeParts[2] ? routeParts[2].trim() : route;
 
           return `
-            <div class="route-item" role="listitem">
+            <div class="route-item ${activeRouteId === route ? 'route-item--active' : ''}" role="button" tabindex="0" data-route-id="${route}">
               <div class="route-item-head">
                 <span class="route-label">${routeLabel}</span>
                 <span class="route-number">${routeNumber}</span>
@@ -4929,11 +5192,41 @@
           `;
         })
         .join('');
+
+      container.querySelectorAll('.route-item').forEach((item) => {
+        const routeId = item.dataset.routeId;
+        const activate = () => {
+          activeRouteId = routeId;
+          drawRoute(routeId);
+          document.querySelectorAll('.route-item').forEach((node) => node.classList.toggle('route-item--active', node === item));
+          document.getElementById('routesModal').classList.remove('active');
+        };
+        item.addEventListener('click', activate);
+        item.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            activate();
+          }
+        });
+      });
+
       document.getElementById('routesModal').classList.add('active');
     }
 
     function closeRoutesModal() {
       document.getElementById('routesModal').classList.remove('active');
+      clearRouteLayers();
+      clearRouteStopHighlights();
+      clearActiveRouteSelection();
+      if (liveStartMarker) {
+        mapPilot.removeLayer(liveStartMarker);
+        liveStartMarker = null;
+      }
+      if (liveEndMarker) {
+        mapPilot.removeLayer(liveEndMarker);
+        liveEndMarker = null;
+      }
+      setJourneyPlannerStatus('RUTAS LIMPIAS');
     }
 
     function openJourneyModal() {
@@ -4943,7 +5236,7 @@
       journeyPlannerActive = false;
       journeySelectionStep = 'origin';
       setJourneySelectionMode(false);
-      setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+      setJourneyPlannerStatus('🚍 RUTA DINaMICA ACTIVA');
     }
 
     function startJourneySelectionMode() {
@@ -4960,7 +5253,7 @@
       journeyPlannerActive = false;
       journeySelectionStep = 'origin';
       setJourneySelectionMode(false);
-      setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+      setJourneyPlannerStatus('🚍 RUTA DINaMICA ACTIVA');
     }
 
     async function calculateJourney(event) {
@@ -4991,7 +5284,7 @@
         saveJourneyHistory({
           origin: originPoint.label,
           destination: destinationPoint.label,
-          lineName: (document.getElementById('journeyNextBusValue')?.textContent || '').split(' · ')[0] || 'Línea 3 Monteverde',
+          lineName: (document.getElementById('journeyNextBusValue')?.textContent || '').split(' · ')[0] || 'Linea 3 Monteverde',
           originLat: originPoint.lat,
           originLng: originPoint.lng,
           destinationLat: destinationPoint.lat,
@@ -5001,12 +5294,12 @@
         journeyPlannerActive = false;
         journeySelectionStep = 'origin';
         setJourneySelectionMode(false);
-        setJourneyPlannerStatus('🚍 RUTA DINÁMICA ACTIVA');
+        setJourneyPlannerStatus('🚍 RUTA DINaMICA ACTIVA');
         document.getElementById('journeyModal').classList.remove('active');
         mapPilot.getContainer().scrollIntoView({ behavior: 'smooth', block: 'center' });
         result.textContent = `Ruta creada: ${originPoint.label} → ${destinationPoint.label}`;
       } catch (error) {
-        result.textContent = error.message || 'No se pudo crear la ruta. Intenta con otra ubicación de Hermosillo.';
+        result.textContent = error.message || 'No se pudo crear la ruta. Intenta con otra ubicacion de Hermosillo.';
       }
     }
 
@@ -5061,14 +5354,18 @@
       const modal = document.getElementById(modalId);
       modal.addEventListener('click', (event) => {
         if (event.target === modal) {
-          modal.classList.remove('active');
+          if (modalId === 'routesModal') {
+            closeRoutesModal();
+          } else {
+            modal.classList.remove('active');
+          }
         }
       });
     });
 
     const citizenRouteFocusCatalog = {
       linea3: {
-        name: 'Línea 3 Monteverde',
+        name: 'Linea 3 Monteverde',
         avg: 4.4,
         summary: 'Frecuencia estable, mejora sugerida en aire activo en horas pico.',
         coords: [
@@ -5086,9 +5383,9 @@
         ]
       },
       linea4: {
-        name: 'Línea 4 Periférico',
+        name: 'Linea 4 Periferico',
         avg: 3.8,
-        summary: 'Buena cobertura periférica, oportunidad en intervalos de espera.',
+        summary: 'Buena cobertura periferica, oportunidad en intervalos de espera.',
         coords: [
           [29.1185, -110.9620],
           [29.1122, -110.9526],
@@ -5100,7 +5397,7 @@
         ]
       },
       linea8: {
-        name: 'Línea 8 Aeropuerto',
+        name: 'Linea 8 Aeropuerto',
         avg: 4.6,
         summary: 'Ruta clave para enlace poniente-centro y traslados largos.',
         coords: [
@@ -5118,39 +5415,39 @@
     const citizenRouteReviews = [
       {
         id: 'linea3',
-        user: 'María C.',
+        user: 'Maria C.',
         stars: 4,
-        comment: 'La Línea 3 es constante, pero necesitamos más unidades con aire activo en horas pico.'
+        comment: 'La Linea 3 es constante, pero necesitamos mas unidades con aire activo en horas pico.'
       },
       {
         id: 'linea4',
-        user: 'Jesús P.',
+        user: 'Jesus P.',
         stars: 4,
-        comment: 'La Línea 4 Periférico conecta muy bien, pero en tarde-noche se siente la espera.'
+        comment: 'La Linea 4 Periferico conecta muy bien, pero en tarde-noche se siente la espera.'
       },
       {
         id: 'linea8',
         user: 'Daniela R.',
         stars: 5,
-        comment: 'La Línea 8 Aeropuerto me salva para traslados largos. Muy útil y cada vez más puntual.'
+        comment: 'La Linea 8 Aeropuerto me salva para traslados largos. Muy util y cada vez mas puntual.'
       }
     ];
 
     const citizenTraditionalReviews = [
       {
-        user: 'Héctor L.',
+        user: 'Hector L.',
         stars: 2,
-        comment: 'En las paradas tradicionales el calor pega directo y no hay sombra útil al mediodía.'
+        comment: 'En las paradas tradicionales el calor pega directo y no hay sombra util al mediodia.'
       },
       {
         user: 'Patricia M.',
         stars: 2,
-        comment: 'Cuando esperamos en parada convencional, el piso y la lámina concentran demasiado calor.'
+        comment: 'Cuando esperamos en parada convencional, el piso y la lamina concentran demasiado calor.'
       },
       {
-        user: 'Iván G.',
+        user: 'Ivan G.',
         stars: 1,
-        comment: 'Sin vegetación ni protección UV, esperar camión en verano se vuelve muy pesado.'
+        comment: 'Sin vegetacion ni proteccion UV, esperar camion en verano se vuelve muy pesado.'
       }
     ];
 
@@ -5158,17 +5455,17 @@
       {
         user: 'Claudia A.',
         stars: 5,
-        comment: 'La Ecoparada del Aeropuerto es la única donde de verdad se siente sombra y aire menos caliente.'
+        comment: 'La Ecoparada del Aeropuerto es la unica donde de verdad se siente sombra y aire menos caliente.'
       },
       {
         user: 'Rogelio T.',
         stars: 5,
-        comment: 'Con plantas y cubierta, la espera cambia por completo. Se siente confort térmico real.'
+        comment: 'Con plantas y cubierta, la espera cambia por completo. Se siente confort termico real.'
       },
       {
         user: 'Fernanda S.',
         stars: 4,
-        comment: 'La iluminación solar y la vegetación hacen que la experiencia sea más segura y cómoda.'
+        comment: 'La iluminacion solar y la vegetacion hacen que la experiencia sea mas segura y comoda.'
       }
     ];
 
@@ -5322,54 +5619,54 @@
     var mockReviews = {
       "San Benito": [
         { author: "Carlos M.",     stars: 5, date: "12 mar 2026", comment: "Excelente confort termico en San Benito. La sombra vegetal se siente desde que llegas." },
-        { author: "Lucía R.",      stars: 4, date: "08 mar 2026", comment: "Muy cómoda y fresca. La reducción térmica se siente inmediatamente al entrar. Zona muy limpia." },
+        { author: "Lucia R.",      stars: 4, date: "08 mar 2026", comment: "Muy comoda y fresca. La reduccion termica se siente inmediatamente al entrar. Zona muy limpia." },
         { author: "Ernesto V.",    stars: 4, date: "01 mar 2026", comment: "Buena bioclimatizacion pasiva. Buen acceso desde Blvd. Luis Encinas. Faltan bancas adicionales." },
-        { author: "Sofía A.",     stars: 5, date: "22 feb 2026", comment: "Siempre la uso para conectar con la Ruta 12. La mejor parada del centro." }
+        { author: "Sofia A.",     stars: 5, date: "22 feb 2026", comment: "Siempre la uso para conectar con la Ruta 12. La mejor parada del centro." }
       ],
       "Tec de Hermosillo": [
-        { author: "Alejandro P.",  stars: 3, date: "15 mar 2026", comment: "Falta limpieza en la parada Tec. Los lunes por la mañana acumula basura. El sombra es rápido." },
+        { author: "Alejandro P.",  stars: 3, date: "15 mar 2026", comment: "Falta limpieza en la parada Tec. Los lunes por la manana acumula basura. El sombra es rapido." },
         { author: "Mariana F.",   stars: 5, date: "10 mar 2026", comment: "Perfecta para estudiantes. Nunca espero mas de 8 minutos y la sombra ayuda bastante." },
-        { author: "Diego S.",     stars: 4, date: "04 mar 2026", comment: "La techumbre da muy buena sombra. Con +45°C aquí afuera, esto es un lujo necesario." }
+        { author: "Diego S.",     stars: 4, date: "04 mar 2026", comment: "La techumbre da muy buena sombra. Con +45degC aqui afuera, esto es un lujo necesario." }
       ],
       "Colosio Poniente": [
-        { author: "Valeria H.",   stars: 5, date: "14 mar 2026", comment: "Nueva zona, pero la parada ya está al 100. Se nota la inversión en infraestructura." },
-        { author: "José L.",      stars: 4, date: "07 mar 2026", comment: "Buena ubicacion cerca del centro comercial. El confort termico reduce mucho la espera pesada." },
-        { author: "Karen T.",     stars: 3, date: "28 feb 2026", comment: "El punto de carga USB estuvo unos días sin funcionar. Ya lo arreglaron. Buen servicio en general." }
+        { author: "Valeria H.",   stars: 5, date: "14 mar 2026", comment: "Nueva zona, pero la parada ya esta al 100. Se nota la inversion en infraestructura." },
+        { author: "Jose L.",      stars: 4, date: "07 mar 2026", comment: "Buena ubicacion cerca del centro comercial. El confort termico reduce mucho la espera pesada." },
+        { author: "Karen T.",     stars: 3, date: "28 feb 2026", comment: "El punto de carga USB estuvo unos dias sin funcionar. Ya lo arreglaron. Buen servicio en general." }
       ],
       "Hospital General": [
-        { author: "Dr. Ruén L.",  stars: 5, date: "13 mar 2026", comment: "Esencial para el personal médico. Nos permite llegar a tiempo al turno. Gracias FORCETECH." },
+        { author: "Dr. Ruen L.",  stars: 5, date: "13 mar 2026", comment: "Esencial para el personal medico. Nos permite llegar a tiempo al turno. Gracias FORCETECH." },
         { author: "Patricia M.",  stars: 5, date: "09 mar 2026", comment: "La sombra y el fresquito hacen que esperar el bus no sea un martirio. Hermosillo necesitaba esto." },
-        { author: "Antonio G.",   stars: 4, date: "02 mar 2026", comment: "Accesible para sillas de ruedas. Diseño inclusivo muy bien logrado." }
+        { author: "Antonio G.",   stars: 4, date: "02 mar 2026", comment: "Accesible para sillas de ruedas. Diseno inclusivo muy bien logrado." }
       ],
       "Plaza Sendero": [
         { author: "Fernanda O.",  stars: 5, date: "16 mar 2026", comment: "Perfecta para ir al centro comercial. El confort termico es notable en horas de calor." },
         { author: "Rodrigo E.",   stars: 4, date: "11 mar 2026", comment: "Muy transitada en fines de semana pero aguanta bien la demanda y mantiene buena sombra." },
-        { author: "Camila N.",    stars: 3, date: "05 mar 2026", comment: "En horas pico el espacio se llena. Podrían ampliar un poco más la cubierta." }
+        { author: "Camila N.",    stars: 3, date: "05 mar 2026", comment: "En horas pico el espacio se llena. Podrian ampliar un poco mas la cubierta." }
       ],
       "Nuevo Hermosillo": [
-        { author: "Miguel A.",    stars: 5, date: "15 mar 2026", comment: "El fraccionamiento creció rápido y la parada llegó con él. Muy buena planificación." },
+        { author: "Miguel A.",    stars: 5, date: "15 mar 2026", comment: "El fraccionamiento crecio rapido y la parada llego con el. Muy buena planificacion." },
         { author: "Isabela C.",   stars: 4, date: "06 mar 2026", comment: "La bioclimatizacion pasiva se nota en la espera. Mucho mas comoda en horas de sol." },
         { author: "Rebeca Z.",    stars: 4, date: "27 feb 2026", comment: "Limpia y bien iluminada de noche. Muy importante para la seguridad del vecindario." }
       ],
       "Aeropuerto": [
         { author: "Ing. Duarte",  stars: 5, date: "17 mar 2026", comment: "Llegue al aeropuerto en tiempo desde el centro. El confort termico en la parada es excelente." },
-        { author: "Laura P.",     stars: 4, date: "12 mar 2026", comment: "Muy práctica para viajeros con maletas. Espacio amplio y fresco." },
+        { author: "Laura P.",     stars: 4, date: "12 mar 2026", comment: "Muy practica para viajeros con maletas. Espacio amplio y fresco." },
         { author: "Marcos B.",    stars: 5, date: "03 mar 2026", comment: "La estructura se siente robusta y la sombra vegetal mejora mucho la espera." }
       ],
       "Centro de Gobierno": [
-        { author: "Lic. Bravo",   stars: 5, date: "14 mar 2026", comment: "Diseño accesible e inclusivo. Excelente para llegar a trámites sin use el auto." },
+        { author: "Lic. Bravo",   stars: 5, date: "14 mar 2026", comment: "Diseno accesible e inclusivo. Excelente para llegar a tramites sin use el auto." },
         { author: "Norma S.",     stars: 4, date: "08 mar 2026", comment: "Siempre hay puntualidad en las rutas 5 y 9. La parada es moderna y da buena imagen." },
-        { author: "Felipe R.",    stars: 3, date: "01 mar 2026", comment: "Buena infraestructura. Me gustaría que hubiera más frecuencias en horario vespertino." }
+        { author: "Felipe R.",    stars: 3, date: "01 mar 2026", comment: "Buena infraestructura. Me gustaria que hubiera mas frecuencias en horario vespertino." }
       ],
       "Blvd. Morelos Final": [
         { author: "Adrian V.",    stars: 4, date: "13 mar 2026", comment: "Alta densidad vehicular pero la parada mantiene el orden y buen confort termico." },
-        { author: "Daniela Q.",   stars: 5, date: "07 mar 2026", comment: "Me sorprendió la calidad. Es el extremo norte y está igual de bien equipada que las del centro." },
+        { author: "Daniela Q.",   stars: 5, date: "07 mar 2026", comment: "Me sorprendio la calidad. Es el extremo norte y esta igual de bien equipada que las del centro." },
         { author: "Ramon F.",     stars: 4, date: "26 feb 2026", comment: "Buena cobertura de sombra incluso en horas pico. La bioclimatizacion pasiva es evidente." }
       ],
       "Nodo Industrial Poniente": [
-        { author: "Enrique M.",   stars: 5, date: "16 mar 2026", comment: "La iluminación del Nodo Industrial es muy segura. Ideal para los turnos nocturnos de fábrica." },
+        { author: "Enrique M.",   stars: 5, date: "16 mar 2026", comment: "La iluminacion del Nodo Industrial es muy segura. Ideal para los turnos nocturnos de fabrica." },
         { author: "Gloria H.",    stars: 4, date: "10 mar 2026", comment: "Punto de transferencia clave. Conecta las rutas 3 y 7 sin necesidad de caminar." },
-        { author: "Tomás E.",     stars: 5, date: "02 mar 2026", comment: "Imprescindible para los trabajadores de la zona. FORCETECH entendió la necesidad real." }
+        { author: "Tomas E.",     stars: 5, date: "02 mar 2026", comment: "Imprescindible para los trabajadores de la zona. FORCETECH entendio la necesidad real." }
       ]
     };
 
@@ -5391,7 +5688,7 @@
       const list = document.getElementById('reviewsList');
       const reviews = (mockReviews[stopName] || []).slice();
       if (!reviews.length) {
-        list.innerHTML = '<p style="font-family:\'Montserrat\',sans-serif;color:#888;font-size:13px;">No hay reseñas aún. ¡Sé el primero!</p>';
+        list.innerHTML = '<p style="font-family:\'Montserrat\',sans-serif;color:#888;font-size:13px;">No hay resenas aun. !Se el primero!</p>';
         return;
       }
       list.innerHTML = reviews.map((r, idx) => `
@@ -5430,13 +5727,13 @@
       highlightEcodirCard(idx);
 
       // Populate modal header
-      document.getElementById('reviewsModalTitle').textContent = `⭐ Reseñas — ${stop.name}`;
+      document.getElementById('reviewsModalTitle').textContent = `⭐ Resenas - ${stop.name}`;
       document.getElementById('reviewsStopBadge').textContent = stop.zone;
 
       const reviews = mockReviews[stop.name] || [];
       const avg = avgRating(reviews);
       document.getElementById('reviewsStopAvg').innerHTML =
-        `<strong>${avg}</strong> / 5 &nbsp;&bull;&nbsp; ${reviews.length} reseña${reviews.length !== 1 ? 's' : ''}`;
+        `<strong>${avg}</strong> / 5 &nbsp;&bull;&nbsp; ${reviews.length} resena${reviews.length !== 1 ? 's' : ''}`;
 
       renderReviews(stop.name);
 
@@ -5460,7 +5757,7 @@
     function submitReview(e) {
       e.preventDefault();
       if (!selectedReviewStars) {
-        document.getElementById('reviewResult').textContent = 'Selecciona una calificación con las estrellas.';
+        document.getElementById('reviewResult').textContent = 'Selecciona una calificacion con las estrellas.';
         return;
       }
       const author  = document.getElementById('reviewAuthor').value.trim();
@@ -5475,13 +5772,13 @@
       const reviews = mockReviews[activeReviewStop];
       const avg = avgRating(reviews);
       document.getElementById('reviewsStopAvg').innerHTML =
-        `<strong>${avg}</strong> / 5 &nbsp;&bull;&nbsp; ${reviews.length} reseña${reviews.length !== 1 ? 's' : ''}`;
+        `<strong>${avg}</strong> / 5 &nbsp;&bull;&nbsp; ${reviews.length} resena${reviews.length !== 1 ? 's' : ''}`;
 
       renderReviews(activeReviewStop);
       e.target.reset();
       resetStarPicker();
       selectedReviewStars = 0;
-      document.getElementById('reviewResult').textContent = '✔ Reseña publicada. ¡Gracias por tu opinión!';
+      document.getElementById('reviewResult').textContent = '✔ Resena publicada. !Gracias por tu opinion!';
     }
 
     // Star picker logic
@@ -5533,7 +5830,7 @@
       }
     });
 
-    // ── Datos y Análisis Tabs + Charts ──
+    // ── Datos y Analisis Tabs + Charts ──
     const analisisTabs = document.querySelectorAll(".analisis-tab");
     const analisisPanels = document.querySelectorAll(".analisis-panel");
 
@@ -5643,7 +5940,7 @@
           labels: years,
           datasets: [
             { label: "Vehiculo nacional", data: [28.0, 32.4, 39.1, 42.9, 37.2, 41.5], borderColor: "#2d5a27", tension: 0.35 },
-            { label: "Transporte público", data: [35.4, 18.3, 19.4, 23.0, 13.0, 23.8], borderColor: "#d4703a", tension: 0.35 },
+            { label: "Transporte publico", data: [35.4, 18.3, 19.4, 23.0, 13.0, 23.8], borderColor: "#d4703a", tension: 0.35 },
             { label: "Caminando", data: [10.0, 10.6, 11.0, 11.0, 10.4, 12.4], borderColor: "#6aad5b", tension: 0.35 }
           ]
         },
@@ -5715,7 +6012,9 @@
         }
       });
     }
-  </script>
+  </script> src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
+   src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+  
 
 </body>
 </html>

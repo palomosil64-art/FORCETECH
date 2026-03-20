@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transporte P�blico Hermosillo � Informe 2019�2024</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<title>Transporte Publico Hermosillo - Informe 2019-2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script> src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -306,7 +307,7 @@
     border: none;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-itemas: center;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -427,7 +428,7 @@
     width: 30px;
     height: 30px;
     display: grid;
-    place-items: center;
+    place-itemas: center;
   }
   .eco-pin-glow {
     position: absolute;
@@ -461,7 +462,7 @@
   }
 
   .eco-popup-name { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: #1E392A; margin-bottom: 4px; }
-  .eco-popup-rating { display: flex; gap: 5px; align-items: center; margin-bottom: 8px; }
+  .eco-popup-rating { display: flex; gap: 5px; align-itemas: center; margin-bottom: 8px; }
   .eco-popup-stars { color: #D35400; font-size: 13px; letter-spacing: 1px; }
   .eco-popup-meta { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #666; font-weight: 700; }
   .eco-popup-btn { width: 100%; border: 2px solid #D35400; border-radius: 10px; background: linear-gradient(135deg, #F17A20 0%, #D35400 62%, #B84400 100%); color: #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 10px; cursor: pointer; }
@@ -480,7 +481,7 @@
     position: fixed;
     inset: 0;
     display: none;
-    align-items: center;
+    align-itemas: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.46);
     z-index: 1200;
@@ -488,7 +489,7 @@
   }
   .eco-reviews-modal.active { display: flex; }
   .eco-reviews-panel { width: min(640px, 100%); max-height: 88vh; overflow: auto; background: #FFFFFF; border: 2px solid #D35400; border-radius: 12px; padding: 18px; box-shadow: 0 18px 40px rgba(211, 84, 0, 0.24); }
-  .eco-reviews-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .eco-reviews-head { display: flex; justify-content: space-between; align-itemas: center; gap: 10px; margin-bottom: 10px; }
   .eco-reviews-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; color: #D35400; text-transform: uppercase; }
   .eco-review-item { border: 2px solid rgba(211, 84, 0, 0.24); border-radius: 12px; padding: 10px 12px; background: #FFFFFF; margin-bottom: 10px; }
   .eco-review-user { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: #1E392A; margin-bottom: 3px; }
@@ -518,9 +519,9 @@
 
 <div class="header">
   <div class="header-badge">Informe de Movilidad</div>
-  <h1>Ingenier�a que Respira<br><span>Hermosillo</span> 2019-2024</h1>
-  <p class="header-sub">Infraestructura Viva de Alta Ingenier�a: acero A36, bioclimatizaci�n activa y desempe�o urbano medible para 453 PARADAS ACTIVAS.</p>
-  <p class="header-source">Fuente: Hermosillo �C�mo Vamos? � IMTES � Encuesta de Percepci�n Ciudadana 2024</p>
+  <h1>Ingenieria que Respira<br><span>Hermosillo</span> 2019-2024</h1>
+  <p class="header-sub">Infraestructura Viva de Alta Ingenieria: acero A36, bioclimatizacion activa y desempeno urbano medible para 32 RUTAS ACTIVAS.</p>
+  <p class="header-source">Fuente: Hermosillo Como Vamos? | IMTES | Encuesta de Percepcion Ciudadana 2024</p>
 </div>
 
 <nav class="nav-tabs">
@@ -532,11 +533,11 @@
   <button class="nav-tab" onclick="showSection('ecoparadas')">Ecoparadas</button>
 </nav>
 
-<!-- SECCI�N: USUARIOS -->
+<!-- SECCION: USUARIOS -->
 <div class="container">
 <div id="sec-usuarios" class="section active">
-  <p class="section-title">Poblaci�n usuaria del transporte p�blico</p>
-  <p class="section-desc">Estimaci�n de habitantes mayores de 18 a�os que usan el transporte con alguna frecuencia, 2019�2024.</p>
+  <p class="section-title">Poblacion usuaria del transporte publico</p>
+  <p class="section-desc">Estimacion de habitantes mayores de 18 anos que usan el transporte con alguna frecuencia, 2019-2024.</p>
 
   <div class="kpi-grid">
     <div class="kpi-card">
@@ -550,12 +551,12 @@
       <div class="kpi-change">11.1% de la pob. adulta</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Pico hist�rico</div>
+      <div class="kpi-label">Pico historico</div>
       <div class="kpi-value">229,624 <small>2019</small></div>
       <div class="kpi-change down">? 26% al 2024</div>
     </div>
     <div class="kpi-card accent">
-      <div class="kpi-label">Satisfacci�n servicio 2024</div>
+      <div class="kpi-label">Satisfaccion servicio 2024</div>
       <div class="kpi-value">7.0 <small>/ 10</small></div>
       <div class="kpi-change down">? 0.4 vs 2023</div>
     </div>
@@ -563,70 +564,70 @@
 
   <div class="chart-grid">
     <div class="chart-panel wide">
-      <div class="chart-title">Tendencia de poblaci�n usuaria (miles de personas)</div>
-      <div class="chart-sub">Con cualquier frecuencia de uso � Poblaci�n municipal mayor de 18 a�os</div>
+      <div class="chart-title">Tendencia de poblacion usuaria (miles de personas)</div>
+      <div class="chart-sub">Con cualquier frecuencia de uso  Poblacion municipal mayor de 18 anos</div>
       <div class="chart-wrap tall"><canvas id="chartUsuarios"></canvas></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Proporci�n de la poblaci�n</div>
-      <div class="chart-sub">% que usa transporte p�blico por a�o</div>
+      <div class="chart-title">Proporcion de la poblacion</div>
+      <div class="chart-sub">% que usa transporte publico por ano</div>
       <div class="chart-wrap"><canvas id="chartPorcentaje"></canvas></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Satisfacci�n con el servicio</div>
-      <div class="chart-sub">Calificaci�n promedio (escala 1�10)</div>
+      <div class="chart-title">Satisfaccion con el servicio</div>
+      <div class="chart-sub">Calificacion promedio (escala 110)</div>
       <div class="chart-wrap"><canvas id="chartSatisfaccion"></canvas></div>
     </div>
   </div>
 
   <div class="chart-panel">
-    <div class="chart-title">Principales motivos de insatisfacci�n (2024)</div>
+    <div class="chart-title">Principales motivos de insatisfaccion (2024)</div>
     <div class="chart-sub">% de usuarios que mencionaron cada factor</div>
     <div class="chart-wrap"><canvas id="chartInsatisfaccion"></canvas></div>
   </div>
 </div>
 
-<!-- SECCI�N: REPARTO MODAL -->
+<!-- SECCION: REPARTO MODAL -->
 <div id="sec-modal" class="section">
   <p class="section-title">Reparto modal de Hermosillo</p>
-  <p class="section-desc">Distribuci�n porcentual de los medios de transporte utilizados por la poblaci�n municipal mayor de 18 a�os.</p>
+  <p class="section-desc">Distribucion porcentual de los medios de transporte uutilizados por la poblacion municipal mayor de 18 anos.</p>
 
   <div class="chart-grid">
     <div class="chart-panel wide">
-      <div class="chart-title">Evoluci�n del reparto modal 2019�2024</div>
-      <div class="chart-sub">Los 6 medios de transporte m�s utilizados � % de poblaci�n</div>
+      <div class="chart-title">Evolucion del reparto modal 2019-2024</div>
+      <div class="chart-sub">Los 6 medios de transporte mas uutilizados  % de poblacion</div>
       <div class="chart-wrap tall"><canvas id="chartModal"></canvas></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Distribuci�n 2019</div>
-      <div class="chart-sub">A�o de referencia previo a pandemia</div>
+      <div class="chart-title">Distribucion 2019</div>
+      <div class="chart-sub">Ano de referencia previo a pandemia</div>
       <div class="chart-wrap"><canvas id="chartModal2019"></canvas></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Distribuci�n 2024</div>
-      <div class="chart-sub">�ltimo a�o del per�odo analizado</div>
+      <div class="chart-title">Distribucion 2024</div>
+      <div class="chart-sub">Ultimo ano del periodo analizado</div>
       <div class="chart-wrap"><canvas id="chartModal2024"></canvas></div>
     </div>
   </div>
 
   <div class="chart-panel">
     <div class="chart-title">Tabla de reparto modal completa</div>
-    <div class="chart-sub">Porcentaje por a�o y medio de transporte</div>
+    <div class="chart-sub">Porcentaje por ano y medio de transporte</div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Medio de Transporte</th>
             <th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th>
-            <th>Variaci�n</th>
+            <th>Variacin</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Veh�culo nacional</td><td>28.0%</td><td>32.4%</td><td>39.1%</td><td>42.9%</td><td>37.2%</td><td>41.5%</td><td class="tag-up">+13.5 pp</td></tr>
-          <tr><td>Transporte p�blico</td><td>35.4%</td><td>18.3%</td><td>19.4%</td><td>23.0%</td><td>13.0%</td><td>23.8%</td><td class="tag-down">-11.6 pp</td></tr>
+          <tr><td>Vehiculo nacional</td><td>28.0%</td><td>32.4%</td><td>39.1%</td><td>42.9%</td><td>37.2%</td><td>41.5%</td><td class="tag-up">+13.5 pp</td></tr>
+          <tr><td>Transporte publico</td><td>35.4%</td><td>18.3%</td><td>19.4%</td><td>23.0%</td><td>13.0%</td><td>23.8%</td><td class="tag-down">-11.6 pp</td></tr>
           <tr><td>Caminando</td><td>10.0%</td><td>10.6%</td><td>11.0%</td><td>11.0%</td><td>10.4%</td><td>12.4%</td><td class="tag-up">+2.4 pp</td></tr>
           <tr><td>?? Taxi/plataforma</td><td>3.2%</td><td>5.8%</td><td>2.8%</td><td>4.5%</td><td>5.9%</td><td>6.5%</td><td class="tag-up">+3.3 pp</td></tr>
-          <tr><td>Veh�culo afiliado</td><td>6.3%</td><td>10.1%</td><td>7.8%</td><td>3.7%</td><td>9.6%</td><td>5.1%</td><td class="tag-down">-1.2 pp</td></tr>
+          <tr><td>Vehiculo afiliado</td><td>6.3%</td><td>10.1%</td><td>7.8%</td><td>3.7%</td><td>9.6%</td><td>5.1%</td><td class="tag-down">-1.2 pp</td></tr>
           <tr><td>Bicicleta</td><td>8.4%</td><td>6.6%</td><td>2.5%</td><td>4.8%</td><td>5.2%</td><td>4.2%</td><td class="tag-down">-4.2 pp</td></tr>
         </tbody>
       </table>
@@ -634,24 +635,24 @@
   </div>
 </div>
 
-<!-- SECCI�N: FINANZAS -->
+<!-- SECCION: FINANZAS -->
 <div id="sec-financiero" class="section">
   <p class="section-title">Estructura financiera del Fideicomiso</p>
-  <p class="section-desc">Ingresos, egresos y d�ficit del Fideicomiso de Recaudaci�n, Administraci�n, Distribuci�n y Pago F/1219 � Millones de pesos (mdp).</p>
+  <p class="section-desc">Ingresos, egresos y deficit del Fideicomiso de Recaudacion, Administracion, Distribucion y Pago F/1219  Millones de pesos (mdp).</p>
 
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-label">Ingresos totales 2019�2024</div>
+      <div class="kpi-label">Ingresos totales 2019-2024</div>
       <div class="kpi-value">$3,931 <small>mdp</small></div>
     </div>
     <div class="kpi-card accent">
-      <div class="kpi-label">Egresos totales 2019�2024</div>
+      <div class="kpi-label">Egresos totales 2019-2024</div>
       <div class="kpi-value">$4,113 <small>mdp</small></div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">D�ficit acumulado</div>
+      <div class="kpi-label">Deficit acumulado</div>
       <div class="kpi-value">$181 <small>mdp</small></div>
-      <div class="kpi-change down">Deuda acumulada del per�odo</div>
+      <div class="kpi-change down">Deuda acumulada del periodo</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">Viajes estimados 2024</div>
@@ -663,12 +664,12 @@
   <div class="chart-grid">
     <div class="chart-panel wide">
       <div class="chart-title">Ingresos vs Egresos del Fideicomiso (mdp)</div>
-      <div class="chart-sub">La brecha muestra el d�ficit anual que se convierte en deuda para el siguiente ejercicio</div>
+      <div class="chart-sub">La brecha muestra el deficit anual que se convierte en deuda para el siguiente ejercicio</div>
       <div class="chart-wrap tall"><canvas id="chartFinanzas"></canvas></div>
     </div>
     <div class="chart-panel">
       <div class="chart-title">Recaudo tarifario (mdp)</div>
-      <div class="chart-sub">Ingresos por pago de pasaje � tarifa $9.00</div>
+      <div class="chart-sub">Ingresos por pago de pasaje  tarifa $9.00</div>
       <div class="chart-wrap"><canvas id="chartRecaudo"></canvas></div>
     </div>
     <div class="chart-panel">
@@ -680,11 +681,11 @@
 
   <div class="chart-panel">
     <div class="chart-title">Tabla de operaciones financieras del Fideicomiso</div>
-    <div class="chart-sub">Valores en millones de pesos (mdp) � 2019�2024</div>
+    <div class="chart-sub">Valores en millones de pesos (mdp)  2019-2024</div>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>A�o</th><th>Recaudo (mdp)</th><th>Subsidio (mdp)</th><th>Ingresos totales (mdp)</th><th>Egresos (mdp)</th><th>D�ficit (mdp)</th></tr>
+          <tr><th>Ano</th><th>Recaudo (mdp)</th><th>Subsidio (mdp)</th><th>Ingresos totales (mdp)</th><th>Egresos (mdp)</th><th>Deficit (mdp)</th></tr>
         </thead>
         <tbody>
           <tr><td>2019</td><td>$159.41</td><td>$92.87</td><td>$252.29</td><td>$299.84</td><td class="tag-down">-$47.55</td></tr>
@@ -700,10 +701,10 @@
   </div>
 </div>
 
-<!-- SECCI�N: SUBSIDIO -->
+<!-- SECCION: SUBSIDIO -->
 <div id="sec-subsidio" class="section">
   <p class="section-title">Dependencia del subsidio gubernamental</p>
-  <p class="section-desc">An�lisis de la contribuci�n estatal al financiamiento del transporte p�blico de Hermosillo.</p>
+  <p class="section-desc">Analisis de la contribucion estatal al financiamiento del transporte publico de Hermosillo.</p>
 
   <div class="kpi-grid">
     <div class="kpi-card accent">
@@ -717,41 +718,41 @@
       <div class="kpi-change down">Era $0.58 en 2019</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Subsidio per c�pita 2024</div>
+      <div class="kpi-label">Subsidio per capita 2024</div>
       <div class="kpi-value">$729 <small>/habitante</small></div>
-      <div class="kpi-change down">Era $99 en 2019 � +633%</div>
+      <div class="kpi-change down">Era $99 en 2019  +633%</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Subsidio total 2019�2024</div>
+      <div class="kpi-label">Subsidio total 2019-2024</div>
       <div class="kpi-value">$2,592 <small>mdp</small></div>
     </div>
   </div>
 
   <div class="chart-grid">
     <div class="chart-panel wide">
-      <div class="chart-title">Evoluci�n del subsidio gubernamental (mdp)</div>
-      <div class="chart-sub">Aumento sostenido a�o a a�o � Crecimiento total del per�odo: +679%</div>
+      <div class="chart-title">Evolucion del subsidio gubernamental (mdp)</div>
+      <div class="chart-sub">Aumento sostenido ano a ano  Crecimiento total del periodo: +679%</div>
       <div class="chart-wrap tall"><canvas id="chartSubsidio"></canvas></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Distribuci�n de ingresos por fuente (%)</div>
+      <div class="chart-title">Distribucion de ingresos por fuente (%)</div>
       <div class="chart-sub">Recaudo tarifario vs subsidio gubernamental</div>
       <div class="chart-wrap"><canvas id="chartFuentes"></canvas></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Subsidio per c�pita ($)</div>
-      <div class="chart-sub">Gasto p�blico por habitante del municipio</div>
+      <div class="chart-title">Subsidio per capita ($)</div>
+      <div class="chart-sub">Gasto publico por habitante del municipio</div>
       <div class="chart-wrap"><canvas id="chartPercapita"></canvas></div>
     </div>
   </div>
 
   <div class="chart-panel">
-    <div class="chart-title">Relaci�n subsidio por peso recaudado</div>
-    <div class="chart-sub">Cu�nto aporta el gobierno por cada $1.00 que paga un pasajero</div>
+    <div class="chart-title">Relacion subsidio por peso recaudado</div>
+    <div class="chart-sub">Cuanto aporta el gobierno por cada $1.00 que paga un pasajero</div>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>A�o</th><th>Recaudo (mdp)</th><th>Subsidio (mdp)</th><th>Relaci�n</th><th>Subsidio / $1 recaudado</th><th>Subsidio per c�pita</th></tr>
+          <tr><th>Ano</th><th>Recaudo (mdp)</th><th>Subsidio (mdp)</th><th>Relacion</th><th>Subsidio / $1 recaudado</th><th>Subsidio per capita</th></tr>
         </thead>
         <tbody>
           <tr><td>2019</td><td>$159.41</td><td>$92.87</td><td>0.58</td><td>$0.58</td><td>$99.54</td></tr>
@@ -766,31 +767,31 @@
   </div>
 </div>
 
-<!-- SECCI�N: ZONAS -->
+<!-- SECCION: ZONAS -->
 <div id="sec-zonas" class="section">
   <p class="section-title">Uso por zona de la ciudad</p>
-  <p class="section-desc">Porcentaje de habitantes por zona urbana que utilizan el transporte p�blico como principal medio de traslado.</p>
+  <p class="section-desc">Porcentaje de habitantes por zona urbana que uutilizan el transporte publico como principal medio de traslado.</p>
 
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-label">Zona Norte � 2024</div>
+      <div class="kpi-label">Zona Norte  2024</div>
       <div class="kpi-value">28.4%</div>
-      <div class="kpi-change">Rango hist�rico: 18.3%�45.8%</div>
+      <div class="kpi-change">Rango historico: 18.3%45.8%</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Zona Centro � 2024</div>
+      <div class="kpi-label">Zona Centro  2024</div>
       <div class="kpi-value">23.7%</div>
-      <div class="kpi-change">Rango hist�rico: 10.1%�31.9%</div>
+      <div class="kpi-change">Rango historico: 10.1%31.9%</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Zona Sur � 2024</div>
+      <div class="kpi-label">Zona Sur  2024</div>
       <div class="kpi-value">33.3%</div>
-      <div class="kpi-change">Rango hist�rico: 15.9%�40.6%</div>
+      <div class="kpi-change">Rango historico: 15.9%40.6%</div>
     </div>
   </div>
 
   <div class="year-selector">
-    <span style="font-size:12px;font-weight:600;color:var(--texto-suave);align-self:center;">Ver a�o:</span>
+    <span style="font-size:12px;font-weight:600;color:var(--texto-suave);align-self:center;">Ver ano:</span>
     <button class="year-btn" onclick="updateZonas('2019')">2019</button>
     <button class="year-btn" onclick="updateZonas('2020')">2020</button>
     <button class="year-btn" onclick="updateZonas('2021')">2021</button>
@@ -801,8 +802,8 @@
 
   <div class="chart-grid">
     <div class="chart-panel">
-      <div class="chart-title">Uso por zona (a�o seleccionado)</div>
-      <div class="chart-sub" id="zonaSubtitle">Porcentaje de residentes que usan transporte p�blico � 2024</div>
+      <div class="chart-title">Uso por zona (ano seleccionado)</div>
+      <div class="chart-sub" id="zonaSubtitle">Porcentaje de residentes que usan transporte publico  2024</div>
       <div class="zone-grid" id="zonaBars">
         <div class="zone-row">
           <div class="zone-label">Zona Norte <span id="zn-val">28.4%</span></div>
@@ -819,14 +820,14 @@
       </div>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">Comparativa hist�rica por zona</div>
-      <div class="chart-sub">Evoluci�n 2019�2024 de las tres zonas urbanas</div>
+      <div class="chart-title">Comparativa historica por zona</div>
+      <div class="chart-sub">Evolucion 2019-2024 de las tres zonas urbanas</div>
       <div class="chart-wrap"><canvas id="chartZonas"></canvas></div>
     </div>
   </div>
 
   <div class="chart-panel">
-    <div class="chart-title">Tabla completa por zona y a�o</div>
+    <div class="chart-title">Tabla completa por zona y ano</div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -842,10 +843,10 @@
   </div>
 </div>
 
-<!-- SECCI�N: TABLAS -->
+<!-- SECCION: TABLAS -->
 <div id="sec-tablas" class="section">
   <p class="section-title">Resumen de indicadores clave</p>
-  <p class="section-desc">Tabla consolidada con todos los indicadores del informe 2019�2024.</p>
+  <p class="section-desc">Tabla consolidada con todos los indicadores del informe 2019-2024.</p>
 
   <div class="chart-panel" style="margin-bottom:20px">
     <div class="chart-title">Resumen financiero completo del Fideicomiso</div>
@@ -855,18 +856,18 @@
           <tr><th>Indicador</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>Total</th></tr>
         </thead>
         <tbody>
-          <tr><td>Tarifa (pesos)</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>�</td></tr>
+          <tr><td>Tarifa (pesos)</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td>$9.00</td><td></td></tr>
           <tr><td>Recaudo (mdp)</td><td>$159.41</td><td>$153.71</td><td>$236.90</td><td>$289.54</td><td>$281.46</td><td>$218.32</td><td>$1,339.34</td></tr>
           <tr><td>Subsidio (mdp)</td><td>$92.87</td><td>$252.49</td><td>$427.51</td><td>$482.43</td><td>$613.54</td><td>$723.36</td><td>$2,592.21</td></tr>
           <tr><td>Ingresos totales (mdp)</td><td>$252.29</td><td>$406.19</td><td>$664.41</td><td>$771.98</td><td>$895.00</td><td>$941.68</td><td>$3,931.55</td></tr>
           <tr><td>Egresos (mdp)</td><td>$299.84</td><td>$460.92</td><td>$688.12</td><td>$781.75</td><td>$912.96</td><td>$969.50</td><td>$4,113.08</td></tr>
-          <tr><td>D�ficit (mdp)</td><td>-$47.55</td><td>-$54.72</td><td>-$23.71</td><td>-$9.77</td><td>-$17.95</td><td>-$27.82</td><td>-$181.53</td></tr>
-          <tr><td>Subsidio per c�pita ($)</td><td>$99.54</td><td>$266.89</td><td>$446.05</td><td>$497.32</td><td>$625.44</td><td>$729.84</td><td>�</td></tr>
-          <tr><td>Usuarios TP (personas)</td><td>229,624</td><td>121,142</td><td>130,892</td><td>157,976</td><td>90,805</td><td>168,902</td><td>�</td></tr>
-          <tr><td>% usa TP</td><td>35.4%</td><td>18.3%</td><td>19.4%</td><td>23.0%</td><td>13.0%</td><td>23.8%</td><td>�</td></tr>
-          <tr><td>% usa veh�culo particular</td><td>28.0%</td><td>32.4%</td><td>39.1%</td><td>42.9%</td><td>37.2%</td><td>41.5%</td><td>�</td></tr>
-          <tr><td>Satisfacci�n /10</td><td>7.6</td><td>7.4</td><td>7.3</td><td>6.5</td><td>7.4</td><td>7.0</td><td>�</td></tr>
-          <tr><td>Subsidio por $1 recaudado</td><td>$0.58</td><td>$1.64</td><td>$1.80</td><td>$1.67</td><td>$2.18</td><td>$3.31</td><td>�</td></tr>
+          <tr><td>Deficit (mdp)</td><td>-$47.55</td><td>-$54.72</td><td>-$23.71</td><td>-$9.77</td><td>-$17.95</td><td>-$27.82</td><td>-$181.53</td></tr>
+          <tr><td>Subsidio per capita ($)</td><td>$99.54</td><td>$266.89</td><td>$446.05</td><td>$497.32</td><td>$625.44</td><td>$729.84</td><td></td></tr>
+          <tr><td>Usuarios TP (personas)</td><td>229,624</td><td>121,142</td><td>130,892</td><td>157,976</td><td>90,805</td><td>168,902</td><td></td></tr>
+          <tr><td>% usa TP</td><td>35.4%</td><td>18.3%</td><td>19.4%</td><td>23.0%</td><td>13.0%</td><td>23.8%</td><td></td></tr>
+          <tr><td>% usa vehculo particular</td><td>28.0%</td><td>32.4%</td><td>39.1%</td><td>42.9%</td><td>37.2%</td><td>41.5%</td><td></td></tr>
+          <tr><td>Satisfaccion /10</td><td>7.6</td><td>7.4</td><td>7.3</td><td>6.5</td><td>7.4</td><td>7.0</td><td></td></tr>
+          <tr><td>Subsidio por $1 recaudado</td><td>$0.58</td><td>$1.64</td><td>$1.80</td><td>$1.67</td><td>$2.18</td><td>$3.31</td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -878,15 +879,15 @@
       <table>
         <thead><tr><th>Dato operativo</th><th>Valor</th></tr></thead>
         <tbody>
-          <tr><td>Total de l�neas en operaci�n</td><td>37 l�neas</td></tr>
+          <tr><td>Total de lineas en operacion</td><td>32 lineas</td></tr>
           <tr><td>Total de unidades</td><td>347 autobuses</td></tr>
-          <tr><td>Unidades en reparaci�n/taller</td><td>26 unidades</td></tr>
-          <tr><td>Extensi�n total de la red</td><td>1,390 km</td></tr>
+          <tr><td>Unidades en reparacion/taller</td><td>26 unidades</td></tr>
+          <tr><td>Extension total de la red</td><td>1,390 km</td></tr>
           <tr><td>Tarifa ordinaria</td><td>$9.00 (sin cambios desde 2017)</td></tr>
-          <tr><td>Tarifa preferencial</td><td>$5.00 (estudiantes, 3� edad, discapacidad)</td></tr>
-          <tr><td>Horario general del servicio</td><td>5:30 a.m. � 10:30 p.m.</td></tr>
-          <tr><td>Empresas operadoras</td><td>Movilidad Integral de Hermosillo � Administraci�n Corporativa de Hermosillo</td></tr>
-          <tr><td>Costo op. acumulado 2019�2024</td><td>$4,113 mdp</td></tr>
+          <tr><td>Tarifa preferencial</td><td>$5.00 (estudiantes, 3 edad, discapacidad)</td></tr>
+          <tr><td>Horario general del servicio</td><td>5:30 a.m.  10:30 p.m.</td></tr>
+          <tr><td>Empresas operadoras</td><td>Movilidad Integral de Hermosillo  Administracion Corporativa de Hermosillo</td></tr>
+          <tr><td>Costo op. acumulado 2019-2024</td><td>$4,113 mdp</td></tr>
           <tr><td>Costo por km (2024)</td><td>$37.77 (era $24.4 en 2019, +55%)</td></tr>
         </tbody>
       </table>
@@ -894,10 +895,10 @@
   </div>
 </div>
 
-<!-- SECCI�N: ECOPARADAS -->
+<!-- SECCION: ECOPARADAS -->
 <div id="sec-ecoparadas" class="section">
-  <p class="section-title">UBICACI�N ESTRAT�GICA DE RED INTELIGENTE</p>
-  <p class="section-desc">Directorio operativo del Proyecto Piloto con 10 ecoparadas inteligentes integradas a la red de 453 PARADAS ACTIVAS y al sistema de rese�as.</p>
+  <p class="section-title">UBICACION ESTRATEGICA DE RED INTELIGENTE</p>
+  <p class="section-desc">Directorio operativo del Proyecto Piloto con 10 ecoparadas inteligentes integradas a la red de 32 RUTAS ACTIVAS y al sistema de resenas.</p>
 
   <div class="eco-actions">
     <button class="eco-btn" type="button" id="ecoDownloadBtn">DESCARGAR</button>
@@ -907,23 +908,23 @@
 
   <div class="chart-panel">
     <div class="chart-title">Mapa interactivo de ecoparadas inteligentes</div>
-    <div class="chart-sub">10 marcadores naranja con rese�as mock, navegaci�n click-to-map y enfoque de infraestructura bioclim�tica.</div>
+    <div class="chart-sub">10 marcadores naranja con resenas mock, navegacion click-to-map y enfoque de infraestructura bioclimatica.</div>
     <div id="ecoMap"></div>
     <div class="eco-why">
-      <div class="eco-why-title">MOTIVOS DE CREACI�N DEL PROYECTO PILOTO</div>
-      <p class="eco-why-text">Este proyecto integra estructura de acero A36, cubierta de plastimadera con sustrato org�nico y vegetaci�n estrat�gica para mitigar el calor extremo, elevar el confort de espera y consolidar una infraestructura con vida �til de 26 a�os.</p>
+      <div class="eco-why-title">MOTIVOS DE CREACION DEL PROYECTO PILOTO</div>
+      <p class="eco-why-text">Este proyecto integra estructura de acero A36, cubierta de plastimadera con sustrato organico y vegetacin estrategica para mitigar el calor extremo, elevar el confort de espera y consolidar una infraestructura con vida util de 26 anos.</p>
     </div>
   </div>
 
   <div class="chart-panel">
-    <div class="chart-title">Tabla t�cnica de materiales FORCETECH</div>
-    <div class="chart-sub">Ficha de ingenier�a para evaluaci�n de desempe�o, durabilidad y retorno de inversi�n.</div>
+    <div class="chart-title">Tabla tcnica de materiales FORCETECH</div>
+    <div class="chart-sub">Ficha de ingenieria para evaluacion de desempeno, durabilidad y retorno de inversion.</div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Componente</th>
-            <th>Detalle T�cnico</th>
+            <th>Detalle Tecnico</th>
             <th>Beneficio</th>
           </tr>
         </thead>
@@ -954,7 +955,7 @@
             <td>Iluminacion autonoma y segura</td>
           </tr>
           <tr>
-            <td>Vida util</td>
+            <td>Vida uutil</td>
             <td>26 anos</td>
             <td>Rentabilidad a largo plazo</td>
           </tr>
@@ -968,7 +969,7 @@
 <div class="eco-reviews-modal" id="ecoReviewsModal">
   <div class="eco-reviews-panel">
     <div class="eco-reviews-head">
-      <div class="eco-reviews-title" id="ecoReviewsTitle">RESE�AS</div>
+      <div class="eco-reviews-title" id="ecoReviewsTitle">RESENAS</div>
       <button class="eco-btn" type="button" id="ecoCloseBtn">CERRAR</button>
     </div>
     <div id="ecoReviewsList"></div>
@@ -980,7 +981,7 @@
   </div>
 </div>
 
-<div class="floating-buttons" aria-label="Acciones r�pidas">
+<div class="floating-buttons" aria-label="Acciones rapidas">
   <button class="floating-btn" id="btn-map" type="button" aria-label="Ver mapa de ecoparadas" title="Ver mapa">
     <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
   </button>
@@ -990,10 +991,9 @@
 </div>
 
 <div class="footer">
-  Datos de <strong>Hermosillo �C�mo Vamos?</strong> � Encuesta de Percepci�n Ciudadana 2024 � IMTES � Elaborado con informaci�n p�blica del per�odo 2019�2024
+  Datos de <strong>Hermosillo Como Vamos?</strong> | Encuesta de Percepcion Ciudadana 2024 | IMTES | Elaborado con informacion publica del periodo 2019-2024
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 // Color palette
 const G = {
@@ -1118,7 +1118,7 @@ new Chart(document.getElementById('chartUsuarios'), {
   data: {
     labels: YEARS,
     datasets: [{
-      label: 'Usuarios del transporte p�blico',
+      label: 'Usuarios del transporte publico',
       data: [229624, 121142, 130892, 157976, 90805, 168902],
       backgroundColor: [G.bosque, G.naranja, G.hoja, G.musgo, G.naranjaCal, G.hoja],
       borderRadius: 8, borderSkipped: false,
@@ -1149,7 +1149,7 @@ new Chart(document.getElementById('chartSatisfaccion'), {
   data: {
     labels: YEARS,
     datasets: [{
-      label: 'Satisfacci�n /10',
+      label: 'Satisfaccion /10',
       data: [7.6, 7.4, 7.3, 6.5, 7.4, 7.0],
       borderColor: G.naranja, backgroundColor: 'rgba(212,112,58,0.1)',
       fill: true, tension: 0.3, pointBackgroundColor: G.naranja, pointRadius: 5,
@@ -1182,8 +1182,8 @@ new Chart(document.getElementById('chartModal'), {
   data: {
     labels: YEARS,
     datasets: [
-      { label: 'Veh�culo nacional', data: [28,32.4,39.1,42.9,37.2,41.5], borderColor: G.naranja, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
-      { label: 'Transporte p�blico', data: [35.4,18.3,19.4,23,13,23.8], borderColor: G.bosque, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+      { label: 'Vehiculo nacional', data: [28,32.4,39.1,42.9,37.2,41.5], borderColor: G.naranja, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
+      { label: 'Transporte publico', data: [35.4,18.3,19.4,23,13,23.8], borderColor: G.bosque, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
       { label: 'Caminando', data: [10,10.6,11,11,10.4,12.4], borderColor: G.musgo, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
       { label: 'Taxi/plataforma', data: [3.2,5.8,2.8,4.5,5.9,6.5], borderColor: G.naranjaCal, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
       { label: 'Bicicleta', data: [8.4,6.6,2.5,4.8,5.2,4.2], borderColor: G.claro, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4 },
@@ -1196,13 +1196,13 @@ const pieDefaults = { responsive: true, maintainAspectRatio: false, plugins: { l
 
 new Chart(document.getElementById('chartModal2019'), {
   type: 'doughnut',
-  data: { labels: ['Veh�culo nac.','TP','Caminando','Bicicleta','V.afiliado','Taxi'], datasets: [{ data: [28,35.4,10,8.4,6.3,3.2], backgroundColor: [G.naranja,G.bosque,G.musgo,G.claro,G.menta,G.naranjaCal], borderWidth: 2, borderColor: '#fff' }] },
+  data: { labels: ['Vehiculo nac.','TP','Caminando','Bicicleta','V.afiliado','Taxi'], datasets: [{ data: [28,35.4,10,8.4,6.3,3.2], backgroundColor: [G.naranja,G.bosque,G.musgo,G.claro,G.menta,G.naranjaCal], borderWidth: 2, borderColor: '#fff' }] },
   options: pieDefaults
 });
 
 new Chart(document.getElementById('chartModal2024'), {
   type: 'doughnut',
-  data: { labels: ['Veh�culo nac.','TP','Caminando','Taxi','V.afiliado','Bicicleta'], datasets: [{ data: [41.5,23.8,12.4,6.5,5.1,4.2], backgroundColor: [G.naranja,G.bosque,G.musgo,G.naranjaCal,G.menta,G.claro], borderWidth: 2, borderColor: '#fff' }] },
+  data: { labels: ['Vehiculo nac.','TP','Caminando','Taxi','V.afiliado','Bicicleta'], datasets: [{ data: [41.5,23.8,12.4,6.5,5.1,4.2], backgroundColor: [G.naranja,G.bosque,G.musgo,G.naranjaCal,G.menta,G.claro], borderWidth: 2, borderColor: '#fff' }] },
   options: pieDefaults
 });
 
@@ -1268,7 +1268,7 @@ new Chart(document.getElementById('chartPercapita'), {
   type: 'line',
   data: {
     labels: YEARS,
-    datasets: [{ label: 'Subsidio per c�pita ($)', data: [99.54,266.89,446.05,497.32,625.44,729.84], borderColor: G.naranja, backgroundColor: 'rgba(212,112,58,0.08)', fill: true, tension: 0.4, pointBackgroundColor: G.naranja, pointRadius: 5 }]
+    datasets: [{ label: 'Subsidio per capita ($)', data: [99.54,266.89,446.05,497.32,625.44,729.84], borderColor: G.naranja, backgroundColor: 'rgba(212,112,58,0.08)', fill: true, tension: 0.4, pointBackgroundColor: G.naranja, pointRadius: 5 }]
   },
   options: mergeOptions({ plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { grid: { color: '#e8f5e2' }, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$'+v } } } })
 });
@@ -1309,7 +1309,7 @@ const zonaData = {
 
 function updateZonas(year) {
   const d = zonaData[year];
-  document.getElementById('zonaSubtitle').textContent = `Porcentaje de residentes que usan transporte p�blico � ${year}`;
+  document.getElementById('zonaSubtitle').textContent = `Porcentaje de residentes que usan transporte publico  ${year}`;
   document.getElementById('zn-val').textContent = d.norte + '%';
   document.getElementById('zc-val').textContent = d.centro + '%';
   document.getElementById('zs-val').textContent = d.sur + '%';
@@ -1325,46 +1325,46 @@ let ecoMarkers = [];
 let ecoActiveIndex = null;
 
 const ecoStops = [
-  { name: 'San Benito', zone: 'Centro', address: 'Blvd. Luis Encinas / Calle Pino Su�rez', route: 'Ruta 12', coords: [29.0728, -110.9559] },
-  { name: 'Tec de Hermosillo', zone: 'Norte', address: 'Blvd. Morelos / Perif�rico Norte', route: 'Ruta 11, 15', coords: [29.1185, -110.9620] },
-  { name: 'Colosio Poniente', zone: 'Norte-Poniente', address: 'Blvd. Luis Donaldo Colosio / Av. Perif�rica', route: 'Ruta 8, 14', coords: [29.1050, -111.0180] },
+  { name: 'San Benito', zone: 'Centro', address: 'Blvd. Luis Encinas / Calle Pino Suarez', route: 'Ruta 12', coords: [29.0728, -110.9559] },
+  { name: 'Tec de Hermosillo', zone: 'Norte', address: 'Blvd. Morelos / Periferico Norte', route: 'Ruta 11, 15', coords: [29.1185, -110.9620] },
+  { name: 'Colosio Poniente', zone: 'Norte-Poniente', address: 'Blvd. Luis Donaldo Colosio / Av. Periferica', route: 'Ruta 8, 14', coords: [29.1050, -111.0180] },
   { name: 'Hospital General', zone: 'Sur', address: 'Blvd. Solidaridad / Hospital General de Sonora', route: 'Ruta 2, 6', coords: [29.0390, -110.9670] },
   { name: 'Plaza Sendero', zone: 'Este', address: 'Blvd. Kino / Plaza Sendero Hermosillo', route: 'Ruta 10, 12', coords: [29.0820, -110.9020] },
   { name: 'Nuevo Hermosillo', zone: 'Este-Norte', address: 'Fracc. Nuevo Hermosillo / Blvd. El Novillo', route: 'Ruta 9, 13', coords: [29.1100, -110.8980] },
   { name: 'Aeropuerto', zone: 'Oeste', address: 'Blvd. de los Seris / Aeropuerto Internacional', route: 'Ruta 5, 8', coords: [29.0960, -111.0480] },
   { name: 'Centro de Gobierno', zone: 'Centro-Este', address: 'Blvd. Paseo del Canal / Centro de Gobierno', route: 'Ruta 5, 9', coords: [29.0745, -110.9310] },
   { name: 'Blvd. Morelos Final', zone: 'Noreste', address: 'Blvd. Morelos Km 9 / Fracc. Villa Hermosa', route: 'Ruta 7', coords: [29.1240, -110.9220] },
-  { name: 'Nodo Industrial Poniente', zone: 'Industrial Poniente', address: 'Blvd. Solidaridad / Blvd. Garc�a Morales', route: 'Ruta 3, 7', coords: [29.0930, -111.0200] }
+  { name: 'Nodo Industrial Poniente', zone: 'Industrial Poniente', address: 'Blvd. Solidaridad / Blvd. Garcia Morales', route: 'Ruta 3, 7', coords: [29.0930, -111.0200] }
 ];
 
 const ecoReviewsMock = {
   'San Benito': [
-    { user: 'CARLOS M.', stars: 5, comment: 'EXCELENTE CONFORT T�RMICO EN SAN BENITO.' },
-    { user: 'LUC�A R.', stars: 4, comment: 'MUY C�MODA Y FRESCA EN HORAS PICO.' },
+    { user: 'CARLOS M.', stars: 5, comment: 'EXCELENTE CONFORT TERMICO EN SAN BENITO.' },
+    { user: 'LUCIA R.', stars: 4, comment: 'MUY COMODA Y FRESCA EN HORAS PICO.' },
     { user: 'ERNESTO V.', stars: 4, comment: 'CONFORT TERMICO MUY ESTABLE TODO EL DIA.' }
   ],
   'Tec de Hermosillo': [
     { user: 'ALEJANDRO P.', stars: 3, comment: 'FALTA LIMPIEZA EN ALGUNOS TURNOS.' },
     { user: 'MARIANA F.', stars: 5, comment: 'IDEAL PARA ESTUDIANTES, TIEMPOS PRECISOS.' },
-    { user: 'DIEGO S.', stars: 4, comment: 'BUENA SOMBRA Y BUENA ILUMINACI�N.' }
+    { user: 'DIEGO S.', stars: 4, comment: 'BUENA SOMBRA Y BUENA ILUMINACION.' }
   ],
   'Colosio Poniente': [
     { user: 'VALERIA H.', stars: 5, comment: 'INFRAESTRUCTURA MODERNA Y SEGURA.' },
-    { user: 'JOS� L.', stars: 4, comment: 'ME AHORRA TIEMPO EN TRANSBORDOS.' },
-    { user: 'KAREN T.', stars: 3, comment: 'FUNCIONA BIEN, A VECES HAY SATURACI�N.' }
+    { user: 'JOSE L.', stars: 4, comment: 'ME AHORRA TIEMPO EN TRANSBORDOS.' },
+    { user: 'KAREN T.', stars: 3, comment: 'FUNCIONA BIEN, A VECES HAY SATURACION.' }
   ],
   'Hospital General': [
-    { user: 'PATRICIA M.', stars: 5, comment: 'LA REDUCCI�N T�RMICA ES MUY NOTORIA.' },
+    { user: 'PATRICIA M.', stars: 5, comment: 'LA REDUCCION TERMICA ES MUY NOTORIA.' },
     { user: 'ANTONIO G.', stars: 4, comment: 'ACCESIBLE Y BIEN UBICADA.' },
-    { user: 'DR. RUIZ', stars: 5, comment: 'CLAVE PARA PERSONAL M�DICO.' }
+    { user: 'DR. RUIZ', stars: 5, comment: 'CLAVE PARA PERSONAL MEDICO.' }
   ],
   'Plaza Sendero': [
     { user: 'FERNANDA O.', stars: 5, comment: 'SOMBRA VEGETAL MUY EFECTIVA EN HORAS DE CALOR.' },
     { user: 'RODRIGO E.', stars: 4, comment: 'BUENA EN FINES DE SEMANA.' },
-    { user: 'CAMILA N.', stars: 3, comment: 'EN HORAS PICO SE LLENA R�PIDO.' }
+    { user: 'CAMILA N.', stars: 3, comment: 'EN HORAS PICO SE LLENA RAPIDO.' }
   ],
   'Nuevo Hermosillo': [
-    { user: 'MIGUEL A.', stars: 5, comment: 'EXCELENTE INTEGRACI�N EN LA ZONA.' },
+    { user: 'MIGUEL A.', stars: 5, comment: 'EXCELENTE INTEGRACION EN LA ZONA.' },
     { user: 'ISABELA C.', stars: 4, comment: 'ESPERA COMODA Y CONFIABLE.' },
     { user: 'REBECA Z.', stars: 4, comment: 'SEGURA Y BIEN ILUMINADA.' }
   ],
@@ -1374,19 +1374,19 @@ const ecoReviewsMock = {
     { user: 'MARCOS B.', stars: 5, comment: 'SOMBRA VEGETAL EXCELENTE.' }
   ],
   'Centro de Gobierno': [
-    { user: 'LIC. BRAVO', stars: 5, comment: 'DISE�O INCLUSIVO Y FUNCIONAL.' },
+    { user: 'LIC. BRAVO', stars: 5, comment: 'DISENO INCLUSIVO Y FUNCIONAL.' },
     { user: 'NORMA S.', stars: 4, comment: 'RUTAS MUY CONSTANTES.' },
     { user: 'FELIPE R.', stars: 3, comment: 'PUEDE MEJORAR EN HORARIO VESPERTINO.' }
   ],
   'Blvd. Morelos Final': [
-    { user: 'ADRI�N V.', stars: 4, comment: 'MUY �TIL EN ZONA DE ALTA CARGA.' },
+    { user: 'ADRIAN V.', stars: 4, comment: 'MUY UTIL EN ZONA DE ALTA CARGA.' },
     { user: 'DANIELA Q.', stars: 5, comment: 'CALIDAD MUY ALTA PARA LA ZONA.' },
-    { user: 'RAM�N F.', stars: 4, comment: 'BUENA PROTECCI�N DE SOMBRA EN HORAS PICO.' }
+    { user: 'RAMON F.', stars: 4, comment: 'BUENA PROTECCION DE SOMBRA EN HORAS PICO.' }
   ],
   'Nodo Industrial Poniente': [
-    { user: 'ENRIQUE M.', stars: 5, comment: 'ILUMINACI�N MUY SEGURA DE NOCHE.' },
+    { user: 'ENRIQUE M.', stars: 5, comment: 'ILUMINACION MUY SEGURA DE NOCHE.' },
     { user: 'GLORIA H.', stars: 4, comment: 'NODO CLAVE PARA TRANSFERENCIA.' },
-    { user: 'TOM�S E.', stars: 5, comment: 'IMPRESCINDIBLE PARA LA ZONA INDUSTRIAL.' }
+    { user: 'TOMAS E.', stars: 5, comment: 'IMPRESCINDIBLE PARA LA ZONA INDUSTRIAL.' }
   ]
 };
 
@@ -1395,19 +1395,19 @@ function ecoStars(value) {
 }
 
 function ecoAvg(name) {
-  const items = ecoReviewsMock[name] || [];
-  if (!items.length) return '0.0';
-  return (items.reduce((s, x) => s + x.stars, 0) / items.length).toFixed(1);
+  const itemas = ecoReviewsMock[name] || [];
+  if (!itemas.length) return '0.0';
+  return (itemas.reduce((s, x) => s + x.stars, 0) / itemas.length).toFixed(1);
 }
 
 function renderEcoGrid() {
   const grid = document.getElementById('ecoGrid');
   if (!grid) return;
   grid.innerHTML = ecoStops.map((stop, idx) => `
-    <article class="eco-card" data-stop-idx="${idx}" role="button" tabindex="0" aria-label="Ver ${stop.name} en mapa y rese�as">
+    <article class="eco-card" data-stop-idx="${idx}" role="button" tabindex="0" aria-label="Ver ${stop.name} en mapa y resenas">
       <div class="eco-title">${stop.name}</div>
       <div class="eco-address">${stop.address}</div>
-      <div class="eco-route">${stop.zone} � ${stop.route}</div>
+      <div class="eco-route">${stop.zone}  ${stop.route}</div>
     </article>
   `).join('');
 
@@ -1436,7 +1436,7 @@ function openEcoReviews(idx) {
   const title = document.getElementById('ecoReviewsTitle');
   const list = document.getElementById('ecoReviewsList');
 
-  title.textContent = `RESE�AS � ${stop.name.toUpperCase()}`;
+  title.textContent = `RESENAS  ${stop.name.toUpperCase()}`;
   const reviews = ecoReviewsMock[stop.name] || [];
   list.innerHTML = reviews.map((r) => `
     <div class="eco-review-item">
@@ -1470,7 +1470,7 @@ function initEcoMap() {
   if (!mapContainer || ecoMap) return;
 
   ecoMap = L.map('ecoMap', { zoomControl: true }).setView([29.0892, -110.9613], 12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.utileLayer('https://{s}.utile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(ecoMap);
@@ -1491,7 +1491,7 @@ function initEcoMap() {
       .bindPopup(`
         <div class="eco-popup-name">${stop.name}</div>
         <div class="eco-popup-rating"><span class="eco-popup-stars">${ecoStars(Math.round(Number(avg)))}</span><span class="eco-popup-meta">${avg}/5</span></div>
-        <button class="eco-popup-btn" onclick="focusEcoStop(${idx})">VER RESE�AS</button>
+        <button class="eco-popup-btn" onclick="focusEcoStop(${idx})">VER RESENAS</button>
       `, { maxWidth: 260 });
     marker.on('click', () => focusEcoStop(idx));
     ecoMarkers.push(marker);
@@ -1573,7 +1573,8 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 
 animateNumbersInSection(document.querySelector('.section.active'));
 renderEcoGrid();
-</script>
+</script> src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+
 </body>
 </html>
 
